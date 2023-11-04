@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('premios', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre');
+            $table->integer('year');
+            $table->foreignId('audiovisual_id')->constrained('audiovisuals');
             $table->timestamps();
         });
     }
