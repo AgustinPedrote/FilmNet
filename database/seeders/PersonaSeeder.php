@@ -121,15 +121,63 @@ class PersonaSeeder extends Seeder
         ]);
 
         Persona::create([
-            "nombre" => "Aleix Saló",
-        ]);
-
-        Persona::create([
             "nombre" => "Luc Jacquet",
         ]);
 
         Persona::create([
             "nombre" => "Michael Moore",
+        ]);
+
+        Persona::create([
+            "nombre" => "Aleix Saló",
+        ]);
+
+        Persona::create([
+            "nombre" => "Álvaro Morte",
+        ]);
+
+        Persona::create([
+            "nombre" => "Laura Karpman",
+        ]);
+
+        Persona::create([
+            "nombre" => "Sean Bobbitt",
+        ]);
+
+        Persona::create([
+            "nombre" => "Nia DaCosta",
+        ]);
+
+        Persona::create([
+            "nombre" => "Samuel L. Jackson",
+        ]);
+
+        Persona::create([
+            "nombre" => "Lorne Balfe",
+        ]);
+
+        Persona::create([
+            "nombre" => "Barry Peterson",
+        ]);
+
+        Persona::create([
+            "nombre" => "Chris Pine",
+        ]);
+
+        Persona::create([
+            "nombre" => "Michelle Rodriguez",
+        ]);
+
+        Persona::create([
+            "nombre" => "Justice Smith",
+        ]);
+
+        Persona::create([
+            "nombre" => "Hugh Grant",
+        ]);
+
+        Persona::create([
+            "nombre" => "Sophia Lillis",
         ]);
     }
 }

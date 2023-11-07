@@ -42,4 +42,42 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    //Relación uno a muchos:
+
+    public function criticas()
+    {
+        return $this->hasMany(Critica::class);
+    }
+
+    public function votaciones()
+    {
+        return $this->hasMany(Votacion::class);
+    }
+
+    public function pendientes()
+    {
+        return $this->hasMany(Pendiente::class);
+    }
+
+    //Relación uno a muchos (inversa):
+
+    public function roles()
+    {
+        return $this->belongsTo(Rol::class);
+    }
+
+    //Relación muchos a muchos:
+
+    //Seguidores (Followers)
+    /* public function amigos()
+    {
+        return $this->belongsToMany(Amigo::class, 'amigos', 'amigo_id', 'user_id');
+    } */
+
+    //Seguidos (Follows)
+    /* public function users()
+    {
+        return $this->belongsToMany(User::class, 'amigos', 'user_id', 'amigo_id');
+    } */
 }
