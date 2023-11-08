@@ -16,6 +16,21 @@ class AudiovisualController extends Controller
         //
     }
 
+    public function peliculasIndex()
+    {
+        return view('audiovisuales.peliculas');
+    }
+
+    public function seriesIndex()
+    {
+        return view('audiovisuales.series');
+    }
+
+    public function documentalesIndex()
+    {
+        return view('audiovisuales.documentales');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
