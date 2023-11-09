@@ -11,7 +11,7 @@ class Premio extends Model
 
     //Relación uno a muchos (inversa):
 
-    public function audiovisuales()
+    public function audiovisual()
     {
         return $this->belongsTo(Audiovisual::class);
     }

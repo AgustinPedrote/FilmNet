@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pendientes', function (Blueprint $table) {
-            $table->foreignId('audiovisual_id')->constrained('audiovisuals');
+            $table->foreignId('audiovisual_id')->constrained('audiovisuales');
             $table->foreignId('user_id')->constrained('users');
             $table->primary(['audiovisual_id', 'user_id']);
         });

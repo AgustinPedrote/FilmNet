@@ -15,6 +15,7 @@ class UserSeeder extends Seeder
     {
         User::truncate();
 
+        $agustin =
         User::create([
             "name" => "agustin",
             "email" => "agustin@agustin.com",
@@ -22,6 +23,7 @@ class UserSeeder extends Seeder
             "rol_id" => 1,
         ]);
 
+        $antonio =
         User::create([
             "name" => "antonio",
             "email" => "antonio@antonio.com",
@@ -35,5 +37,9 @@ class UserSeeder extends Seeder
             "password" => bcrypt('12345678'),
             "rol_id" => 2,
         ]);
+
+        $agustin = User::where('name', 'agustin')->first();
+        $antonio = User::where('name', 'antonio')->first();
+        $antonio->users()->attach($agustin->id);
     }
 }

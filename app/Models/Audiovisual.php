@@ -9,7 +9,7 @@ class Audiovisual extends Model
 {
     use HasFactory;
 
-    protected $table = 'audiovisuals';
+    protected $table = 'audiovisuales';
 
     protected $fillable = [
         'titulo',
@@ -60,7 +60,7 @@ class Audiovisual extends Model
 
     //Relación uno a muchos (inversa):
 
-    public function tipos()
+    public function tipo()
     {
         return $this->belongsTo(Tipo::class);
     }

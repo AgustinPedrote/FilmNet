@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('votaciones', function (Blueprint $table) {
             $table->integer('voto');
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('audiovisual_id')->constrained('audiovisuals');
+            $table->foreignId('audiovisual_id')->constrained('audiovisuales');
             $table->primary(['user_id', 'audiovisual_id']);
             $table->timestamps();
         });

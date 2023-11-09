@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Votacion extends Model
 {
     use HasFactory;
+    protected $table = 'votaciones';
 
     //Relación uno a muchos (inversa):
 

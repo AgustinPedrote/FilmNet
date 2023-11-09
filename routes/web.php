@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AudiovisualController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CriticaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,10 +16,6 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
-    return view('home');
-})->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -32,11 +30,22 @@ Route::middleware('auth')->group(function () {
 
 //rutas
 
-//Peliculas: serapa las rutas por secciones.
+//Peliculas: separa las rutas por secciones.
 
+Route::get('/', [AudiovisualController::class, 'index'])->name('home.index');
 Route::get('peliculas', [AudiovisualController::class, 'peliculasIndex'])->name('peliculas.index');
 Route::get('series', [AudiovisualController::class, 'seriesIndex'])->name('series.index');
 Route::get('documentales', [AudiovisualController::class, 'documentalesIndex'])->name('documentales.index');
+
+//Rutas logueado.
+
+Route::get('mis_votaciones', [UserController::class, 'misVotaciones'])->name('votaciones.index');
+Route::get('mis_criticas', [UserController::class, 'misCriticas'])->name('criticas.index');
+Route::get('pendientes', [UserController::class, 'pendientes'])->name('pendientes.index');
+Route::get('amigos', [UserController::class, 'misAmigos'])->name('amigos.index');
+
+
+
 
 
 

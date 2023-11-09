@@ -18,12 +18,12 @@ class Critica extends Model
 
     //Relación uno a muchos (inversa):
 
-    public function users()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function audiovisuales()
+    public function audiovisual()
     {
         return $this->belongsTo(Audiovisual::class);
     }

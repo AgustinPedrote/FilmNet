@@ -14,16 +14,4 @@ class Amigo extends Model
     protected $fillable = [
         'user_id',
         'amigo_id'];
-
-    //Relación muchos a muchos:
-
-    /* public function users()
-    {
-        return $this->belongsToMany(User::class, 'amigos', 'amigo_id', 'user_id');
-    } */
-
-    /* public function amigos()
-    {
-        return $this->belongsToMany(User::class, 'amigos', 'user_id', 'amigo_id');
-    } */
 }

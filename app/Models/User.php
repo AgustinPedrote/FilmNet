@@ -62,22 +62,16 @@ class User extends Authenticatable
 
     //Relación uno a muchos (inversa):
 
-    public function roles()
+    public function rol()
     {
         return $this->belongsTo(Rol::class);
     }
 
     //Relación muchos a muchos:
 
-    //Seguidores (Followers)
-    /* public function amigos()
-    {
-        return $this->belongsToMany(Amigo::class, 'amigos', 'amigo_id', 'user_id');
-    } */
-
-    //Seguidos (Follows)
-    /* public function users()
+    //Seguidos (Follows) usuarios que son tus amigos
+    public function users()
     {
         return $this->belongsToMany(User::class, 'amigos', 'user_id', 'amigo_id');
-    } */
+    }
 }

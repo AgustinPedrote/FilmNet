@@ -5,11 +5,16 @@
             <div class="flex h-14">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center mb-10">
-                    <a href="{{ route('home') }}">
+                    <a href="{{ route('home.index') }}">
                         <x-application-logo class="block fill-current text-gray-800" />
                     </a>
                 </div>
                 <!-- Navigation Links -->
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('home.index')" :active="request()->routeIs('dashboard')">
+                        {{ __('Inicio') }}
+                    </x-nav-link>
+                </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('peliculas.index')" :active="request()->routeIs('dashboard')">
                         {{ __('Peliculas') }}
@@ -25,6 +30,12 @@
                         {{ __('Documentales') }}
                     </x-nav-link>
                 </div>
+                <div class="w-60 items-center hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <input type="text" id="search-navbar"
+                        class="h-10 block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500
+                        focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Search...">
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -34,7 +45,7 @@
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 <button
-                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                    class="inline-flex items-center px-3 py-2 border border-transparent text-md leading-4 font-bold rounded-md text-white bg-blue-500 hover:text-yellow-400 focus:outline-none transition ease-in-out duration-150">
                                     <div>{{ Auth::user()->name }}</div>
                                     <div class="ml-1">
                                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +60,23 @@
 
                             <x-slot name="content">
                                 <x-dropdown-link :href="route('profile.edit')">
-                                    {{ __('Profile') }}
+                                    {{ __('Datos personales') }}
+                                </x-dropdown-link>
+
+                                <x-dropdown-link :href="route('votaciones.index')">
+                                    {{ __('Mis votaciones') }}
+                                </x-dropdown-link>
+
+                                <x-dropdown-link :href="route('criticas.index')">
+                                    {{ __('Mis críticas') }}
+                                </x-dropdown-link>
+
+                                <x-dropdown-link :href="route('pendientes.index')">
+                                    {{ __('Mi lista') }}
+                                </x-dropdown-link>
+
+                                <x-dropdown-link :href="route('amigos.index')">
+                                    {{ __('Amigos') }}
                                 </x-dropdown-link>
 
                                 <!-- Authentication -->
@@ -59,19 +86,19 @@
                                     <x-dropdown-link :href="route('logout')"
                                         onclick="event.preventDefault();
                                                                     this.closest('form').submit();">
-                                        {{ __('Log Out') }}
+                                        {{ __('Cerrar sesión') }}
                                     </x-dropdown-link>
                                 </form>
                             </x-slot>
                         </x-dropdown>
                     @else
                         <a href="{{ route('login') }}"
-                            class="font-semibold text-white hover:text-yellow-400 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
-                            in</a>
+                            class="font-semibold text-white hover:text-yellow-400 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Iniciar
+                            sesión</a>
 
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}"
-                                class="ml-4 font-semibold text-white hover:text-yellow-400 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
+                                class="ml-4 font-semibold text-white hover:text-yellow-400 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Registrarse</a>
                         @endif
 
                     @endauth

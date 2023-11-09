@@ -11,9 +11,12 @@ class CriticaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function misCriticas()
     {
-        //
+        // Obtén las criticas del usuario logado
+        $criticas = auth()->user()->criticas;
+
+        return view('criticas.index', compact('criticas'));
     }
 
     /**
