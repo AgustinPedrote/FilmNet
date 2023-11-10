@@ -59,10 +59,6 @@
                             </x-slot>
 
                             <x-slot name="content">
-                                <x-dropdown-link :href="route('profile.edit')">
-                                    {{ __('Datos personales') }}
-                                </x-dropdown-link>
-
                                 <x-dropdown-link :href="route('votaciones.index')">
                                     {{ __('Mis votaciones') }}
                                 </x-dropdown-link>
@@ -77,6 +73,10 @@
 
                                 <x-dropdown-link :href="route('amigos.index')">
                                     {{ __('Amigos') }}
+                                </x-dropdown-link>
+
+                                <x-dropdown-link :href="route('profile.edit')">
+                                    {{ __('Datos personales') }}
                                 </x-dropdown-link>
 
                                 <!-- Authentication -->

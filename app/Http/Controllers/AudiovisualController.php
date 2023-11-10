@@ -13,7 +13,23 @@ class AudiovisualController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $peliculas = Audiovisual::where('tipo_id', 1)
+        ->orderBy('id', 'desc')
+        ->take(6)
+        ->get();
+
+        $series = Audiovisual::where('tipo_id', 2)
+        ->orderBy('id', 'desc')
+        ->take(6)
+        ->get();
+
+        $documentales = Audiovisual::where('tipo_id', 3)
+        ->orderBy('id', 'desc')
+        ->take(6)
+        ->get();
+
+
+        return view('home', ['peliculas' => $peliculas, 'series' => $series, 'documentales' => $documentales]);
     }
 
     public function peliculasIndex()
@@ -52,7 +68,7 @@ class AudiovisualController extends Controller
      */
     public function show(Audiovisual $audiovisual)
     {
-        //
+        return view('audiovisuales.show', ['audiovisual' => $audiovisual]);
     }
 
     /**

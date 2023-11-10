@@ -4,6 +4,7 @@ use App\Http\Controllers\AudiovisualController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CriticaController;
+use App\Models\Audiovisual;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,7 @@ Route::middleware('auth')->group(function () {
 //Peliculas: separa las rutas por secciones.
 
 Route::get('/', [AudiovisualController::class, 'index'])->name('home.index');
+Route::get('/audiovisual/{audiovisual}', [AudiovisualController::class, 'show'])->name('audiovisual.show');
 Route::get('peliculas', [AudiovisualController::class, 'peliculasIndex'])->name('peliculas.index');
 Route::get('series', [AudiovisualController::class, 'seriesIndex'])->name('series.index');
 Route::get('documentales', [AudiovisualController::class, 'documentalesIndex'])->name('documentales.index');

@@ -28,6 +28,7 @@ class AudiovisualSeeder extends Seeder
             "sinopsis" => "Jack y Rose se enamoran, pero el prometido y la madre de ella ponen todo tipo de trabas a su relación.
             Mientras, el gigantesco y lujoso transatlántico se aproxima hacia un inmenso iceberg.",
             "tipo_id" => 1,
+            "img" => "https://pics.filmaffinity.com/titanic-321994924-large.jpg"
         ]);
 
         $director = Persona::where('nombre', 'James Cameron')->first();
@@ -66,6 +67,7 @@ class AudiovisualSeeder extends Seeder
             "pais" => "Estados Unidos",
             "sinopsis" => "La incepción, que consiste en implantar una idea en el subconsciente en lugar de sustraerla. Sin embargo, su plan se complica.",
             "tipo_id" => 1,
+            "img" => "https://pics.filmaffinity.com/inception-652954101-large.jpg"
         ]);
 
         $director = Persona::where('nombre', 'Christopher Nolan')->first();
@@ -97,13 +99,14 @@ class AudiovisualSeeder extends Seeder
 
         $pelicula =
         Audiovisual::create([
-            "titulo" => "El laberinto del fauno",
-            "titulo_original" => "El laberinto del fauno",
-            "year" => 2006,
-            "duracion" => 112,
-            "pais" => "España",
-            "sinopsis" => "Una extraña criatura que le hace una sorprendente revelación: ella es en realidad una princesa, la última de su estirpe, y los suyos la esperan desde hace mucho tiempo.",
+            "titulo" => "Saw X",
+            "titulo_original" => "Saw 10",
+            "year" => 2023,
+            "duracion" => 118,
+            "pais" => "Estados Unidos",
+            "sinopsis" => "Situada entre los acontecimientos sucedidos en SAW y SAW II, John, desesperado y enfermo, viaja a México para someterse a un tratamiento experimental y muy arriesgado con la esperanza de curar su cáncer mortal.",
             "tipo_id" => 1,
+            "img" => "https://pics.filmaffinity.com/saw_10-770317273-large.jpg"
         ]);
 
         $director = Persona::where('nombre', 'Guillermo del Toro')->first();
@@ -131,6 +134,124 @@ class AudiovisualSeeder extends Seeder
         $pelicula->generos()->attach($genero->id);
 
         $company = Company::where('nombre', 'Walt Disney Pictures')->first();
+        $pelicula->companies()->attach($company->id);
+
+        $pelicula =
+        Audiovisual::create([
+            "titulo" => "The Marvels",
+            "titulo_original" => "The Marvels",
+            "year" => 2023,
+            "duracion" => 105,
+            "pais" => "Estados Unidos",
+            "sinopsis" => "JCarol Danvers, alias Capitana Marvel, ha recuperado la identidad que le arrebataron los tiránicos Kree y se ha cobrado su venganza contra la Inteligencia Suprema.",
+            "tipo_id" => 1,
+            "img" => "https://pics.filmaffinity.com/the_marvels-502364297-large.jpg"
+        ]);
+
+        $director = Persona::where('nombre', 'James Cameron')->first();
+        $pelicula->directores()->attach($director->id);
+
+        $compositor = Persona::where('nombre', 'Russell Carpenter')->first();
+        $pelicula->compositores()->attach($compositor->id);
+
+        $fotografia = Persona::where('nombre', 'Álvaro Morte')->first();
+        $pelicula->fotografias()->attach($fotografia->id);
+
+        $guionista = Persona::where('nombre', 'Lorne Balfe')->first();
+        $pelicula->guionistas()->attach($guionista->id);
+
+        $reparto = Persona::where('nombre', 'Leonardo DiCaprio')->first();
+        $pelicula->repartos()->attach($reparto->id);
+
+        $reparto = Persona::where('nombre', 'Kate Winslet')->first();
+        $pelicula->repartos()->attach($reparto->id);
+
+        $genero = Genero::where('nombre', 'Romance')->first();
+        $pelicula->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Aventuras')->first();
+        $pelicula->generos()->attach($genero->id);
+
+        $company = Company::where('nombre', 'Paramount Pictures')->first();
+        $pelicula->companies()->attach($company->id);
+
+        $pelicula =
+        Audiovisual::create([
+            "titulo" => "El señor de los anillos: La comunidad del anillo",
+            "titulo_original" => "The Lord of the Rings: The Fellowship of the Ring",
+            "year" => 2001,
+            "duracion" => 180,
+            "pais" => "Nueva Zelanda",
+            "sinopsis" => "En la Tierra Media, el Señor Oscuro Sauron ordenó a los Elfos que forjaran los Grandes Anillos de Poder.
+            Tres para los reyes Elfos, siete para los Señores Enanos, y nueve para los Hombres Mortales. Pero Saurón también forjó, en secreto, el Anillo Único, que tiene el poder de esclavizar toda la Tierra Media.",
+            "tipo_id" => 1,
+            "img" => "https://pics.filmaffinity.com/the_lord_of_the_rings_the_fellowship_of_the_ring-952398002-large.jpg"
+        ]);
+
+        $director = Persona::where('nombre', 'James Cameron')->first();
+        $pelicula->directores()->attach($director->id);
+
+        $compositor = Persona::where('nombre', 'Russell Carpenter')->first();
+        $pelicula->compositores()->attach($compositor->id);
+
+        $fotografia = Persona::where('nombre', 'Álvaro Morte')->first();
+        $pelicula->fotografias()->attach($fotografia->id);
+
+        $guionista = Persona::where('nombre', 'Lorne Balfe')->first();
+        $pelicula->guionistas()->attach($guionista->id);
+
+        $reparto = Persona::where('nombre', 'Leonardo DiCaprio')->first();
+        $pelicula->repartos()->attach($reparto->id);
+
+        $reparto = Persona::where('nombre', 'Kate Winslet')->first();
+        $pelicula->repartos()->attach($reparto->id);
+
+        $genero = Genero::where('nombre', 'Romance')->first();
+        $pelicula->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Aventuras')->first();
+        $pelicula->generos()->attach($genero->id);
+
+        $company = Company::where('nombre', 'Paramount Pictures')->first();
+        $pelicula->companies()->attach($company->id);
+
+        $pelicula =
+        Audiovisual::create([
+            "titulo" => "El chico y la garza",
+            "titulo_original" => "Kimitachi wa dô ikiru ka",
+            "year" => 2023,
+            "duracion" => 124,
+            "pais" => "Japón",
+            "sinopsis" => "Mahito, un joven de 12 años, lucha por asentarse en una nueva ciudad tras la muerte de su madre.",
+            "tipo_id" => 1,
+            "img" => "https://pics.filmaffinity.com/kimitachi_wa_do_ikiru_ka-917153869-large.jpg"
+        ]);
+
+        $director = Persona::where('nombre', 'James Cameron')->first();
+        $pelicula->directores()->attach($director->id);
+
+        $compositor = Persona::where('nombre', 'Russell Carpenter')->first();
+        $pelicula->compositores()->attach($compositor->id);
+
+        $fotografia = Persona::where('nombre', 'Álvaro Morte')->first();
+        $pelicula->fotografias()->attach($fotografia->id);
+
+        $guionista = Persona::where('nombre', 'Lorne Balfe')->first();
+        $pelicula->guionistas()->attach($guionista->id);
+
+        $reparto = Persona::where('nombre', 'Leonardo DiCaprio')->first();
+        $pelicula->repartos()->attach($reparto->id);
+
+        $reparto = Persona::where('nombre', 'Kate Winslet')->first();
+        $pelicula->repartos()->attach($reparto->id);
+
+        $genero = Genero::where('nombre', 'Romance')->first();
+        $pelicula->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Aventuras')->first();
+        $pelicula->generos()->attach($genero->id);
+
+        $company = Company::where('nombre', 'Paramount Pictures')->first();
         $pelicula->companies()->attach($company->id);
 
         $serie =
