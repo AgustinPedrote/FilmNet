@@ -8,27 +8,18 @@ use App\Models\Audiovisual;
 
 class AudiovisualController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $peliculas = Audiovisual::where('tipo_id', 1)
-        ->orderBy('id', 'desc')
-        ->take(6)
-        ->get();
+        // Obtener las últimas 6 películas ordenadas por id de forma descendente
+        $peliculas = Audiovisual::where('tipo_id', 1)->latest('id')->take(6)->get();
 
-        $series = Audiovisual::where('tipo_id', 2)
-        ->orderBy('id', 'desc')
-        ->take(6)
-        ->get();
+        // Obtener las últimas 6 series ordenadas por id de forma descendente
+        $series = Audiovisual::where('tipo_id', 2)->latest('id')->take(6)->get();
 
-        $documentales = Audiovisual::where('tipo_id', 3)
-        ->orderBy('id', 'desc')
-        ->take(6)
-        ->get();
+        // Obtener los últimos 6 documentales ordenados por id de forma descendente
+        $documentales = Audiovisual::where('tipo_id', 3)->latest('id')->take(6)->get();
 
-
+        // Pasar los datos a la vista 'home'
         return view('home', ['peliculas' => $peliculas, 'series' => $series, 'documentales' => $documentales]);
     }
 
