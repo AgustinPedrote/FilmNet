@@ -1,32 +1,32 @@
+<!-- Barra de navegación principal -->
 <nav x-data="{ open: false }" class="border-b border-gray-100 bg-blue-500 h-32">
-    <!-- Primary Navigation Menu -->
+    <!-- Contenedor principal -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Flex container para alinear elementos -->
         <div class="flex justify-between h-32 items-center">
+            <!-- Contenedor para el logo y enlaces de navegación -->
             <div class="flex h-14">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center mb-10">
+                <!-- Logo con espacio a la derecha -->
+                <div class="shrink-0 flex items-center mb-10 mr-4">
                     <a href="{{ route('home.index') }}">
                         <x-application-logo class="block fill-current text-gray-800" />
                     </a>
                 </div>
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('home.index')" :active="request()->routeIs('dashboard')">
+                <!-- Enlaces de navegación -->
+                <div class="flex space-x-4 sm:space-x-6">
+                    <x-nav-link :href="route('home.index')" :active="request()->routeIs('home.index')">
                         {{ __('Inicio') }}
                     </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('peliculas.index')" :active="request()->routeIs('dashboard')">
+
+                    <x-nav-link :href="route('peliculas.index')" :active="request()->routeIs('peliculas.index')">
                         {{ __('Peliculas') }}
                     </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('series.index')" :active="request()->routeIs('dashboard')">
+
+                    <x-nav-link :href="route('series.index')" :active="request()->routeIs('series.index')">
                         {{ __('Series') }}
                     </x-nav-link>
-                </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('documentales.index')" :active="request()->routeIs('dashboard')">
+
+                    <x-nav-link :href="route('documentales.index')" :active="request()->routeIs('documentales.index')">
                         {{ __('Documentales') }}
                     </x-nav-link>
                 </div>
@@ -40,11 +40,13 @@
                 </div>
             </div>
 
-            <!-- Settings Dropdown -->
+            <!-- Menú desplegable de configuración de usuario -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 @if (Route::has('login'))
                     @auth
+                        <!-- Dropdown para el usuario autenticado -->
                         <x-dropdown align="right" width="48">
+                            <!-- Botón del usuario -->
                             <x-slot name="trigger">
                                 <button
                                     class="inline-flex items-center px-3 py-2 border border-transparent text-md leading-4 font-semibold rounded-md text-white bg-blue-500 hover:text-yellow-400 focus:outline-none transition ease-in-out duration-150">
@@ -60,6 +62,7 @@
                                 </button>
                             </x-slot>
 
+                            <!-- Contenido del menú desplegable -->
                             <x-slot name="content">
                                 <x-dropdown-link :href="route('votaciones.index')">
                                     {{ __('Mis votaciones') }}
@@ -81,7 +84,7 @@
                                     {{ __('Datos personales') }}
                                 </x-dropdown-link>
 
-                                <!-- Authentication -->
+                                <!-- Formulario para cerrar sesión -->
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
 
@@ -94,20 +97,16 @@
                             </x-slot>
                         </x-dropdown>
                     @else
-                    {{-- Iniciar sesión y Registrar --}}
+                        {{-- Iniciar sesión y Registrar --}}
                         <a href="{{ route('login') }}"
-                            class="text-sm font-semibold text-white hover:text-yellow-400 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Iniciar sesión</a>
-
+                            class="text-md font-semibold text-white hover:text-yellow-400 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Iniciar
+                            sesión</a>
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}"
-                                class="text-sm ml-4 font-semibold text-white hover:text-yellow-400 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Registrarse</a>
+                                class="text-md ml-4 font-semibold text-white hover:text-yellow-400 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Registrarse</a>
                         @endif
-
                     @endauth
-
                 @endif
-
-
             </div>
 
             <!-- Hamburger -->

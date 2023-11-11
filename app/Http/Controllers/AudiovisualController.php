@@ -10,14 +10,14 @@ class AudiovisualController extends Controller
 {
     public function index()
     {
-        // Obtener las últimas 6 películas ordenadas por id de forma descendente
-        $peliculas = Audiovisual::where('tipo_id', 1)->latest('id')->take(6)->get();
+        // Obtener las últimas 5 películas ordenadas por id de forma descendente
+        $peliculas = Audiovisual::where('tipo_id', 1)->latest('id')->take(5)->get();
 
-        // Obtener las últimas 6 series ordenadas por id de forma descendente
-        $series = Audiovisual::where('tipo_id', 2)->latest('id')->take(6)->get();
+        // Obtener las últimas 5 series ordenadas por id de forma descendente
+        $series = Audiovisual::where('tipo_id', 2)->latest('id')->take(5)->get();
 
-        // Obtener los últimos 6 documentales ordenados por id de forma descendente
-        $documentales = Audiovisual::where('tipo_id', 3)->latest('id')->take(6)->get();
+        // Obtener los últimos 5 documentales ordenados por id de forma descendente
+        $documentales = Audiovisual::where('tipo_id', 3)->latest('id')->take(5)->get();
 
         // Pasar los datos a la vista 'home'
         return view('home', ['peliculas' => $peliculas, 'series' => $series, 'documentales' => $documentales]);
