@@ -85,7 +85,13 @@ class AudiovisualSeeder extends Seeder
         $fotografia = Persona::where('nombre', 'Laura Karpman')->first();
         $pelicula->fotografias()->attach($fotografia->id);
 
+        $fotografia = Persona::where('nombre', 'Alf Clausen')->first();
+        $pelicula->fotografias()->attach($fotografia->id);
+
         $guionista = Persona::where('nombre', 'Barry Peterson')->first();
+        $pelicula->guionistas()->attach($guionista->id);
+
+        $guionista = Persona::where('nombre', 'Sean Bobbitt')->first();
         $pelicula->guionistas()->attach($guionista->id);
 
         $reparto = Persona::where('nombre', 'Leonardo DiCaprio')->first();
@@ -122,6 +128,9 @@ class AudiovisualSeeder extends Seeder
         $director = Persona::where('nombre', 'Guillermo del Toro')->first();
         $pelicula->directores()->attach($director->id);
 
+        $director = Persona::where('nombre', 'Nia DaCosta')->first();
+        $pelicula->directores()->attach($director->id);
+
         $compositor = Persona::where('nombre', 'Wally Pfister')->first();
         $pelicula->compositores()->attach($compositor->id);
 
@@ -137,6 +146,9 @@ class AudiovisualSeeder extends Seeder
         $reparto = Persona::where('nombre', 'Guillermo Navarro')->first();
         $pelicula->repartos()->attach($reparto->id);
 
+        $reparto = Persona::where('nombre', 'Samuel L. Jackson')->first();
+        $pelicula->repartos()->attach($reparto->id);
+
         // Se obtiene los géneros.
         $genero = Genero::where('nombre', 'Drama')->first();
         $pelicula->generos()->attach($genero->id);
@@ -145,7 +157,10 @@ class AudiovisualSeeder extends Seeder
         $pelicula->generos()->attach($genero->id);
 
         // Se obtienen las compañias.
-        $company = Company::where('nombre', 'Walt Disney Pictures')->first();
+        $company = Company::where('nombre', 'Paramount Pictures')->first();
+        $pelicula->companies()->attach($company->id);
+
+        $company = Company::where('nombre', '20th Century Fox')->first();
         $pelicula->companies()->attach($company->id);
 
         // Creación de la película "The Marvels"
@@ -162,7 +177,7 @@ class AudiovisualSeeder extends Seeder
             ]);
 
         // Se obtienen las personas relacionadas con la película (director, compositor, fotógrafo, guionista, reparto)
-        $director = Persona::where('nombre', 'James Cameron')->first();
+        $director = Persona::where('nombre', 'Sean Bobbitt')->first();
         $pelicula->directores()->attach($director->id);
 
         $compositor = Persona::where('nombre', 'Russell Carpenter')->first();
@@ -174,14 +189,20 @@ class AudiovisualSeeder extends Seeder
         $guionista = Persona::where('nombre', 'Lorne Balfe')->first();
         $pelicula->guionistas()->attach($guionista->id);
 
-        $reparto = Persona::where('nombre', 'Leonardo DiCaprio')->first();
+        $reparto = Persona::where('nombre', 'Brie Larson')->first();
         $pelicula->repartos()->attach($reparto->id);
 
-        $reparto = Persona::where('nombre', 'Kate Winslet')->first();
+        $reparto = Persona::where('nombre', 'Chris Pine')->first();
+        $pelicula->repartos()->attach($reparto->id);
+
+        $reparto = Persona::where('nombre', 'Hugh Grant')->first();
+        $pelicula->repartos()->attach($reparto->id);
+
+        $reparto = Persona::where('nombre', 'Luc Jacquet')->first();
         $pelicula->repartos()->attach($reparto->id);
 
         // Se obtiene los géneros.
-        $genero = Genero::where('nombre', 'Romance')->first();
+        $genero = Genero::where('nombre', 'Acción')->first();
         $pelicula->generos()->attach($genero->id);
 
         $genero = Genero::where('nombre', 'Aventuras')->first();
@@ -189,6 +210,9 @@ class AudiovisualSeeder extends Seeder
 
         // Se obtienen las compañias.
         $company = Company::where('nombre', 'Paramount Pictures')->first();
+        $pelicula->companies()->attach($company->id);
+
+        $company = Company::where('nombre', 'Marvel Studios')->first();
         $pelicula->companies()->attach($company->id);
 
         // Creación de la película "El señor de los anillos"
@@ -206,29 +230,32 @@ class AudiovisualSeeder extends Seeder
             ]);
 
         // Se obtienen las personas relacionadas con la película (director, compositor, fotógrafo, guionista, reparto)
-        $director = Persona::where('nombre', 'James Cameron')->first();
+        $director = Persona::where('nombre', 'Peter Jackson')->first();
         $pelicula->directores()->attach($director->id);
 
         $compositor = Persona::where('nombre', 'Russell Carpenter')->first();
         $pelicula->compositores()->attach($compositor->id);
 
-        $fotografia = Persona::where('nombre', 'Álvaro Morte')->first();
+        $fotografia = Persona::where('nombre', 'Justice Smith')->first();
         $pelicula->fotografias()->attach($fotografia->id);
 
         $guionista = Persona::where('nombre', 'Lorne Balfe')->first();
         $pelicula->guionistas()->attach($guionista->id);
 
-        $reparto = Persona::where('nombre', 'Leonardo DiCaprio')->first();
+        $reparto = Persona::where('nombre', 'Elijah Wood')->first();
         $pelicula->repartos()->attach($reparto->id);
 
         $reparto = Persona::where('nombre', 'Kate Winslet')->first();
         $pelicula->repartos()->attach($reparto->id);
 
         // Se obtiene los géneros.
-        $genero = Genero::where('nombre', 'Romance')->first();
+        $genero = Genero::where('nombre', 'Ciencia Ficción')->first();
         $pelicula->generos()->attach($genero->id);
 
         $genero = Genero::where('nombre', 'Aventuras')->first();
+        $pelicula->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Acción')->first();
         $pelicula->generos()->attach($genero->id);
 
         // Se obtienen las compañias.
@@ -243,28 +270,36 @@ class AudiovisualSeeder extends Seeder
                 "year" => 2023,
                 "duracion" => 124,
                 "pais" => "Japón",
-                "sinopsis" => "Mahito, un joven de 12 años, lucha por asentarse en una nueva ciudad tras la muerte de su madre.",
+                "sinopsis" => "Mahito, un joven de 12 años, lucha por asentarse en una nueva ciudad tras la muerte de su madre.
+                Sin embargo, cuando una garza parlante informa a Mahito de que su madre sigue viva, entra en una torre abandonada en su busca, lo que le lleva a otro mundo.
+                El título de la película se basa en la novela de 1937, 'Kimitachi wa Dō Ikiru ka' escrita por Yoshino Genzaburō pero la película presenta una historia original que no guarda relación con la novela.",
                 "tipo_id" => 1,
                 "img" => "https://pics.filmaffinity.com/kimitachi_wa_do_ikiru_ka-917153869-large.jpg"
             ]);
 
         // Se obtienen las personas relacionadas con la película (director, compositor, fotógrafo, guionista, reparto)
-        $director = Persona::where('nombre', 'James Cameron')->first();
+        $director = Persona::where('nombre', 'Hayao Miyazaki')->first();
         $pelicula->directores()->attach($director->id);
 
-        $compositor = Persona::where('nombre', 'Russell Carpenter')->first();
+        $compositor = Persona::where('nombre', 'Hayao Miyazaki')->first();
+        $pelicula->compositores()->attach($compositor->id);
+
+        $compositor = Persona::where('nombre', 'Barry Peterson')->first();
         $pelicula->compositores()->attach($compositor->id);
 
         $fotografia = Persona::where('nombre', 'Álvaro Morte')->first();
         $pelicula->fotografias()->attach($fotografia->id);
 
+        $guionista = Persona::where('nombre', 'Hayao Miyazaki')->first();
+        $pelicula->guionistas()->attach($guionista->id);
+
         $guionista = Persona::where('nombre', 'Lorne Balfe')->first();
         $pelicula->guionistas()->attach($guionista->id);
 
-        $reparto = Persona::where('nombre', 'Leonardo DiCaprio')->first();
+        $reparto = Persona::where('nombre', 'Nia DaCosta')->first();
         $pelicula->repartos()->attach($reparto->id);
 
-        $reparto = Persona::where('nombre', 'Kate Winslet')->first();
+        $reparto = Persona::where('nombre', 'Laura Karpman')->first();
         $pelicula->repartos()->attach($reparto->id);
 
         // Se obtiene los géneros.
@@ -318,6 +353,9 @@ class AudiovisualSeeder extends Seeder
         $serie->generos()->attach($genero->id);
 
         // Se obtienen las compañias.
+        $company = Company::where('nombre', 'Studio Ghibli')->first();
+        $serie->companies()->attach($company->id);
+
         $company = Company::where('nombre', '20th Century Fox')->first();
         $serie->companies()->attach($company->id);
 
@@ -338,6 +376,9 @@ class AudiovisualSeeder extends Seeder
         $director = Persona::where('nombre', 'Vince Gilligan')->first();
         $serie->directores()->attach($director->id);
 
+        $director = Persona::where('nombre', 'Hank Azaria')->first();
+        $serie->directores()->attach($director->id);
+
         $compositor = Persona::where('nombre', 'Elliot Page')->first();
         $serie->compositores()->attach($compositor->id);
 
@@ -347,17 +388,23 @@ class AudiovisualSeeder extends Seeder
         $guionista = Persona::where('nombre', 'Sophia Lillis')->first();
         $serie->guionistas()->attach($guionista->id);
 
+        $guionista = Persona::where('nombre', 'Joseph Gordon-Levitt')->first();
+        $serie->guionistas()->attach($guionista->id);
+
         $reparto = Persona::where('nombre', 'Bryan Cranston')->first();
         $serie->repartos()->attach($reparto->id);
 
         $reparto = Persona::where('nombre', 'Aaron Paul')->first();
         $serie->repartos()->attach($reparto->id);
 
+        $reparto = Persona::where('nombre', 'Alf Clausen')->first();
+        $serie->repartos()->attach($reparto->id);
+
         // Se obtiene los géneros.
         $genero = Genero::where('nombre', 'Acción')->first();
         $serie->generos()->attach($genero->id);
 
-        $genero = Genero::where('nombre', 'Aventuras')->first();
+        $genero = Genero::where('nombre', 'Drama')->first();
         $serie->generos()->attach($genero->id);
 
         // Se obtienen las compañias.
@@ -396,6 +443,12 @@ class AudiovisualSeeder extends Seeder
         $reparto = Persona::where('nombre', 'Álvaro Morte')->first();
         $serie->repartos()->attach($reparto->id);
 
+        $reparto = Persona::where('nombre', 'Dan Castellaneta')->first();
+        $serie->repartos()->attach($reparto->id);
+
+        $reparto = Persona::where('nombre', 'Guillermo Navarro')->first();
+        $serie->repartos()->attach($reparto->id);
+
         // Se obtiene los géneros.
         $genero = Genero::where('nombre', 'Acción')->first();
         $serie->generos()->attach($genero->id);
@@ -405,6 +458,9 @@ class AudiovisualSeeder extends Seeder
 
         // Se obtienen las compañias.
         $company = Company::where('nombre', 'Paramount Pictures')->first();
+        $serie->companies()->attach($company->id);
+
+        $company = Company::where('nombre', '20th Century Fox')->first();
         $serie->companies()->attach($company->id);
 
         // Creación de la serie "The Last of Us"
@@ -421,17 +477,23 @@ class AudiovisualSeeder extends Seeder
             ]);
 
         // Se obtienen las personas relacionadas con la serie (director, compositor, fotógrafo, guionista, reparto)
-        $director = Persona::where('nombre', 'Matt Groening')->first();
+        $director = Persona::where('nombre', 'Elliot Page')->first();
+        $serie->directores()->attach($director->id);
+
+        $director = Persona::where('nombre', 'Sean Bobbitt')->first();
         $serie->directores()->attach($director->id);
 
         $compositor = Persona::where('nombre', 'Joseph Gordon-Levitt')->first();
         $serie->compositores()->attach($compositor->id);
 
-        $fotografia = Persona::where('nombre', 'Nia DaCosta')->first();
+        $fotografia = Persona::where('nombre', 'Alf Clausen')->first();
         $serie->fotografias()->attach($fotografia->id);
 
         $guionista = Persona::where('nombre', 'Justice Smith')->first();
         $serie->guionistas()->attach($guionista->id);
+
+        $reparto = Persona::where('nombre', 'Pedro Pascal')->first();
+        $serie->repartos()->attach($reparto->id);
 
         $reparto = Persona::where('nombre', 'Álvaro Morte')->first();
         $serie->repartos()->attach($reparto->id);
@@ -439,18 +501,24 @@ class AudiovisualSeeder extends Seeder
         $reparto = Persona::where('nombre', 'Guillermo Navarro')->first();
         $serie->repartos()->attach($reparto->id);
 
+        $reparto = Persona::where('nombre', 'Lorne Balfe')->first();
+        $serie->repartos()->attach($reparto->id);
+
         // Se obtiene los géneros.
-        $genero = Genero::where('nombre', 'Animación')->first();
+        $genero = Genero::where('nombre', 'Acción')->first();
         $serie->generos()->attach($genero->id);
 
         $genero = Genero::where('nombre', 'Aventuras')->first();
+        $serie->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Terror')->first();
         $serie->generos()->attach($genero->id);
 
         // Se obtienen las compañias.
         $company = Company::where('nombre', '20th Century Fox')->first();
         $serie->companies()->attach($company->id);
 
-        // Creación de la serie "The Last of Us"
+        // Creación de la serie "La Casa del Dragón"
         $serie =
             Audiovisual::create([
                 "titulo" => "La Casa del Dragón",
@@ -464,26 +532,29 @@ class AudiovisualSeeder extends Seeder
             ]);
 
         // Se obtienen las personas relacionadas con la serie (director, compositor, fotógrafo, guionista, reparto)
-        $director = Persona::where('nombre', 'Matt Groening')->first();
+        $director = Persona::where('nombre', 'Lorne Balfe')->first();
         $serie->directores()->attach($director->id);
 
         $compositor = Persona::where('nombre', 'Joseph Gordon-Levitt')->first();
         $serie->compositores()->attach($compositor->id);
 
-        $fotografia = Persona::where('nombre', 'Nia DaCosta')->first();
+        $fotografia = Persona::where('nombre', 'Sean Bobbitt')->first();
         $serie->fotografias()->attach($fotografia->id);
 
         $guionista = Persona::where('nombre', 'Justice Smith')->first();
         $serie->guionistas()->attach($guionista->id);
 
-        $reparto = Persona::where('nombre', 'Álvaro Morte')->first();
+        $reparto = Persona::where('nombre', 'Dave Porter')->first();
         $serie->repartos()->attach($reparto->id);
 
         $reparto = Persona::where('nombre', 'Guillermo Navarro')->first();
         $serie->repartos()->attach($reparto->id);
 
+        $reparto = Persona::where('nombre', 'Wally Pfister')->first();
+        $serie->repartos()->attach($reparto->id);
+
         // Se obtiene los géneros.
-        $genero = Genero::where('nombre', 'Animación')->first();
+        $genero = Genero::where('nombre', 'Acción')->first();
         $serie->generos()->attach($genero->id);
 
         $genero = Genero::where('nombre', 'Aventuras')->first();
@@ -491,6 +562,9 @@ class AudiovisualSeeder extends Seeder
 
         // Se obtienen las compañias.
         $company = Company::where('nombre', '20th Century Fox')->first();
+        $serie->companies()->attach($company->id);
+
+        $company = Company::where('nombre', 'Paramount Pictures')->first();
         $serie->companies()->attach($company->id);
 
         // Creación de la serie "Invencible"
@@ -510,7 +584,7 @@ class AudiovisualSeeder extends Seeder
         $director = Persona::where('nombre', 'Matt Groening')->first();
         $serie->directores()->attach($director->id);
 
-        $compositor = Persona::where('nombre', 'Joseph Gordon-Levitt')->first();
+        $compositor = Persona::where('nombre', 'Dan Castellaneta')->first();
         $serie->compositores()->attach($compositor->id);
 
         $fotografia = Persona::where('nombre', 'Nia DaCosta')->first();
@@ -519,7 +593,7 @@ class AudiovisualSeeder extends Seeder
         $guionista = Persona::where('nombre', 'Justice Smith')->first();
         $serie->guionistas()->attach($guionista->id);
 
-        $reparto = Persona::where('nombre', 'Álvaro Morte')->first();
+        $reparto = Persona::where('nombre', 'Bryan Cranston')->first();
         $serie->repartos()->attach($reparto->id);
 
         $reparto = Persona::where('nombre', 'Guillermo Navarro')->first();
@@ -530,6 +604,9 @@ class AudiovisualSeeder extends Seeder
         $serie->generos()->attach($genero->id);
 
         $genero = Genero::where('nombre', 'Aventuras')->first();
+        $serie->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Acción')->first();
         $serie->generos()->attach($genero->id);
 
         // Se obtienen las compañias.
@@ -562,15 +639,21 @@ class AudiovisualSeeder extends Seeder
         $guionista = Persona::where('nombre', 'Nia DaCosta')->first();
         $documental->guionistas()->attach($guionista->id);
 
+        $reparto = Persona::where('nombre', 'Pelé')->first();
+        $documental->repartos()->attach($reparto->id);
+
         // Se obtiene los géneros.
         $genero = Genero::where('nombre', 'Drama')->first();
         $documental->generos()->attach($genero->id);
 
-        $genero = Genero::where('nombre', 'Aventuras')->first();
+        $genero = Genero::where('nombre', 'Romance')->first();
         $documental->generos()->attach($genero->id);
 
         // Se obtienen las compañias.
         $company = Company::where('nombre', 'Walt Disney Pictures')->first();
+        $documental->companies()->attach($company->id);
+
+        $company = Company::where('nombre', 'Studio Ghibli')->first();
         $documental->companies()->attach($company->id);
 
         // Creación del documental "Bowling for Columbine"
@@ -599,12 +682,18 @@ class AudiovisualSeeder extends Seeder
         $guionista = Persona::where('nombre', 'Michael Moore')->first();
         $documental->guionistas()->attach($guionista->id);
 
+        $reparto = Persona::where('nombre', 'Michael Moore')->first();
+        $documental->repartos()->attach($reparto->id);
+
         // Se obtiene los géneros.
         $genero = Genero::where('nombre', 'Drama')->first();
         $documental->generos()->attach($genero->id);
 
         // Se obtienen las compañias.
         $company = Company::where('nombre', 'Paramount Pictures')->first();
+        $documental->companies()->attach($company->id);
+
+        $company = Company::where('nombre', '20th Century Fox')->first();
         $documental->companies()->attach($company->id);
 
         // Creación del documental "Cowspiracy: The Sustainability Secret"
@@ -661,13 +750,13 @@ class AudiovisualSeeder extends Seeder
         $director = Persona::where('nombre', 'Luc Jacquet')->first();
         $documental->directores()->attach($director->id);
 
-        $compositor = Persona::where('nombre', 'Ivana Baquero')->first();
+        $compositor = Persona::where('nombre', 'Sean Bobbitt')->first();
         $documental->compositores()->attach($compositor->id);
 
         $fotografia = Persona::where('nombre', 'Hank Azaria')->first();
         $documental->fotografias()->attach($fotografia->id);
 
-        $guionista = Persona::where('nombre', 'Nia DaCosta')->first();
+        $guionista = Persona::where('nombre', 'Barry Peterson')->first();
         $documental->guionistas()->attach($guionista->id);
 
         // Se obtiene los géneros.
@@ -679,6 +768,9 @@ class AudiovisualSeeder extends Seeder
 
         // Se obtienen las compañias.
         $company = Company::where('nombre', 'Walt Disney Pictures')->first();
+        $documental->companies()->attach($company->id);
+
+        $company = Company::where('nombre', 'Paramount Pictures')->first();
         $documental->companies()->attach($company->id);
 
         // Creación del documental "Lo que el pulpo me enseñó"
@@ -695,13 +787,13 @@ class AudiovisualSeeder extends Seeder
             ]);
 
         // Se obtienen las personas relacionadas con el documental (director, compositor, fotógrafo, guionista, reparto)
-        $director = Persona::where('nombre', 'Luc Jacquet')->first();
+        $director = Persona::where('nombre', 'Laura Karpman')->first();
         $documental->directores()->attach($director->id);
 
         $compositor = Persona::where('nombre', 'Ivana Baquero')->first();
         $documental->compositores()->attach($compositor->id);
 
-        $fotografia = Persona::where('nombre', 'Hank Azaria')->first();
+        $fotografia = Persona::where('nombre', 'Sophia Lillis')->first();
         $documental->fotografias()->attach($fotografia->id);
 
         $guionista = Persona::where('nombre', 'Nia DaCosta')->first();
@@ -715,7 +807,7 @@ class AudiovisualSeeder extends Seeder
         $documental->generos()->attach($genero->id);
 
         // Se obtienen las compañias.
-        $company = Company::where('nombre', 'Walt Disney Pictures')->first();
+        $company = Company::where('nombre', 'Marvel Studios')->first();
         $documental->companies()->attach($company->id);
 
         // Creación del documental "El equipo redentor"
@@ -732,17 +824,26 @@ class AudiovisualSeeder extends Seeder
             ]);
 
         // Se obtienen las personas relacionadas con el documental (director, compositor, fotógrafo, guionista, reparto)
-        $director = Persona::where('nombre', 'Luc Jacquet')->first();
+        $director = Persona::where('nombre', 'Michelle Rodriguez')->first();
         $documental->directores()->attach($director->id);
 
-        $compositor = Persona::where('nombre', 'Ivana Baquero')->first();
+        $compositor = Persona::where('nombre', 'Úrsula Corberó')->first();
         $documental->compositores()->attach($compositor->id);
 
         $fotografia = Persona::where('nombre', 'Hank Azaria')->first();
         $documental->fotografias()->attach($fotografia->id);
 
+        $fotografia = Persona::where('nombre', 'Aleix Saló')->first();
+        $documental->fotografias()->attach($fotografia->id);
+
         $guionista = Persona::where('nombre', 'Nia DaCosta')->first();
         $documental->guionistas()->attach($guionista->id);
+
+        $reparto = Persona::where('nombre', 'Barry Peterson')->first();
+        $documental->repartos()->attach($reparto->id);
+
+        $reparto = Persona::where('nombre', 'Brie Larson')->first();
+        $documental->repartos()->attach($reparto->id);
 
         // Se obtiene los géneros.
         $genero = Genero::where('nombre', 'Drama')->first();
@@ -753,6 +854,12 @@ class AudiovisualSeeder extends Seeder
 
         // Se obtienen las compañias.
         $company = Company::where('nombre', 'Walt Disney Pictures')->first();
+        $documental->companies()->attach($company->id);
+
+        $company = Company::where('nombre', 'Paramount Pictures')->first();
+        $documental->companies()->attach($company->id);
+
+        $company = Company::where('nombre', 'Lightstorm Entertainments')->first();
         $documental->companies()->attach($company->id);
     }
 }

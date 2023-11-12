@@ -25,8 +25,12 @@ class AudiovisualController extends Controller
 
     public function peliculasIndex()
     {
-        return view('audiovisuales.peliculas');
+        // Obtener las últimas 5 películas ordenadas por id de forma descendente
+        $peliculas = Audiovisual::where('tipo_id', 1)->latest('id')->take(5)->get();
+
+        return view('audiovisuales.peliculas', ['peliculas' => $peliculas]);
     }
+
 
     public function seriesIndex()
     {

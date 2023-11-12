@@ -179,5 +179,29 @@ class PersonaSeeder extends Seeder
         Persona::create([
             "nombre" => "Sophia Lillis",
         ]);
+
+        Persona::create([
+            "nombre" => "Brie Larson",
+        ]);
+
+        Persona::create([
+            "nombre" => "Peter Jackson",
+        ]);
+
+        Persona::create([
+            "nombre" => "Elijah Wood",
+        ]);
+
+        Persona::create([
+            "nombre" => "Hayao Miyazaki",
+        ]);
+
+        Persona::create([
+            "nombre" => "Pedro Pascal",
+        ]);
+
+        Persona::create([
+            "nombre" => "Pelé",
+        ]);
     }
 }
