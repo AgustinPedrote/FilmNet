@@ -10,21 +10,21 @@
         </div>
 
         <!-- Detalles del Audiovisual -->
-        <div class="w-full md:w-2/3 p-4 space-y-2">
+        <div class="w-full md:w-2/3 p-4 space-y-2 mt-2 bg-white rounded-lg shadow-md">
             <!-- Descripción y Características -->
             <div class="mb-2">
                 <p class="text-gray-600">{{ $audiovisual->descripcion }}</p>
             </div>
 
-            <!-- Detalles adicionales -->
-            <div class="text-lg text-gray-500">
-                <div><strong>Título Original:</strong> {{ $audiovisual->titulo_original }}</div>
-                <div><strong>Año:</strong> {{ $audiovisual->year }}</div>
-                <div><strong>Duración:</strong> {{ $audiovisual->duracion }} minutos</div>
-                <div><strong>País:</strong> {{ $audiovisual->pais }}</div>
+            <!-- Detalles adicionales con mayor margen -->
+            <div class="text-lg text-gray-500 space-y-2 mb-4">
+                <div class="mb-2"><strong>Título Original:</strong> {{ $audiovisual->titulo_original }}</div>
+                <div class="mb-2"><strong>Año:</strong> {{ $audiovisual->year }}</div>
+                <div class="mb-2"><strong>Duración:</strong> {{ $audiovisual->duracion }} minutos</div>
+                <div class="mb-2"><strong>País:</strong> {{ $audiovisual->pais }}</div>
 
                 <!-- Mostrar información de las personas relacionadas -->
-                <div><strong>Director:</strong>
+                <div class="mb-2"><strong>Director:</strong>
                     @foreach ($audiovisual->directores as $director)
                         {{ $director->nombre }}@if (!$loop->last)
                             ,
@@ -32,7 +32,7 @@
                     @endforeach
                 </div>
 
-                <div><strong>Compositor:</strong>
+                <div class="mb-2"><strong>Compositor:</strong>
                     @foreach ($audiovisual->compositores as $compositor)
                         {{ $compositor->nombre }}@if (!$loop->last)
                             ,
@@ -40,7 +40,7 @@
                     @endforeach
                 </div>
 
-                <div><strong>Fotografía:</strong>
+                <div class="mb-2"><strong>Fotografía:</strong>
                     @foreach ($audiovisual->fotografias as $fotografia)
                         {{ $fotografia->nombre }}@if (!$loop->last)
                             ,
@@ -48,7 +48,7 @@
                     @endforeach
                 </div>
 
-                <div><strong>Guionista:</strong>
+                <div class="mb-2"><strong>Guionista:</strong>
                     @foreach ($audiovisual->guionistas as $guionista)
                         {{ $guionista->nombre }}@if (!$loop->last)
                             ,
@@ -57,7 +57,7 @@
                 </div>
 
                 <!-- Reparto -->
-                <div><strong>Reparto:</strong>
+                <div class="mb-2"><strong>Reparto:</strong>
                     @foreach ($audiovisual->repartos as $reparto)
                         {{ $reparto->nombre }}@if (!$loop->last)
                             ,
@@ -66,7 +66,7 @@
                 </div>
 
                 <!-- Géneros -->
-                <div><strong>Géneros:</strong>
+                <div class="mb-2"><strong>Géneros:</strong>
                     @foreach ($audiovisual->generos as $genero)
                         {{ $genero->nombre }}@if (!$loop->last)
                             ,
@@ -75,28 +75,39 @@
                 </div>
 
                 {{-- Sinopsis --}}
-                <div class="mt-4"><strong>Sinopsis:</strong> {{ $audiovisual->sinopsis }}</div>
+                <div class="mb-2"><strong>Sinopsis:</strong> {{ $audiovisual->sinopsis }}</div>
             </div>
 
             <!-- Formulario de Críticas -->
-            <div class="mt-6 p-6 bg-white rounded-lg shadow-md">
-                <form action="{{-- {{ route('guardar_critica', ['audiovisual_id' => $audiovisual->id]) }} --}}" method="post">
-                    @csrf
-                    <!-- Área de Texto para la Crítica -->
-                    <div class="mb-4">
-                        <label for="critica" class="block text-lg font-bold text-gray-500">Tu Crítica:</label>
-                        <textarea name="critica" id="critica" rows="4"
-                            class="form-input mt-1 block w-full focus:outline-none focus:shadow-outline-blue border border-gray-300 rounded-md px-4 py-2 resize-none"
-                            placeholder="Escribe tu opinión para que el resto de los usuarios la pueda leer."></textarea>
-                    </div>
-                    <!-- Botón para Enviar la Crítica -->
-                    <div class="flex justify-center">
-                        <button type="submit"
-                            class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 mx-auto">
-                            Enviar Crítica
-                        </button>
-                    </div>
-                </form>
+            <form action="" method="post">
+                @csrf
+                <!-- Área de Texto para la Crítica -->
+                <div class="mb-4">
+                    <label for="critica" class="block text-lg font-bold text-gray-500">Tu Crítica:</label>
+                    <textarea name="critica" id="critica" rows="4"
+                        class="form-input mt-1 block w-full focus:outline-none focus:shadow-outline-blue border border-gray-300 rounded-md px-4 py-2 resize-none"
+                        placeholder="Escribe tu opinión para que el resto de los usuarios la pueda leer."></textarea>
+                </div>
+                <!-- Botón para Enviar la Crítica -->
+                <div class="flex justify-center">
+                    <button type="submit"
+                        class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 mx-auto">
+                        Enviar Crítica
+                    </button>
+                </div>
+            </form>
+
+            <!-- Trailer del Audiovisual -->
+            <div class="mt-6>
+                <h3 class="block text-lg font-bold text-gray-500">Trailer:</h3>
+                @if ($audiovisual->trailer)
+                    <iframe class="w-full" height="500" src="{{ $audiovisual->trailer }}"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+                @else
+                    <p class="text-red-500">No hay trailer disponible para este audiovisual.</p>
+                @endif
             </div>
         </div>
 
@@ -106,6 +117,5 @@
                 class="w-full h-auto object-cover md:w-48 mx-auto my-auto rounded-lg shadow-md">
             <!-- Imagen con bordes redondeados y sombreada -->
         </div>
-
     </div>
 </x-app-layout>

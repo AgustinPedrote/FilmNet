@@ -19,7 +19,8 @@ return new class extends Migration
             $table->integer('duracion')->nullable();
             $table->string('pais')->nullable();
             $table->text('sinopsis')->nullable();
-            $table->string('img');
+            $table->string('img')->nullable();
+            $table->string('trailer')->nullable();
             $table->foreignId('tipo_id')->constrained('tipos')->nullable();
             $table->timestamps();
         });

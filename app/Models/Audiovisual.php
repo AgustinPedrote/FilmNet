@@ -19,6 +19,7 @@ class Audiovisual extends Model
         'pais',
         'sinopsis',
         'img',
+        'trailer',
         'tipo_id'];
 
     //Relación muchos a muchos:
