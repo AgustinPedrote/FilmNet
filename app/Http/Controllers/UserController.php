@@ -20,7 +20,7 @@ class UserController extends Controller
         // Obtén las criticas del usuario logado
         $criticas = auth()->user()->criticas;
 
-        return view('criticas.index', compact('criticas'));
+        return view('criticas.miscriticas', compact('criticas'));
     }
 
     public function pendientes()

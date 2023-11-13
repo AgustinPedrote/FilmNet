@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('audiovisual_id')->constrained('audiovisuales');
             $table->timestamps();
+            $table->primary(['user_id', 'audiovisual_id']);
         });
     }
 

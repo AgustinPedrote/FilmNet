@@ -20,7 +20,8 @@ class Audiovisual extends Model
         'sinopsis',
         'img',
         'trailer',
-        'tipo_id'];
+        'tipo_id'
+    ];
 
     //Relación muchos a muchos:
 
@@ -86,5 +87,16 @@ class Audiovisual extends Model
     public function pendientes()
     {
         return $this->hasMany(Pendiente::class);
+    }
+
+    public function obtenerVotacion($user_id, $audiovisual_id)
+    {
+        // Consultar la tabla de votaciones para obtener la votación del usuario para el audiovisual específico
+        $votacion = Votacion::where('user_id', $user_id)
+            ->where('audiovisual_id', $audiovisual_id)
+            ->first();
+
+        // Devolver el resultado de la consulta (puede ser un objeto Votacion o null si no se encuentra ninguna votación)
+        return $votacion;
     }
 }

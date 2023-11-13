@@ -8,60 +8,51 @@ use App\Models\Critica;
 
 class CriticaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function misCriticas()
+    public function index()
     {
-        // Obtén las criticas del usuario logado
-        $criticas = auth()->user()->criticas;
-
-        return view('criticas.index', compact('criticas'));
+        //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreCriticaRequest $request)
     {
-        //
+        // Obtener el ID del usuario autenticado
+        $user = auth()->user()->id;
+
+        // Obtener la crítica y el ID del audiovisual del formulario de solicitud
+        $critica = $request->critica;
+        $audiovisual = $request->audiovisual;
+
+        // Crear una nueva instancia de la clase Critica y almacenarla en la base de datos
+        Critica::create([
+            'audiovisual_id' => $audiovisual,
+            'user_id' => $user,
+            'critica' => $critica,
+        ]);
+
+        // Redireccionar de nuevo a la página anterior (usualmente la página del audiovisual)
+        return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Critica $critica)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Critica $critica)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateCriticaRequest $request, Critica $critica)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Critica $critica)
     {
         //

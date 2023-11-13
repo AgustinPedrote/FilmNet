@@ -4,7 +4,9 @@ use App\Http\Controllers\AudiovisualController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CriticaController;
+use App\Http\Controllers\VotacionController;
 use App\Models\Audiovisual;
+use App\Models\Critica;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,9 +44,12 @@ Route::get('documentales', [AudiovisualController::class, 'documentalesIndex'])-
 //Rutas logueado.
 
 Route::get('mis_votaciones', [UserController::class, 'misVotaciones'])->name('votaciones.index');
-Route::get('mis_criticas', [UserController::class, 'misCriticas'])->name('criticas.index');
+Route::get('mis_criticas', [UserController::class, 'miscriticas'])->name('users.criticas');
+Route::get('audivisual/criticas/{audiovisual}', [AudiovisualController::class, 'criticas'])->name('ver.criticas');
+Route::post('criticas/create/{audiovisual}', [CriticaController::class, 'store'])->name('criticas.store');
 Route::get('pendientes', [UserController::class, 'pendientes'])->name('pendientes.index');
 Route::get('amigos', [UserController::class, 'misAmigos'])->name('amigos.index');
+Route::post('votaciones/create/{audiovisual}', [VotacionController::class, 'store'])->name('votaciones.store');
 
 
 

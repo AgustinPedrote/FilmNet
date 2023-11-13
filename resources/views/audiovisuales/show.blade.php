@@ -1,4 +1,16 @@
 <x-app-layout>
+
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
     <!-- Contenido de la Página -->
     <div class="flex flex-wrap items-start">
         <!-- Título del Audiovisual -->
@@ -79,7 +91,7 @@
             </div>
 
             <!-- Formulario de Críticas -->
-            <form action="" method="post">
+            <form method="POST" action="{{ route('criticas.store', $audiovisual) }}">
                 @csrf
                 <!-- Área de Texto para la Crítica -->
                 <div class="mb-4">
@@ -92,7 +104,7 @@
                 <div class="flex justify-center">
                     <button type="submit"
                         class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 mx-auto">
-                        Enviar Crítica
+                        Enviar
                     </button>
                 </div>
             </form>
@@ -112,10 +124,67 @@
         </div>
 
         <!-- Imagen del Audiovisual -->
-        <div class="w-full md:w-1/3 p-4 flex items-center justify-center">
+        <div class="w-full md:w-1/3 p-4 flex flex-col items-center justify-center">
             <img src="{{ $audiovisual->img }}" alt="{{ $audiovisual->titulo }}"
                 class="w-full h-auto object-cover md:w-48 mx-auto my-auto rounded-lg shadow-md">
-            <!-- Imagen con bordes redondeados y sombreada -->
+
+            <!-- Link a críticas del audiovisual -->
+            <div class="mt-2 text-center">
+                <a href="{{ route('ver.criticas', $audiovisual) }}" class="text-blue-500 hover:underline">
+                    {{ $audiovisual->criticas->count() }} Críticas
+                </a>
+            </div>
+
+            <!-- Formulario de Votación -->
+            <form method="POST" action="{{ route('votaciones.store', $audiovisual) }}"
+                class="mt-4 text-center w-1/2 bg-gray-200 rounded-md p-2 border-gray-400">
+                @csrf
+
+                <!-- Desplegable para Votación -->
+                <div class="mb-4">
+                    <label for="voto" class="block text-lg font-bold text-gray-800">Tu voto</label>
+                    <select name="voto" id="voto"
+                        class="form-select mt-1 block w-full focus:outline-none focus:shadow-outline-blue border border-gray-300 rounded-md px-4 py-2">
+                        <option value="{{ null }}">No vista</option>
+                        @for ($i = 10; $i >= 1; $i--)
+                            <option value="{{ $i }}"
+                                {{ isset($votacion) && $votacion->voto == $i ? 'selected' : '' }}>
+                                {{ $i }} -
+                                @if ($i == 10)
+                                    Excelente
+                                @elseif($i == 9)
+                                    Muy buena
+                                @elseif($i == 8)
+                                    Notable
+                                @elseif($i == 7)
+                                    Buena
+                                @elseif($i == 6)
+                                    Interesante
+                                @elseif($i == 5)
+                                    Pasable
+                                @elseif($i == 4)
+                                    Regular
+                                @elseif($i == 3)
+                                    Floja
+                                @elseif($i == 2)
+                                    Mala
+                                @else
+                                    Muy mala
+                                @endif
+                            </option>
+                        @endfor
+                    </select>
+                </div>
+
+                <!-- Botón para Enviar la Votación -->
+                <div class="flex justify-center">
+                    <button type="submit"
+                        class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 mx-auto">
+                        Enviar
+                    </button>
+                </div>
+            </form>
         </div>
+
     </div>
 </x-app-layout>

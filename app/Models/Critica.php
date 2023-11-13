@@ -11,13 +11,17 @@ class Critica extends Model
 
     protected $table = 'criticas';
 
+    protected $primaryKey = ['user_id', 'audiovisual_id']; // Clave primaria compuesta
+
+    public $incrementing = false; // Indicar que no es una clave primaria autoincremental
+
     protected $fillable = [
         'critica',
         'user_id',
-        'audiovisual_id'];
+        'audiovisual_id',
+    ];
 
-    //Relación uno a muchos (inversa):
-
+    // Relación uno a muchos (inversa):
     public function user()
     {
         return $this->belongsTo(User::class);

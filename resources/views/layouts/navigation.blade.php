@@ -68,7 +68,7 @@
                                     {{ __('Mis votaciones') }}
                                 </x-dropdown-link>
 
-                                <x-dropdown-link :href="route('criticas.index')">
+                                <x-dropdown-link :href="route('users.criticas')">
                                     {{ __('Mis críticas') }}
                                 </x-dropdown-link>
 
