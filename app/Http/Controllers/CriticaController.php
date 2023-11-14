@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCriticaRequest;
 use App\Http\Requests\UpdateCriticaRequest;
+use App\Models\Audiovisual;
 use App\Models\Critica;
 
 class CriticaController extends Controller
@@ -20,23 +21,43 @@ class CriticaController extends Controller
 
     public function store(StoreCriticaRequest $request)
     {
-        // Obtener el ID del usuario autenticado
-        $user = auth()->user()->id;
+        try {
+            // Obtener el ID del usuario autenticado
+            $user = auth()->user()->id;
 
-        // Obtener la crítica y el ID del audiovisual del formulario de solicitud
-        $critica = $request->critica;
-        $audiovisual = $request->audiovisual;
+            // Obtener la crítica y el ID del audiovisual del formulario de solicitud
+            $critica = $request->critica;
+            $audiovisual = $request->audiovisual;
 
-        // Crear una nueva instancia de la clase Critica y almacenarla en la base de datos
-        Critica::create([
-            'audiovisual_id' => $audiovisual,
-            'user_id' => $user,
-            'critica' => $critica,
-        ]);
+            // Verificar si el usuario ya ha realizado una crítica para este audiovisual
+            $existingCritica = Critica::where('user_id', $user)->where('audiovisual_id', $audiovisual)->first();
 
-        // Redireccionar de nuevo a la página anterior (usualmente la página del audiovisual)
-        return redirect()->back();
+            if ($existingCritica) {
+                // Si ya existe una crítica, redirigir con un mensaje de error
+                return redirect()->back()->with('error', 'Ya has realizado una crítica para este audiovisual.');
+            }
+
+            // Verificar si la crítica está vacía
+            if (empty($critica)) {
+                // Si la crítica está vacía, redirigir con un mensaje de error
+                return redirect()->back()->with('error', 'No puedes enviar una crítica vacía.');
+            }
+
+            // Crear una nueva instancia de la clase Critica y almacenarla en la base de datos
+            Critica::create([
+                'audiovisual_id' => $audiovisual,
+                'user_id' => $user,
+                'critica' => $critica,
+            ]);
+
+            // Redireccionar de nuevo a la página anterior (usualmente la página del audiovisual) con un mensaje de éxito
+            return redirect()->back()->with('success', 'La crítica ha sido creada con éxito.');
+        } catch (\Exception $e) {
+            // Manejar cualquier excepción que pueda ocurrir durante el proceso
+            return redirect()->back()->with('error', 'Error al procesar la solicitud. Por favor, inténtalo de nuevo.');
+        }
     }
+
 
     public function show(Critica $critica)
     {
