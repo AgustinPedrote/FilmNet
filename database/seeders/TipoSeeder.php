@@ -17,15 +17,15 @@ class TipoSeeder extends Seeder
         Tipo::truncate();
 
         Tipo::create([
-            "nombre" => "Películas",
+            "nombre" => "Película",
         ]);
 
         Tipo::create([
-            "nombre" => "Series",
+            "nombre" => "Serie",
         ]);
 
         Tipo::create([
-            "nombre" => "Documentales",
+            "nombre" => "Documental",
         ]);
     }
 }

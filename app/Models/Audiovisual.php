@@ -116,4 +116,13 @@ class Audiovisual extends Model
     {
         return $this->votaciones->count();
     }
+
+    public function obtenerTipo()
+    {
+        if ($this->tipo->nombre == 'Película' || $this->tipo->nombre == 'Serie') {
+            return "Vota esta " . $this->tipo->nombre;
+        }else {
+            return "Vota este " . $this->tipo->nombre;
+        }
+    }
 }
