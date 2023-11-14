@@ -63,8 +63,16 @@ class AudiovisualController extends Controller
             $votacion = null;
         }
 
-        return view('audiovisuales.show', ['audiovisual' => $audiovisual, 'votacion' => $votacion]);
+        // Calcula la nota media
+        $notaMedia = $audiovisual->obtenerNotaMedia();
+
+        // Obtiene el número de votos
+        $numeroVotos = $audiovisual->obtenerNumeroVotos();
+
+        return view('audiovisuales.show', ['audiovisual' => $audiovisual, 'votacion' => $votacion, 'notaMedia' => $notaMedia, 'numeroVotos' => $numeroVotos]);
     }
+
+
 
     public function edit(Audiovisual $audiovisual)
     {

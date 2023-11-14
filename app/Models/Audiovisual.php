@@ -99,4 +99,21 @@ class Audiovisual extends Model
         // Devolver el resultado de la consulta (puede ser un objeto Votacion o null si no se encuentra ninguna votación)
         return $votacion;
     }
+
+    // En tu modelo Audiovisual.php
+    public function obtenerNotaMedia()
+    {
+        $votaciones = $this->votaciones;
+
+        // Calcula la nota media
+        $notaMedia = $votaciones->avg('voto');
+
+        return $notaMedia;
+    }
+
+    // Número de votos realizados al audiovisual
+    public function obtenerNumeroVotos()
+    {
+        return $this->votaciones->count();
+    }
 }

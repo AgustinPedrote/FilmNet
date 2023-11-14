@@ -132,7 +132,7 @@
             </script>
 
             <!-- Trailer del Audiovisual -->
-            <div class="mt-6>
+            <div class="mt-6">
                 <h3 class="block text-lg font-bold text-gray-500">Trailer:</h3>
                 @if ($audiovisual->trailer)
                     <iframe class="w-full" height="500" src="{{ $audiovisual->trailer }}"
@@ -140,7 +140,7 @@
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowfullscreen></iframe>
                 @else
-                    <p class="text-red-500">No hay trailer disponible para este audiovisual.</p>
+                    <p class="text-lg text-red-500 space-y-1">No hay trailer disponible para este audiovisual.</p>
                 @endif
             </div>
         </div>
@@ -149,6 +149,19 @@
         <div class="w-full md:w-1/3 p-4 flex flex-col items-center justify-center">
             <img src="{{ $audiovisual->img }}" alt="{{ $audiovisual->titulo }}"
                 class="w-full h-auto object-cover md:w-48 mx-auto my-auto rounded-lg shadow-md">
+
+            <!-- Nota media de las votaciones -->
+            <div class="mt-2 text-center">
+                <p class="text-lg font-bold text-gray-800">Nota Media:</p>
+                <p class="font-bold {{ $notaMedia ? 'text-3xl text-blue-500' : 'text-xl text-gray-500' }}">
+                    {{ $notaMedia ? number_format($notaMedia, 1) : 'Sin votaciones' }}
+                </p>
+            </div>
+
+            <!-- Número de votos -->
+            <div class="mt-2 text-center">
+                <p class="text-blue-500 font-bold"> {{ $notaMedia ? $numeroVotos . ' Votos'  : '' }} </p>
+            </div>
 
             <!-- Link a críticas del audiovisual -->
             <div class="mt-2 text-center">
