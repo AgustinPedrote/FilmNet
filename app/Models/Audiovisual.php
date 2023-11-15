@@ -60,6 +60,11 @@ class Audiovisual extends Model
         return $this->belongsToMany(Company::class);
     }
 
+    public function pendientes()
+    {
+        return $this->belongsToMany(User::class, 'pendientes');
+    }
+
     //Relación uno a muchos (inversa):
 
     public function tipo()
@@ -82,11 +87,6 @@ class Audiovisual extends Model
     public function votaciones()
     {
         return $this->hasMany(Votacion::class);
-    }
-
-    public function pendientes()
-    {
-        return $this->hasMany(Pendiente::class);
     }
 
     public function obtenerVotacion($user_id, $audiovisual_id)

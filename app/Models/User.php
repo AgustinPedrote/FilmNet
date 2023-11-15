@@ -55,11 +55,6 @@ class User extends Authenticatable
         return $this->hasMany(Votacion::class);
     }
 
-    public function pendientes()
-    {
-        return $this->hasMany(Pendiente::class);
-    }
-
     //Relación uno a muchos (inversa):
 
     public function rol()
@@ -73,5 +68,10 @@ class User extends Authenticatable
     public function users()
     {
         return $this->belongsToMany(User::class, 'amigos', 'user_id', 'amigo_id');
+    }
+
+    public function pendientes()
+    {
+        return $this->belongsToMany(Audiovisual::class, 'pendientes');
     }
 }

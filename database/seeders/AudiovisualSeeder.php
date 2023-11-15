@@ -7,6 +7,7 @@ use App\Models\Audiovisual;
 use App\Models\Company;
 use App\Models\Genero;
 use App\Models\Persona;
+use App\Models\User;
 
 class AudiovisualSeeder extends Seeder
 {
@@ -50,6 +51,11 @@ class AudiovisualSeeder extends Seeder
 
         $reparto = Persona::where('nombre', 'Kate Winslet')->first();
         $pelicula->repartos()->attach($reparto->id);
+
+     /*    //Pendientes
+        $pelicula = Audiovisual::find(6);
+        $user = User::where('name', 'agustin')->first();
+        $user->pendientes()->attach($pelicula->id); */
 
         // Se obtiene los géneros.
         $genero = Genero::where('nombre', 'Romance')->first();
