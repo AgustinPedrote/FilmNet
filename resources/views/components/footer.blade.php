@@ -8,13 +8,18 @@
                 <!-- Logo del sitio -->
                 <img src="{{ asset('img/logo.png') }}" alt="logo" class="w-16 h-auto mr-2">
                 <!-- Nombre del sitio -->
-                <span class="text-xl font-bold text-gray-800 dark:text-white">FilmNet</span>
+                <span class="text-base text-gray-900 ">© 2023 FilmNet</span>
             </a>
         </div>
 
-        <!-- Derechos de autor -->
-        <p class="text-gray-600 dark:text-gray-400 text-center md:text-lg">© 2023 FilmNet. Todos los derechos reservados.
-        </p>
+        <ul class="flex flex-wrap items-center mb-6 text-base text-gray-900 sm:mb-0">
+            <li>
+                <a href="{{ route('politica-de-privacidad') }}" class="mr-4 hover:underline md:mr-6">Política de privacidad</a>
+            </li>
+            <li>
+                <a href="{{ route('sobre-nosotros') }}" class="mr-4 hover:underline md:mr-6">Sobre Nosotros</a>
+            </li>
+        </ul>
 
         <!-- Iconos de redes sociales -->
         <div class="flex gap-4 cursor-pointer">

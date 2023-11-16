@@ -53,4 +53,14 @@ Route::post('votaciones/create/{audiovisual}', [VotacionController::class, 'stor
 Route::post('pendientes/create/{audiovisual}', [UserController::class, 'insertPendiente'])->name('insert.pendiente');
 Route::delete('/pendiente/{audiovisual}', [UserController::class, 'quitarPendiente'])->name('quitar.pendiente');
 
+/* POLITICA DE PRIVACIDAD Y QUIENES SOMOS */
+
+Route::get('/politica-de-privacidad', function () {
+    return view('politica-de-privacidad');
+})->name('politica-de-privacidad');
+
+Route::get('/sobre-nosotros', function () {
+    return view('sobre-nosotros');
+})->name('sobre-nosotros');
+
 require __DIR__ . '/auth.php';
