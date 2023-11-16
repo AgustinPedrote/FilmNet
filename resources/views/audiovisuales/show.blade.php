@@ -242,7 +242,7 @@
                                 <path d="M0 0h24v24H0z" fill="none" />
                                 <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2L12 15.6 4 21.2l2.4-7.2-6-4.8h7.6z" />
                             </svg>
-                            Quitar de mi lista
+                            Lista de seguimiento
                         </button>
                     </form>
                 @else
@@ -255,7 +255,7 @@
                                 <path d="M0 0h24v24H0z" fill="none" />
                                 <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2L12 15.6 4 21.2l2.4-7.2-6-4.8h7.6z" />
                             </svg>
-                            Añadir a mi lista
+                            Lista de seguimiento
                         </button>
                     </form>
                 @endif
@@ -270,7 +270,7 @@
                             <path d="M0 0h24v24H0z" fill="none" />
                             <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2L12 15.6 4 21.2l2.4-7.2-6-4.8h7.6z" />
                         </svg>
-                        Añadir a mi lista
+                        Lista de seguimiento
                     </a>
                 </div>
             @endauth
