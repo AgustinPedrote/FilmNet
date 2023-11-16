@@ -50,10 +50,7 @@ Route::post('criticas/create/{audiovisual}', [CriticaController::class, 'store']
 Route::get('pendientes', [UserController::class, 'pendientes'])->name('pendientes.index');
 Route::get('amigos', [UserController::class, 'misAmigos'])->name('amigos.index');
 Route::post('votaciones/create/{audiovisual}', [VotacionController::class, 'store'])->name('votaciones.store');
+Route::post('pendientes/create/{audiovisual}', [UserController::class, 'insertPendiente'])->name('insert.pendiente');
+Route::delete('/pendiente/{audiovisual}', [UserController::class, 'quitarPendiente'])->name('quitar.pendiente');
 
-
-
-
-
-
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

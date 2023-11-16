@@ -60,7 +60,7 @@ class Audiovisual extends Model
         return $this->belongsToMany(Company::class);
     }
 
-    public function pendientes()
+    public function audiovisualPendientes()
     {
         return $this->belongsToMany(User::class, 'pendientes');
     }
@@ -121,7 +121,7 @@ class Audiovisual extends Model
     {
         if ($this->tipo->nombre == 'Película' || $this->tipo->nombre == 'Serie') {
             return "Vota esta " . $this->tipo->nombre;
-        }else {
+        } else {
             return "Vota este " . $this->tipo->nombre;
         }
     }

@@ -86,7 +86,7 @@
                 <div class="mb-4">
                     <label for="critica" class="block text-lg font-bold text-gray-500">Tu Crítica:</label>
 
-                    {{-- Código JS que comprueba antes de realizar una crítica si estas logueado y sino te redirige al login. --}}
+                    {{-- Alarmas cuando hacemos una crítica. --}}
                     <x-input-error :messages="session('error')" class="mt-2" />
                     <x-input-success :messages="session('success')" class="mt-2" />
 
@@ -105,6 +105,7 @@
 
             {{-- Código JS que comprueba antes de realizar una crítica si estas logueado y sino te redirige al login. --}}
             <script>
+                //Text-area
                 document.getElementById('critica').addEventListener('click', function() {
                     // Verificar si el usuario está autenticado
                     @auth
@@ -115,7 +116,7 @@
                 @endauth
                 });
 
-
+                //Botón formulario
                 document.getElementById('criticaForm').addEventListener('submit', function(event) {
                     // Evitar que el formulario se envíe automáticamente
                     event.preventDefault();
@@ -227,7 +228,52 @@
                 </div>
 
             @endauth
-        </div>
 
+            @auth
+                @if (auth()->user()->usuariosPendientes->contains('id', $audiovisual->id))
+                    <form id="comprobarForm" action="{{ route('quitar.pendiente', $audiovisual) }}" method="post">
+                        @method('DELETE')
+                        @csrf
+                        {{--    <button  type="submit">quitar de favoritos</button> --}}
+                        <button type="submit"
+                            class="flex items-center px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 mx-auto mt-4">
+                            <svg id="starIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
+                                height="20" fill="yellow" class="mr-2">
+                                <path d="M0 0h24v24H0z" fill="none" />
+                                <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2L12 15.6 4 21.2l2.4-7.2-6-4.8h7.6z" />
+                            </svg>
+                            Quitar de mi lista
+                        </button>
+                    </form>
+                @else
+                    <form id="comprobarForm" action="{{ route('insert.pendiente', $audiovisual) }}" method="post">
+                        @csrf
+                        <button type="submit"
+                            class="flex items-center px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 mx-auto mt-4">
+                            <svg id="starIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
+                                height="20" fill="white" class="mr-2">
+                                <path d="M0 0h24v24H0z" fill="none" />
+                                <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2L12 15.6 4 21.2l2.4-7.2-6-4.8h7.6z" />
+                            </svg>
+                            Añadir a mi lista
+                        </button>
+                    </form>
+                @endif
+            @else
+                <div class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 mx-auto mt-4"
+                    id="starButton">
+                    <!-- Cambiado el botón por un enlace -->
+                    <a href="{{ route('login') }}"
+                        style="display: flex; align-items: center; text-decoration: none; color: white;">
+                        <svg id="starIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
+                            height="20" fill="currentColor" class="mr-2">
+                            <path d="M0 0h24v24H0z" fill="none" />
+                            <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2L12 15.6 4 21.2l2.4-7.2-6-4.8h7.6z" />
+                        </svg>
+                        Añadir a mi lista
+                    </a>
+                </div>
+            @endauth
+        </div>
     </div>
 </x-app-layout>

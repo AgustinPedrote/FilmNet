@@ -70,7 +70,7 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'amigos', 'user_id', 'amigo_id');
     }
 
-    public function pendientes()
+    public function usuariosPendientes()
     {
         return $this->belongsToMany(Audiovisual::class, 'pendientes');
     }
