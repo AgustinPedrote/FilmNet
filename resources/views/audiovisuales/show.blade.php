@@ -183,7 +183,7 @@
 
             <div class="mt-4 text-center w-full md:w-48 bg-gray-100 rounded-md p-10 border-gray-300">
                 <!-- Nota media de las votaciones -->
-                <div class="space-y-4 m-4">
+                <div class="space-y-4">
                     <p
                         class="font-bold {{ $notaMedia ? 'text-3xl text-white bg-blue-500 border border-blue-700 rounded-md p-3' : 'text-gray-500' }} mb-4">
                         {{ $notaMedia ? number_format($notaMedia, 1) : 'Sin votaciones' }}
