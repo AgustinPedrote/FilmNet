@@ -60,9 +60,9 @@ class Audiovisual extends Model
         return $this->belongsToMany(Company::class);
     }
 
-    public function audiovisualPendientes()
+    public function audiovisualSeguimientos()
     {
-        return $this->belongsToMany(User::class, 'pendientes');
+        return $this->belongsToMany(User::class, 'seguimientos');
     }
 
     //Relación uno a muchos (inversa):

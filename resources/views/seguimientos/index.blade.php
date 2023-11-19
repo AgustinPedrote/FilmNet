@@ -1,5 +1,5 @@
 <x-app-layout>
     <p>Mi lista</p>
-    {{$pendientes}}
+    {{$seguimientos}}
 </x-app-layout>
 

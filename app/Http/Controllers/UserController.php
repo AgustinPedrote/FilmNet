@@ -26,12 +26,12 @@ class UserController extends Controller
         return view('criticas.miscriticas', compact('criticas'));
     }
 
-    public function pendientes()
+    public function seguimientos()
     {
-        // Obtén los audivisuales pendientes de ver del usuario logado
-        $pendientes = auth()->user()->usuariosPendientes;
+        // Obtén los audivisuales en seguimiento.
+        $seguimientos = auth()->user()->usuariosSeguimientos;
 
-        return view('pendientes.index', compact('pendientes'));
+        return view('seguimientos.index', compact('seguimientos'));
     }
 
     public function misAmigos()
@@ -42,22 +42,22 @@ class UserController extends Controller
         return view('amigos.index', compact('amigos'));
     }
 
-    public function insertPendiente(Audiovisual $audiovisual)
+    public function insertSeguimiento(Audiovisual $audiovisual)
     {
 
        $user =  User::find(auth()->user()->id);
-        $user->usuariosPendientes()->attach($audiovisual);
+        $user->usuariosSeguimientos()->attach($audiovisual);
         // Puedes redirigir o mostrar un mensaje de éxito
-        return redirect()->back()->with('status', 'Audiovisual añadido a la lista de pendientes con éxito');
+        return redirect()->back()->with('status', 'Audiovisual añadido a la lista de seguimientos con éxito');
     }
 
-    public function quitarPendiente(Audiovisual $audiovisual)
+    public function quitarSeguimiento(Audiovisual $audiovisual)
     {
         $user = User::find(auth()->user()->id);
-        $pendientes = $user->usuariosPendientes();
-        $pendientes->detach($audiovisual->id);
+        $seguimientos = $user->usuariosSeguimientos();
+        $seguimientos->detach($audiovisual->id);
 
         // Puedes redirigir o mostrar un mensaje de éxito
-        return redirect()->back()->with('status', 'Audiovisual eliminado de la lista de pendientes con éxito');
+        return redirect()->back()->with('status', 'Audiovisual eliminado de la lista de seguimientos con éxito');
     }
 }

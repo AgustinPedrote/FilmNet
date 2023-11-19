@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pendientes', function (Blueprint $table) {
+        Schema::create('seguimientos', function (Blueprint $table) {
             $table->foreignId('audiovisual_id')->constrained('audiovisuales');
             $table->foreignId('user_id')->constrained('users');
             $table->primary(['audiovisual_id', 'user_id']);
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pendientes');
+        Schema::dropIfExists('seguimientos');
     }
 };

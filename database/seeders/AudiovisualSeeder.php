@@ -52,11 +52,6 @@ class AudiovisualSeeder extends Seeder
         $reparto = Persona::where('nombre', 'Kate Winslet')->first();
         $pelicula->repartos()->attach($reparto->id);
 
-     /*    //Pendientes
-        $pelicula = Audiovisual::find(6);
-        $user = User::where('name', 'agustin')->first();
-        $user->pendientes()->attach($pelicula->id); */
-
         // Se obtiene los géneros.
         $genero = Genero::where('nombre', 'Romance')->first();
         $pelicula->generos()->attach($genero->id);
@@ -129,7 +124,6 @@ class AudiovisualSeeder extends Seeder
                 "sinopsis" => "Situada entre los acontecimientos sucedidos en SAW y SAW II, John, desesperado y enfermo, viaja a México para someterse a un tratamiento experimental y muy arriesgado con la esperanza de curar su cáncer mortal.",
                 "tipo_id" => 1,
                 "img" => "https://pics.filmaffinity.com/saw_10-770317273-large.jpg",
-                "trailer" => "https://www.youtube.com/embed/JkYRrPBLqpA?si=aZYuM5Q_9ijsa0bC"
             ]);
 
         // Se obtienen las personas relacionadas con la película (director, compositor, fotógrafo, guionista, reparto)
@@ -592,8 +586,7 @@ class AudiovisualSeeder extends Seeder
                 "pais" => "Estados Unidos",
                 "sinopsis" => "Cuando Mark Grayson hereda superpoderes con 17 años, se convierte en uno de los superhéroes más grandes de la Tierra, junto con su padre.",
                 "tipo_id" => 2,
-                "img" => "https://pics.filmaffinity.com/invincible-253390708-large.jpg",
-                "trailer" => "https://www.youtube.com/embed/glqLjgAfnTM?si=gth77It8sMjCf-IQ"
+                "img" => "https://pics.filmaffinity.com/invincible-253390708-large.jpg"
             ]);
 
         // Se obtienen las personas relacionadas con la serie (director, compositor, fotógrafo, guionista, reparto)

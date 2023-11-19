@@ -72,7 +72,7 @@
                                     {{ __('Mis críticas') }}
                                 </x-dropdown-link>
 
-                                <x-dropdown-link :href="route('pendientes.index')">
+                                <x-dropdown-link :href="route('seguimientos.index')">
                                     {{ __('Mi lista') }}
                                 </x-dropdown-link>
 

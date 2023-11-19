@@ -7,6 +7,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 
+
 class UserSeeder extends Seeder
 {
     /**
@@ -40,13 +41,14 @@ class UserSeeder extends Seeder
             "rol_id" => 2,
         ]);
 
+        // Amigos
         $agustin = User::where('name', 'agustin')->first();
         $antonio = User::where('name', 'antonio')->first();
         $antonio->users()->attach($agustin->id);
 
-        //Pendientes
+        // Seguimientos
         $pelicula = Audiovisual::find(6);
         $user = User::where('name', 'agustin')->first();
-        $user->pendientes()->attach($pelicula->id);
+        $user->usuariosSeguimientos()->attach($pelicula->id);
     }
 }
