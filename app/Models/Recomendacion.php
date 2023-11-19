@@ -5,20 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Company extends Model
+class Recomendacion extends Model
 {
     use HasFactory;
 
-    protected $table = 'companies';
+    protected $table = 'recomendaciones';
 
     protected $fillable = [
-        'nombre'
+        'edad'
     ];
 
-    //Relación muchos a muchos:
+    // Relación uno a muchos:
 
     public function audiovisuales()
     {
-        return $this->belongsToMany(Audiovisual::class);
+        return $this->hasMany(Audiovisual::class);
     }
 }

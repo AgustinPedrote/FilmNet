@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('img')->nullable();
             $table->string('trailer')->nullable();
             $table->foreignId('tipo_id')->constrained('tipos')->nullable();
+            $table->foreignId('recomendacion_id')->constrained('recomendaciones')->nullable();
             $table->timestamps();
         });
     }

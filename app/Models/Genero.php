@@ -12,7 +12,8 @@ class Genero extends Model
     protected $table = 'generos';
 
     protected $fillable = [
-        'nombre'];
+        'nombre'
+    ];
 
     //Relación muchos a muchos:
 

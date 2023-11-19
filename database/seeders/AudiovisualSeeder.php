@@ -30,6 +30,7 @@ class AudiovisualSeeder extends Seeder
                 "sinopsis" => "Jack y Rose se enamoran, pero el prometido y la madre de ella ponen todo tipo de trabas a su relación.
             Mientras, el gigantesco y lujoso transatlántico se aproxima hacia un inmenso iceberg.",
                 "tipo_id" => 1,
+                "recomendacion_id" => 2,
                 "img" => "https://pics.filmaffinity.com/titanic-321994924-large.jpg"
             ]);
 
@@ -73,6 +74,7 @@ class AudiovisualSeeder extends Seeder
                 "pais" => "Estados Unidos",
                 "sinopsis" => "La incepción, que consiste en implantar una idea en el subconsciente en lugar de sustraerla. Sin embargo, su plan se complica.",
                 "tipo_id" => 1,
+                "recomendacion_id" => 2,
                 "img" => "https://pics.filmaffinity.com/inception-652954101-large.jpg",
                 "trailer" => "https://www.youtube.com/embed/RV9L7ui9Cn8?si=2Znoq3jRJWmNwVX9"
             ]);
@@ -123,7 +125,9 @@ class AudiovisualSeeder extends Seeder
                 "pais" => "Estados Unidos",
                 "sinopsis" => "Situada entre los acontecimientos sucedidos en SAW y SAW II, John, desesperado y enfermo, viaja a México para someterse a un tratamiento experimental y muy arriesgado con la esperanza de curar su cáncer mortal.",
                 "tipo_id" => 1,
+                "recomendacion_id" => 3,
                 "img" => "https://pics.filmaffinity.com/saw_10-770317273-large.jpg",
+                "trailer" => "https://www.youtube.com/embed/acQco_ggW1o?si=Yx4j6WmP3MajyQ-K"
             ]);
 
         // Se obtienen las personas relacionadas con la película (director, compositor, fotógrafo, guionista, reparto)
@@ -175,6 +179,7 @@ class AudiovisualSeeder extends Seeder
                 "pais" => "Estados Unidos",
                 "sinopsis" => "JCarol Danvers, alias Capitana Marvel, ha recuperado la identidad que le arrebataron los tiránicos Kree y se ha cobrado su venganza contra la Inteligencia Suprema.",
                 "tipo_id" => 1,
+                "recomendacion_id" => 2,
                 "img" => "https://pics.filmaffinity.com/the_marvels-502364297-large.jpg",
                 "trailer" => "https://www.youtube.com/embed/gdSGIf8kbhg?si=7V7xYQ2Uyfcj68Xq"
             ]);
@@ -229,6 +234,7 @@ class AudiovisualSeeder extends Seeder
                 "sinopsis" => "En la Tierra Media, el Señor Oscuro Sauron ordenó a los Elfos que forjaran los Grandes Anillos de Poder.
             Tres para los reyes Elfos, siete para los Señores Enanos, y nueve para los Hombres Mortales. Pero Saurón también forjó, en secreto, el Anillo Único, que tiene el poder de esclavizar toda la Tierra Media.",
                 "tipo_id" => 1,
+                "recomendacion_id" => 1,
                 "img" => "https://pics.filmaffinity.com/the_lord_of_the_rings_the_fellowship_of_the_ring-952398002-large.jpg",
                 "trailer" => "https://www.youtube.com/embed/3GJp6p_mgPo?si=YsDcwOivvfxrixXA"
             ]);
@@ -278,6 +284,7 @@ class AudiovisualSeeder extends Seeder
                 Sin embargo, cuando una garza parlante informa a Mahito de que su madre sigue viva, entra en una torre abandonada en su busca, lo que le lleva a otro mundo.
                 El título de la película se basa en la novela de 1937, 'Kimitachi wa Dō Ikiru ka' escrita por Yoshino Genzaburō pero la película presenta una historia original que no guarda relación con la novela.",
                 "tipo_id" => 1,
+                "recomendacion_id" => 1,
                 "img" => "https://pics.filmaffinity.com/kimitachi_wa_do_ikiru_ka-917153869-large.jpg",
                 "trailer" => "https://www.youtube.com/embed/oDIbOWgADr8?si=mEBLLW0kjVAtXtBI"
             ]);
@@ -328,6 +335,7 @@ class AudiovisualSeeder extends Seeder
                 "pais" => "Estados Unidos",
                 "sinopsis" => "Narra la historia de una peculiar familia y otros divertidos personajes de la localidad norteamericana de Springfield.",
                 "tipo_id" => 2,
+                "recomendacion_id" => 1,
                 "img" => "https://pics.filmaffinity.com/the_simpsons-397676780-large.jpg"
             ]);
 
@@ -374,6 +382,7 @@ class AudiovisualSeeder extends Seeder
                 "pais" => "Estados Unidos",
                 "sinopsis" => "Walter White, un profesor de química de un instituto de Albuquerque, se entera de que tiene un cáncer de pulmón incurable. Decide, con la ayuda de un antiguo alumno, fabricar anfetaminas y ponerlas a la venta.",
                 "tipo_id" => 2,
+                "recomendacion_id" => 3,
                 "img" => "https://pics.filmaffinity.com/breaking_bad-504442815-large.jpg",
                 "trailer" => "https://www.youtube.com/embed/V8WQhxHEmMc?si=5xwqF596r_2AFaOX"
             ]);
@@ -427,6 +436,7 @@ class AudiovisualSeeder extends Seeder
                 "pais" => "España",
                 "sinopsis" => "El objetivo es atracar la Fábrica Nacional de Moneda y Timbre, con la intención de quedarse encerrados dentro con una misión muy concreta: no robar dinero, sino crearlo.",
                 "tipo_id" => 2,
+                "recomendacion_id" => 2,
                 "img" => "https://pics.filmaffinity.com/la_casa_de_papel-844739080-large.jpg",
                 "trailer" => "https://www.youtube.com/embed/3y-6iaveY6c?si=sHB3JWOZYPOxBOGx"
             ]);
@@ -480,6 +490,7 @@ class AudiovisualSeeder extends Seeder
                 "pais" => "Estados Unidos",
                 "sinopsis" => "Veinte años después de la destrucción de la civilización moderna a causa de un hongo que se adueña del cuerpo de los humanos, uno de los supervivientes, recibe el encargo de sacar a la joven Ellie de una opresiva zona de cuarentena.",
                 "tipo_id" => 2,
+                "recomendacion_id" => 3,
                 "img" => "https://pics.filmaffinity.com/the_last_of_us-722385305-large.jpg",
                 "trailer" => "https://www.youtube.com/embed/yyGetSp7CIc?si=G_lRU4yeLwaDghuv"
             ]);
@@ -536,6 +547,7 @@ class AudiovisualSeeder extends Seeder
                 "pais" => "Estados Unidos",
                 "sinopsis" => "Historia ambientada 172 años antes de Daenerys Targaryen, y en el noveno año del reinado de Viserys Targaryen (Paddy Considine), un rey cuya línea de sucesión está en peligro.",
                 "tipo_id" => 2,
+                "recomendacion_id" => 2,
                 "img" => "https://pics.filmaffinity.com/house_of_the_dragon-678918948-large.jpg",
                 "trailer" => "https://www.youtube.com/embed/339paLFRKlo?si=u21ATdi0o1jfYLoz"
             ]);
@@ -586,7 +598,9 @@ class AudiovisualSeeder extends Seeder
                 "pais" => "Estados Unidos",
                 "sinopsis" => "Cuando Mark Grayson hereda superpoderes con 17 años, se convierte en uno de los superhéroes más grandes de la Tierra, junto con su padre.",
                 "tipo_id" => 2,
-                "img" => "https://pics.filmaffinity.com/invincible-253390708-large.jpg"
+                "recomendacion_id" => 3,
+                "img" => "https://pics.filmaffinity.com/invincible-253390708-large.jpg",
+                "trailer" => "https://www.youtube.com/embed/VuK_xTa6QTI?si=Ft1U8OgE-razNHqK"
             ]);
 
         // Se obtienen las personas relacionadas con la serie (director, compositor, fotógrafo, guionista, reparto)
@@ -632,6 +646,7 @@ class AudiovisualSeeder extends Seeder
                 "pais" => "Reino Unido",
                 "sinopsis" => "Documental de Netflix que narra la vida del futbolista Edson Arantes do Nascimento, más conocido como Pelé.",
                 "tipo_id" => 3,
+                "recomendacion_id" => 1,
                 "img" => "https://pics.filmaffinity.com/pele-801713591-large.jpg"
             ]);
 
@@ -675,6 +690,7 @@ class AudiovisualSeeder extends Seeder
                 "pais" => "Estados Unidos",
                 "sinopsis" => "Famoso documental que aborda la cuestión de la violencia en América.",
                 "tipo_id" => 3,
+                "recomendacion_id" => 2,
                 "img" => "https://pics.filmaffinity.com/bowling_for_columbine-349496940-large.jpg"
             ]);
 
@@ -715,6 +731,7 @@ class AudiovisualSeeder extends Seeder
                 "pais" => "Estados Unidos",
                 "sinopsis" => "Las organizaciones ecologistas más importantes a nivel mundial están fracasando al encarar la fuerza destructiva más grande a la que se enfrenta hoy nuestro planeta.",
                 "tipo_id" => 3,
+                "recomendacion_id" => 2,
                 "img" => "https://pics.filmaffinity.com/cowspiracy_the_sustainability_secret-329537261-large.jpg",
                 "trailer" => "https://www.youtube.com/embed/QQ0a4z8_F8s?si=zTou1QlPvCyBYGXS"
             ]);
@@ -753,6 +770,7 @@ class AudiovisualSeeder extends Seeder
                 "pais" => "Estados Unidos",
                 "sinopsis" => "Los maestros de la tecnología han ideado una nueva forma de capitalismo, y la humanidad es ahora la materia prima de la que se alimentan las máquinas.",
                 "tipo_id" => 3,
+                "recomendacion_id" => 1,
                 "img" => "https://pics.filmaffinity.com/the_social_dilemma-384147385-large.jpg"
             ]);
 
@@ -793,6 +811,7 @@ class AudiovisualSeeder extends Seeder
                 "pais" => "Sudáfrica",
                 "sinopsis" => "Un cineasta forja una amistad inusual con un pulpo que vive en un bosque de algas en Sudáfrica y aprende mientras el animal comparte los misterios de su mundo.",
                 "tipo_id" => 3,
+                "recomendacion_id" => 1,
                 "img" => "https://pics.filmaffinity.com/my_octopus_teacher-902842067-large.jpg",
                 "trailer" => "https://www.youtube.com/embed/1HBKCE8j7EQ?si=gKVmmxro2rWu8ZPJ"
             ]);
@@ -831,6 +850,7 @@ class AudiovisualSeeder extends Seeder
                 "pais" => "Estados Unidos",
                 "sinopsis" => "Después de su decepcionante actuación en los Juegos Olímpicos de 2004, el equipo masculino de baloncesto de Estados Unidos busca la redención persiguiendo el oro en Pekín 2008. ",
                 "tipo_id" => 3,
+                "recomendacion_id" => 1,
                 "img" => "https://pics.filmaffinity.com/the_redeem_team-367062472-large.jpg"
             ]);
 

@@ -9,6 +9,12 @@ class Tipo extends Model
 {
     use HasFactory;
 
+    protected $table = 'tipos';
+
+    protected $fillable = [
+        'nombre'
+    ];
+
     //Relación uno a muchos:
 
     public function audiovisuales()

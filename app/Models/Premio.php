@@ -9,6 +9,14 @@ class Premio extends Model
 {
     use HasFactory;
 
+    protected $table = 'premios';
+
+    protected $fillable = [
+        'nombre',
+        'year',
+        'audiovisual_id'
+    ];
+
     //Relación uno a muchos (inversa):
 
     public function audiovisual()

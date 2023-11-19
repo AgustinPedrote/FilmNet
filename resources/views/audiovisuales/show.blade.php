@@ -74,7 +74,37 @@
                     @endforeach
                 </div>
 
-                {{-- Sinopsis --}}
+                <!-- Recomendación de edad -->
+                <div class="mb-2">
+                    <strong>Recomendación de edad:</strong>
+
+                    @php
+                        $recomendacionId = $audiovisual->recomendacion_id;
+                        $descripcionEdad = $audiovisual->getDescripcionEdad();
+                    @endphp
+
+                    @switch($recomendacionId)
+                        @case(1)
+                            <span class="inline-block bg-green-500 text-white rounded-full px-2 w-4 h-4"></span>
+                            <span>{{ $descripcionEdad }}</span>
+                        @break
+
+                        @case(2)
+                            <span class="inline-block bg-orange-500 text-white rounded-full px-2 w-4 h-4"></span>
+                            <span>{{ $descripcionEdad }}</span>
+                        @break
+
+                        @case(3)
+                            <span class="inline-block bg-red-500 text-white rounded-full px-2 w-4 h-4"></span>
+                            <span>{{ $descripcionEdad }}</span>
+                        @break
+
+                        @default
+                            <span>{{ $descripcionEdad }}</span>
+                    @endswitch
+                </div>
+
+                <!-- Sinopsis -->
                 <div class="mb-2"><strong>Sinopsis:</strong> {{ $audiovisual->sinopsis }}</div>
             </div>
 
@@ -240,9 +270,9 @@
             <!-- Lista de seguimientos -->
             @auth
                 @if (auth()->user()->usuariosSeguimientos->contains('id', $audiovisual->id))
-                <form id="comprobarForm" action="{{ route('quitar.seguimiento', $audiovisual) }}" method="POST">
-                    @method('DELETE')
-                    @csrf
+                    <form id="comprobarForm" action="{{ route('quitar.seguimiento', $audiovisual) }}" method="POST">
+                        @method('DELETE')
+                        @csrf
 
                         <button type="submit"
                             class="flex items-center px-4 py-2  bg-blue-500 border border-blue-600 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 mx-auto mt-4">

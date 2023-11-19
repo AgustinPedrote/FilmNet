@@ -20,7 +20,8 @@ class Audiovisual extends Model
         'sinopsis',
         'img',
         'trailer',
-        'tipo_id'
+        'tipo_id',
+        'recomendaciones'
     ];
 
     //Relación muchos a muchos:
@@ -70,6 +71,11 @@ class Audiovisual extends Model
     public function tipo()
     {
         return $this->belongsTo(Tipo::class);
+    }
+
+    public function recomendacion()
+    {
+        return $this->belongsTo(Recomendacion::class);
     }
 
     //Relación uno a muchos:
@@ -123,6 +129,21 @@ class Audiovisual extends Model
             return "Vota esta " . $this->tipo->nombre;
         } else {
             return "Vota este " . $this->tipo->nombre;
+        }
+    }
+
+    // Recomendación de edad
+    public function getDescripcionEdad(): string
+    {
+        switch ($this->recomendacion_id) {
+            case 1:
+                return 'Todos los públicos';
+            case 2:
+                return 'Mayores de 13 años';
+            case 3:
+                return 'Mayores de 18 años';
+            default:
+                return 'Sin clasificación';
         }
     }
 }
