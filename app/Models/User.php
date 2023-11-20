@@ -79,4 +79,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Audiovisual::class, 'seguimientos');
     }
+
+    // Dentro del modelo User.php
+    public function getEdadAttribute()
+    {
+        return now()->year - $this->nacimiento;
+    }
 }

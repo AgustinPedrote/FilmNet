@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
                 "email" => "agustin@agustin.com",
                 "password" => bcrypt('12345678'),
                 "rol_id" => 1,
+                "nacimiento" => 1982
             ]);
 
 
@@ -32,6 +33,7 @@ class UserSeeder extends Seeder
                 "email" => "antonio@antonio.com",
                 "password" => bcrypt('12345678'),
                 "rol_id" => 1,
+                "nacimiento" => 2015
             ]);
 
         User::create([
@@ -39,6 +41,7 @@ class UserSeeder extends Seeder
             "email" => "admin@admin.com",
             "password" => bcrypt('12345678'),
             "rol_id" => 2,
+            "nacimiento" => 2009
         ]);
 
         // Amigos
