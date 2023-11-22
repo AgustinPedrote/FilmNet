@@ -8,59 +8,93 @@ use App\Models\Audiovisual;
 
 class AudiovisualController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        // Obtener las últimas 5 películas ordenadas por id de forma descendente
+        $peliculas = Audiovisual::where('tipo_id', 1)->latest('id')->take(5)->get();
+
+        // Obtener las últimas 5 series ordenadas por id de forma descendente
+        $series = Audiovisual::where('tipo_id', 2)->latest('id')->take(5)->get();
+
+        // Obtener los últimos 5 documentales ordenados por id de forma descendente
+        $documentales = Audiovisual::where('tipo_id', 3)->latest('id')->take(5)->get();
+
+        // Pasar los datos a la vista 'home'
+        return view('home', ['peliculas' => $peliculas, 'series' => $series, 'documentales' => $documentales]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function peliculasIndex()
+    {
+        // Obtener las últimas 5 películas ordenadas por id de forma descendente
+        $peliculas = Audiovisual::where('tipo_id', 1)->latest('id')->take(5)->get();
+
+        return view('audiovisuales.peliculas', ['peliculas' => $peliculas]);
+    }
+
+
+    public function seriesIndex()
+    {
+        return view('audiovisuales.series');
+    }
+
+    public function documentalesIndex()
+    {
+        return view('audiovisuales.documentales');
+    }
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreAudiovisualRequest $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Audiovisual $audiovisual)
     {
-        //
+        // Verifica si el usuario está autenticado
+        if (auth()->check()) {
+            $user_id = auth()->user()->id;
+            $votacion = $audiovisual->obtenerVotacion($user_id, $audiovisual->id);
+        } else {
+            // Si el usuario no está autenticado, asigna null a $votacion
+            $votacion = null;
+        }
+
+        // Calcula la nota media
+        $notaMedia = $audiovisual->obtenerNotaMedia();
+
+        // Obtiene el número de votos
+        $numeroVotos = $audiovisual->obtenerNumeroVotos();
+
+        return view('audiovisuales.show', ['audiovisual' => $audiovisual, 'votacion' => $votacion, 'notaMedia' => $notaMedia, 'numeroVotos' => $numeroVotos]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
+
     public function edit(Audiovisual $audiovisual)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdateAudiovisualRequest $request, Audiovisual $audiovisual)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Audiovisual $audiovisual)
     {
         //
+    }
+
+    // Ver las criticas de una pelicula
+    public function criticas($audiovisual)
+    {
+        $audiovisual = Audiovisual::find($audiovisual);
+        $criticas = $audiovisual->criticas;
+
+        return view('audiovisuales.criticas', ['criticas' => $criticas]);
     }
 }

@@ -9,6 +9,12 @@ class Persona extends Model
 {
     use HasFactory;
 
+    protected $table = 'personas';
+
+    protected $fillable = [
+        'nombre'
+    ];
+
     //Relación muchos a muchos:
 
     public function repartos()

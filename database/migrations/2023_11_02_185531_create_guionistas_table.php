@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('guionistas', function (Blueprint $table) {
             $table->foreignId('persona_id')->constrained('personas');
-            $table->foreignId('audiovisual_id')->constrained('audiovisuals');
+            $table->foreignId('audiovisual_id')->constrained('audiovisuales');
             $table->primary(['persona_id', 'audiovisual_id']);
         });
     }

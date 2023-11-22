@@ -12,7 +12,8 @@ class Company extends Model
     protected $table = 'companies';
 
     protected $fillable = [
-        'nombre'];
+        'nombre'
+    ];
 
     //Relación muchos a muchos:
 

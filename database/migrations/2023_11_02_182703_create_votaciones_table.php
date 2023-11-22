@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('votaciones', function (Blueprint $table) {
-            $table->integer('voto');
+            $table->enum('voto', [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])->default('No vista')->nullable();
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('audiovisual_id')->constrained('audiovisuals');
+            $table->foreignId('audiovisual_id')->constrained('audiovisuales');
             $table->primary(['user_id', 'audiovisual_id']);
             $table->timestamps();
         });

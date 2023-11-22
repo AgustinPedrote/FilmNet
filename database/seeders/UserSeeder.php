@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Audiovisual;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+
 
 class UserSeeder extends Seeder
 {
@@ -15,25 +17,41 @@ class UserSeeder extends Seeder
     {
         User::truncate();
 
-        User::create([
-            "name" => "agustin",
-            "email" => "agustin@agustin.com",
-            "password" => bcrypt('12345678'),
-            "rol_id" => 1,
-        ]);
+        $agustin =
+            User::create([
+                "name" => "agustin",
+                "email" => "agustin@agustin.com",
+                "password" => bcrypt('12345678'),
+                "rol_id" => 1,
+                "nacimiento" => 1982
+            ]);
 
-        User::create([
-            "name" => "antonio",
-            "email" => "antonio@antonio.com",
-            "password" => bcrypt('12345678'),
-            "rol_id" => 1,
-        ]);
+
+        $antonio =
+            User::create([
+                "name" => "antonio",
+                "email" => "antonio@antonio.com",
+                "password" => bcrypt('12345678'),
+                "rol_id" => 1,
+                "nacimiento" => 2015
+            ]);
 
         User::create([
             "name" => "admin",
             "email" => "admin@admin.com",
             "password" => bcrypt('12345678'),
             "rol_id" => 2,
+            "nacimiento" => 2009
         ]);
+
+        // Amigos
+        $agustin = User::where('name', 'agustin')->first();
+        $antonio = User::where('name', 'antonio')->first();
+        $antonio->users()->attach($agustin->id);
+
+        // Seguimientos
+        $pelicula = Audiovisual::find(6);
+        $user = User::where('name', 'agustin')->first();
+        $user->usuariosSeguimientos()->attach($pelicula->id);
     }
 }

@@ -35,5 +35,9 @@ class CompanySeeder extends Seeder
         Company::create([
             "nombre" => "Lightstorm Entertainments",
         ]);
+
+        Company::create([
+            "nombre" => "Studio Ghibli",
+        ]);
     }
 }

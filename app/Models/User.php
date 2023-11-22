@@ -21,6 +21,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'sexo',
+        'ciudad',
+        'pais',
+        'nacimiento',
+        'rol_id'
     ];
 
     /**
@@ -55,29 +60,29 @@ class User extends Authenticatable
         return $this->hasMany(Votacion::class);
     }
 
-    public function pendientes()
-    {
-        return $this->hasMany(Pendiente::class);
-    }
-
     //Relación uno a muchos (inversa):
 
-    public function roles()
+    public function rol()
     {
         return $this->belongsTo(Rol::class);
     }
 
     //Relación muchos a muchos:
 
-    //Seguidores (Followers)
-    /* public function amigos()
-    {
-        return $this->belongsToMany(Amigo::class, 'amigos', 'amigo_id', 'user_id');
-    } */
-
-    //Seguidos (Follows)
-    /* public function users()
+    //Seguidos (Follows) usuarios que son tus amigos
+    public function users()
     {
         return $this->belongsToMany(User::class, 'amigos', 'user_id', 'amigo_id');
-    } */
+    }
+
+    public function usuariosSeguimientos()
+    {
+        return $this->belongsToMany(Audiovisual::class, 'seguimientos');
+    }
+
+    // Dentro del modelo User.php
+    public function getEdadAttribute()
+    {
+        return now()->year - $this->nacimiento;
+    }
 }
