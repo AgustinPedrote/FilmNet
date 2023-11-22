@@ -325,6 +325,271 @@ class AudiovisualSeeder extends Seeder
         $company = Company::where('nombre', 'Paramount Pictures')->first();
         $pelicula->companies()->attach($company->id);
 
+        // Creación de la película "El chico y la garza"
+        $pelicula =
+            Audiovisual::create([
+                "titulo" => "El chico y la garza",
+                "titulo_original" => "Kimitachi wa dô ikiru ka",
+                "year" => 2023,
+                "duracion" => 124,
+                "pais" => "Japón",
+                "sinopsis" => "Mahito, un joven de 12 años, lucha por asentarse en una nueva ciudad tras la muerte de su madre.
+                Sin embargo, cuando una garza parlante informa a Mahito de que su madre sigue viva, entra en una torre abandonada en su busca, lo que le lleva a otro mundo.
+                El título de la película se basa en la novela de 1937, 'Kimitachi wa Dō Ikiru ka' escrita por Yoshino Genzaburō pero la película presenta una historia original que no guarda relación con la novela.",
+                "tipo_id" => 1,
+                "recomendacion_id" => 1,
+                "img" => "https://pics.filmaffinity.com/kimitachi_wa_do_ikiru_ka-917153869-large.jpg",
+                "trailer" => "https://www.youtube.com/embed/oDIbOWgADr8?si=mEBLLW0kjVAtXtBI"
+            ]);
+
+        // Se obtienen las personas relacionadas con la película (director, compositor, fotógrafo, guionista, reparto)
+        $director = Persona::where('nombre', 'Hayao Miyazaki')->first();
+        $pelicula->directores()->attach($director->id);
+
+        $compositor = Persona::where('nombre', 'Hayao Miyazaki')->first();
+        $pelicula->compositores()->attach($compositor->id);
+
+        $compositor = Persona::where('nombre', 'Barry Peterson')->first();
+        $pelicula->compositores()->attach($compositor->id);
+
+        $fotografia = Persona::where('nombre', 'Álvaro Morte')->first();
+        $pelicula->fotografias()->attach($fotografia->id);
+
+        $guionista = Persona::where('nombre', 'Hayao Miyazaki')->first();
+        $pelicula->guionistas()->attach($guionista->id);
+
+        $guionista = Persona::where('nombre', 'Lorne Balfe')->first();
+        $pelicula->guionistas()->attach($guionista->id);
+
+        $reparto = Persona::where('nombre', 'Nia DaCosta')->first();
+        $pelicula->repartos()->attach($reparto->id);
+
+        $reparto = Persona::where('nombre', 'Laura Karpman')->first();
+        $pelicula->repartos()->attach($reparto->id);
+
+        // Se obtiene los géneros.
+        $genero = Genero::where('nombre', 'Romance')->first();
+        $pelicula->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Aventuras')->first();
+        $pelicula->generos()->attach($genero->id);
+
+        // Se obtienen las compañias.
+        $company = Company::where('nombre', 'Paramount Pictures')->first();
+        $pelicula->companies()->attach($company->id);
+
+        // Creación de la película "El chico y la garza"
+        $pelicula =
+            Audiovisual::create([
+                "titulo" => "El chico y la garza",
+                "titulo_original" => "Kimitachi wa dô ikiru ka",
+                "year" => 2023,
+                "duracion" => 124,
+                "pais" => "Japón",
+                "sinopsis" => "Mahito, un joven de 12 años, lucha por asentarse en una nueva ciudad tras la muerte de su madre.
+                Sin embargo, cuando una garza parlante informa a Mahito de que su madre sigue viva, entra en una torre abandonada en su busca, lo que le lleva a otro mundo.
+                El título de la película se basa en la novela de 1937, 'Kimitachi wa Dō Ikiru ka' escrita por Yoshino Genzaburō pero la película presenta una historia original que no guarda relación con la novela.",
+                "tipo_id" => 1,
+                "recomendacion_id" => 1,
+                "img" => "https://pics.filmaffinity.com/kimitachi_wa_do_ikiru_ka-917153869-large.jpg",
+                "trailer" => "https://www.youtube.com/embed/oDIbOWgADr8?si=mEBLLW0kjVAtXtBI"
+            ]);
+
+        // Se obtienen las personas relacionadas con la película (director, compositor, fotógrafo, guionista, reparto)
+        $director = Persona::where('nombre', 'Hayao Miyazaki')->first();
+        $pelicula->directores()->attach($director->id);
+
+        $compositor = Persona::where('nombre', 'Hayao Miyazaki')->first();
+        $pelicula->compositores()->attach($compositor->id);
+
+        $compositor = Persona::where('nombre', 'Barry Peterson')->first();
+        $pelicula->compositores()->attach($compositor->id);
+
+        $fotografia = Persona::where('nombre', 'Álvaro Morte')->first();
+        $pelicula->fotografias()->attach($fotografia->id);
+
+        $guionista = Persona::where('nombre', 'Hayao Miyazaki')->first();
+        $pelicula->guionistas()->attach($guionista->id);
+
+        $guionista = Persona::where('nombre', 'Lorne Balfe')->first();
+        $pelicula->guionistas()->attach($guionista->id);
+
+        $reparto = Persona::where('nombre', 'Nia DaCosta')->first();
+        $pelicula->repartos()->attach($reparto->id);
+
+        $reparto = Persona::where('nombre', 'Laura Karpman')->first();
+        $pelicula->repartos()->attach($reparto->id);
+
+        // Se obtiene los géneros.
+        $genero = Genero::where('nombre', 'Romance')->first();
+        $pelicula->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Aventuras')->first();
+        $pelicula->generos()->attach($genero->id);
+
+        // Se obtienen las compañias.
+        $company = Company::where('nombre', 'Paramount Pictures')->first();
+        $pelicula->companies()->attach($company->id);
+
+        // Creación de la película "El chico y la garza"
+        $pelicula =
+            Audiovisual::create([
+                "titulo" => "El chico y la garza",
+                "titulo_original" => "Kimitachi wa dô ikiru ka",
+                "year" => 2023,
+                "duracion" => 124,
+                "pais" => "Japón",
+                "sinopsis" => "Mahito, un joven de 12 años, lucha por asentarse en una nueva ciudad tras la muerte de su madre.
+                Sin embargo, cuando una garza parlante informa a Mahito de que su madre sigue viva, entra en una torre abandonada en su busca, lo que le lleva a otro mundo.
+                El título de la película se basa en la novela de 1937, 'Kimitachi wa Dō Ikiru ka' escrita por Yoshino Genzaburō pero la película presenta una historia original que no guarda relación con la novela.",
+                "tipo_id" => 1,
+                "recomendacion_id" => 1,
+                "img" => "https://pics.filmaffinity.com/kimitachi_wa_do_ikiru_ka-917153869-large.jpg",
+                "trailer" => "https://www.youtube.com/embed/oDIbOWgADr8?si=mEBLLW0kjVAtXtBI"
+            ]);
+
+        // Se obtienen las personas relacionadas con la película (director, compositor, fotógrafo, guionista, reparto)
+        $director = Persona::where('nombre', 'Hayao Miyazaki')->first();
+        $pelicula->directores()->attach($director->id);
+
+        $compositor = Persona::where('nombre', 'Hayao Miyazaki')->first();
+        $pelicula->compositores()->attach($compositor->id);
+
+        $compositor = Persona::where('nombre', 'Barry Peterson')->first();
+        $pelicula->compositores()->attach($compositor->id);
+
+        $fotografia = Persona::where('nombre', 'Álvaro Morte')->first();
+        $pelicula->fotografias()->attach($fotografia->id);
+
+        $guionista = Persona::where('nombre', 'Hayao Miyazaki')->first();
+        $pelicula->guionistas()->attach($guionista->id);
+
+        $guionista = Persona::where('nombre', 'Lorne Balfe')->first();
+        $pelicula->guionistas()->attach($guionista->id);
+
+        $reparto = Persona::where('nombre', 'Nia DaCosta')->first();
+        $pelicula->repartos()->attach($reparto->id);
+
+        $reparto = Persona::where('nombre', 'Laura Karpman')->first();
+        $pelicula->repartos()->attach($reparto->id);
+
+        // Se obtiene los géneros.
+        $genero = Genero::where('nombre', 'Romance')->first();
+        $pelicula->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Aventuras')->first();
+        $pelicula->generos()->attach($genero->id);
+
+        // Se obtienen las compañias.
+        $company = Company::where('nombre', 'Paramount Pictures')->first();
+        $pelicula->companies()->attach($company->id);
+
+        // Creación de la película "El chico y la garza"
+        $pelicula =
+            Audiovisual::create([
+                "titulo" => "El chico y la garza",
+                "titulo_original" => "Kimitachi wa dô ikiru ka",
+                "year" => 2023,
+                "duracion" => 124,
+                "pais" => "Japón",
+                "sinopsis" => "Mahito, un joven de 12 años, lucha por asentarse en una nueva ciudad tras la muerte de su madre.
+                Sin embargo, cuando una garza parlante informa a Mahito de que su madre sigue viva, entra en una torre abandonada en su busca, lo que le lleva a otro mundo.
+                El título de la película se basa en la novela de 1937, 'Kimitachi wa Dō Ikiru ka' escrita por Yoshino Genzaburō pero la película presenta una historia original que no guarda relación con la novela.",
+                "tipo_id" => 1,
+                "recomendacion_id" => 1,
+                "img" => "https://pics.filmaffinity.com/kimitachi_wa_do_ikiru_ka-917153869-large.jpg",
+                "trailer" => "https://www.youtube.com/embed/oDIbOWgADr8?si=mEBLLW0kjVAtXtBI"
+            ]);
+
+        // Se obtienen las personas relacionadas con la película (director, compositor, fotógrafo, guionista, reparto)
+        $director = Persona::where('nombre', 'Hayao Miyazaki')->first();
+        $pelicula->directores()->attach($director->id);
+
+        $compositor = Persona::where('nombre', 'Hayao Miyazaki')->first();
+        $pelicula->compositores()->attach($compositor->id);
+
+        $compositor = Persona::where('nombre', 'Barry Peterson')->first();
+        $pelicula->compositores()->attach($compositor->id);
+
+        $fotografia = Persona::where('nombre', 'Álvaro Morte')->first();
+        $pelicula->fotografias()->attach($fotografia->id);
+
+        $guionista = Persona::where('nombre', 'Hayao Miyazaki')->first();
+        $pelicula->guionistas()->attach($guionista->id);
+
+        $guionista = Persona::where('nombre', 'Lorne Balfe')->first();
+        $pelicula->guionistas()->attach($guionista->id);
+
+        $reparto = Persona::where('nombre', 'Nia DaCosta')->first();
+        $pelicula->repartos()->attach($reparto->id);
+
+        $reparto = Persona::where('nombre', 'Laura Karpman')->first();
+        $pelicula->repartos()->attach($reparto->id);
+
+        // Se obtiene los géneros.
+        $genero = Genero::where('nombre', 'Romance')->first();
+        $pelicula->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Aventuras')->first();
+        $pelicula->generos()->attach($genero->id);
+
+        // Se obtienen las compañias.
+        $company = Company::where('nombre', 'Paramount Pictures')->first();
+        $pelicula->companies()->attach($company->id);
+
+        // Creación de la película "El chico y la garza"
+        $pelicula =
+            Audiovisual::create([
+                "titulo" => "El chico y la garza",
+                "titulo_original" => "Kimitachi wa dô ikiru ka",
+                "year" => 2023,
+                "duracion" => 124,
+                "pais" => "Japón",
+                "sinopsis" => "Mahito, un joven de 12 años, lucha por asentarse en una nueva ciudad tras la muerte de su madre.
+                Sin embargo, cuando una garza parlante informa a Mahito de que su madre sigue viva, entra en una torre abandonada en su busca, lo que le lleva a otro mundo.
+                El título de la película se basa en la novela de 1937, 'Kimitachi wa Dō Ikiru ka' escrita por Yoshino Genzaburō pero la película presenta una historia original que no guarda relación con la novela.",
+                "tipo_id" => 1,
+                "recomendacion_id" => 1,
+                "img" => "https://pics.filmaffinity.com/kimitachi_wa_do_ikiru_ka-917153869-large.jpg",
+                "trailer" => "https://www.youtube.com/embed/oDIbOWgADr8?si=mEBLLW0kjVAtXtBI"
+            ]);
+
+        // Se obtienen las personas relacionadas con la película (director, compositor, fotógrafo, guionista, reparto)
+        $director = Persona::where('nombre', 'Hayao Miyazaki')->first();
+        $pelicula->directores()->attach($director->id);
+
+        $compositor = Persona::where('nombre', 'Hayao Miyazaki')->first();
+        $pelicula->compositores()->attach($compositor->id);
+
+        $compositor = Persona::where('nombre', 'Barry Peterson')->first();
+        $pelicula->compositores()->attach($compositor->id);
+
+        $fotografia = Persona::where('nombre', 'Álvaro Morte')->first();
+        $pelicula->fotografias()->attach($fotografia->id);
+
+        $guionista = Persona::where('nombre', 'Hayao Miyazaki')->first();
+        $pelicula->guionistas()->attach($guionista->id);
+
+        $guionista = Persona::where('nombre', 'Lorne Balfe')->first();
+        $pelicula->guionistas()->attach($guionista->id);
+
+        $reparto = Persona::where('nombre', 'Nia DaCosta')->first();
+        $pelicula->repartos()->attach($reparto->id);
+
+        $reparto = Persona::where('nombre', 'Laura Karpman')->first();
+        $pelicula->repartos()->attach($reparto->id);
+
+        // Se obtiene los géneros.
+        $genero = Genero::where('nombre', 'Romance')->first();
+        $pelicula->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Aventuras')->first();
+        $pelicula->generos()->attach($genero->id);
+
+        // Se obtienen las compañias.
+        $company = Company::where('nombre', 'Paramount Pictures')->first();
+        $pelicula->companies()->attach($company->id);
+
         // Creación de la serie "Los Simpson"
         $serie =
             Audiovisual::create([
@@ -636,6 +901,247 @@ class AudiovisualSeeder extends Seeder
         $company = Company::where('nombre', '20th Century Fox')->first();
         $serie->companies()->attach($company->id);
 
+        // Creación de la serie "Invencible"
+        $serie =
+            Audiovisual::create([
+                "titulo" => "Invencible",
+                "titulo_original" => "Invincible",
+                "year" => 2021,
+                "duracion" => 45,
+                "pais" => "Estados Unidos",
+                "sinopsis" => "Cuando Mark Grayson hereda superpoderes con 17 años, se convierte en uno de los superhéroes más grandes de la Tierra, junto con su padre.",
+                "tipo_id" => 2,
+                "recomendacion_id" => 3,
+                "img" => "https://pics.filmaffinity.com/invincible-253390708-large.jpg",
+                "trailer" => "https://www.youtube.com/embed/VuK_xTa6QTI?si=Ft1U8OgE-razNHqK"
+            ]);
+
+        // Se obtienen las personas relacionadas con la serie (director, compositor, fotógrafo, guionista, reparto)
+        $director = Persona::where('nombre', 'Matt Groening')->first();
+        $serie->directores()->attach($director->id);
+
+        $compositor = Persona::where('nombre', 'Dan Castellaneta')->first();
+        $serie->compositores()->attach($compositor->id);
+
+        $fotografia = Persona::where('nombre', 'Nia DaCosta')->first();
+        $serie->fotografias()->attach($fotografia->id);
+
+        $guionista = Persona::where('nombre', 'Justice Smith')->first();
+        $serie->guionistas()->attach($guionista->id);
+
+        $reparto = Persona::where('nombre', 'Bryan Cranston')->first();
+        $serie->repartos()->attach($reparto->id);
+
+        $reparto = Persona::where('nombre', 'Guillermo Navarro')->first();
+        $serie->repartos()->attach($reparto->id);
+
+        // Se obtiene los géneros.
+        $genero = Genero::where('nombre', 'Animación')->first();
+        $serie->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Aventuras')->first();
+        $serie->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Acción')->first();
+        $serie->generos()->attach($genero->id);
+
+        // Se obtienen las compañias.
+        $company = Company::where('nombre', '20th Century Fox')->first();
+        $serie->companies()->attach($company->id);
+
+        // Creación de la serie "Invencible"
+        $serie =
+            Audiovisual::create([
+                "titulo" => "Invencible",
+                "titulo_original" => "Invincible",
+                "year" => 2021,
+                "duracion" => 45,
+                "pais" => "Estados Unidos",
+                "sinopsis" => "Cuando Mark Grayson hereda superpoderes con 17 años, se convierte en uno de los superhéroes más grandes de la Tierra, junto con su padre.",
+                "tipo_id" => 2,
+                "recomendacion_id" => 3,
+                "img" => "https://pics.filmaffinity.com/invincible-253390708-large.jpg",
+                "trailer" => "https://www.youtube.com/embed/VuK_xTa6QTI?si=Ft1U8OgE-razNHqK"
+            ]);
+
+        // Se obtienen las personas relacionadas con la serie (director, compositor, fotógrafo, guionista, reparto)
+        $director = Persona::where('nombre', 'Matt Groening')->first();
+        $serie->directores()->attach($director->id);
+
+        $compositor = Persona::where('nombre', 'Dan Castellaneta')->first();
+        $serie->compositores()->attach($compositor->id);
+
+        $fotografia = Persona::where('nombre', 'Nia DaCosta')->first();
+        $serie->fotografias()->attach($fotografia->id);
+
+        $guionista = Persona::where('nombre', 'Justice Smith')->first();
+        $serie->guionistas()->attach($guionista->id);
+
+        $reparto = Persona::where('nombre', 'Bryan Cranston')->first();
+        $serie->repartos()->attach($reparto->id);
+
+        $reparto = Persona::where('nombre', 'Guillermo Navarro')->first();
+        $serie->repartos()->attach($reparto->id);
+
+        // Se obtiene los géneros.
+        $genero = Genero::where('nombre', 'Animación')->first();
+        $serie->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Aventuras')->first();
+        $serie->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Acción')->first();
+        $serie->generos()->attach($genero->id);
+
+        // Se obtienen las compañias.
+        $company = Company::where('nombre', '20th Century Fox')->first();
+        $serie->companies()->attach($company->id);
+
+        // Creación de la serie "Invencible"
+        $serie =
+            Audiovisual::create([
+                "titulo" => "Invencible",
+                "titulo_original" => "Invincible",
+                "year" => 2021,
+                "duracion" => 45,
+                "pais" => "Estados Unidos",
+                "sinopsis" => "Cuando Mark Grayson hereda superpoderes con 17 años, se convierte en uno de los superhéroes más grandes de la Tierra, junto con su padre.",
+                "tipo_id" => 2,
+                "recomendacion_id" => 3,
+                "img" => "https://pics.filmaffinity.com/invincible-253390708-large.jpg",
+                "trailer" => "https://www.youtube.com/embed/VuK_xTa6QTI?si=Ft1U8OgE-razNHqK"
+            ]);
+
+        // Se obtienen las personas relacionadas con la serie (director, compositor, fotógrafo, guionista, reparto)
+        $director = Persona::where('nombre', 'Matt Groening')->first();
+        $serie->directores()->attach($director->id);
+
+        $compositor = Persona::where('nombre', 'Dan Castellaneta')->first();
+        $serie->compositores()->attach($compositor->id);
+
+        $fotografia = Persona::where('nombre', 'Nia DaCosta')->first();
+        $serie->fotografias()->attach($fotografia->id);
+
+        $guionista = Persona::where('nombre', 'Justice Smith')->first();
+        $serie->guionistas()->attach($guionista->id);
+
+        $reparto = Persona::where('nombre', 'Bryan Cranston')->first();
+        $serie->repartos()->attach($reparto->id);
+
+        $reparto = Persona::where('nombre', 'Guillermo Navarro')->first();
+        $serie->repartos()->attach($reparto->id);
+
+        // Se obtiene los géneros.
+        $genero = Genero::where('nombre', 'Animación')->first();
+        $serie->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Aventuras')->first();
+        $serie->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Acción')->first();
+        $serie->generos()->attach($genero->id);
+
+        // Se obtienen las compañias.
+        $company = Company::where('nombre', '20th Century Fox')->first();
+        $serie->companies()->attach($company->id);
+
+        // Creación de la serie "Invencible"
+        $serie =
+            Audiovisual::create([
+                "titulo" => "Invencible",
+                "titulo_original" => "Invincible",
+                "year" => 2021,
+                "duracion" => 45,
+                "pais" => "Estados Unidos",
+                "sinopsis" => "Cuando Mark Grayson hereda superpoderes con 17 años, se convierte en uno de los superhéroes más grandes de la Tierra, junto con su padre.",
+                "tipo_id" => 2,
+                "recomendacion_id" => 3,
+                "img" => "https://pics.filmaffinity.com/invincible-253390708-large.jpg",
+                "trailer" => "https://www.youtube.com/embed/VuK_xTa6QTI?si=Ft1U8OgE-razNHqK"
+            ]);
+
+        // Se obtienen las personas relacionadas con la serie (director, compositor, fotógrafo, guionista, reparto)
+        $director = Persona::where('nombre', 'Matt Groening')->first();
+        $serie->directores()->attach($director->id);
+
+        $compositor = Persona::where('nombre', 'Dan Castellaneta')->first();
+        $serie->compositores()->attach($compositor->id);
+
+        $fotografia = Persona::where('nombre', 'Nia DaCosta')->first();
+        $serie->fotografias()->attach($fotografia->id);
+
+        $guionista = Persona::where('nombre', 'Justice Smith')->first();
+        $serie->guionistas()->attach($guionista->id);
+
+        $reparto = Persona::where('nombre', 'Bryan Cranston')->first();
+        $serie->repartos()->attach($reparto->id);
+
+        $reparto = Persona::where('nombre', 'Guillermo Navarro')->first();
+        $serie->repartos()->attach($reparto->id);
+
+        // Se obtiene los géneros.
+        $genero = Genero::where('nombre', 'Animación')->first();
+        $serie->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Aventuras')->first();
+        $serie->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Acción')->first();
+        $serie->generos()->attach($genero->id);
+
+        // Se obtienen las compañias.
+        $company = Company::where('nombre', '20th Century Fox')->first();
+        $serie->companies()->attach($company->id);
+
+        // Creación de la serie "Invencible"
+        $serie =
+            Audiovisual::create([
+                "titulo" => "Invencible",
+                "titulo_original" => "Invincible",
+                "year" => 2021,
+                "duracion" => 45,
+                "pais" => "Estados Unidos",
+                "sinopsis" => "Cuando Mark Grayson hereda superpoderes con 17 años, se convierte en uno de los superhéroes más grandes de la Tierra, junto con su padre.",
+                "tipo_id" => 2,
+                "recomendacion_id" => 3,
+                "img" => "https://pics.filmaffinity.com/invincible-253390708-large.jpg",
+                "trailer" => "https://www.youtube.com/embed/VuK_xTa6QTI?si=Ft1U8OgE-razNHqK"
+            ]);
+
+        // Se obtienen las personas relacionadas con la serie (director, compositor, fotógrafo, guionista, reparto)
+        $director = Persona::where('nombre', 'Matt Groening')->first();
+        $serie->directores()->attach($director->id);
+
+        $compositor = Persona::where('nombre', 'Dan Castellaneta')->first();
+        $serie->compositores()->attach($compositor->id);
+
+        $fotografia = Persona::where('nombre', 'Nia DaCosta')->first();
+        $serie->fotografias()->attach($fotografia->id);
+
+        $guionista = Persona::where('nombre', 'Justice Smith')->first();
+        $serie->guionistas()->attach($guionista->id);
+
+        $reparto = Persona::where('nombre', 'Bryan Cranston')->first();
+        $serie->repartos()->attach($reparto->id);
+
+        $reparto = Persona::where('nombre', 'Guillermo Navarro')->first();
+        $serie->repartos()->attach($reparto->id);
+
+        // Se obtiene los géneros.
+        $genero = Genero::where('nombre', 'Animación')->first();
+        $serie->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Aventuras')->first();
+        $serie->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Acción')->first();
+        $serie->generos()->attach($genero->id);
+
+        // Se obtienen las compañias.
+        $company = Company::where('nombre', '20th Century Fox')->first();
+        $serie->companies()->attach($company->id);
+
+
         // Creación del documental "Pelé"
         $documental =
             Audiovisual::create([
@@ -838,6 +1344,324 @@ class AudiovisualSeeder extends Seeder
 
         // Se obtienen las compañias.
         $company = Company::where('nombre', 'Marvel Studios')->first();
+        $documental->companies()->attach($company->id);
+
+        // Creación del documental "El equipo redentor"
+        $documental =
+            Audiovisual::create([
+                "titulo" => "El equipo redentor",
+                "titulo_original" => "The Redeem Team",
+                "year" => 2022,
+                "duracion" => 97,
+                "pais" => "Estados Unidos",
+                "sinopsis" => "Después de su decepcionante actuación en los Juegos Olímpicos de 2004, el equipo masculino de baloncesto de Estados Unidos busca la redención persiguiendo el oro en Pekín 2008. ",
+                "tipo_id" => 3,
+                "recomendacion_id" => 1,
+                "img" => "https://pics.filmaffinity.com/the_redeem_team-367062472-large.jpg"
+            ]);
+
+        // Se obtienen las personas relacionadas con el documental (director, compositor, fotógrafo, guionista, reparto)
+        $director = Persona::where('nombre', 'Michelle Rodriguez')->first();
+        $documental->directores()->attach($director->id);
+
+        $compositor = Persona::where('nombre', 'Úrsula Corberó')->first();
+        $documental->compositores()->attach($compositor->id);
+
+        $fotografia = Persona::where('nombre', 'Hank Azaria')->first();
+        $documental->fotografias()->attach($fotografia->id);
+
+        $fotografia = Persona::where('nombre', 'Aleix Saló')->first();
+        $documental->fotografias()->attach($fotografia->id);
+
+        $guionista = Persona::where('nombre', 'Nia DaCosta')->first();
+        $documental->guionistas()->attach($guionista->id);
+
+        $reparto = Persona::where('nombre', 'Barry Peterson')->first();
+        $documental->repartos()->attach($reparto->id);
+
+        $reparto = Persona::where('nombre', 'Brie Larson')->first();
+        $documental->repartos()->attach($reparto->id);
+
+        // Se obtiene los géneros.
+        $genero = Genero::where('nombre', 'Drama')->first();
+        $documental->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Aventuras')->first();
+        $documental->generos()->attach($genero->id);
+
+        // Se obtienen las compañias.
+        $company = Company::where('nombre', 'Walt Disney Pictures')->first();
+        $documental->companies()->attach($company->id);
+
+        $company = Company::where('nombre', 'Paramount Pictures')->first();
+        $documental->companies()->attach($company->id);
+
+        $company = Company::where('nombre', 'Lightstorm Entertainments')->first();
+        $documental->companies()->attach($company->id);
+
+        // Creación del documental "El equipo redentor"
+        $documental =
+            Audiovisual::create([
+                "titulo" => "El equipo redentor",
+                "titulo_original" => "The Redeem Team",
+                "year" => 2022,
+                "duracion" => 97,
+                "pais" => "Estados Unidos",
+                "sinopsis" => "Después de su decepcionante actuación en los Juegos Olímpicos de 2004, el equipo masculino de baloncesto de Estados Unidos busca la redención persiguiendo el oro en Pekín 2008. ",
+                "tipo_id" => 3,
+                "recomendacion_id" => 1,
+                "img" => "https://pics.filmaffinity.com/the_redeem_team-367062472-large.jpg"
+            ]);
+
+        // Se obtienen las personas relacionadas con el documental (director, compositor, fotógrafo, guionista, reparto)
+        $director = Persona::where('nombre', 'Michelle Rodriguez')->first();
+        $documental->directores()->attach($director->id);
+
+        $compositor = Persona::where('nombre', 'Úrsula Corberó')->first();
+        $documental->compositores()->attach($compositor->id);
+
+        $fotografia = Persona::where('nombre', 'Hank Azaria')->first();
+        $documental->fotografias()->attach($fotografia->id);
+
+        $fotografia = Persona::where('nombre', 'Aleix Saló')->first();
+        $documental->fotografias()->attach($fotografia->id);
+
+        $guionista = Persona::where('nombre', 'Nia DaCosta')->first();
+        $documental->guionistas()->attach($guionista->id);
+
+        $reparto = Persona::where('nombre', 'Barry Peterson')->first();
+        $documental->repartos()->attach($reparto->id);
+
+        $reparto = Persona::where('nombre', 'Brie Larson')->first();
+        $documental->repartos()->attach($reparto->id);
+
+        // Se obtiene los géneros.
+        $genero = Genero::where('nombre', 'Drama')->first();
+        $documental->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Aventuras')->first();
+        $documental->generos()->attach($genero->id);
+
+        // Se obtienen las compañias.
+        $company = Company::where('nombre', 'Walt Disney Pictures')->first();
+        $documental->companies()->attach($company->id);
+
+        $company = Company::where('nombre', 'Paramount Pictures')->first();
+        $documental->companies()->attach($company->id);
+
+        $company = Company::where('nombre', 'Lightstorm Entertainments')->first();
+        $documental->companies()->attach($company->id);
+
+        // Creación del documental "El equipo redentor"
+        $documental =
+            Audiovisual::create([
+                "titulo" => "El equipo redentor",
+                "titulo_original" => "The Redeem Team",
+                "year" => 2022,
+                "duracion" => 97,
+                "pais" => "Estados Unidos",
+                "sinopsis" => "Después de su decepcionante actuación en los Juegos Olímpicos de 2004, el equipo masculino de baloncesto de Estados Unidos busca la redención persiguiendo el oro en Pekín 2008. ",
+                "tipo_id" => 3,
+                "recomendacion_id" => 1,
+                "img" => "https://pics.filmaffinity.com/the_redeem_team-367062472-large.jpg"
+            ]);
+
+        // Se obtienen las personas relacionadas con el documental (director, compositor, fotógrafo, guionista, reparto)
+        $director = Persona::where('nombre', 'Michelle Rodriguez')->first();
+        $documental->directores()->attach($director->id);
+
+        $compositor = Persona::where('nombre', 'Úrsula Corberó')->first();
+        $documental->compositores()->attach($compositor->id);
+
+        $fotografia = Persona::where('nombre', 'Hank Azaria')->first();
+        $documental->fotografias()->attach($fotografia->id);
+
+        $fotografia = Persona::where('nombre', 'Aleix Saló')->first();
+        $documental->fotografias()->attach($fotografia->id);
+
+        $guionista = Persona::where('nombre', 'Nia DaCosta')->first();
+        $documental->guionistas()->attach($guionista->id);
+
+        $reparto = Persona::where('nombre', 'Barry Peterson')->first();
+        $documental->repartos()->attach($reparto->id);
+
+        $reparto = Persona::where('nombre', 'Brie Larson')->first();
+        $documental->repartos()->attach($reparto->id);
+
+        // Se obtiene los géneros.
+        $genero = Genero::where('nombre', 'Drama')->first();
+        $documental->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Aventuras')->first();
+        $documental->generos()->attach($genero->id);
+
+        // Se obtienen las compañias.
+        $company = Company::where('nombre', 'Walt Disney Pictures')->first();
+        $documental->companies()->attach($company->id);
+
+        $company = Company::where('nombre', 'Paramount Pictures')->first();
+        $documental->companies()->attach($company->id);
+
+        $company = Company::where('nombre', 'Lightstorm Entertainments')->first();
+        $documental->companies()->attach($company->id);
+
+        // Creación del documental "El equipo redentor"
+        $documental =
+            Audiovisual::create([
+                "titulo" => "El equipo redentor",
+                "titulo_original" => "The Redeem Team",
+                "year" => 2022,
+                "duracion" => 97,
+                "pais" => "Estados Unidos",
+                "sinopsis" => "Después de su decepcionante actuación en los Juegos Olímpicos de 2004, el equipo masculino de baloncesto de Estados Unidos busca la redención persiguiendo el oro en Pekín 2008. ",
+                "tipo_id" => 3,
+                "recomendacion_id" => 1,
+                "img" => "https://pics.filmaffinity.com/the_redeem_team-367062472-large.jpg"
+            ]);
+
+        // Se obtienen las personas relacionadas con el documental (director, compositor, fotógrafo, guionista, reparto)
+        $director = Persona::where('nombre', 'Michelle Rodriguez')->first();
+        $documental->directores()->attach($director->id);
+
+        $compositor = Persona::where('nombre', 'Úrsula Corberó')->first();
+        $documental->compositores()->attach($compositor->id);
+
+        $fotografia = Persona::where('nombre', 'Hank Azaria')->first();
+        $documental->fotografias()->attach($fotografia->id);
+
+        $fotografia = Persona::where('nombre', 'Aleix Saló')->first();
+        $documental->fotografias()->attach($fotografia->id);
+
+        $guionista = Persona::where('nombre', 'Nia DaCosta')->first();
+        $documental->guionistas()->attach($guionista->id);
+
+        $reparto = Persona::where('nombre', 'Barry Peterson')->first();
+        $documental->repartos()->attach($reparto->id);
+
+        $reparto = Persona::where('nombre', 'Brie Larson')->first();
+        $documental->repartos()->attach($reparto->id);
+
+        // Se obtiene los géneros.
+        $genero = Genero::where('nombre', 'Drama')->first();
+        $documental->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Aventuras')->first();
+        $documental->generos()->attach($genero->id);
+
+        // Se obtienen las compañias.
+        $company = Company::where('nombre', 'Walt Disney Pictures')->first();
+        $documental->companies()->attach($company->id);
+
+        $company = Company::where('nombre', 'Paramount Pictures')->first();
+        $documental->companies()->attach($company->id);
+
+        $company = Company::where('nombre', 'Lightstorm Entertainments')->first();
+        $documental->companies()->attach($company->id);
+
+        // Creación del documental "El equipo redentor"
+        $documental =
+            Audiovisual::create([
+                "titulo" => "El equipo redentor",
+                "titulo_original" => "The Redeem Team",
+                "year" => 2022,
+                "duracion" => 97,
+                "pais" => "Estados Unidos",
+                "sinopsis" => "Después de su decepcionante actuación en los Juegos Olímpicos de 2004, el equipo masculino de baloncesto de Estados Unidos busca la redención persiguiendo el oro en Pekín 2008. ",
+                "tipo_id" => 3,
+                "recomendacion_id" => 1,
+                "img" => "https://pics.filmaffinity.com/the_redeem_team-367062472-large.jpg"
+            ]);
+
+        // Se obtienen las personas relacionadas con el documental (director, compositor, fotógrafo, guionista, reparto)
+        $director = Persona::where('nombre', 'Michelle Rodriguez')->first();
+        $documental->directores()->attach($director->id);
+
+        $compositor = Persona::where('nombre', 'Úrsula Corberó')->first();
+        $documental->compositores()->attach($compositor->id);
+
+        $fotografia = Persona::where('nombre', 'Hank Azaria')->first();
+        $documental->fotografias()->attach($fotografia->id);
+
+        $fotografia = Persona::where('nombre', 'Aleix Saló')->first();
+        $documental->fotografias()->attach($fotografia->id);
+
+        $guionista = Persona::where('nombre', 'Nia DaCosta')->first();
+        $documental->guionistas()->attach($guionista->id);
+
+        $reparto = Persona::where('nombre', 'Barry Peterson')->first();
+        $documental->repartos()->attach($reparto->id);
+
+        $reparto = Persona::where('nombre', 'Brie Larson')->first();
+        $documental->repartos()->attach($reparto->id);
+
+        // Se obtiene los géneros.
+        $genero = Genero::where('nombre', 'Drama')->first();
+        $documental->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Aventuras')->first();
+        $documental->generos()->attach($genero->id);
+
+        // Se obtienen las compañias.
+        $company = Company::where('nombre', 'Walt Disney Pictures')->first();
+        $documental->companies()->attach($company->id);
+
+        $company = Company::where('nombre', 'Paramount Pictures')->first();
+        $documental->companies()->attach($company->id);
+
+        $company = Company::where('nombre', 'Lightstorm Entertainments')->first();
+        $documental->companies()->attach($company->id);
+
+        // Creación del documental "El equipo redentor"
+        $documental =
+            Audiovisual::create([
+                "titulo" => "El equipo redentor",
+                "titulo_original" => "The Redeem Team",
+                "year" => 2022,
+                "duracion" => 97,
+                "pais" => "Estados Unidos",
+                "sinopsis" => "Después de su decepcionante actuación en los Juegos Olímpicos de 2004, el equipo masculino de baloncesto de Estados Unidos busca la redención persiguiendo el oro en Pekín 2008. ",
+                "tipo_id" => 3,
+                "recomendacion_id" => 1,
+                "img" => "https://pics.filmaffinity.com/the_redeem_team-367062472-large.jpg"
+            ]);
+
+        // Se obtienen las personas relacionadas con el documental (director, compositor, fotógrafo, guionista, reparto)
+        $director = Persona::where('nombre', 'Michelle Rodriguez')->first();
+        $documental->directores()->attach($director->id);
+
+        $compositor = Persona::where('nombre', 'Úrsula Corberó')->first();
+        $documental->compositores()->attach($compositor->id);
+
+        $fotografia = Persona::where('nombre', 'Hank Azaria')->first();
+        $documental->fotografias()->attach($fotografia->id);
+
+        $fotografia = Persona::where('nombre', 'Aleix Saló')->first();
+        $documental->fotografias()->attach($fotografia->id);
+
+        $guionista = Persona::where('nombre', 'Nia DaCosta')->first();
+        $documental->guionistas()->attach($guionista->id);
+
+        $reparto = Persona::where('nombre', 'Barry Peterson')->first();
+        $documental->repartos()->attach($reparto->id);
+
+        $reparto = Persona::where('nombre', 'Brie Larson')->first();
+        $documental->repartos()->attach($reparto->id);
+
+        // Se obtiene los géneros.
+        $genero = Genero::where('nombre', 'Drama')->first();
+        $documental->generos()->attach($genero->id);
+
+        $genero = Genero::where('nombre', 'Aventuras')->first();
+        $documental->generos()->attach($genero->id);
+
+        // Se obtienen las compañias.
+        $company = Company::where('nombre', 'Walt Disney Pictures')->first();
+        $documental->companies()->attach($company->id);
+
+        $company = Company::where('nombre', 'Paramount Pictures')->first();
+        $documental->companies()->attach($company->id);
+
+        $company = Company::where('nombre', 'Lightstorm Entertainments')->first();
         $documental->companies()->attach($company->id);
 
         // Creación del documental "El equipo redentor"
