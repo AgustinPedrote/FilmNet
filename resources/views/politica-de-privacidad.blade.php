@@ -1,5 +1,4 @@
 <x-app-layout>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 min-h-[22em]">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg border-2 border-blue-500">
@@ -54,7 +53,8 @@
 
                         <div class="m-4">
                             <p>
-                                El tratamiento de datos corresponde a cada actividad de tratamiento realizada por la AEPD,
+                                El tratamiento de datos corresponde a cada actividad de tratamiento realizada por la
+                                AEPD,
                                 accesibles en el
                                 <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                                     href="https://www.aepd.es/es/la-agencia/transparencia/informacion-en-materia-de-proteccion-de-datos/inventario-actividades-tratamiento-aepd">registro
@@ -71,7 +71,8 @@
 
                         <div class="m-4 ">
                             <p>
-                                El tratamiento se realiza para el cumplimiento de obligaciones legales, misiones de interés
+                                El tratamiento se realiza para el cumplimiento de obligaciones legales, misiones de
+                                interés
                                 público, ejercicio de poderes públicos, o con su consentimiento.
                             </p>
                             <p>
@@ -125,7 +126,8 @@
 
                         <div class="m-4">
                             <p>
-                                Para solicitar acceso, rectificación, supresión, limitación o oponerse al tratamiento, siga
+                                Para solicitar acceso, rectificación, supresión, limitación o oponerse al tratamiento,
+                                siga
                                 las instrucciones en el
                                 <a class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                                     href="https://sedeagpd.gob.es/sede-electronica-web/vistas/formProcedimientoEntrada/procedimientoEntrada.jsf">registro
@@ -139,12 +141,9 @@
                                     href="mailto:dpd@aepd.es">dpd@aepd.es</a>.
                             </p>
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-
 </x-app-layout>

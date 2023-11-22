@@ -45,7 +45,7 @@ class UserController extends Controller
     public function insertSeguimiento(Audiovisual $audiovisual)
     {
 
-       $user =  User::find(auth()->user()->id);
+        $user =  User::find(auth()->user()->id);
         $user->usuariosSeguimientos()->attach($audiovisual);
         // Puedes redirigir o mostrar un mensaje de éxito
         return redirect()->back()->with('status', 'Audiovisual añadido a la lista de seguimientos con éxito');

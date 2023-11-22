@@ -76,32 +76,7 @@
 
                 <!-- Recomendación de edad -->
                 <div class="mb-2">
-                    <strong>Recomendación de edad:</strong>
-
-                    @php
-                        $recomendacionId = $audiovisual->recomendacion_id;
-                        $descripcionEdad = $audiovisual->getDescripcionEdad();
-                    @endphp
-
-                    @switch($recomendacionId)
-                        @case(1)
-                            <span class="inline-block bg-green-500 text-white rounded-full px-2 w-4 h-4"></span>
-                            <span>{{ $descripcionEdad }}</span>
-                        @break
-
-                        @case(2)
-                            <span class="inline-block bg-orange-500 text-white rounded-full px-2 w-4 h-4"></span>
-                            <span>{{ $descripcionEdad }}</span>
-                        @break
-
-                        @case(3)
-                            <span class="inline-block bg-red-500 text-white rounded-full px-2 w-4 h-4"></span>
-                            <span>{{ $descripcionEdad }}</span>
-                        @break
-
-                        @default
-                            <span>{{ $descripcionEdad }}</span>
-                    @endswitch
+                    @include('partials.recommendation')
                 </div>
 
                 <!-- Sinopsis -->
@@ -109,114 +84,10 @@
             </div>
 
             <!-- Formulario de Críticas -->
-            <form method="POST" action="{{ route('criticas.store', $audiovisual) }}" id="criticaForm">
-                @csrf
-
-                <!-- Área de Texto para la Crítica -->
-                <div class="mb-4">
-                    <label for="critica" class="block text-lg font-bold text-gray-500">Tu Crítica:</label>
-
-                    {{-- Alarmas cuando hacemos una crítica. --}}
-                    <x-input-error :messages="session('error')" class="mt-2" />
-                    <x-input-success :messages="session('success')" class="mt-2" />
-
-                    <textarea name="critica" id="critica" rows="4"
-                        class="form-input mt-1 block w-full focus:outline-none focus:shadow-outline-blue border border-gray-300 rounded-md px-4 py-2 resize-none"
-                        placeholder="Escribe tu opinión para que el resto de los usuarios la pueda leer."></textarea>
-                </div>
-
-                <div class="flex justify-center">
-                    <button type="submit" id="botoncritica"
-                        class="px-4 py-2 bg-blue-500 border border-blue-600 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 mx-auto">
-                        Enviar
-                    </button>
-                </div>
-            </form>
-
-            {{-- Código JS que comprueba antes de realizar una crítica si estas logueado y sino te redirige al login. --}}
-            <script>
-                //Text-area
-                document.getElementById('critica').addEventListener('click', function() {
-                    // Verificar si el usuario está autenticado
-                    @auth
-                    // Usuario autenticado, no hacer nada
-                @else
-                    // Usuario no autenticado, redirigir al formulario de inicio de sesión
-                    window.location.href = "{{ route('login') }}";
-                @endauth
-                });
-
-                //Botón formulario
-                document.getElementById('criticaForm').addEventListener('submit', function(event) {
-                    // Evitar que el formulario se envíe automáticamente
-                    event.preventDefault();
-
-                    // Verificar si el usuario está autenticado
-                    @auth
-                    // Usuario autenticado, enviar el formulario
-                    this.submit();
-                @else
-                    // Usuario no autenticado, redirigir al formulario de inicio de sesión
-                    window.location.href = "{{ route('login') }}";
-                @endauth
-                });
-            </script>
+            @include('partials.comments-form')
 
             <!-- Trailer del Audiovisual -->
-            @auth
-                <div class="p-6">
-                    @php
-                        $recomendacionId = $audiovisual->recomendacion_id;
-                        $descripcionEdad = $audiovisual->getDescripcionEdad();
-                        $edadUsuario = auth()->user()->edad;
-
-                        // Establecer la edad máxima permitida según la recomendación
-                        switch ($recomendacionId) {
-                            case 1:
-                                // Todos los públicos (no hay restricción de edad)
-                                $puedeVerTrailer = true;
-                                break;
-                            case 2:
-                                // Mayores de 13 años
-                                $puedeVerTrailer = $edadUsuario >= 13;
-                                break;
-                            case 3:
-                                // Mayores de 18 años
-                                $puedeVerTrailer = $edadUsuario >= 18;
-                                break;
-                            default:
-                                // Sin clasificación (tratar como "Todos los públicos")
-                                $puedeVerTrailer = true;
-                        }
-                    @endphp
-
-                    @if ($puedeVerTrailer)
-                        <div class="mt-6">
-                            @if ($audiovisual->trailer)
-                                <div class="bg-gray-900 rounded-md p-1 border-gray-300">
-                                    <iframe class="w-full" height="500" src="{{ $audiovisual->trailer }}"
-                                        title="YouTube video player" frameborder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                        allowfullscreen>
-                                    </iframe>
-                                </div>
-                            @else
-                                <p class="text-lg text-red-500 space-y-1 font-bold">No hay trailer disponible para este
-                                    audiovisual.</p>
-                            @endif
-                        </div>
-                    @else
-                        <p class="text-lg text-red-500 space-y-1 font-bold">No tienes la edad permitida para ver este
-                            trailer.</p>
-                    @endif
-                </div>
-            @else
-                <div class="p-6">
-                    <a href="{{ route('login') }}" class="text-blue-500 hover:underline font-bold text-lg">
-                        Ver trailer
-                    </a>
-                </div>
-            @endauth
+            @include('partials.trailers')
         </div>
 
         <!-- Imagen del Audiovisual -->
@@ -233,14 +104,13 @@
                     </p>
                 </div>
 
-                <!-- Interior white box -->
                 <div class="space-y-4">
-                    <!-- Number of votes -->
+                    <!-- Número de votos -->
                     <div class="bg-white rounded-md p-4 border border-gray-300">
                         <p class="text-blue-500 font-bold">{{ $notaMedia ? $numeroVotos . ' Votos' : '0 Votos' }}</p>
                     </div>
 
-                    <!-- Link to audiovisual reviews -->
+                    <!-- Link audiovisual críticas -->
                     <div class="bg-white rounded-md p-4 border border-gray-300">
                         <a href="{{ route('ver.criticas', $audiovisual) }}"
                             class="text-blue-500 hover:underline font-bold">
@@ -250,112 +120,11 @@
                 </div>
             </div>
 
-            @auth
-                <!-- Formulario de Votación -->
-                <form method="POST" action="{{ route('votaciones.store', $audiovisual) }}"
-                    class="mt-4 text-center w-full md:w-48 bg-gray-100 rounded-md p-2 border-gray-300">
-                    @csrf
+            <!-- Formulario de Votación -->
+            @include('partials.voting-form')
 
-                    <!-- Desplegable para Votación -->
-                    <div class="mb-4">
-                        <label for="voto" class="block text-lg font-bold text-gray-800">Tu voto</label>
-                        <select name="voto" id="voto"
-                            class="form-select mt-2 block w-full focus:outline-none focus:shadow-outline-blue border border-gray-300 rounded-md px-4 py-2">
-                            <option value="{{ null }}">No vista</option>
-                            @for ($i = 10; $i >= 1; $i--)
-                                <option value="{{ $i }}"
-                                    {{ isset($votacion) && $votacion->voto == $i ? 'selected' : '' }}>
-                                    {{ $i }} -
-                                    @if ($i == 10)
-                                        Excelente
-                                    @elseif($i == 9)
-                                        Muy buena
-                                    @elseif($i == 8)
-                                        Notable
-                                    @elseif($i == 7)
-                                        Buena
-                                    @elseif($i == 6)
-                                        Interesante
-                                    @elseif($i == 5)
-                                        Pasable
-                                    @elseif($i == 4)
-                                        Regular
-                                    @elseif($i == 3)
-                                        Floja
-                                    @elseif($i == 2)
-                                        Mala
-                                    @else
-                                        Muy mala
-                                    @endif
-                                </option>
-                            @endfor
-                        </select>
-                    </div>
-
-                    <!-- Botón para Enviar la Votación -->
-                    <div class="flex justify-center">
-                        <button type="submit"
-                            class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 mx-auto">
-                            Enviar
-                        </button>
-                    </div>
-                </form>
-            @else
-                <div class="mt-4 text-center w-full md:w-48 bg-gray-100 rounded-md p-10 border-gray-300">
-                    <label for="voto" class="block text-lg font-bold text-gray-800">Tu voto</label>
-                    <div class="bg-white rounded-md p-2 border border-gray-300 mt-2">
-                        <a class="text-blue-500 hover:underline font-bold"
-                            href="{{ route('login') }}">{{ $audiovisual->obtenerTipo() }}</a>
-                    </div>
-                </div>
-            @endauth
-
-            <!-- Lista de seguimientos -->
-            @auth
-                @if (auth()->user()->usuariosSeguimientos->contains('id', $audiovisual->id))
-                    <form id="comprobarForm" action="{{ route('quitar.seguimiento', $audiovisual) }}" method="POST">
-                        @method('DELETE')
-                        @csrf
-
-                        <button type="submit"
-                            class="flex items-center px-4 py-2  bg-blue-500 border border-blue-600 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 mx-auto mt-4">
-                            <svg id="starIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
-                                height="20" fill="yellow" class="mr-2">
-                                <path d="M0 0h24v24H0z" fill="none" />
-                                <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2L12 15.6 4 21.2l2.4-7.2-6-4.8h7.6z" />
-                            </svg>
-                            Seguimiento
-                        </button>
-                    </form>
-                @else
-                    <form id="comprobarForm" action="{{ route('insert.seguimiento', $audiovisual) }}" method="post">
-                        @csrf
-                        <button type="submit"
-                            class="flex items-center px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 border-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 mx-auto mt-4">
-                            <svg id="starIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
-                                height="20" fill="white" class="mr-2">
-                                <path d="M0 0h24v24H0z" fill="none" />
-                                <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2L12 15.6 4 21.2l2.4-7.2-6-4.8h7.6z" />
-                            </svg>
-                            Seguimiento
-                        </button>
-                    </form>
-                @endif
-            @else
-                <div class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 border-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-800 mx-auto mt-4"
-                    id="starButton">
-                    <!-- Cambiado el botón por un enlace -->
-                    <a href="{{ route('login') }}"
-                        style="display: flex; align-items: center; text-decoration: none; color: white;">
-                        <svg id="starIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
-                            height="20" fill="currentColor" class="mr-2">
-                            <path d="M0 0h24v24H0z" fill="none" />
-                            <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2L12 15.6 4 21.2l2.4-7.2-6-4.8h7.6z" />
-                        </svg>
-                        Seguimiento
-                    </a>
-                </div>
-            @endauth
+            <!-- Botón para agregar a la lista de seguimiento -->
+            @include('partials.follow-button')
         </div>
     </div>
 </x-app-layout>

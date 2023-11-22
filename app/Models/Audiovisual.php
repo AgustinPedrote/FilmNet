@@ -95,9 +95,9 @@ class Audiovisual extends Model
         return $this->hasMany(Votacion::class);
     }
 
+    // Consultar la tabla de votaciones para obtener la votación del usuario para el audiovisual específico
     public function obtenerVotacion($user_id, $audiovisual_id)
     {
-        // Consultar la tabla de votaciones para obtener la votación del usuario para el audiovisual específico
         $votacion = Votacion::where('user_id', $user_id)
             ->where('audiovisual_id', $audiovisual_id)
             ->first();
@@ -106,12 +106,11 @@ class Audiovisual extends Model
         return $votacion;
     }
 
-    // En tu modelo Audiovisual.php
+    // Calcula la nota media
     public function obtenerNotaMedia()
     {
         $votaciones = $this->votaciones;
 
-        // Calcula la nota media
         $notaMedia = $votaciones->avg('voto');
 
         return $notaMedia;
@@ -123,6 +122,7 @@ class Audiovisual extends Model
         return $this->votaciones->count();
     }
 
+    // Obtiene el tipo de audiovisual.
     public function obtenerTipo()
     {
         if ($this->tipo->nombre == 'Película' || $this->tipo->nombre == 'Serie') {
