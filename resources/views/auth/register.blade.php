@@ -14,25 +14,25 @@
             <div>
                 <!-- Nombre -->
                 <x-input-label class="text-white text-lg" for="name" :value="__('Nombre')" />
-                <x-text-input id="name" class="block mt-1 w-full text-lg" type="text" name="name"
+                <x-text-input id="name" class="block mt-1 w-full text-md" type="text" name="name"
                     :value="old('name')" required autofocus autocomplete="name" />
                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
 
                 <!-- Año de nacimiento -->
                 <x-input-label class="text-white mt-4" for="nacimiento" :value="__('Año de nacimiento')" />
-                <x-text-input id="nacimiento" class="block mt-1 w-full text-lg" type="number" name="nacimiento"
+                <x-text-input id="nacimiento" class="block mt-1 w-full text-md" type="number" name="nacimiento"
                     :value="old('nacimiento')" required min="1900" max="9999" />
                 <x-input-error :messages="$errors->get('nacimiento')" class="mt-2" />
 
                 <!-- Email Address -->
                 <x-input-label class="text-white mt-4" for="email" :value="__('Email')" />
-                <x-text-input id="email" class="block mt-1 w-full text-lg" type="email" name="email"
+                <x-text-input id="email" class="block mt-1 w-full text-md" type="email" name="email"
                     :value="old('email')" required autocomplete="username" />
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
 
                 <!-- Género -->
                 <x-input-label class="text-white mt-4" for="sexo" :value="__('Género')" />
-                <select id="sexo" name="sexo" class="block mt-1 w-full text-lg" required>
+                <select id="sexo" name="sexo" class="block mt-1 w-full text-md" required>
                     <option value="" disabled selected>Selecciona tu género</option>
                     <option value="hombre" {{ old('sexo') == 'hombre' ? 'selected' : '' }}>Hombre</option>
                     <option value="mujer" {{ old('sexo') == 'mujer' ? 'selected' : '' }}>Mujer</option>
@@ -44,25 +44,25 @@
             <div>
                 <!-- País -->
                 <x-input-label class="text-white" for="pais" :value="__('País')" />
-                <x-text-input id="pais" class="block mt-1 w-full text-lg" type="text" name="pais"
+                <x-text-input id="pais" class="block mt-1 w-full text-md" type="text" name="pais"
                     :value="old('pais')" required autofocus autocomplete="pais" />
                 <x-input-error :messages="$errors->get('pais')" class="mt-2" />
 
                 <!-- Ciudad -->
                 <x-input-label class="text-white mt-4" for="ciudad" :value="__('Ciudad')" />
-                <x-text-input id="ciudad" class="block mt-1 w-full text-lg" type="text" name="ciudad"
+                <x-text-input id="ciudad" class="block mt-1 w-full text-md" type="text" name="ciudad"
                     :value="old('ciudad')" required autofocus autocomplete="ciudad" />
                 <x-input-error :messages="$errors->get('ciudad')" class="mt-2" />
 
                 <!-- Contraseña -->
                 <x-input-label class="text-white mt-4" for="password" :value="__('Contraseña')" />
-                <x-text-input id="password" class="block mt-1 w-full text-lg" type="password" name="password" required
+                <x-text-input id="password" class="block mt-1 w-full text-md" type="password" name="password" required
                     autocomplete="new-password" />
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
 
                 <!-- Confirmar contraseña -->
                 <x-input-label class="text-white mt-4" for="password_confirmation" :value="__('Confirmar contraseña')" />
-                <x-text-input id="password_confirmation" class="block mt-1 w-full text-lg" type="password"
+                <x-text-input id="password_confirmation" class="block mt-1 w-full text-md" type="password"
                     name="password_confirmation" required autocomplete="new-password" />
                 <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
             </div>
