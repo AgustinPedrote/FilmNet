@@ -1,5 +1,6 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}" class="bg-blue-500 p-8 rounded-lg w-full mx-auto">
+    <form method="POST" action="{{ route('register') }}" id="registrationForm"
+        class="bg-blue-500 p-8 rounded-lg w-full mx-auto">
         @csrf
 
         <!-- Centrada la imagen -->
@@ -23,19 +24,20 @@
                     :value="old('nacimiento')" required min="1900" max="9999" />
                 <x-input-error :messages="$errors->get('nacimiento')" class="mt-2" />
 
-                <!-- Sexo -->
-                <x-input-label class="text-white mt-4" for="sexo" :value="__('Sexo')" />
+                <!-- Email Address -->
+                <x-input-label class="text-white mt-4" for="email" :value="__('Email')" />
+                <x-text-input id="email" class="block mt-1 w-full text-lg" type="email" name="email"
+                    :value="old('email')" required autocomplete="username" />
+                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+
+                <!-- Género -->
+                <x-input-label class="text-white mt-4" for="sexo" :value="__('Género')" />
                 <select id="sexo" name="sexo" class="block mt-1 w-full text-lg" required>
+                    <option value="" disabled selected>Selecciona tu género</option>
                     <option value="hombre" {{ old('sexo') == 'hombre' ? 'selected' : '' }}>Hombre</option>
                     <option value="mujer" {{ old('sexo') == 'mujer' ? 'selected' : '' }}>Mujer</option>
                 </select>
-                <x-input-error :messages="$errors->get('sexo')" class="mt-2" />
-
-                <!-- Contraseña -->
-                <x-input-label class="text-white mt-4" for="password" :value="__('Contraseña')" />
-                <x-text-input id="password" class="block mt-1 w-full text-lg" type="password" name="password" required
-                    autocomplete="new-password" />
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                <x-input-error :messages="$errors->get('sexo')" class="mt-2" id="sexo-error" />
             </div>
 
             <!-- Columna 2 -->
@@ -52,11 +54,11 @@
                     :value="old('ciudad')" required autofocus autocomplete="ciudad" />
                 <x-input-error :messages="$errors->get('ciudad')" class="mt-2" />
 
-                <!-- Email Address -->
-                <x-input-label class="text-white mt-4" for="email" :value="__('Email')" />
-                <x-text-input id="email" class="block mt-1 w-full text-lg" type="email" name="email"
-                    :value="old('email')" required autocomplete="username" />
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                <!-- Contraseña -->
+                <x-input-label class="text-white mt-4" for="password" :value="__('Contraseña')" />
+                <x-text-input id="password" class="block mt-1 w-full text-lg" type="password" name="password" required
+                    autocomplete="new-password" />
+                <x-input-error :messages="$errors->get('password')" class="mt-2" />
 
                 <!-- Confirmar contraseña -->
                 <x-input-label class="text-white mt-4" for="password_confirmation" :value="__('Confirmar contraseña')" />
@@ -72,9 +74,12 @@
                 {{ __('¿Ya registrado?') }}
             </a>
 
-            <x-primary-button class="ml-4 text-lg">
+            <x-primary-button class="ml-4 text-lg" id="registerButton">
                 {{ __('Registro') }}
             </x-primary-button>
         </div>
     </form>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="{{ asset('js/validation.js') }}"></script>
 </x-guest-layout>
