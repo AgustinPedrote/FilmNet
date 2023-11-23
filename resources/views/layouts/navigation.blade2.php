@@ -49,7 +49,7 @@
                             <!-- Botón del usuario -->
                             <x-slot name="trigger">
                                 <button
-                                    class="inline-flex items-center px-3 py-2 border border-transparent text-md leading-4 font-semibold rounded-md text-white bg-blue-500 hover:text-yellow-300 focus:outline-none transition ease-in-out duration-150">
+                                    class="inline-flex items-center px-3 py-2 border border-transparent text-md leading-4 font-semibold rounded-md text-white bg-blue-500 hover:text-yellow-400 focus:outline-none transition ease-in-out duration-150">
                                     <div>{{ Auth::user()->name }}</div>
                                     <div class="ml-1">
                                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -99,11 +99,11 @@
                     @else
                         {{-- Iniciar sesión y Registrar --}}
                         <a href="{{ route('login') }}"
-                            class="text-md font-semibold text-white hover:text-yellow-300 dark:text-gray-400 dark:hover:text-white">Iniciar
+                            class="text-md font-semibold text-white hover:text-yellow-400 dark:text-gray-400 dark:hover:text-white focus:rounded-sm">Iniciar
                             sesión</a>
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}"
-                                class="text-md ml-4 font-semibold text-white hover:text-yellow-300 dark:text-gray-400 dark:hover:text-white">Registrarse</a>
+                                class="text-md ml-4 font-semibold text-white hover:text-yellow-400 dark:text-gray-400 dark:hover:text-white focus:rounded-sm">Registrarse</a>
                         @endif
                     @endauth
                 @endif

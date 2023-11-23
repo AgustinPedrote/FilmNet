@@ -1,6 +1,6 @@
 <x-app-layout>
     <!-- Título de Novedades -->
-    <h1 class="text-3xl font-extrabold text-center mb-6">
+    <h1 class="text-2xl font-extrabold text-center mb-6">
         <span class="relative inline-block rounded-lg overflow-hidden">
             <span class="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-500 border border-blue-600"></span>
             <span class="relative text-white z-10 p-4">Novedades</span>
@@ -10,7 +10,7 @@
     {{-- Iterar sobre las categorías y sus elementos --}}
     @foreach (['Películas' => $peliculas, 'Series' => $series, 'Documentales' => $documentales] as $title => $items)
         {{-- Mostrar el título de la categoría --}}
-        <h1 class="text-2xl font-bold my-6 ml-10 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
+        <h1 class="text-xl font-bold my-6 ml-10 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
             {{ $title }}</h1>
 
         {{-- Contenedor principal para los elementos de la categoría --}}
