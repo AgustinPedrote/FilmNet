@@ -3,12 +3,12 @@
         class="bg-blue-500 p-8 rounded-lg w-full mx-auto">
         @csrf
 
-        <!-- Centrada la imagen -->
-        <div class="flex items-center justify-center mb-6">
-            <img src="{{ asset('img/logo3.png') }}" alt="Logo" class="w-1/2 object-contain">
+        <!-- Imagen -->
+        <div class="flex items-center justify-center mb-2">
+            <img src="{{ asset('img/logo3.png') }}" alt="Logo" class="w-1/3 object-contain">
         </div>
 
-        <!-- Dos columnas con campos -->
+        <!-- Dos columnas con los campos requerídos -->
         <div class="grid grid-cols-2 gap-4">
             <!-- Columna 1 -->
             <div>
@@ -32,7 +32,7 @@
 
                 <!-- Género -->
                 <x-input-label class="text-white mt-4" for="sexo" :value="__('Género')" />
-                <select id="sexo" name="sexo" class="block mt-1 w-full text-md" required>
+                <select id="sexo" name="sexo" class="block mt-1 w-full text-md border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm">
                     <option value="" disabled selected>Selecciona tu género</option>
                     <option value="hombre" {{ old('sexo') == 'hombre' ? 'selected' : '' }}>Hombre</option>
                     <option value="mujer" {{ old('sexo') == 'mujer' ? 'selected' : '' }}>Mujer</option>
@@ -80,6 +80,5 @@
         </div>
     </form>
 
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="{{ asset('js/validation.js') }}"></script>
+    <script src="{{ asset('js/validation_register.js') }}"></script>
 </x-guest-layout>

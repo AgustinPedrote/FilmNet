@@ -5,12 +5,12 @@
     <form method="POST" action="{{ route('login') }}" class="bg-blue-500 py-8 px-6 rounded-lg w-full max-w-md mx-auto">
         @csrf
 
-        <!-- Centrada la imagen -->
+        <!-- Imagen -->
         <div class="flex items-center justify-center mb-6">
-            <img src="{{ asset('img/logo3.png') }}" alt="Logo" class="w-full object-contain">
+            <img src="{{ asset('img/logo3.png') }}" alt="Logo" class="w-3/4 object-contain">
         </div>
 
-        <!-- Email Address -->
+        <!-- Email -->
         <div class="mb-4">
             <x-input-label class="text-white text-lg" for="email" :value="__('Email')" />
             <x-text-input id="email" class="block mt-1 w-full text-lg" type="email" name="email"
@@ -35,7 +35,7 @@
             </label>
         </div>
 
-        <!-- Link to Register Page -->
+        <!-- Register -->
         <div class="mb-4">
             <p class="text-base text-white">
                 {{ __('¿No tienes una cuenta?') }}
@@ -45,6 +45,7 @@
             </p>
         </div>
 
+        <!-- Olvidaste contraseña -->
         <div class="flex items-center justify-end">
             @if (Route::has('password.request'))
                 <a class="underline text-base text-white hover:text-yellow-300 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
