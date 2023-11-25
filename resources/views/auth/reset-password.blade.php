@@ -14,19 +14,19 @@
         <div>
             <x-input-label class="text-white" for="email" :value="__('Email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <x-input-error :messages="$errors->get('email')" class="mt-2 bg-red-200 border border-red-500 rounded p-1 my-2 text-base" />
         </div>
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label class="text-white" for="password" :value="__('Password')" />
+            <x-input-label class="text-white" for="password" :value="__('Contraseña')" />
             <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <x-input-error :messages="$errors->get('password')" class="mt-2 bg-red-200 border border-red-500 rounded p-1 my-2 text-md" />
         </div>
 
         <!-- Confirm Password -->
         <div class="mt-4">
-            <x-input-label class="text-white" for="password_confirmation" :value="__('Confirm Password')" />
+            <x-input-label class="text-white" for="password_confirmation" :value="__('Confirmar contraseña')" />
 
             <x-text-input id="password_confirmation" class="block mt-1 w-full"
                                 type="password"
