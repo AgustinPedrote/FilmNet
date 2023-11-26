@@ -7,42 +7,43 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         // La variable indica si el formulario es válido o no.
-        var isValid;
+        var isValid = true;
 
         // Nombre
         var name = document.getElementById("name").value;
-        isValid = validateField(name, "name", "Por favor, ingrese su nombre.");
+        isValid = validateField(name, "name", "Por favor, ingrese su nombre.") && isValid;
 
         // Género
         var sexo = document.getElementById("sexo").value;
-        isValid = validateField(sexo, "sexo", "Por favor, seleccione su género.");
+        isValid = validateField(sexo, "sexo", "Por favor, seleccione su género.") && isValid;
 
         // Ciudad
         var ciudad = document.getElementById("ciudad").value;
-        isValid = validateField(ciudad, "ciudad", "Por favor, ingrese su ciudad.");
+        isValid = validateField(ciudad, "ciudad", "Por favor, ingrese su ciudad.") && isValid;
 
         // País
         var pais = document.getElementById("pais").value;
-        isValid = validateField(pais, "pais", "Por favor, ingrese su país.");
+        isValid = validateField(pais, "pais", "Por favor, ingrese su país.") && isValid;
 
         // Contraseña
         var password = document.getElementById("password").value;
-        isValid = validatePassword(password, "password");
+        isValid = validatePassword(password, "password") && isValid;
 
         // Confirmar contraseña
         var passwordConfirmation = document.getElementById("password_confirmation").value;
-        isValid = validatePasswordConfirmation(passwordConfirmation, password);
+        isValid = validatePasswordConfirmation(passwordConfirmation, password) && isValid;
 
         // Año de nacimiento
         var nacimiento = document.getElementById("nacimiento").value;
-        isValid = validateYear(nacimiento, "nacimiento");
+        isValid = validateYear(nacimiento, "nacimiento") && isValid;
 
         // Email
         var email = document.getElementById("email").value;
-        isValid = validateEmail(email, "email");
+        isValid = validateEmail(email, "email") && isValid;
 
         return isValid;
     }
+
 
     // Esta función muestra un mensaje de error debajo del campo específico.
     function displayErrorMessage(field, errorMessage) {
@@ -50,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .getElementById(field)
             .insertAdjacentHTML(
                 "afterend",
-                '<p class="text-red-500 bg-red-200 border border-red-500 rounded p-1 my-2 text-center error-message">' +
+                '<p class="text-base font-medium text-red-500 bg-red-200 border-red-500 rounded p-1 my-2 text-center error-message">' +
                     errorMessage +
                     "</p>"
             );
@@ -87,10 +88,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // Esta función valida la contraseña.
     function validatePassword(password, field) {
         // Verifica la longitud de la contraseña.
-        if (password.length < 4 || password.length > 8) {
+        if (password.length < 8) {
             displayErrorMessage(
                 field,
-                "La contraseña debe tener entre 4 y 8 caracteres."
+                "La contraseña debe tener almenos 8 caracteres."
             );
             return false;
         }

@@ -9,7 +9,7 @@
 
         <!-- Email -->
         <!-- Session Status -->
-        <x-auth-session-status class="mb-2 bg bg-green-200 border border-green-500 rounded p-1 my-2" :status="session('status')" />
+        <x-auth-session-status class="mb-2" :status="session('status')" />
 
         <div class="mb-4">
             <x-input-label class="text-white text-lg" for="email" :value="__('Email')" />

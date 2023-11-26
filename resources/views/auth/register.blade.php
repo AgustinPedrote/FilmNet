@@ -32,7 +32,8 @@
 
                 <!-- Género -->
                 <x-input-label class="text-white mt-4" for="sexo" :value="__('Género')" />
-                <select id="sexo" name="sexo" class="block mt-1 w-full text-md border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm">
+                <select id="sexo" name="sexo"
+                    class="block mt-1 w-full text-md border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm">
                     <option value="" disabled selected>Selecciona tu género</option>
                     <option value="hombre" {{ old('sexo') == 'hombre' ? 'selected' : '' }}>Hombre</option>
                     <option value="mujer" {{ old('sexo') == 'mujer' ? 'selected' : '' }}>Mujer</option>
