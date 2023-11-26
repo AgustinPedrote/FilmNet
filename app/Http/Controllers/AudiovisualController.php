@@ -23,23 +23,28 @@ class AudiovisualController extends Controller
         return view('home', ['peliculas' => $peliculas, 'series' => $series, 'documentales' => $documentales]);
     }
 
+    // Obtener todas las películas ordenadas por id de forma descendente paginadas de 8 en 8
     public function peliculasIndex()
     {
-        // Obtener las últimas 5 películas ordenadas por id de forma descendente
-        $peliculas = Audiovisual::where('tipo_id', 1)->latest('id')->take(5)->get();
+        $peliculas = Audiovisual::where('tipo_id', 1)->latest('id')->paginate(10);
 
         return view('audiovisuales.peliculas', ['peliculas' => $peliculas]);
     }
 
 
+
     public function seriesIndex()
     {
-        return view('audiovisuales.series');
+        $series = Audiovisual::where('tipo_id', 2)->latest('id')->paginate(10);
+
+        return view('audiovisuales.series', ['series' => $series]);
     }
 
     public function documentalesIndex()
     {
-        return view('audiovisuales.documentales');
+        $documentales = Audiovisual::where('tipo_id', 3)->latest('id')->paginate(10);
+
+        return view('audiovisuales.documentales', ['documentales' => $documentales]);
     }
 
     public function create()

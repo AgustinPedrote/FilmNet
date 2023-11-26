@@ -32,7 +32,7 @@
                 </div>
 
                 {{-- Buscador --}}
-                <div class="w-60 items-center hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="w-72 items-center hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <input type="text" id="search-navbar"
                         class="h-10 block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500
                         focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -49,7 +49,7 @@
                             <!-- Botón del usuario -->
                             <x-slot name="trigger">
                                 <button
-                                    class="inline-flex items-center px-3 py-2 border border-transparent text-md leading-4 font-semibold rounded-md text-white bg-blue-500 hover:text-yellow-400 focus:outline-none transition ease-in-out duration-150">
+                                    class="inline-flex items-center px-3 py-2 border border-transparent text-md leading-4 font-semibold rounded-md text-white bg-blue-500 hover:text-yellow-300 focus:outline-none transition ease-in-out duration-150">
                                     <div>{{ Auth::user()->name }}</div>
                                     <div class="ml-1">
                                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -99,11 +99,11 @@
                     @else
                         {{-- Iniciar sesión y Registrar --}}
                         <a href="{{ route('login') }}"
-                            class="text-md font-semibold text-white hover:text-yellow-400 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Iniciar
+                            class="text-md font-semibold text-white hover:text-yellow-300 dark:text-gray-400 dark:hover:text-white">Iniciar
                             sesión</a>
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}"
-                                class="text-md ml-4 font-semibold text-white hover:text-yellow-400 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Registrarse</a>
+                                class="text-md ml-4 font-semibold text-white hover:text-yellow-300 dark:text-gray-400 dark:hover:text-white">Registrarse</a>
                         @endif
                     @endauth
                 @endif
