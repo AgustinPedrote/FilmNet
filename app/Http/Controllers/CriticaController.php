@@ -50,7 +50,7 @@ class CriticaController extends Controller
                 'critica' => $critica,
             ]);
 
-            // Redireccionar de nuevo a la página anterior (usualmente la página del audiovisual) con un mensaje de éxito
+            // Redireccionar de nuevo a la página anterior con un mensaje de éxito
             return redirect()->back()->with('success', 'La crítica ha sido creada con éxito.');
         } catch (\Exception $e) {
             // Manejar cualquier excepción que pueda ocurrir durante el proceso
@@ -66,16 +66,46 @@ class CriticaController extends Controller
 
     public function edit(Critica $critica)
     {
-        //
     }
 
-    public function update(UpdateCriticaRequest $request, Critica $critica)
+    /*     public function update(UpdateCriticaRequest $request, Critica $critica)
     {
-        //
+        $critica->update($request->all());
+        return redirect()->route('users.criticas')->with('success', 'La critica se ha modificado correctamente');
+    } */
+
+    public function update(UpdateCriticaRequest $request, $usuario_id, $audiovisual_id)
+    {
+        try {
+            // Intenta actualizar la crítica si ya existe, de lo contrario, la inserta
+            Critica::updateOrInsert(
+                ['user_id' => $usuario_id, 'audiovisual_id' => $audiovisual_id],
+                ['critica' => $request->critica]
+            );
+
+            return redirect()->route('users.criticas')->with('success', 'La crítica se ha modificado correctamente');
+        } catch (\Exception $e) {
+            // Maneja cualquier excepción que pueda ocurrir durante el proceso
+            return redirect()->back()->with('error', 'Error al procesar la solicitud. Por favor, inténtalo de nuevo.');
+        }
     }
 
-    public function destroy(Critica $critica)
+
+    public function destroy(StoreCriticaRequest $request)
     {
-        //
+
+        // Obtener el ID del usuario autenticado
+        $user = auth()->user()->id;
+
+        // Obtener el ID del audiovisual y el critica del formulario de solicitud
+        $audiovisualId = $request->audiovisual_id;
+
+        // Eliminar la crítica correspondiente
+        Critica::where('audiovisual_id', $audiovisualId)
+            ->where('user_id', $user)
+            ->delete();
+
+        // Redireccionar de nuevo a la página anterior
+        return redirect()->back();
     }
 }

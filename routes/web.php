@@ -46,6 +46,8 @@ Route::get('mis_votaciones', [UserController::class, 'misVotaciones'])->name('vo
 Route::get('mis_criticas', [UserController::class, 'miscriticas'])->name('users.criticas');
 Route::get('audivisual/criticas/{audiovisual}', [AudiovisualController::class, 'criticas'])->name('ver.criticas');
 Route::post('criticas/create/{audiovisual}', [CriticaController::class, 'store'])->name('criticas.store');
+Route::delete('/criticas/{usuario_id}/{audiovisual_id}', [CriticaController::class, 'destroy'])->name('criticas.destroy');
+Route::put('/criticas/edit/{usuario_id}/{audiovisual_id}', [CriticaController::class, 'update'])->name('criticas.update');
 
 Route::get('amigos', [UserController::class, 'misAmigos'])->name('amigos.index');
 
