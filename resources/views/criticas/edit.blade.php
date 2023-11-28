@@ -19,7 +19,6 @@
              </div>
 
              <!-- Modal body -->
-
              <form
                  action="{{ route('criticas.update', ['usuario_id' => $critica->user_id, 'audiovisual_id' => $critica->audiovisual_id]) }}"
                  method="POST"> @method('put')
@@ -30,7 +29,8 @@
                          <x-input-label for="critica" :value="__('Crítica')"
                              class="block mb-2 text-xl font-bold text-gray-900 dark:text-white" />
 
-                         <textarea id="critica" class="block mt-1 w-full h-60 border-gray-300 rounded-md text-lg" name="critica" required autofocus autocomplete="critica">{{ $critica->critica }}</textarea>
+                         <textarea id="critica" class="block mt-1 w-full h-60 border-gray-300 rounded-md text-lg" name="critica" required
+                             autofocus autocomplete="critica">{{ $critica->critica }}</textarea>
 
 
                          <x-input-error :messages="$errors->get('critica')" class="mt-2" />

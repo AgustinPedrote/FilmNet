@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Audiovisual;
+use App\Models\Critica;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
 
@@ -20,8 +21,8 @@ class UserController extends Controller
 
     public function misCriticas()
     {
-        // Obtén las criticas del usuario logado
-        $criticas = auth()->user()->criticas;
+        // Obtén las críticas del usuario logado paginadas
+        $criticas = Critica::where('user_id', auth()->user()->id)->paginate(4);
 
         return view('criticas.miscriticas', compact('criticas'));
     }

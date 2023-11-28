@@ -83,7 +83,7 @@ class CriticaController extends Controller
                 ['critica' => $request->critica]
             );
 
-            return redirect()->route('users.criticas')->with('success', 'La crítica se ha modificado correctamente');
+            return redirect()->route('users.criticas')->with('success', 'La crítica se ha modificado correctamente.');
         } catch (\Exception $e) {
             // Maneja cualquier excepción que pueda ocurrir durante el proceso
             return redirect()->back()->with('error', 'Error al procesar la solicitud. Por favor, inténtalo de nuevo.');
@@ -106,6 +106,6 @@ class CriticaController extends Controller
             ->delete();
 
         // Redireccionar de nuevo a la página anterior
-        return redirect()->back();
+        return redirect()->back()->with('success', 'La crítica se ha eliminado correctamente.');;
     }
 }
