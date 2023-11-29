@@ -1,7 +1,7 @@
 @auth
     <!-- Formulario de Votación -->
     <form method="POST" action="{{ route('votaciones.store', $audiovisual) }}"
-        class="mt-4 text-center w-full md:w-48 bg-gray-100 rounded-md p-2 border-gray-300">
+        class="my-2 text-center w-full md:w-48 bg-gray-100 rounded-md p-2 border-gray-300">
         @csrf
 
         <!-- Desplegable para Votación -->

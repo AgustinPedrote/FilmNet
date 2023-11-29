@@ -1,13 +1,23 @@
 <x-app-layout>
-    <h1 class="text-2xl font-bold my-6 ml-10 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
+    <!-- Mensajes de éxito y error -->
+    <div class="relative z-10">
+        @if (session('success'))
+            <div class="absolute top-[-10px] left-0 w-full mr-10 z-50">
+                <x-success :status="session('success')" />
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="absolute top-[-10px] left-0 w-full mr-10 z-50">
+                <x-error :status="session('error')" />
+            </div>
+        @endif
+    </div>
+
+    <h1 class="text-2xl font-bold mb-8 mt-20 ml-10 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
         Mis críticas
     </h1>
 
-    @if(session('success'))
-        <div class="font-medium text-base text-green-500 bg-green-200 border-green-500 rounded p-1 my-2 text-center">
-            {{ session('success') }}
-        </div>
-    @endif
 
     @forelse ($criticas as $critica)
         <div class="flex justify-center mb-4">

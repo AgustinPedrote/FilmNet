@@ -1,5 +1,5 @@
 <!-- Barra de navegación principal -->
-<nav x-data="{ open: false }" class="border-b border-gray-100 bg-blue-500 h-32">
+<nav x-data="{ open: false }" class="border-b border-gray-100 bg-blue-500 h-32 relative z-50">
     <!-- Contenedor principal -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Flex container para alinear elementos -->
@@ -13,7 +13,7 @@
                     </a>
                 </div>
                 <!-- Enlaces de navegación -->
-                <div class="flex space-x-4 sm:space-x-6">
+                <div class="flex space-x-4 sm:space-x-6 relative z-20">
                     <x-nav-link :href="route('home.index')" :active="request()->routeIs('home.index')">
                         {{ __('Inicio') }}
                     </x-nav-link>
