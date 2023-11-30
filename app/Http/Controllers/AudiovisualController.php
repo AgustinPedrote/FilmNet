@@ -100,6 +100,9 @@ class AudiovisualController extends Controller
         $audiovisual = Audiovisual::find($audiovisual);
         $criticas = $audiovisual->criticas;
 
-        return view('audiovisuales.criticas', ['criticas' => $criticas]);
+        // Calcula la nota media
+        $notaMedia = $audiovisual->obtenerNotaMedia();
+
+        return view('audiovisuales.criticas', ['criticas' => $criticas, 'notaMedia' => $notaMedia]);
     }
 }

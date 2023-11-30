@@ -23,7 +23,9 @@ class UserSeeder extends Seeder
                 "email" => "agustin@agustin.com",
                 "password" => bcrypt('1234567a'),
                 "rol_id" => 1,
-                "nacimiento" => 1982
+                "nacimiento" => 1982,
+                "ciudad" => "Sanlúcar",
+                "pais" => "España"
             ]);
 
 
@@ -33,7 +35,9 @@ class UserSeeder extends Seeder
                 "email" => "antonio@antonio.com",
                 "password" => bcrypt('1234567a'),
                 "rol_id" => 1,
-                "nacimiento" => 2015
+                "nacimiento" => 2015,
+                "ciudad" => "Las Cabezas",
+                "pais" => "España"
             ]);
 
         User::create([
@@ -41,7 +45,9 @@ class UserSeeder extends Seeder
             "email" => "admin@admin.com",
             "password" => bcrypt('1234567a'),
             "rol_id" => 2,
-            "nacimiento" => 2009
+            "nacimiento" => 2009,
+            "ciudad" => "Madrid",
+            "pais" => "España"
         ]);
 
         // Amigos
