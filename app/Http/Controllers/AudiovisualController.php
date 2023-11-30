@@ -103,6 +103,6 @@ class AudiovisualController extends Controller
         // Calcula la nota media
         $notaMedia = $audiovisual->obtenerNotaMedia();
 
-        return view('audiovisuales.criticas', ['criticas' => $criticas, 'notaMedia' => $notaMedia]);
+        return view('audiovisuales.criticas', ['audiovisual' => $audiovisual, 'criticas' => $criticas, 'notaMedia' => $notaMedia]);
     }
 }

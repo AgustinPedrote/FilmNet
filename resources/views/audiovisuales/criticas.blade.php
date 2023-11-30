@@ -4,6 +4,30 @@
         Críticas
     </h1>
 
+    <!-- Sección de información del audiovisual -->
+    <div class="mt-10 mb-10 mx-4 relative">
+        <a href="{{ route('audiovisual.show', ['audiovisual' => $audiovisual->id]) }}">
+            <div class="max-w-4xl mx-auto relative">
+                <!-- Imagen panorámica -->
+                <img src="{{ $audiovisual->img }}" alt="{{ $audiovisual->titulo }}"
+                    class="w-full h-48 object-cover object-center rounded-md shadow-md mb-8">
+
+                <!-- Contenedor absoluto para el título y la nota media -->
+                <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center text-white">
+                    <!-- Nombre del audiovisual con fondo semi-transparente -->
+                    <p class="text-3xl font-bold mb-4 bg-blue-500 bg-opacity-50 p-4 rounded-md">
+                        {{ $audiovisual->titulo }}
+                    </p>
+
+                    <!-- Nota media del audiovisual con fondo semi-transparente -->
+                    <p class="text-lg font-semibold mb-4 bg-blue-500 bg-opacity-50 p-2 rounded-md">
+                        Nota Media: {{ number_format($notaMedia, 1) }}
+                    </p>
+                </div>
+            </div>
+        </a>
+    </div>
+
     <!-- Sección para mostrar las críticas -->
     @forelse ($criticas as $critica)
         @php
@@ -22,8 +46,8 @@
                             <!-- Autor de la crítica -->
                             <div class="font-medium mb-2 text-2xl flex items-center">
                                 <!-- Icono de usuario -->
-                                <svg xmlns="http://www.w3.org/2000/svg" height="26" width="26" viewBox="0 0 512 512"
-                                    class="mr-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="26" width="26"
+                                    viewBox="0 0 512 512" class="mr-2">
                                     <path
                                         d="M256 288A144 144 0 1 0 256 0a144 144 0 1 0 0 288zm-94.7 32C72.2 320 0 392.2 0 481.3c0 17 13.8 30.7 30.7 30.7H481.3c17 0 30.7-13.8 30.7-30.7C512 392.2 439.8 320 350.7 320H161.3z" />
                                 </svg>
@@ -40,7 +64,7 @@
                                 <span class="mr-2">
                                     {{ $critica->user->criticas->count() }} críticas
                                 </span>
-                                <span class="text-gray-500">|</span> <!-- Separador -->
+                                <span class="text-gray-500">|</span>
                                 <span class="ml-2">
                                     {{ $critica->user->votaciones->count() }} votaciones
                                 </span>
@@ -79,12 +103,12 @@
 
                 <!-- Segunda fila (fila de abajo) -->
                 <div class="bg-gray-100 p-4 rounded-md m-2">
-                    <!-- Contenido de la segunda fila -->
                     <div class="text-lg font-bold mb-2">Crítica:</div>
                     <p class="text-lg" style="min-height: 6rem;">{{ $critica->critica }}</p>
                 </div>
 
             </div>
+
             <!-- Línea divisoria entre críticas -->
             <hr class="my-4">
         </div>
