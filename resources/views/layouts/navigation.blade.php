@@ -64,6 +64,11 @@
 
                             <!-- Contenido del menú desplegable -->
                             <x-slot name="content">
+                                @if (Auth::user()->rol_id == 2)
+                                <x-dropdown-link :href="route('admin.index')">
+                                    {{ __('Panel administración') }}
+                                </x-dropdown-link>
+                                @endif
                                 <x-dropdown-link :href="route('votaciones.index')">
                                     {{ __('Mis votaciones') }}
                                 </x-dropdown-link>

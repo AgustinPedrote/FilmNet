@@ -61,4 +61,9 @@ class UserController extends Controller
         // Puedes redirigir o mostrar un mensaje de éxito
         return redirect()->back()->with('status', 'Audiovisual eliminado de la lista de seguimientos con éxito');
     }
+
+    public function adminIndex()
+    {
+        return view('admin.index');
+    }
 }

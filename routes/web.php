@@ -67,4 +67,26 @@ Route::get('/sobre-nosotros', function () {
     return view('sobre-nosotros');
 })->name('sobre-nosotros');
 
+
+//Ruta para admin
+
+Route::middleware(['auth', 'userEsAdmin'])->group(function () {
+
+    //Ruta index del panel de administración:
+    Route::get('admin', [UserController::class, 'adminIndex'])->name('admin.index');
+
+    //Rutas audiovisuales de admin:
+    Route::get('audiovisuales', [AudiovisualController::class, 'adminIndex'])->name('admin.audiovisual.index');
+    Route::get('audiovisuales/create', [AudiovisualController::class, 'create'])->name('audiovisual.create');
+    Route::post('audiovisuales', [AudiovisualController::class, 'store'])->name('audiovisuales.store');
+    Route::get('/audiovisuales/{audiovisual}', [AudiovisualController::class, 'adminShow'])->name('admin.audiovisual.show');
+    Route::get('/audiovisuales/editar/{audiovisual}', [AudiovisualController::class, 'edit'])->name('audiovisual.edit');
+    Route::put('/audiovisuales/update/{audiovisual}', [AudiovisualController::class, 'update'])->name('audiovisual.update');
+    Route::delete('/audiovisuales/borrar/{audiovisual}', [AudiovisualController::class, 'destroy'])->name('audiovisual.borrar');
+
+    //Rutas de usuarios de admin:
+});
+
+
+
 require __DIR__ . '/auth.php';
