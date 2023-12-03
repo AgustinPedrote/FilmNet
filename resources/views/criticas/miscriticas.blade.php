@@ -21,7 +21,7 @@
 
     @forelse ($criticas as $critica)
         <div class="flex justify-center mb-4">
-            <div class="bg-blue-500 p-4 max-w-4xl rounded-md shadow-md">
+            <div class="bg-blue-500 p-4 max-w-4xl rounded-md shadow-md mt-2">
 
                 <!-- Primera fila (fila de arriba) -->
                 <div class="flex items-center justify-between mb-4 bg-gray-100 p-4 rounded-md">
