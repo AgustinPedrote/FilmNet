@@ -13,7 +13,7 @@ class PremioController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.premios.index');
     }
 
     /**

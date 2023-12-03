@@ -19,6 +19,7 @@ class CriticaController extends Controller
         //
     }
 
+    // Crear crítica para un audiovisual
     public function store(StoreCriticaRequest $request)
     {
         try {
@@ -29,17 +30,15 @@ class CriticaController extends Controller
             $critica = $request->critica;
             $audiovisual = $request->audiovisual;
 
-            // Verificar si el usuario ya ha realizado una crítica para este audiovisual
-            $existingCritica = Critica::where('user_id', $user)->where('audiovisual_id', $audiovisual)->first();
+            $existeCritica = Critica::where('user_id', $user)->where('audiovisual_id', $audiovisual)->first();
 
-            if ($existingCritica) {
-                // Si ya existe una crítica, redirigir con un mensaje de error
+            // Verificar si el usuario ya ha realizado una crítica para este audiovisual
+            if ($existeCritica) {
                 return redirect()->back()->with('error', 'Ya has realizado una crítica para este audiovisual.');
             }
 
             // Verificar si la crítica está vacía
             if (empty($critica)) {
-                // Si la crítica está vacía, redirigir con un mensaje de error
                 return redirect()->back()->with('error', 'No puedes enviar una crítica vacía.');
             }
 
@@ -50,14 +49,14 @@ class CriticaController extends Controller
                 'critica' => $critica,
             ]);
 
-            // Redireccionar de nuevo a la página anterior con un mensaje de éxito
+            // Redireccionar de nuevo a la ficha técnica del audiovisual
             return redirect()->back()->with('success', 'La crítica ha sido creada con éxito.');
+
         } catch (\Exception $e) {
             // Manejar cualquier excepción que pueda ocurrir durante el proceso
             return redirect()->back()->with('error', 'Error al procesar la solicitud. Por favor, inténtalo de nuevo.');
         }
     }
-
 
     public function show(Critica $critica)
     {
@@ -66,13 +65,8 @@ class CriticaController extends Controller
 
     public function edit(Critica $critica)
     {
+        //
     }
-
-    /*     public function update(UpdateCriticaRequest $request, Critica $critica)
-    {
-        $critica->update($request->all());
-        return redirect()->route('users.criticas')->with('success', 'La critica se ha modificado correctamente');
-    } */
 
     public function update(UpdateCriticaRequest $request, $usuario_id, $audiovisual_id)
     {
@@ -84,12 +78,12 @@ class CriticaController extends Controller
             );
 
             return redirect()->route('users.criticas')->with('success', 'La crítica se ha modificado correctamente.');
+
         } catch (\Exception $e) {
             // Maneja cualquier excepción que pueda ocurrir durante el proceso
             return redirect()->back()->with('error', 'Error al procesar la solicitud. Por favor, inténtalo de nuevo.');
         }
     }
-
 
     public function destroy(StoreCriticaRequest $request)
     {
@@ -97,7 +91,7 @@ class CriticaController extends Controller
         // Obtener el ID del usuario autenticado
         $user = auth()->user()->id;
 
-        // Obtener el ID del audiovisual y el critica del formulario de solicitud
+        // Obtener el ID del audiovisual
         $audiovisualId = $request->audiovisual_id;
 
         // Eliminar la crítica correspondiente

@@ -66,7 +66,7 @@
                             <x-slot name="content">
                                 @if (Auth::user()->rol_id == 2)
                                 <x-dropdown-link :href="route('admin.index')">
-                                    {{ __('Panel administración') }}
+                                    {{ __('Panel de administración') }}
                                 </x-dropdown-link>
                                 @endif
                                 <x-dropdown-link :href="route('votaciones.index')">

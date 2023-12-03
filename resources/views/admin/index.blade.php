@@ -1,3 +1,3 @@
 <x-admin>
-    <p>hola</p>
+    <h1>Panel de adminitración</h1>
 </x-admin>
