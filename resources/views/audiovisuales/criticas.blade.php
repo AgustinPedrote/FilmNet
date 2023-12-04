@@ -30,12 +30,12 @@
                 <!-- Contenedor absoluto para el título y la nota media -->
                 <div class="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center text-white">
                     <!-- Nombre del audiovisual con fondo semi-transparente -->
-                    <p class="text-3xl font-bold mb-4 bg-blue-500 bg-opacity-50 p-4 rounded-md">
+                    <p class="text-2xl font-bold mb-4 bg-blue-500 bg-opacity-50 p-4 rounded-md">
                         {{ $audiovisual->titulo }}
                     </p>
 
                     <!-- Nota media del audiovisual con fondo semi-transparente -->
-                    <p class="text-lg font-semibold mb-4 bg-blue-500 bg-opacity-50 p-2 rounded-md">
+                    <p class="text-xl font-semibold mb-4 bg-blue-500 bg-opacity-50 p-2 rounded-md">
                         Nota Media: {{ number_format($notaMedia, 1) }}
                     </p>
                 </div>
@@ -43,12 +43,10 @@
         </a>
     </div>
 
-    {{-- Si no tiene críticas da un array con un valor null --}}
-
     @if ($criticas != null)
 
         @foreach ($criticas as $critica)
-            <!-- Sección para mostrar las críticas -->
+            <!-- Votación del usuario al audiovisual -->
             @php
                 $votacion = $critica->audiovisual->obtenerVotacion($critica->user_id, $critica->audiovisual_id);
             @endphp
@@ -62,8 +60,10 @@
                         <!-- Columna 1: Detalles del usuario y fecha -->
                         <div class="w-2/3 flex flex-col ml-4">
                             <div class="flex flex-col">
+
                                 <!-- Autor de la crítica -->
                                 <div class="font-medium mb-2 text-2xl flex items-center">
+
                                     <!-- Icono de usuario -->
                                     <svg xmlns="http://www.w3.org/2000/svg" height="26" width="26"
                                         viewBox="0 0 512 512" class="mr-2">
@@ -80,6 +80,7 @@
                                     <!-- Editar y eliminar crítica solo para el usuario logueado -->
                                     @if ($critica->user_id == auth()->id())
                                         <div class="flex justify-end items-center mt-2">
+
                                             <!-- Editar crítica de usuario logueado -->
                                             <span class="ml-6 cursor-pointer hover:scale-110">
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20"
@@ -124,6 +125,7 @@
 
                                 <!-- Fecha de la crítica -->
                                 <div class="font-medium mb-2 text-lg flex items-center">
+
                                     <!-- Icono de calendario -->
                                     <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14"
                                         viewBox="0 0 448 512" class="mr-2">
@@ -138,9 +140,10 @@
                         <!-- Columna 2: Nota Usuario -->
                         <div class="w-1/3 flex justify-end items-center">
                             <div class="mt-2 flex space-x-4">
+
                                 <!-- Nota del usuario al audiovisual -->
                                 <p
-                                    class="font-bold {{ $votacion && $votacion->voto ? 'text-3xl text-white bg-blue-500 border border-blue-700 rounded-md p-3 mr-10 mb-4' : 'text-lg text-gray-500' }}">
+                                    class="font-bold {{ $votacion && $votacion->voto ? 'text-2xl text-white bg-blue-500 border border-blue-700 rounded-md p-3 mr-10 mb-4' : 'text-lg text-gray-500' }}">
                                     @if ($votacion && $votacion->voto)
                                         {{ number_format($votacion->voto, 1) }}
                                     @else
@@ -153,7 +156,7 @@
 
                     <hr class="my-4 mx-2">
 
-                    <!-- Segunda fila (fila de abajo) -->
+                    <!-- Segunda fila: Crítica -->
                     <div class="bg-gray-100 p-4 rounded-md m-2">
                         <div class="text-lg font-bold mb-2">Crítica:</div>
                         <p class="text-lg" style="min-height: 6rem;">{{ $critica->critica }}</p>
