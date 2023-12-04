@@ -18,7 +18,6 @@
         Mis críticas
     </h1>
 
-
     @forelse ($criticas as $critica)
         <div class="flex justify-center mb-4">
             <div class="bg-blue-500 p-4 max-w-4xl rounded-md shadow-md mt-2">
@@ -55,14 +54,15 @@
                                 class="px-4 py-2 bg-blue-500 border border-blue-600 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-red active:bg-blue-600 mx-auto font-semibold"
                                 data-modal-target="EditarModal{{ $critica }}"
                                 data-modal-toggle="EditarModal{{ $critica }}">
-
                                 Editar
                             </button>
 
                             <button type="submit"
                                 class="px-4 py-2 bg-red-500 border border-red-600 text-white rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-red active:bg-red-600 mx-auto font-semibold"
                                 data-modal-target="popup-modal{{ $critica }}"
-                                data-modal-toggle="popup-modal{{ $critica }}">Borrar</button>
+                                data-modal-toggle="popup-modal{{ $critica }}">
+                                Borrar
+                            </button>
                         </div>
                     </div>
                 </div>

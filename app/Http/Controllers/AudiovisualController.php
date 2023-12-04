@@ -100,22 +100,30 @@ class AudiovisualController extends Controller
     }
 
     public function criticas($audiovisual)
-{
-    $audiovisual = Audiovisual::find($audiovisual);
-    $criticas = $audiovisual->criticas;
+    {
+        $audiovisual = Audiovisual::find($audiovisual);
+        $criticas = $audiovisual->criticas;
 
-    // Si el usuario está logueado, mover su crítica al principio de la lista (reject elimina la crítica y prepend la inserta al principio del array)
-    if (auth()->check()) {
-        $userCritica = $criticas->where('user_id', auth()->id())->first();
-        $criticas = $criticas->reject(function ($critica) {
-            return $critica->user_id == auth()->id();
-        })->prepend($userCritica);
+        // Si no hay críticas, asignar null a $criticas
+        if ($criticas->isEmpty()) {
+            $criticas = null;
+        } else {
+            // Si el usuario está logueado, mover su crítica al principio de la lista
+            if (auth()->check()) {
+                $userCritica = $criticas->where('user_id', auth()->id())->first();
+
+                // Verificar si se encontró una crítica del usuario
+                if ($userCritica) {
+                    $criticas = $criticas->reject(function ($critica) {
+                        return $critica->user_id == auth()->id();
+                    })->prepend($userCritica);
+                }
+            }
+        }
+
+        // Calcula la nota media
+        $notaMedia = $audiovisual->obtenerNotaMedia();
+
+        return view('audiovisuales.criticas', ['audiovisual' => $audiovisual, 'criticas' => $criticas, 'notaMedia' => $notaMedia]);
     }
-
-    // Calcula la nota media
-    $notaMedia = $audiovisual->obtenerNotaMedia();
-
-    return view('audiovisuales.criticas', ['audiovisual' => $audiovisual, 'criticas' => $criticas, 'notaMedia' => $notaMedia]);
-}
-
 }

@@ -51,7 +51,6 @@ class CriticaController extends Controller
 
             // Redireccionar de nuevo a la ficha técnica del audiovisual
             return redirect()->back()->with('success', 'La crítica ha sido creada con éxito.');
-
         } catch (\Exception $e) {
             // Manejar cualquier excepción que pueda ocurrir durante el proceso
             return redirect()->back()->with('error', 'Error al procesar la solicitud. Por favor, inténtalo de nuevo.');
@@ -70,6 +69,8 @@ class CriticaController extends Controller
 
     public function update(UpdateCriticaRequest $request, $usuario_id, $audiovisual_id)
     {
+        $referer = $request->headers->get('referer');
+
         try {
             // Intenta actualizar la crítica si ya existe, de lo contrario, la inserta
             Critica::updateOrInsert(
@@ -77,8 +78,14 @@ class CriticaController extends Controller
                 ['critica' => $request->critica]
             );
 
-            return redirect()->route('users.criticas')->with('success', 'La crítica se ha modificado correctamente.');
-
+            // Verifica la URL de referencia y realiza la redirección
+            if (strpos($referer, 'http://127.0.0.1:8000/mis_criticas') !== false) {
+                // Redirección si viene de la página anterior 1
+                return redirect()->route('users.criticas')->with('success', 'La crítica se ha modificado correctamente.');
+            } else {
+                // Redirección predeterminada o lógica adicional
+                return redirect()->route('ver.criticas', $audiovisual_id)->with('success', 'La crítica se ha modificado correctamente.');
+            }
         } catch (\Exception $e) {
             // Maneja cualquier excepción que pueda ocurrir durante el proceso
             return redirect()->back()->with('error', 'Error al procesar la solicitud. Por favor, inténtalo de nuevo.');
