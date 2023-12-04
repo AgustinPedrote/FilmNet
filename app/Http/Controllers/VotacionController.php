@@ -39,7 +39,7 @@ class VotacionController extends Controller
             return redirect()->back();
         }
 
-        // Utilizar updateOrInsert para manejar la lógica de inserción o actualización
+        // Insertar o actualizar voto
         Votacion::updateOrInsert(
             ['audiovisual_id' => $audiovisualId, 'user_id' => $user],
             ['voto' => $voto]

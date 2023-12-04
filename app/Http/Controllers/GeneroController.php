@@ -13,7 +13,7 @@ class GeneroController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.generos.index');
     }
 
     /**

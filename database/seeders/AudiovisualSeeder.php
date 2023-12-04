@@ -389,7 +389,7 @@ class AudiovisualSeeder extends Seeder
                 La historia se ve a través de la lente de la relación adictiva y volátil de Napoleón Bonaparte con su esposa y único amor verdadero, Josefina.",
                 "tipo_id" => 1,
                 "recomendacion_id" => 2,
-                "img" => "https://pics.filmaffinity.com/napoleon-775472086-large.jpg",
+                "img" => "https://pics.filmaffinity.com/napoleon-602820505-large.jpg",
                 "trailer" => "https://www.youtube.com/embed/1KZ2r5qR6oA?si=iG0DFPR9FEMkmwTk"
             ]);
 

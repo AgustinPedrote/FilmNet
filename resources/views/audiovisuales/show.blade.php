@@ -1,8 +1,23 @@
 <x-app-layout>
+    <!-- Mensajes de éxito y error -->
+    <div class="relative z-10">
+        @if (session('success'))
+            <div class="absolute top-[-10px] left-0 w-full mr-10 z-50">
+                <x-success :status="session('success')" />
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="absolute top-[-10px] left-0 w-full mr-10 z-50">
+                <x-error :status="session('error')" />
+            </div>
+        @endif
+    </div>
+
     <!-- Contenido de la Página -->
-    <div class="flex flex-wrap items-start">
+    <div class="flex flex-wrap items-start ml-6">
         <!-- Título del Audiovisual -->
-        <div class="w-full p-4">
+        <div class="w-full p-4 mt-16">
             <!-- Título -->
             <h2 class="font-semibold text-2xl text-gray-800 leading-tight border-b-2 border-blue-500 w-11/12">
                 {{ $audiovisual->titulo }}
@@ -10,11 +25,9 @@
         </div>
 
         <!-- Detalles del Audiovisual -->
-        <div class="w-full md:w-2/3 p-4 space-y-2 mt-2 bg-white rounded-lg shadow-md">
+        <div class="w-full md:w-2/3 p-4 space-y-2 bg-white rounded-lg shadow-md">
             <!-- Descripción y Características -->
-            <div class="mb-2">
-                <p class="text-gray-600">{{ $audiovisual->descripcion }}</p>
-            </div>
+            <p class="text-gray-600">{{ $audiovisual->descripcion }}</p>
 
             <!-- Detalles adicionales con mayor margen -->
             <div class="text-lg text-gray-500 space-y-2 mb-4">
@@ -93,9 +106,9 @@
         <!-- Imagen del Audiovisual -->
         <div class="w-full md:w-1/3 p-4 flex flex-col items-center justify-center">
             <img src="{{ $audiovisual->img }}" alt="{{ $audiovisual->titulo }}"
-                class="w-full h-auto object-cover md:w-48 mx-auto my-auto rounded-lg shadow-md">
+                class="w-full h-auto object-cover md:w-48 mx-auto my-2 rounded-lg shadow-md">
 
-            <div class="mt-4 text-center w-full md:w-48 bg-gray-100 rounded-md p-10 border-gray-300">
+            <div class="my-4 text-center w-full md:w-48 bg-gray-100 rounded-md p-10 border-gray-300">
                 <!-- Nota media de las votaciones -->
                 <div class="space-y-4">
                     <p

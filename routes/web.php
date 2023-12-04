@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\AudiovisualController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CriticaController;
+use App\Http\Controllers\GeneroController;
+use App\Http\Controllers\PersonaController;
+use App\Http\Controllers\PremioController;
 use App\Http\Controllers\VotacionController;
-use App\Models\Audiovisual;
-use App\Models\Critica;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,29 +33,77 @@ Route::middleware('auth')->group(function () {
 });
 
 
-//rutas
-
-//Peliculas: separa las rutas por secciones.
+/* INICIO FILMNET */
 Route::get('/', [AudiovisualController::class, 'index'])->name('home.index');
-Route::get('/audiovisual/{audiovisual}', [AudiovisualController::class, 'show'])->name('audiovisual.show');
+
+
+/* SECCIONES DE AUDIOVISUALES */
+// Películas.
 Route::get('peliculas', [AudiovisualController::class, 'peliculasIndex'])->name('peliculas.index');
+// Series.
 Route::get('series', [AudiovisualController::class, 'seriesIndex'])->name('series.index');
+// Documentales
 Route::get('documentales', [AudiovisualController::class, 'documentalesIndex'])->name('documentales.index');
 
-//Rutas logueado.
-Route::get('mis_votaciones', [UserController::class, 'misVotaciones'])->name('votaciones.index');
 
-Route::get('mis_criticas', [UserController::class, 'miscriticas'])->name('users.criticas');
-Route::get('audivisual/criticas/{audiovisual}', [AudiovisualController::class, 'criticas'])->name('ver.criticas');
-Route::post('criticas/create/{audiovisual}', [CriticaController::class, 'store'])->name('criticas.store');
-
-Route::get('amigos', [UserController::class, 'misAmigos'])->name('amigos.index');
-
+/* FICHA TÉCNICA DEL AUDIOVISUAL */
+Route::get('/audiovisual/{audiovisual}', [AudiovisualController::class, 'show'])->name('audiovisual.show');
+// Votar audiovisual.
 Route::post('votaciones/create/{audiovisual}', [VotacionController::class, 'store'])->name('votaciones.store');
-
-Route::get('seguimientos', [UserController::class, 'seguimientos'])->name('seguimientos.index');
+// Ver crítica del audiovisual.
+Route::get('audivisual/criticas/{audiovisual}', [AudiovisualController::class, 'criticas'])->name('ver.criticas');
+// Crear crítica del audiovisual.
+Route::post('criticas/create/{audiovisual}', [CriticaController::class, 'store'])->name('criticas.store');
+// Seguir audiovisual.
 Route::post('seguimientos/create/{audiovisual}', [UserController::class, 'insertSeguimiento'])->name('insert.seguimiento');
+// Borrar audiovisual.
 Route::delete('/seguimiento/{audiovisual}', [UserController::class, 'quitarSeguimiento'])->name('quitar.seguimiento');
+
+
+/* MENÚ DE USUARIO */
+// Mis votaciones.
+Route::get('mis_votaciones', [UserController::class, 'misVotaciones'])->name('votaciones.index');
+// Mis críticas.
+Route::get('mis_criticas', [UserController::class, 'miscriticas'])->name('users.criticas');
+// Mis críticas, editar.
+Route::put('/criticas/edit/{usuario_id}/{audiovisual_id}', [CriticaController::class, 'update'])->name('criticas.update');
+// Mis críticas, borrar.
+Route::delete('/criticas/{usuario_id}/{audiovisual_id}', [CriticaController::class, 'destroy'])->name('criticas.destroy');
+// Mis amigos.
+Route::get('amigos', [UserController::class, 'misAmigos'])->name('amigos.index');
+// Mis seguimientos de audiovisuales.
+Route::get('seguimientos', [UserController::class, 'seguimientos'])->name('seguimientos.index');
+
+
+/* PANEL DE ADMINISTRACIÓN */
+Route::middleware(['auth', 'userEsAdmin'])->group(function () {
+    // Inicio
+    Route::get('admin', [UserController::class, 'adminIndex'])->name('admin.index');
+
+    //Audiovisuales:
+    Route::get('audiovisuales', [AudiovisualController::class, 'adminIndex'])->name('admin.audiovisuales.index');
+    Route::get('audiovisuales/create', [AudiovisualController::class, 'create'])->name('audiovisuales.create');
+    Route::post('audiovisuales', [AudiovisualController::class, 'store'])->name('audiovisuales.store');
+    Route::get('/audiovisuales/{audiovisual}', [AudiovisualController::class, 'adminShow'])->name('admin.audiovisuales.show');
+    Route::get('/audiovisuales/{audiovisual}/editar', [AudiovisualController::class, 'edit'])->name('audiovisuales.edit');
+    Route::put('/audiovisuales/{audiovisual}', [AudiovisualController::class, 'update'])->name('audiovisuales.update');
+    Route::delete('/audiovisuales/{audiovisual}', [AudiovisualController::class, 'destroy'])->name('audiovisuales.borrar');
+
+    // Users:
+    Route::resource('users', UserController::class);
+
+    // Personas:
+    Route::resource('personas', PersonaController::class);
+
+    // Géneros:
+    Route::resource('generos', GeneroController::class);
+
+    // Companies:
+    Route::resource('companies', CompanyController::class);
+
+    // Premios:
+    Route::resource('premios', PremioController::class);
+});
 
 
 /* POLITICA DE PRIVACIDAD Y QUIENES SOMOS */

@@ -102,7 +102,6 @@ class Audiovisual extends Model
             ->where('audiovisual_id', $audiovisual_id)
             ->first();
 
-        // Devolver el resultado de la consulta (puede ser un objeto Votacion o null si no se encuentra ninguna votación)
         return $votacion;
     }
 

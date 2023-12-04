@@ -80,7 +80,7 @@ class User extends Authenticatable
         return $this->belongsToMany(Audiovisual::class, 'seguimientos');
     }
 
-    // Dentro del modelo User.php
+    // Edad del usuario logueado.
     public function getEdadAttribute()
     {
         return now()->year - $this->nacimiento;
