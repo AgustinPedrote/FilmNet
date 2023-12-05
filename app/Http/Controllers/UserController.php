@@ -8,8 +8,6 @@ use App\Models\Critica;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Votacion;
-use Illuminate\Http\Request;
-use PhpParser\Node\Stmt\Return_;
 
 class UserController extends Controller
 {
@@ -74,9 +72,22 @@ class UserController extends Controller
         // Votaciones del usuario logado
         $votaciones = Votacion::where('user_id', auth()->user()->id)->paginate(10);
 
-        return view('votaciones.index', compact('votaciones'));
-    }
+        // Array asociativo de nombres de puntuaciones
+        $puntuacionesNombres = [
+            1 => 'Muy mala',
+            2 => 'Mala',
+            3 => 'Floja',
+            4 => 'Regular',
+            5 => 'Pasable',
+            6 => 'Interesante',
+            7 => 'Buena',
+            8 => 'Notable',
+            9 => 'Muy buena',
+            10 => 'Excelente',
+        ];
 
+        return view('votaciones.index', compact('votaciones', 'puntuacionesNombres'));
+    }
 
     public function misCriticas()
     {

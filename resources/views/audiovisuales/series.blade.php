@@ -20,7 +20,7 @@
         @endforeach
     </div>
 
-    <div class="mt-4 mb-10">
+    <div class="mt-6 mb-10">
         {{ $series->links() }}
     </div>
 </x-app-layout>

@@ -8,16 +8,16 @@
             @if ($votaciones->isEmpty())
                 <p class="text-center text-lg text-gray-500">No has realizado votaciones.</p>
             @else
-                <table class="min-w-full divide-y divide-gray-100 text-center">
+                <table class="min-w-full divide-y divide-gray-100 text-left">
                     <thead class="bg-gray-100">
                         <tr>
-                            <th class="px-6 py-3 text-xl font-semibold text-gray-900 tracking-wider">
+                            <th class="px-6 py-3 text-xl font-semibold text-gray-900">
                                 Audiovisuales
                             </th>
-                            <th class="px-6 py-3 text-xl font-semibold text-gray-900 tracking-wider">
+                            <th class="px-6 py-3 text-xl font-semibold text-gray-900">
                                 Características
                             </th>
-                            <th class="px-6 py-3 text-xl font-semibold text-gray-900 tracking-wider">
+                            <th class="px-6 py-3 text-xl font-semibold text-gray-900">
                                 <div class="flex items-center justify-center">
                                     <span class="mr-2">Votos</span>
                                     <span class="bg-blue-500 text-white px-2 py-1 rounded-full">
@@ -25,18 +25,16 @@
                                     </span>
                                 </div>
                             </th>
-
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
                         @foreach ($votaciones as $votacion)
                             <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4">
                                     <div class="flex items-center">
                                         <div class="flex-shrink-0 h-20 w-20">
-                                            <a
-                                                href="{{ route('audiovisual.show', ['audiovisual' => $votacion->audiovisual]) }}">
-                                                <img class="h-20 w-20 rounded-full"
+                                            <a href="{{ route('audiovisual.show', ['audiovisual' => $votacion->audiovisual]) }}">
+                                                <img class="h-20 w-20 rounded-full object-cover"
                                                     src="{{ $votacion->audiovisual->img }}"
                                                     alt="{{ $votacion->audiovisual->titulo }}">
                                             </a>
@@ -46,29 +44,35 @@
                                                 <a href="{{ route('audiovisual.show', ['audiovisual' => $votacion->audiovisual]) }}"
                                                     class="hover:underline font-bold">
                                                     {{ $votacion->audiovisual->titulo }}
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap text-lg">
+                                <td class="px-6 py-4 text-lg">
                                     Año: {{ $votacion->audiovisual->year }}<br>
                                     Duración: {{ $votacion->audiovisual->duracion }} minutos<br>
                                     País: {{ $votacion->audiovisual->pais }}<br>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap font-semibold text-xl">
-                                    {{ $votacion->voto }}
-                                    <!-- Mostrar las estrellas (1 al 10) -->
-                                    <div class="flex items-center justify-center mt-2">
-                                        @for ($i = 1; $i <= 10; $i++)
-                                            @if ($i <= $votacion->voto)
-                                                <span class="text-yellow-300 text-2xl">&#9733;</span>
-                                            @else
-                                                <span class="text-gray-400 text-2xl">&#9733;</span>
-                                            @endif
-                                        @endfor
+                                <td class="px-6 py-4 text-center">
+                                    <div class="font-semibold text-xl">
+                                        {{ $votacion->voto }}
+                                        <!-- Mostrar las estrellas (1 al 10) -->
+                                        <div class="flex items-center justify-center mt-2">
+                                            @for ($i = 1; $i <= 10; $i++)
+                                                @if ($i <= $votacion->voto)
+                                                    <span class="text-yellow-300 text-2xl">&#9733;</span>
+                                                @else
+                                                    <span class="text-gray-400 text-2xl">&#9733;</span>
+                                                @endif
+                                            @endfor
+                                        </div>
+                                        <!-- Mostrar el nombre correspondiente a la puntuación -->
+                                        <div class="text-lg text-gray-500 mt-2">
+                                            {{ $puntuacionesNombres[$votacion->voto] }}
+                                        </div>
                                     </div>
                                 </td>
-
                             </tr>
                         @endforeach
                     </tbody>
@@ -77,7 +81,7 @@
         </div>
     </div>
 
-    <div class="mx-6 mt-4 mb-10">
+    <div class="mx-6 mt-6 mb-10">
         {{ $votaciones->links() }}
     </div>
 </x-app-layout>
