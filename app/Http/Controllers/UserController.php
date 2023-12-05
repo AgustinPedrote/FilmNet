@@ -7,6 +7,7 @@ use App\Models\Audiovisual;
 use App\Models\Critica;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Votacion;
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
 
@@ -70,8 +71,8 @@ class UserController extends Controller
 
     public function misVotaciones()
     {
-        // Obtén las votaciones del usuario logado
-        $votaciones = auth()->user()->votaciones;
+        // Votaciones del usuario logado
+        $votaciones = Votacion::where('user_id', auth()->user()->id)->paginate(10);
 
         return view('votaciones.index', compact('votaciones'));
     }
@@ -79,7 +80,7 @@ class UserController extends Controller
 
     public function misCriticas()
     {
-        // Obtén las críticas del usuario logado paginadas
+        // Críticas del usuario logado paginadas
         $criticas = Critica::where('user_id', auth()->user()->id)->paginate(4);
 
         return view('criticas.miscriticas', compact('criticas'));
@@ -87,7 +88,7 @@ class UserController extends Controller
 
     public function seguimientos()
     {
-        // Obtén los audivisuales en seguimiento.
+        // Audiovisuales en seguimiento paginados.
         $seguimientos = auth()->user()->usuariosSeguimientos;
 
         return view('seguimientos.index', compact('seguimientos'));
@@ -95,7 +96,7 @@ class UserController extends Controller
 
     public function misAmigos()
     {
-        // Obtén los audivisuales de la lista del usuario logado
+        // Audivisuales de la lista del usuario logado
         $amigos = auth()->user()->users;
 
         return view('amigos.index', compact('amigos'));

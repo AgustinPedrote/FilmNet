@@ -109,6 +109,18 @@
                 class="w-full h-auto object-cover md:w-48 mx-auto my-2 rounded-lg shadow-md">
 
             <div class="my-4 text-center w-full md:w-48 bg-gray-100 rounded-md p-10 border-gray-300">
+
+                <!-- Mostrar las estrellas (1 al 10) -->
+                <div class="flex items-center justify-center mb-2">
+                    @for ($i = 1; $i <= 10; $i++)
+                        @if ($notaMedia !== null && $i <= $notaMedia)
+                            <span class="text-yellow-300 text-lg">&#9733;</span>
+                        @else
+                            <span class="text-gray-400 text-lg">&#9733;</span>
+                        @endif
+                    @endfor
+                </div>
+
                 <!-- Nota media de las votaciones -->
                 <div class="space-y-4">
                     <p
@@ -136,7 +148,7 @@
             <!-- Formulario de Votación -->
             @include('partials.voting-form')
 
-            <!-- Botón para agregar a la lista de seguimiento -->
+            <!-- Botón para agregar a mi lista de seguimiento -->
             @include('partials.follow-button')
         </div>
     </div>
