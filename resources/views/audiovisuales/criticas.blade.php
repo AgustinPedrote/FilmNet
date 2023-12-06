@@ -153,4 +153,9 @@
         <!-- Mensaje si no hay críticas -->
         <p class="text-lg text-center font-semibold">No hay críticas disponibles.</p>
     @endif
+
+    <!-- paginación -->
+    <div class="mx-6 mt-4 mb-10">
+        {{ $criticas->appends(request()->query())->links() }}
+    </div>
 </x-app-layout>

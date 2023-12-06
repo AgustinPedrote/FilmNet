@@ -5,7 +5,7 @@
 
     <div
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 justify-center mx-auto">
-        @foreach ($seguimientos as $seguimiento)
+        @foreach ($seguimientosPaginados as $seguimiento)
             <a href="{{ route('audiovisual.show', $seguimiento) }}"
                 class="group p-4 transition duration-300 ease-in-out transform hover:scale-105">
                 <div class="relative w-full h-64 overflow-hidden rounded-md shadow-md">
@@ -18,5 +18,10 @@
                 </div>
             </a>
         @endforeach
+    </div>
+
+    <!-- paginación -->
+    <div class="mx-6 mt-4 mb-10">
+        {{ $seguimientosPaginados->appends(request()->query())->links() }}
     </div>
 </x-app-layout>

@@ -19,6 +19,7 @@ class VotacionController extends Controller
         //
     }
 
+    // Votación del audiovisual por un usuario logueado
     public function store(StoreVotacionRequest $request)
     {
         // Obtener el ID del usuario autenticado

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAudiovisualRequest;
 use App\Http\Requests\UpdateAudiovisualRequest;
 use App\Models\Audiovisual;
+use Illuminate\Pagination\LengthAwarePaginator;
+
 
 class AudiovisualController extends Controller
 {
@@ -19,12 +21,11 @@ class AudiovisualController extends Controller
         // Obtener los últimos 5 documentales ordenados por id de forma descendente
         $documentales = Audiovisual::where('tipo_id', 3)->latest('id')->take(5)->get();
 
-        return view('home', ['peliculas' => $peliculas, 'series' => $series, 'documentales' => $documentales]);
-    }
-
-    public function adminIndex()
-    {
-        return view('admin.audiovisuales.index');
+        return view('home', [
+            'peliculas' => $peliculas,
+            'series' => $series,
+            'documentales' => $documentales
+        ]);
     }
 
     public function peliculasIndex()
@@ -32,17 +33,19 @@ class AudiovisualController extends Controller
         // Obtener todas las películas ordenadas por id de forma descendente paginadas de 10 en 10
         $peliculas = Audiovisual::where('tipo_id', 1)->latest('id')->paginate(10);
 
-        return view('audiovisuales.peliculas', ['peliculas' => $peliculas]);
+        return view('audiovisuales.peliculas', [
+            'peliculas' => $peliculas
+        ]);
     }
-
-
 
     public function seriesIndex()
     {
         // Obtener todas las series ordenadas por id de forma descendente paginadas de 10 en 10
         $series = Audiovisual::where('tipo_id', 2)->latest('id')->paginate(10);
 
-        return view('audiovisuales.series', ['series' => $series]);
+        return view('audiovisuales.series', [
+            'series' => $series
+        ]);
     }
 
     public function documentalesIndex()
@@ -50,8 +53,18 @@ class AudiovisualController extends Controller
         // Obtener todas las documentales ordenadas por id de forma descendente paginadas de 10 en 10
         $documentales = Audiovisual::where('tipo_id', 3)->latest('id')->paginate(10);
 
-        return view('audiovisuales.documentales', ['documentales' => $documentales]);
+        return view(
+            'audiovisuales.documentales',
+            ['documentales' => $documentales]
+        );
     }
+
+    // Panel de control del administrador
+    public function adminIndex()
+    {
+        return view('admin.audiovisuales.index');
+    }
+
 
     public function create()
     {
@@ -63,6 +76,7 @@ class AudiovisualController extends Controller
         //
     }
 
+    // Ficha técnica del audiovisual
     public function show(Audiovisual $audiovisual)
     {
         // Verifica si el usuario está autenticado
@@ -79,10 +93,13 @@ class AudiovisualController extends Controller
         // Obtiene el número de votos
         $numeroVotos = $audiovisual->obtenerNumeroVotos();
 
-        return view('audiovisuales.show', ['audiovisual' => $audiovisual, 'votacion' => $votacion, 'notaMedia' => $notaMedia, 'numeroVotos' => $numeroVotos]);
+        return view('audiovisuales.show', [
+            'audiovisual' => $audiovisual,
+            'votacion' => $votacion,
+            'notaMedia' => $notaMedia,
+            'numeroVotos' => $numeroVotos
+        ]);
     }
-
-
 
     public function edit(Audiovisual $audiovisual)
     {
@@ -99,31 +116,40 @@ class AudiovisualController extends Controller
         //
     }
 
+    // Críticas del audiovisual (paginados)
     public function criticas($audiovisual)
     {
         $audiovisual = Audiovisual::find($audiovisual);
         $criticas = $audiovisual->criticas;
 
-        // Si no hay críticas, asignar null a $criticas
-        if ($criticas->isEmpty()) {
-            $criticas = null;
-        } else {
-            // Si el usuario está logueado, mover su crítica al principio de la lista
-            if (auth()->check()) {
-                $userCritica = $criticas->where('user_id', auth()->id())->first();
+        // Si el usuario está logueado, mover su crítica al principio de la lista
+        if (auth()->check()) {
+            $userCritica = $criticas->where('user_id', auth()->id())->first();
 
-                // Verificar si se encontró una crítica del usuario
-                if ($userCritica) {
-                    $criticas = $criticas->reject(function ($critica) {
-                        return $critica->user_id == auth()->id();
-                    })->prepend($userCritica);
-                }
+            // Verificar si se encontró una crítica del usuario
+            if ($userCritica) {
+                $criticas = $criticas->reject(function ($critica) {
+                    return $critica->user_id == auth()->id();
+                })->prepend($userCritica);
             }
         }
 
         // Calcula la nota media
         $notaMedia = $audiovisual->obtenerNotaMedia();
 
-        return view('audiovisuales.criticas', ['audiovisual' => $audiovisual, 'criticas' => $criticas, 'notaMedia' => $notaMedia]);
+        // Pagina las críticas con 4 elementos por página
+        $perPage = 4;
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $currentItems = $criticas->slice(($currentPage - 1) * $perPage, $perPage)->all();
+        $criticasPaginadas = new LengthAwarePaginator($currentItems, $criticas->count(), $perPage);
+
+        // Establece la ruta correcta para los enlaces de paginación
+        $criticasPaginadas->withPath(route('ver.criticas', ['audiovisual' => $audiovisual->id]));
+
+        return view('audiovisuales.criticas', [
+            'audiovisual' => $audiovisual,
+            'criticas' => $criticasPaginadas,
+            'notaMedia' => $notaMedia
+        ]);
     }
 }
