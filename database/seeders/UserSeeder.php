@@ -19,13 +19,14 @@ class UserSeeder extends Seeder
 
         $agustin =
             User::create([
-                "name" => "agustin",
+                "name" => "agustín",
                 "email" => "agustin@agustin.com",
                 "password" => bcrypt('1234567a'),
                 "rol_id" => 1,
                 "nacimiento" => 1982,
                 "ciudad" => "Sanlúcar",
-                "pais" => "España"
+                "pais" => "España",
+                "sexo" => "hombre"
             ]);
 
 
@@ -37,8 +38,20 @@ class UserSeeder extends Seeder
                 "rol_id" => 1,
                 "nacimiento" => 2015,
                 "ciudad" => "Las Cabezas",
-                "pais" => "España"
+                "pais" => "España",
+                "sexo" => "hombre"
             ]);
+
+        User::create([
+            "name" => "María",
+            "email" => "maria@maria.com",
+            "password" => bcrypt('1234567a'),
+            "rol_id" => 2,
+            "nacimiento" => 2009,
+            "ciudad" => "Barcelona",
+            "pais" => "España",
+            "sexo" => "mujer"
+        ]);
 
         User::create([
             "name" => "admin",
@@ -47,17 +60,18 @@ class UserSeeder extends Seeder
             "rol_id" => 2,
             "nacimiento" => 2009,
             "ciudad" => "Madrid",
-            "pais" => "España"
+            "pais" => "España",
+            "sexo" => "hombre"
         ]);
 
         // Amigos
-        $agustin = User::where('name', 'agustin')->first();
+        $agustin = User::where('name', 'agustín')->first();
         $antonio = User::where('name', 'antonio')->first();
         $antonio->users()->attach($agustin->id);
 
         // Seguimientos
         $pelicula = Audiovisual::find(6);
-        $user = User::where('name', 'agustin')->first();
+        $user = User::where('name', 'agustín')->first();
         $user->usuariosSeguimientos()->attach($pelicula->id);
     }
 }

@@ -78,7 +78,7 @@
                                 </x-dropdown-link>
 
                                 <x-dropdown-link :href="route('seguimientos.index')">
-                                    {{ __('Mi lista') }}
+                                    {{ __('Lista') }}
                                 </x-dropdown-link>
 
                                 <x-dropdown-link :href="route('amigos.index')">
@@ -86,7 +86,7 @@
                                 </x-dropdown-link>
 
                                 <x-dropdown-link :href="route('profile.edit')">
-                                    {{ __('Datos personales') }}
+                                    {{ __('Perfil') }}
                                 </x-dropdown-link>
 
                                 <!-- Formulario para cerrar sesión -->
