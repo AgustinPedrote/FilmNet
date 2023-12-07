@@ -20,7 +20,7 @@
         @endforeach
     </div>
 
-    <div class="mx-6 mt-4 mb-10">
+    <div class="mx-6 mt-6 mb-10">
         {{ $peliculas->links() }}
     </div>
 </x-app-layout>

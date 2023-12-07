@@ -24,8 +24,8 @@
             $votacion = $critica->audiovisual->obtenerVotacion($critica->user_id, $critica->audiovisual_id);
         @endphp
 
-        <div class="flex justify-center mb-4">
-            <div class="bg-blue-500 p-4 max-w-4xl rounded-md shadow-md mt-2">
+        <div class="flex justify-center mb-8">
+            <div class="bg-white p-6 max-w-4xl rounded-md shadow-lg w-full">
 
                 <!-- Primera fila (fila de arriba) -->
                 <div class="flex items-center justify-between mb-4 bg-gray-100 p-4 rounded-md">
@@ -54,7 +54,8 @@
 
                         <!-- Nota del usuario al audiovisual -->
                         <div class="mt-2 flex space-x-4">
-                            <p class="font-bold {{ $votacion && $votacion->voto ? 'text-xl text-white bg-blue-500 border border-blue-700 rounded-md p-3 mr-10 mb-4' : 'text-lg text-gray-500' }}">
+                            <p
+                                class="font-bold {{ $votacion && $votacion->voto ? 'text-xl text-white bg-blue-500 border border-blue-700 rounded-md p-3 mr-10 mb-4' : 'text-lg text-gray-500' }}">
                                 @if ($votacion && $votacion->voto)
                                     {{ number_format($votacion->voto, 1) }}
                                 @else

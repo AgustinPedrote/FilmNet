@@ -15,7 +15,7 @@ class Company extends Model
         'nombre'
     ];
 
-    //Relación muchos a muchos:
+    // Relación muchos a muchos:
 
     public function audiovisuales()
     {

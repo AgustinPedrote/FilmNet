@@ -7,17 +7,21 @@ use App\Models\Audiovisual;
 use App\Models\Critica;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use Illuminate\Http\Request;
-use PhpParser\Node\Stmt\Return_;
+use App\Models\Votacion;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Usuarios en el panel de administración
     public function index()
     {
         return view('admin.users.index');
+    }
+
+    // Index en el panel de administración
+    public function adminIndex()
+    {
+        return view('admin.index');
     }
 
     /**
@@ -68,39 +72,72 @@ class UserController extends Controller
         //
     }
 
+    // Las votaciones del usuario logueado
     public function misVotaciones()
     {
-        // Obtén las votaciones del usuario logado
-        $votaciones = auth()->user()->votaciones;
+        // Votaciones del usuario logado y paginado
+        $votaciones = Votacion::where('user_id', auth()->user()->id)->paginate(10);
 
-        return view('votaciones.index', compact('votaciones'));
+        // Array asociativo de nombres de puntuaciones
+        $puntuacionesNombres = [
+            1 => 'Muy mala',
+            2 => 'Mala',
+            3 => 'Floja',
+            4 => 'Regular',
+            5 => 'Pasable',
+            6 => 'Interesante',
+            7 => 'Buena',
+            8 => 'Notable',
+            9 => 'Muy buena',
+            10 => 'Excelente',
+        ];
+
+        return view('votaciones.index', compact(
+            'votaciones',
+            'puntuacionesNombres'
+        ));
     }
 
-
+    // Las críticas del usuario logueado
     public function misCriticas()
     {
-        // Obtén las críticas del usuario logado paginadas
+        // Críticas del usuario logado paginadas
         $criticas = Critica::where('user_id', auth()->user()->id)->paginate(4);
 
-        return view('criticas.miscriticas', compact('criticas'));
+        return view('criticas.miscriticas', compact(
+            'criticas'
+        ));
     }
 
-    public function seguimientos()
-    {
-        // Obtén los audivisuales en seguimiento.
-        $seguimientos = auth()->user()->usuariosSeguimientos;
-
-        return view('seguimientos.index', compact('seguimientos'));
-    }
-
+    // Amigos del usuario logueado
     public function misAmigos()
     {
-        // Obtén los audivisuales de la lista del usuario logado
         $amigos = auth()->user()->users;
 
-        return view('amigos.index', compact('amigos'));
+        return view('amigos.index', compact(
+            'amigos'
+        ));
     }
 
+    // Mi lista de audiovisuales en seguimiento (paginados)
+    public function seguimientos()
+    {
+        // Audiovisuales en seguimiento sin paginar
+        $seguimientos = auth()->user()->usuariosSeguimientos;
+
+        // Configura la paginación
+        $perPage = 10;
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $currentItems = $seguimientos->slice(($currentPage - 1) * $perPage, $perPage)->all();
+        $seguimientosPaginados = new LengthAwarePaginator($currentItems, $seguimientos->count(), $perPage);
+
+        // Establece la ruta correcta para los enlaces de paginación
+        $seguimientosPaginados->withPath(route('seguimientos.index'));
+
+        return view('seguimientos.index', compact('seguimientosPaginados'));
+    }
+
+    // Insertar audiovisual en mi lista de seguimientos
     public function insertSeguimiento(Audiovisual $audiovisual)
     {
         $user =  User::find(auth()->user()->id);
@@ -109,6 +146,7 @@ class UserController extends Controller
         return redirect()->back()->with('status', 'Audiovisual añadido a la lista de seguimientos con éxito');
     }
 
+    // Eliminar audiovisual en mi lista de seguimientos
     public function quitarSeguimiento(Audiovisual $audiovisual)
     {
         $user = User::find(auth()->user()->id);
@@ -116,10 +154,5 @@ class UserController extends Controller
 
         // Puedes redirigir o mostrar un mensaje de éxito
         return redirect()->back()->with('status', 'Audiovisual eliminado de la lista de seguimientos con éxito');
-    }
-
-    public function adminIndex()
-    {
-        return view('admin.index');
     }
 }

@@ -67,6 +67,7 @@ class CriticaController extends Controller
         //
     }
 
+    // Editar una crítica
     public function update(UpdateCriticaRequest $request, $usuario_id, $audiovisual_id)
     {
         $referer = $request->headers->get('referer');
@@ -80,10 +81,10 @@ class CriticaController extends Controller
 
             // Verifica la URL de referencia y realiza la redirección
             if (strpos($referer, 'http://127.0.0.1:8000/mis_criticas') !== false) {
-                // Redirección si viene de la página anterior 1
+                // Redirección si viene de la página anterior
                 return redirect()->route('users.criticas')->with('success', 'La crítica se ha modificado correctamente.');
             } else {
-                // Redirección predeterminada o lógica adicional
+                // Redirección si NO viene de la página anterior
                 return redirect()->route('ver.criticas', $audiovisual_id)->with('success', 'La crítica se ha modificado correctamente.');
             }
         } catch (\Exception $e) {
@@ -92,9 +93,9 @@ class CriticaController extends Controller
         }
     }
 
+    // Eliminar una crítica
     public function destroy(StoreCriticaRequest $request)
     {
-
         // Obtener el ID del usuario autenticado
         $user = auth()->user()->id;
 
