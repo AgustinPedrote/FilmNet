@@ -17,9 +17,11 @@ class Votacion extends Model
         'voto',
     ];
 
-    protected $primaryKey = ['user_id', 'audiovisual_id']; // Clave primaria compuesta
+    // Clave primaria compuesta
+    protected $primaryKey = ['user_id', 'audiovisual_id'];
 
-    public $incrementing = false; // Indicar que no es una clave primaria autoincremental
+    // Indicar que no es una clave primaria autoincremental
+    public $incrementing = false;
 
     //Relación uno a muchos (inversa):
 

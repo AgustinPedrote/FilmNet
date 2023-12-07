@@ -24,7 +24,7 @@ class Audiovisual extends Model
         'recomendaciones'
     ];
 
-    //Relación muchos a muchos:
+    // Relación muchos a muchos:
 
     public function repartos()
     {
@@ -66,7 +66,7 @@ class Audiovisual extends Model
         return $this->belongsToMany(User::class, 'seguimientos');
     }
 
-    //Relación uno a muchos (inversa):
+    // Relación uno a muchos (inversa):
 
     public function tipo()
     {
@@ -78,7 +78,7 @@ class Audiovisual extends Model
         return $this->belongsTo(Recomendacion::class);
     }
 
-    //Relación uno a muchos:
+    // Relación uno a muchos:
 
     public function premios()
     {
