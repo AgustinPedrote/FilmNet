@@ -13,6 +13,7 @@
         @csrf
         @method('patch')
 
+        <!-- Nombre -->
         <div>
             <x-input-label for="name" :value="__('Nombre')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)"
@@ -20,13 +21,15 @@
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
+        <!-- Año de nacimiento -->
         <div>
             <x-input-label for="nacimiento" :value="__('Año de nacimiento')" />
-            <x-text-input id="nacimiento" name="nacimiento" type="text" class="mt-1 block w-full" :value="old('nacimiento', $user->nacimiento)"
+            <x-text-input id="nacimiento" name="nacimiento" type="number" class="mt-1 block w-full" :value="old('nacimiento', $user->nacimiento)"
                 required autofocus autocomplete="nacimiento" />
             <x-input-error class="mt-2" :messages="$errors->get('nacimiento')" />
         </div>
 
+         <!-- País -->
         <div>
             <x-input-label for="pais" :value="__('País')" />
             <x-text-input id="pais" name="pais" type="text" class="mt-1 block w-full" :value="old('pais', $user->pais)"
@@ -34,6 +37,7 @@
             <x-input-error class="mt-2" :messages="$errors->get('pais')" />
         </div>
 
+        <!-- Ciudad -->
         <div>
             <x-input-label for="ciudad" :value="__('Ciudad')" />
             <x-text-input id="ciudad" name="ciudad" type="text" class="mt-1 block w-full" :value="old('ciudad', $user->ciudad)"
@@ -41,13 +45,18 @@
             <x-input-error class="mt-2" :messages="$errors->get('ciudad')" />
         </div>
 
+        <!-- Género -->
         <div>
-            <x-input-label for="genero" :value="__('Género')" />
-            <x-text-input id="genero" name="genero" type="text" class="mt-1 block w-full" :value="old('genero', $user->sexo)"
-                required autofocus autocomplete="genero" />
-            <x-input-error class="mt-2" :messages="$errors->get('genero')" />
+            <x-input-label for="sexo" :value="__('Género')" />
+            <select id="sexo" name="sexo" class="mt-1 block w-full">
+                <option value="" disabled>Selecciona tu género</option>
+                <option value="hombre" {{ old('sexo', $user->sexo) == 'hombre' ? 'selected' : '' }}>Hombre</option>
+                <option value="mujer" {{ old('sexo', $user->sexo) == 'mujer' ? 'selected' : '' }}>Mujer</option>
+            </select>
+            <x-input-error class="mt-2" :messages="$errors->get('sexo')" />
         </div>
 
+        <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)"

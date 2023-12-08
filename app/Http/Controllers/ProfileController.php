@@ -36,7 +36,7 @@ class ProfileController extends Controller
             'nacimiento' => $request->input('nacimiento'),
             'pais' => $request->input('pais'),
             'ciudad' => $request->input('ciudad'),
-            'sexo' => $request->input('genero'),
+            'sexo' => $request->input('sexo'),
             'email' => $request->input('email'),
         ]);
 
