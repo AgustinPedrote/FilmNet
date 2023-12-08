@@ -9,7 +9,7 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" id="profile-update-form" class="mt-6 space-y-6">
         @csrf
         @method('patch')
 
@@ -29,7 +29,7 @@
             <x-input-error class="mt-2" :messages="$errors->get('nacimiento')" />
         </div>
 
-         <!-- País -->
+        <!-- País -->
         <div>
             <x-input-label for="pais" :value="__('País')" />
             <x-text-input id="pais" name="pais" type="text" class="mt-1 block w-full" :value="old('pais', $user->pais)"
@@ -41,14 +41,15 @@
         <div>
             <x-input-label for="ciudad" :value="__('Ciudad')" />
             <x-text-input id="ciudad" name="ciudad" type="text" class="mt-1 block w-full" :value="old('ciudad', $user->ciudad)"
-                required autofocus autocomplete="ciudad" />
+                autofocus autocomplete="ciudad" />
             <x-input-error class="mt-2" :messages="$errors->get('ciudad')" />
         </div>
 
         <!-- Género -->
         <div>
             <x-input-label for="sexo" :value="__('Género')" />
-            <select id="sexo" name="sexo" class="mt-1 block w-full">
+            <select id="sexo" name="sexo"
+                class="mt-1 block w-full border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm">
                 <option value="" disabled>Selecciona tu género</option>
                 <option value="hombre" {{ old('sexo', $user->sexo) == 'hombre' ? 'selected' : '' }}>Hombre</option>
                 <option value="mujer" {{ old('sexo', $user->sexo) == 'mujer' ? 'selected' : '' }}>Mujer</option>
@@ -83,8 +84,12 @@
             @endif
         </div>
 
+         <!-- Botón de guardar -->
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Guardar') }}</x-primary-button>
+            <button id="profile-update-button"
+                class='inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150'>
+                {{ __('Guardar') }}
+            </button>
 
             @if (session('status') === 'profile-updated')
                 <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
@@ -93,3 +98,6 @@
         </div>
     </form>
 </section>
+
+<!-- Validación del formulario del perfil con JS -->
+<script src="{{ asset('js/validation_profile.js') }}"></script>

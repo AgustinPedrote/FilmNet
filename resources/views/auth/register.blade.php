@@ -81,5 +81,6 @@
         </div>
     </form>
 
+    <!-- Validación del formulario de registro con JS -->
     <script src="{{ asset('js/validation_register.js') }}"></script>
 </x-guest-layout>

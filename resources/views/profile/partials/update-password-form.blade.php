@@ -13,24 +13,28 @@
         @csrf
         @method('put')
 
+        <!-- Contraseña actual -->
         <div>
             <x-input-label for="current_password" :value="__('Contraseña actual')" />
             <x-text-input id="current_password" name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
             <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
         </div>
 
+        <!-- Nueva contraseña -->
         <div>
             <x-input-label for="password" :value="__('Nueva contraseña')" />
             <x-text-input id="password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
             <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
         </div>
 
+        <!-- Confirmar contraseña -->
         <div>
             <x-input-label for="password_confirmation" :value="__('Confirmar contraseña')" />
             <x-text-input id="password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
             <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
         </div>
 
+        <!-- Botón de guardar -->
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Guardar') }}</x-primary-button>
 
