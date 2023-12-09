@@ -5,11 +5,11 @@
         </h1>
     </header>
 
-    <form id="send-verification" method="post" action="{{ route('verification.send') }}">
+    <form id="send-verification" method="post" action="{{ route('verification.send') }}" novalidate>
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" id="profile-update-form" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" id="profile-update-form" class="mt-6 space-y-6" novalidate>
         @csrf
         @method('patch')
 
@@ -41,7 +41,7 @@
         <div>
             <x-input-label for="ciudad" :value="__('Ciudad')" />
             <x-text-input id="ciudad" name="ciudad" type="text" class="mt-1 block w-full" :value="old('ciudad', $user->ciudad)"
-                autofocus autocomplete="ciudad" />
+                required autofocus autocomplete="ciudad" />
             <x-input-error class="mt-2" :messages="$errors->get('ciudad')" />
         </div>
 

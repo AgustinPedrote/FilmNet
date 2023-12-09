@@ -24,9 +24,6 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    /**
-     * Actualiza la información del perfil del usuario.
-     */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $user = $request->user();
