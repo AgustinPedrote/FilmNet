@@ -44,7 +44,7 @@
     </div>
 
     @if ($criticas != null)
-        @foreach ($criticas as $critica)
+        @foreach ($criticas->reverse() as $critica)
             <!-- Votación del usuario al audiovisual -->
             @php
                 $votacion = $critica->audiovisual->obtenerVotacion($critica->user_id, $critica->audiovisual_id);

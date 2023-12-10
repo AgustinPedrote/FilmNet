@@ -15,10 +15,14 @@ document.addEventListener("DOMContentLoaded", function () {
             validateField(name, "name", "Por favor, ingrese su nombre.") &&
             isValid;
 
-        // Género
-        var sexo = document.getElementById("sexo").value;
+        // Año de nacimiento
+        var nacimiento = document.getElementById("nacimiento").value;
+        isValid = validateYear(nacimiento, "nacimiento") && isValid;
+
+        // País
+        var pais = document.getElementById("pais").value;
         isValid =
-            validateField(sexo, "sexo", "Por favor, seleccione su género.") &&
+            validateField(pais, "pais", "Por favor, ingrese su país.") &&
             isValid;
 
         // Ciudad
@@ -27,31 +31,20 @@ document.addEventListener("DOMContentLoaded", function () {
             validateField(ciudad, "ciudad", "Por favor, ingrese su ciudad.") &&
             isValid;
 
-        // País
-        var pais = document.getElementById("pais").value;
+        // Género
+        var sexo = document.getElementById("sexo").value;
         isValid =
-            validateField(pais, "pais", "Por favor, ingrese su país.") &&
+            validateField(sexo, "sexo", "Por favor, seleccione su género.") &&
             isValid;
-
-        // Contraseña
-        var password = document.getElementById("password").value;
-        isValid = validatePassword(password, "password") && isValid;
-
-        // Confirmar contraseña
-        var passwordConfirmation = document.getElementById(
-            "password_confirmation"
-        ).value;
-        isValid =
-            validatePasswordConfirmation(passwordConfirmation, password) &&
-            isValid;
-
-        // Año de nacimiento
-        var nacimiento = document.getElementById("nacimiento").value;
-        isValid = validateYear(nacimiento, "nacimiento") && isValid;
 
         // Email
         var email = document.getElementById("email").value;
-        isValid = validateEmail(email, "email") && isValid;
+        isValid =
+            validateEmail(
+                email,
+                "email",
+                "Por favor, ingrese un correo electrónico válido."
+            ) && isValid;
 
         return isValid;
     }
@@ -88,53 +81,11 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+$/.test(value)) {
             displayErrorMessage(
                 field,
-                "Debe contener solo caracteres alfabéticos, incluyendo caracteres especiales como la ñ o los acentos."
+                "Debe contener solo caracteres alfabéticos."
             );
             return false;
         }
 
-        return true;
-    }
-
-    // Esta función valida la contraseña.
-    function validatePassword(password, field) {
-        // Verifica la longitud de la contraseña.
-        if (password.length < 8) {
-            displayErrorMessage(
-                field,
-                "La contraseña debe tener almenos 8 caracteres."
-            );
-            return false;
-        }
-
-        // Verifica la presencia de al menos un número.
-        if (!/\d/.test(password)) {
-            displayErrorMessage(
-                field,
-                "La contraseña debe contener al menos un número."
-            );
-            return false;
-        }
-
-        // Verifica la presencia de al menos una letra mayúscula.
-        if (!/[a-zA-Z]/.test(password)) {
-            displayErrorMessage(
-                field,
-                "La contraseña debe contener al menos una letra."
-            );
-            return false;
-        }
-
-        // Si cumple con todos los requisitos, la contraseña es válida.
-        return true;
-    }
-
-    // Esta función valida la coincidencia de las contraseñas.
-    function validatePasswordConfirmation(passwordConfirmation, password) {
-        if (passwordConfirmation !== password) {
-            displayErrorMessage(field, "Las contraseñas no coinciden.");
-            return false;
-        }
         return true;
     }
 
@@ -148,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
         ) {
             displayErrorMessage(
                 field,
-                "Por favor, ingrese su año de nacimiento."
+                "Por favor, ingrese un año de nacimiento válido."
             );
             return false;
         }
@@ -159,7 +110,6 @@ document.addEventListener("DOMContentLoaded", function () {
     function validateEmail(email, field, errorMessage) {
         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (email === "" || !emailRegex.test(email)) {
-            document;
             displayErrorMessage(
                 field,
                 "Por favor, ingrese un correo electrónico válido."
@@ -169,10 +119,18 @@ document.addEventListener("DOMContentLoaded", function () {
         return true;
     }
 
-    // Manejar clic en el botón de registro
+    // Manejar validación adicional del lado del cliente antes de que los datos se envíen al servidor.
     document
-        .getElementById("registerButton")
-        .addEventListener("click", function (e) {
+        .getElementById("send-verification")
+        .addEventListener("submit", function (e) {
+            if (!validateForm()) {
+                e.preventDefault();
+            }
+        });
+
+    document
+        .getElementById("profile-update-form")
+        .addEventListener("submit", function (e) {
             if (!validateForm()) {
                 e.preventDefault();
             }

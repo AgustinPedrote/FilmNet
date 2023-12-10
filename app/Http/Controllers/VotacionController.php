@@ -26,8 +26,9 @@ class VotacionController extends Controller
         $user = auth()->user()->id;
 
         // Obtener el ID del audiovisual y el voto del formulario de solicitud
-        $audiovisualId = $request->audiovisual;
+        $audiovisualId = $request->id;
         $voto = $request->voto;
+
 
         // Verificar si se seleccionó la opción para eliminar
         if ($voto === null) {
@@ -37,7 +38,7 @@ class VotacionController extends Controller
                 ->delete();
 
             // Redireccionar de nuevo a la página anterior
-            return redirect()->back();
+            return response()->json('Voto nulo');
         }
 
         // Insertar o actualizar voto
@@ -47,12 +48,19 @@ class VotacionController extends Controller
         );
 
         // Redireccionar de nuevo a la página anterior
-        return redirect()->back();
+        return response()->json('Voto guardado');
     }
 
-    public function show(Votacion $votacion)
+    public function show(StoreVotacionRequest $request)
     {
-        //
+        // Obtener el ID del audiovisual desde la solicitud
+        $audiovisualId = $request->id;
+
+        // Buscar las votaciones para el audiovisual
+        $search = Votacion::where('audiovisual_id', $audiovisualId)->get();
+
+        // Formato JSON
+        return response()->json($search);
     }
 
     public function edit(Votacion $votacion)
