@@ -78,7 +78,7 @@
                                 </x-dropdown-link>
 
                                 <x-dropdown-link :href="route('seguimientos.index')">
-                                    {{ __('Lista') }}
+                                    {{ __('Lista de seguimiento') }}
                                 </x-dropdown-link>
 
                                 <x-dropdown-link :href="route('amigos.index')">
