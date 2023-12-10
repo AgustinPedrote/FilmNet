@@ -51,7 +51,8 @@ Route::get('documentales', [AudiovisualController::class, 'documentalesIndex'])-
 /* FICHA TÉCNICA DEL AUDIOVISUAL */
 Route::get('/audiovisual/{audiovisual}', [AudiovisualController::class, 'show'])->name('audiovisual.show');
 // Votar audiovisual.
-Route::post('votaciones/create/{audiovisual}', [VotacionController::class, 'store'])->name('votaciones.store');
+Route::post('/votaciones/create', [VotacionController::class, 'store'])->name('votaciones.store');
+Route::post('/votaciones/show', [VotacionController::class, 'show'])->name('votaciones.show');
 // Ver crítica del audiovisual.
 Route::get('audivisual/criticas/{audiovisual}', [AudiovisualController::class, 'criticas'])->name('ver.criticas');
 // Crear crítica del audiovisual.

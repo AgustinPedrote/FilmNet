@@ -106,12 +106,12 @@
         <!-- Imagen del Audiovisual -->
         <div class="w-full md:w-1/3 p-4 flex flex-col items-center justify-center">
             <img src="{{ $audiovisual->img }}" alt="{{ $audiovisual->titulo }}"
-                class="w-full h-auto object-cover md:w-48 mx-auto my-2 rounded-lg shadow-md">
+                class="w-full h-auto object-cover md:w-48 mx-auto mb-6 rounded-lg shadow-md">
 
-            <div class="my-4 text-center w-full md:w-48 bg-gray-100 rounded-md p-10 border-gray-300">
+            <div class="mb-6 text-center w-full md:w-48 bg-gray-100 rounded-md p-10 border-gray-300">
 
                 <!-- Mostrar las estrellas (1 al 10) -->
-                <div class="flex items-center justify-center mb-2">
+                <div id="stars-container" class="flex items-center justify-center mb-2">
                     @for ($i = 1; $i <= 10; $i++)
                         @if ($notaMedia !== null && $i <= $notaMedia)
                             <span class="text-yellow-300 text-lg">&#9733;</span>
@@ -123,16 +123,17 @@
 
                 <!-- Nota media de las votaciones -->
                 <div class="space-y-4">
-                    <p
-                        class="font-bold {{ $notaMedia ? 'text-3xl text-white bg-blue-500 border border-blue-700 rounded-md p-3' : 'text-gray-500' }} mb-4">
+                    <p class="font-bold text-lg text-white bg-blue-500 border border-blue-700 rounded-md p-3 mb-4"
+                        id="nota">
                         {{ $notaMedia ? number_format($notaMedia, 1) : 'Sin votaciones' }}
                     </p>
                 </div>
 
                 <div class="space-y-4">
-                    <!-- Número de votos -->
+                    <!-- Number of votes -->
                     <div class="bg-white rounded-md p-4 border border-gray-300">
-                        <p class="text-blue-500 font-bold">{{ $notaMedia ? $numeroVotos . ' Votos' : '0 Votos' }}</p>
+                        <p class="text-blue-500 font-bold" id="votos">
+                            {{ $notaMedia ? $numeroVotos . ' Votos' : '0 Votos' }}</p>
                     </div>
 
                     <!-- Link audiovisual críticas -->
@@ -152,4 +153,6 @@
             @include('partials.follow-button')
         </div>
     </div>
+
+    <script src="{{ asset('js/vote.js') }}"></script>
 </x-app-layout>
