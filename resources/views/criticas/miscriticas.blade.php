@@ -101,8 +101,8 @@
         <!-- Ventana modal para editar una crítica -->
         @include('criticas.edit')
 
-        <!-- Ventana modal para editar una crítica -->
-        @include('criticas.delete', ['critica' => $critica])
+        <!-- Ventana modal para borrar una crítica -->
+        @include('criticas.delete')
 
     @empty
         <p class="text-lg text-center font-semibold">No hay críticas disponibles.</p>

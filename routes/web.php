@@ -97,6 +97,7 @@ Route::middleware(['auth', 'userEsAdmin'])->group(function () {
 
     // Personas:
     Route::resource('personas', PersonaController::class);
+    Route::get('personas/admin/index', [PersonaController::class, 'Index'])->name('admin.personas.index');
 
     // Géneros:
     Route::resource('generos', GeneroController::class);

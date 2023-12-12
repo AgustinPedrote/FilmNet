@@ -20,14 +20,14 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans bg-gray-100">
+<body class="font-sans bg-gray-200">
 
     <div class="flex h-screen">
 
         @include('components.navAdmin')
 
         <!-- Contenido principal -->
-        <main>
+        <main class="w-full">
             {{ $slot }}
         </main>
     </div>
