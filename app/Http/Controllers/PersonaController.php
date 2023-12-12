@@ -32,16 +32,13 @@ class PersonaController extends Controller
     public function store(StorePersonaRequest $request)
     {
         $nombre = $request->nombre;
-        return 'hola';
         Persona::create([
             'nombre' => $nombre,
         ]);
 
         // Redireccionar de nuevo a la ficha técnica del audiovisual
-        return redirect()->back()->with('success', 'La crítica ha sido creada con éxito.');
+        return redirect()->route('admin.personas.index')->with('success', 'La persona ha sido creada con éxito.');
     }
-    //
-
 
     /**
      * Show the form for editing the specified resource.
@@ -68,13 +65,15 @@ class PersonaController extends Controller
      */
     public function destroy(Persona $persona)
     {
-        if ($persona->repartos || $persona->compositores || $persona->directores || $persona->guionistas || $persona->fotografias) {
-            return redirect()->route('admin.personas.index')->with('error', 'Imposible eliminar persona: tiene vínculos en uno o más audiovisuales');
+        // Verificar si la persona tiene roles relacionados
+        if ($persona->directores->isEmpty() && $persona->guionistas->isEmpty() && $persona->compositores->isEmpty() && $persona->repartos->isEmpty() && $persona->fotografias->isEmpty()) {
+            // No tiene roles relacionados, entonces se puede eliminar
+            $persona->delete();
+
+            return redirect()->route('admin.personas.index')->with('success', 'La persona ha sido eliminada con éxito.');
         }
 
-        $persona->delete();
-
-        // Redireccionar de nuevo a la página anterior
-        return redirect()->route('admin.personas.index')->with('success', 'La persona ha sido eliminada con éxito.');
+        // La persona tiene roles relacionados, no se puede eliminar
+        return redirect()->route('admin.personas.index')->with('error', 'Imposible eliminar persona: tiene vínculos en uno o más audiovisuales');
     }
 }

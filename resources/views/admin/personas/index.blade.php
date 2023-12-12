@@ -17,6 +17,10 @@
 
     <div class="min-h-screen flex justify-center items-center">
         <div class="overflow-x-auto max-w-screen-md w-full mx-auto">
+            <h1 class="text-3xl font-semibold mb-4 border-b border-gray-400 w-full pb-2 text-gray-800">
+                Personas
+            </h1>
+
             <div class="flex justify-center">
                 <table
                     class="text-sm text-left text-gray-500 dark:text-gray-400 border border-gray-300 dark:border-gray-700 rounded-lg overflow-hidden w-full">
@@ -63,10 +67,15 @@
             <div class="flex justify-center mt-4">
                 <a href="#" class="inline-block">
                     <button
-                        class="px-4 py-2 bg-green-500 border border-green-600 text-white rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-red active:bg-green-600 mx-auto text-base font-semibold">
+                        class="px-4 py-2 bg-green-500 border border-green-600 text-white rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-red active:bg-green-600 mx-auto text-base font-semibold"
+                        data-modal-target="InsertarModal{{ $persona }}"
+                        data-modal-toggle="InsertarModal{{ $persona }}">
                         Insertar
                     </button>
                 </a>
+
+                <!-- Ventana modal para insertar una persona -->
+                @include('admin.personas.create')
             </div>
 
             <div class="mt-4">
