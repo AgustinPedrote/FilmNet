@@ -1,5 +1,5 @@
 <!-- Barra de navegación principal -->
-<nav x-data="{ open: false }" class="border-b border-gray-100 bg-blue-500 h-32 relative z-50">
+<nav x-data="{ open: false }" class="border-b border-gray-100 bg-blue-500 h-32 relative z-30">
     <!-- Contenedor principal -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Flex container para alinear elementos -->

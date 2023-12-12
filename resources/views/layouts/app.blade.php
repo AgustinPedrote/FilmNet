@@ -22,7 +22,7 @@
 
 <body class="font-sans antialiased">
     <!-- Contenedor principal del cuerpo de la página -->
-    <div class="min-h-screen bg-gray-100">
+    <div class="principal min-h-screen bg-gray-100">
         <!-- Inclusión de la barra de navegación desde un archivo de diseño -->
         @include('layouts.navigation')
 

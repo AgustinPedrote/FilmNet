@@ -37,4 +37,6 @@
             @endforeach
         </div>
     @endforeach
+
+    @include('components.cookies')
 </x-app-layout>
