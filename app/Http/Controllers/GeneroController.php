@@ -13,7 +13,9 @@ class GeneroController extends Controller
      */
     public function index()
     {
-        return view('admin.generos.index');
+        $generos = Genero::orderBy('updated_at', 'desc')->paginate(10);
+
+        return view('admin.generos.index', ['generos' => $generos]);
     }
 
     /**
@@ -29,7 +31,12 @@ class GeneroController extends Controller
      */
     public function store(StoreGeneroRequest $request)
     {
-        //
+        $nombre = $request->nombre;
+        Genero::create([
+            'nombre' => $nombre,
+        ]);
+
+        return redirect()->route('admin.generos.index')->with('success', 'El género ha sido creado con éxito');
     }
 
     /**
@@ -53,7 +60,9 @@ class GeneroController extends Controller
      */
     public function update(UpdateGeneroRequest $request, Genero $genero)
     {
-        //
+        $genero->update($request->all());
+
+        return redirect()->route('admin.generos.index')->with('success', 'El género ha sido modificado con éxito');
     }
 
     /**
@@ -61,6 +70,15 @@ class GeneroController extends Controller
      */
     public function destroy(Genero $genero)
     {
-        //
+        // Verificar si el género tiene roles relacionados (audiovisuales)
+        if ($genero->audiovisuales->isEmpty()) {
+            // No tiene roles relacionados, entonces se puede eliminar
+            $genero->delete();
+
+            return redirect()->route('admin.generos.index')->with('success', 'El género ha sido eliminado con éxito.');
+        }
+
+        // El género tiene roles relacionados, no se puede eliminar
+        return redirect()->route('admin.generos.index')->with('error', 'Imposible eliminar género: tiene vínculos en uno o más audiovisuales');
     }
 }

@@ -13,7 +13,9 @@ class PremioController extends Controller
      */
     public function index()
     {
-        return view('admin.premios.index');
+        $premios = Premio::orderBy('updated_at', 'desc')->paginate(10);
+
+        return view('admin.premios.index', ['premios' => $premios]);
     }
 
     /**
@@ -29,7 +31,17 @@ class PremioController extends Controller
      */
     public function store(StorePremioRequest $request)
     {
-        //
+        $nombre = $request->nombre;
+        $year = $request->year;
+        $audiovisual_id = $request->audiovisual;
+
+        Premio::create([
+            'nombre' => $nombre,
+            'year' => $year,
+            'audiovisual_id' => $audiovisual_id
+        ]);
+
+        return redirect()->route('admin.premios.index')->with('success', 'El premio ha sido creado con éxito');
     }
 
     /**
@@ -53,7 +65,9 @@ class PremioController extends Controller
      */
     public function update(UpdatePremioRequest $request, Premio $premio)
     {
-        //
+        $premio->update($request->all());
+
+        return redirect()->route('admin.premios.index')->with('success', 'El premio ha sido modificado con éxito');
     }
 
     /**

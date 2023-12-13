@@ -101,12 +101,15 @@ Route::middleware(['auth', 'userEsAdmin'])->group(function () {
 
     // Géneros:
     Route::resource('generos', GeneroController::class);
+    Route::get('generos/admin/index', [GeneroController::class, 'Index'])->name('admin.generos.index');
 
     // Companies:
     Route::resource('companies', CompanyController::class);
+    Route::get('companies/admin/index', [CompanyController::class, 'Index'])->name('admin.companies.index');
 
     // Premios:
     Route::resource('premios', PremioController::class);
+    Route::get('premios/admin/index', [PremioController::class, 'Index'])->name('admin.premios.index');
 });
 
 

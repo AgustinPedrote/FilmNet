@@ -14,7 +14,7 @@ async function saveVote(event, audiovisual) {
 
     console.log("Voto seleccionado:", voto);
 
-    // Solicitud POST asíncrona utilizando fetch para enviar los datos del voto al servidor
+    // Enviar votaciones
     const result = await fetch("http://127.0.0.1:8000/votaciones/create", {
         method: "POST",
         body: JSON.stringify(audiovisual),

@@ -17,13 +17,13 @@
 
     <div class="min-h-screen flex justify-center items-center">
         <div class="overflow-x-auto max-w-screen-md w-full mx-auto">
-            <h1 class="text-3xl font-semibold mb-4 border-b border-gray-400 w-full pb-2 text-gray-800">
+            <h1
+                class="text-3xl font-semibold mb-4 border border-gray-400 w-full pb-2 text-gray-700 bg-gray-100 p-3 rounded-lg text-center">
                 Personas
             </h1>
 
             <div class="flex justify-center">
-                <table
-                    class="text-sm text-left text-gray-500 dark:text-gray-400 border border-gray-300 dark:border-gray-700 rounded-lg overflow-hidden w-full">
+                <table class="text-sm text-left text-gray-500 rounded-lg overflow-hidden w-full">
                     <thead class="text-xs text-white bg-gray-700 dark:bg-gray-800">
                         <tr>
                             <th scope="col" class="py-3 px-6 text-center font-semibold text-lg">Nombre</th>
@@ -33,7 +33,7 @@
                     <tbody>
                         @foreach ($personas as $persona)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                <td class="py-4 px-6 text-center text-base">{{ $persona->nombre }}</td>
+                                <td class="py-4 px-6 text-center text-base w-1/2">{{ $persona->nombre }}</td>
                                 <td class="px-6 text-center space-x-2">
                                     <a href="#" class="inline-block">
                                         <button

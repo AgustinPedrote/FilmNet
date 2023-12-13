@@ -13,7 +13,9 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return view('admin.companies.index');
+        $companies = Company::orderBy('updated_at', 'desc')->paginate(10);
+
+        return view('admin.companies.index', ['companies' => $companies]);
     }
 
     /**
@@ -29,7 +31,12 @@ class CompanyController extends Controller
      */
     public function store(StoreCompanyRequest $request)
     {
-        //
+        $nombre = $request->nombre;
+        Company::create([
+            'nombre' => $nombre,
+        ]);
+
+        return redirect()->route('admin.companies.index')->with('success', 'La compañía ha sido creada con éxito.');
     }
 
     /**
@@ -53,7 +60,9 @@ class CompanyController extends Controller
      */
     public function update(UpdateCompanyRequest $request, Company $company)
     {
-        //
+        $company->update($request->all());
+
+        return redirect()->route('admin.companies.index')->with('success', 'La compañía ha sido modificada con éxito.');
     }
 
     /**
@@ -61,6 +70,15 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        //
+        // Verificar si la compan$company tiene roles relacionados
+        if ($company->audiovisuales->isEmpty()) {
+
+            $company->delete();
+
+            return redirect()->route('admin.companies.index')->with('success', 'La compañía ha sido eliminada con éxito.');
+        }
+
+        // La compañía tiene roles relacionados, no se puede eliminar
+        return redirect()->route('admin.companies.index')->with('error', 'Imposible eliminar compañía: tiene vínculos en uno o más audiovisuales');
     }
 }

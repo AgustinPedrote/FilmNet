@@ -7,7 +7,7 @@
          <li class="mb-2"><a href="{{ route('admin.audiovisuales.index') }}" class="block p-2 rounded hover:bg-gray-700 text-lg">Audiovisuales</a></li>
          <li class="mb-2"><a href="{{ route('personas.index') }}" class="block p-2 rounded hover:bg-gray-700 text-lg">Personas</a></li>
          <li class="mb-2"><a href="{{ route('generos.index') }}" class="block p-2 rounded hover:bg-gray-700 text-lg">Géneros</a></li>
-         <li class="mb-2"><a href="{{ route('companies.index') }}" class="block p-2 rounded hover:bg-gray-700 text-lg">Compañias</a></li>
+         <li class="mb-2"><a href="{{ route('companies.index') }}" class="block p-2 rounded hover:bg-gray-700 text-lg">Compañías</a></li>
          <li class="mb-2"><a href="{{ route('premios.index') }}" class="block p-2 rounded hover:bg-gray-700 text-lg">Premios</a></li>
          <li class="mb-2"><a href="{{ route('home.index') }}" class="block p-2 rounded hover:bg-gray-700 text-lg">Salir</a></li>
      </ul>
