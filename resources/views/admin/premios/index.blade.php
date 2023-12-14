@@ -50,8 +50,8 @@
 
                                     <button type="submit"
                                         class="px-4 py-2 bg-red-500 border border-red-600 text-white rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-red active:bg-red-600 mx-auto font-semibold text-base"
-                                        data-modal-target="popup-modal{{ $premio }}"
-                                        data-modal-toggle="popup-modal{{ $premio }}">
+                                       {{--  data-modal-target="popup-modal{{ $premio }}"
+                                        data-modal-toggle="popup-modal{{ $premio }}" --}}>
                                         Borrar
                                     </button>
                                     </form>
@@ -72,8 +72,8 @@
                 <a href="#" class="inline-block">
                     <button
                         class="px-4 py-2 bg-green-500 border border-green-600 text-white rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-red active:bg-green-600 mx-auto text-base font-semibold"
-                        data-modal-target="InsertarModal{{ $premio }}"
-                        data-modal-toggle="InsertarModal{{ $premio }}">
+                       {{--  data-modal-target="InsertarModal{{ $premio }}"
+                        data-modal-toggle="InsertarModal{{ $premio }}" --}}>
                         Insertar
                     </button>
                 </a>

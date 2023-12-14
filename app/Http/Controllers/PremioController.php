@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePremioRequest;
 use App\Http\Requests\UpdatePremioRequest;
 use App\Models\Premio;
+use App\Models\Audiovisual;
+use Illuminate\Http\Request;
 
 class PremioController extends Controller
 {
@@ -65,6 +67,9 @@ class PremioController extends Controller
      */
     public function update(UpdatePremioRequest $request, Premio $premio)
     {
+        if ($request->audiovisual_ != null) {
+            $premio->audiovisual_id = $request->audiovisual_;
+        }
         $premio->update($request->all());
 
         return redirect()->route('admin.premios.index')->with('success', 'El premio ha sido modificado con éxito');
@@ -76,5 +81,17 @@ class PremioController extends Controller
     public function destroy(Premio $premio)
     {
         //
+    }
+
+    // app/Http/Controllers/PremioController.php
+
+    public function buscarAudiovisual(Request $request)
+    {
+
+        // Lógica de búsqueda en tu base de datos según la entrada del usuario
+        $query = $request->input('query');
+        $resultados = Audiovisual::where('titulo', 'like', '%' . $query . '%')->get();
+
+        return response()->json($resultados);
     }
 }

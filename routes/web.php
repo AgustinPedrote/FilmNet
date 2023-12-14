@@ -110,6 +110,8 @@ Route::middleware(['auth', 'userEsAdmin'])->group(function () {
     // Premios:
     Route::resource('premios', PremioController::class);
     Route::get('premios/admin/index', [PremioController::class, 'Index'])->name('admin.premios.index');
+    // routes/web.php
+    Route::get('/busqueda/audiovisual', [PremioController::class, 'buscarAudiovisual']);
 });
 
 
