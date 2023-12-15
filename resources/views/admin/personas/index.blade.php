@@ -68,8 +68,8 @@
                 <a href="#" class="inline-block">
                     <button
                         class="px-4 py-2 bg-green-500 border border-green-600 text-white rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-red active:bg-green-600 mx-auto text-base font-semibold"
-                        data-modal-target="InsertarModal{{ $persona }}"
-                        data-modal-toggle="InsertarModal{{ $persona }}">
+                        data-modal-target="InsertarModal"
+                        data-modal-toggle="InsertarModal">
                         Insertar
                     </button>
                 </a>

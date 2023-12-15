@@ -35,7 +35,7 @@ class PremioController extends Controller
     {
         $nombre = $request->nombre;
         $year = $request->year;
-        $audiovisual_id = $request->audiovisual;
+        $audiovisual_id = $request->audiovisual_;
 
         Premio::create([
             'nombre' => $nombre,
@@ -80,7 +80,10 @@ class PremioController extends Controller
      */
     public function destroy(Premio $premio)
     {
-        //
+
+        $premio->delete();
+
+        return redirect()->route('admin.premios.index')->with('success', 'El premio ha sido eliminado con éxito.');
     }
 
     // app/Http/Controllers/PremioController.php

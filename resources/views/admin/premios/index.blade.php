@@ -37,7 +37,8 @@
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <td class="py-4 px-6 text-center text-base w-1/4">{{ $premio->nombre }}</td>
                                 <td class="py-4 px-6 text-center text-base w-1/4">{{ $premio->year }}</td>
-                                <td class="py-4 px-6 text-center text-base w-1/4">{{ $premio->audiovisual->titulo }}</td>
+                                <td class="py-4 px-6 text-center text-base w-1/4">{{ $premio->audiovisual->titulo }}
+                                </td>
                                 <td class="px-6 text-center space-x-2 w-1/4">
                                     <a href="#" class="inline-block">
                                         <button
@@ -50,8 +51,8 @@
 
                                     <button type="submit"
                                         class="px-4 py-2 bg-red-500 border border-red-600 text-white rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-red active:bg-red-600 mx-auto font-semibold text-base"
-                                       {{--  data-modal-target="popup-modal{{ $premio }}"
-                                        data-modal-toggle="popup-modal{{ $premio }}" --}}>
+                                        data-modal-target="popup-modal{{ $premio }}"
+                                        data-modal-toggle="popup-modal{{ $premio }}">
                                         Borrar
                                     </button>
                                     </form>
@@ -62,7 +63,7 @@
                             @include('admin.premios.edit')
 
                             <!-- Ventana modal para borrar una premio -->
-                            {{-- @include('admin.premios.delete') --}}
+                            @include('admin.premios.delete')
                         @endforeach
                     </tbody>
                 </table>
@@ -72,14 +73,13 @@
                 <a href="#" class="inline-block">
                     <button
                         class="px-4 py-2 bg-green-500 border border-green-600 text-white rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-red active:bg-green-600 mx-auto text-base font-semibold"
-                       {{--  data-modal-target="InsertarModal{{ $premio }}"
-                        data-modal-toggle="InsertarModal{{ $premio }}" --}}>
+                        data-modal-target="InsertarModal" data-modal-toggle="InsertarModal">
                         Insertar
                     </button>
                 </a>
 
                 <!-- Ventana modal para insertar una premio -->
-                {{-- @include('admin.premios.create') --}}
+                @include('admin.premios.create')
             </div>
 
             <div class="mt-4">
