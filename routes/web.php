@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function () {
 
 
 /* INICIO FILMNET */
-Route::get('/', [AudiovisualController::class, 'index'])->name('home.index');
+Route::get('/', [AudiovisualController::class, 'index'])->name('home.index')->middleware('ValidadoMiddleware');
 
 
 /* SECCIONES DE AUDIOVISUALES */
@@ -94,6 +94,8 @@ Route::middleware(['auth', 'userEsAdmin'])->group(function () {
 
     // Users:
     Route::resource('users', UserController::class);
+    Route::get('users/admin/index', [UserController::class, 'Index'])->name('admin.users.index');
+    Route::put('/users/{user}/validar', [UserController::class, 'validar'])->name('admin.users.validar');
 
     // Personas:
     Route::resource('personas', PersonaController::class);

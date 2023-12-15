@@ -15,7 +15,9 @@ class UserController extends Controller
     // Usuarios en el panel de administración
     public function index()
     {
-        return view('admin.users.index');
+        $users = User::orderBy('updated_at', 'desc')->paginate(10);
+
+        return view('admin.users.index', ['users' => $users]);
     }
 
     // Index en el panel de administración
@@ -43,7 +45,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $premio)
+    public function show(User $user)
     {
         //
     }
@@ -51,7 +53,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $premio)
+    public function edit(User $user)
     {
         //
     }
@@ -59,7 +61,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, User $premio)
+    public function update(UpdateUserRequest $request, User $user)
     {
         //
     }
@@ -67,9 +69,11 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $premio)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect()->route('admin.users.index')->with('success', 'El usuario ha sido eliminado con éxito.');
     }
 
     // Las votaciones del usuario logueado
@@ -154,5 +158,15 @@ class UserController extends Controller
 
         // Puedes redirigir o mostrar un mensaje de éxito
         return redirect()->back()->with('status', 'Audiovisual eliminado de la lista de seguimientos con éxito');
+    }
+
+    public function validar(User $user)
+    {
+        $user->validado = !$user->validado;
+        $user->save();
+
+        return redirect()
+            ->route('admin.users.index')
+            ->with('success', 'Usuario validado/invalidado correctamente');
     }
 }
