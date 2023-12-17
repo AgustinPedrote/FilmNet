@@ -1,12 +1,12 @@
-{{-- Ventana modal para borrar el premio --}}
-<div id="popup-modal{{ $premio }}" tabindex="-1"
+{{-- Ventana modal para borrar al usuario --}}
+<div id="popup-modal{{ $user }}" tabindex="-1"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 md:inset-0 h-modal md:h-full">
     <div class="relative p-4 w-full max-w-md h-full md:h-auto">
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 ">
 
             <button type="button"
                 class="absolute top-3 right-2.5 text-black bg-transparent  hover:text-gray-500 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-                data-modal-toggle="popup-modal{{ $premio }}">
+                data-modal-toggle="popup-modal{{ $user }}">
                 <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
@@ -24,19 +24,19 @@
                 </svg>
 
                 <h3 class="mb-5 text-lg font-normal text-black  dark:text-gray-900">
-                    ¿Seguro que deseas borrar este premio?
+                    ¿Seguro que deseas borrar este usuario?
                 </h3>
 
-                <form action="{{ route('premios.destroy', $premio) }}" method="POST" class="inline">
+                <form action="{{ route('users.destroy', $user) }}" method="POST" class="inline">
                     @method('DELETE')
                     @csrf
 
-                    <button data-modal-toggle="popup-modal{{ $premio }}" type="submit"
+                    <button data-modal-toggle="popup-modal{{ $user }}" type="submit"
                         class="px-4 py-2 bg-red-500 border border-red-600 text-white rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-red active:bg-red-600 mx-auto font-semibold">
                         Sí, seguro
                     </button>
 
-                    <button data-modal-toggle="popup-modal{{ $premio }}" type="button"
+                    <button data-modal-toggle="popup-modal{{ $user }}" type="button"
                         class="px-4 py-2 bg-white border border-gray-600 text-gray-900 rounded-md hover:bg-gray-400 focus:outline-none focus:shadow-outline-red active:bg-gray-400 mx-auto font-semibold">
                         No, cancelar
                     </button>

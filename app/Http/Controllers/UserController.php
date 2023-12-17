@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCriticaRequest;
 use App\Models\User;
 use App\Models\Audiovisual;
 use App\Models\Critica;
@@ -15,7 +16,7 @@ class UserController extends Controller
     // Usuarios en el panel de administración
     public function index()
     {
-        $users = User::orderBy('updated_at', 'desc')->paginate(10);
+        $users = User::orderBy('name')->paginate(10);
 
         return view('admin.users.index', ['users' => $users]);
     }
@@ -168,5 +169,29 @@ class UserController extends Controller
         return redirect()
             ->route('admin.users.index')
             ->with('success', 'Usuario validado/invalidado correctamente');
+    }
+
+    // ver críticas como
+    public function verCriticas(User $user)
+    {
+
+        // Críticas del usuario logado paginadas
+        $criticas = Critica::where('user_id', $user->id)->paginate(4);
+
+        return view('admin.users.miscriticas', compact(
+            'criticas'
+        ));
+    }
+
+    // Eliminar una crítica como administrador
+    public function verCriticasDestroy($usuario_id, $audiovisual_id)
+    {
+        // Buscar la crítica pasandole el usuario y el audiovisual.
+        Critica::where('audiovisual_id', $audiovisual_id)
+            ->where('user_id', $usuario_id)
+            ->delete();
+
+        // Redireccionar de nuevo a la página anterior
+        return redirect()->back()->with('success', 'Crítica eliminada con éxito');
     }
 }
