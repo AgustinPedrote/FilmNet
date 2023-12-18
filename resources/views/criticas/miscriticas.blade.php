@@ -18,7 +18,7 @@
         Mis críticas
     </h1>
 
-    @forelse ($criticas->reverse() as $critica)
+    @forelse ($criticas->sortByDesc('created_at') as $critica)
         <!-- Votación del usuario al audiovisual -->
         @php
             $votacion = $critica->audiovisual->obtenerVotacion($critica->user_id, $critica->audiovisual_id);

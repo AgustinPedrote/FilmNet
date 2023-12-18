@@ -37,7 +37,7 @@
                         @foreach ($users as $user)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <td class="py-4 px-6 text-center text-base w-1/6">{{ $user->name }}</td>
-                                <td class="py-4 px-6 text-center text-base w-2/6">
+                                <td class="py-4 px-6 text-base w-2/6">
                                     <ul class="list-none p-0 m-0">
                                         <li><strong>Año de Nacimiento:</strong> {{ $user->nacimiento }}</li>
                                         <li><strong>Género:</strong> {{ $user->sexo }}</li>
@@ -46,7 +46,30 @@
                                         <li><strong>Email:</strong> {{ $user->email }}</li>
                                     </ul>
                                 </td>
-                                <td class="py-4 px-6 text-center text-base w-1/6">{{ $user->rol->nombre }}</td>
+
+                                <td class="py-4 px-6 text-center text-base w-1/6">
+                                    <form id="updateRoleForm" action="{{ route('admin.users.update', $user->id) }}"
+                                        method="post">
+                                        @csrf
+                                        @method('put')
+
+                                        <select name="rol_id" class="w-full" onchange="submitForm(this)">
+                                            <option value="1" {{ $user->rol->id == 1 ? 'selected' : '' }}>
+                                                Usuario
+                                            </option>
+                                            <option value="2" {{ $user->rol->id == 2 ? 'selected' : '' }}>
+                                                Admin
+                                            </option>
+                                        </select>
+                                    </form>
+
+                                    <script>
+                                        function submitForm(select) {
+                                            select.form.submit();
+                                        }
+                                    </script>
+                                </td>
+
                                 <td class="px-6 text-center space-x-2 w-2/6">
                                     <div class="flex justify-center space-x-2">
                                         <a href="{{ route('admin.verCriticas', $user) }}" class="inline-block">

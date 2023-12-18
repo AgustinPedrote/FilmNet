@@ -10,6 +10,8 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\Votacion;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Http\Request;
+
 
 class UserController extends Controller
 {
@@ -62,10 +64,16 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(Request $request, User $user)
     {
-        //
+        $user->update([
+            'rol_id' => $request->input('rol_id'),
+        ]);
+
+        // Puedes redirigir a la vista de detalles del usuario o a donde desees
+        return redirect()->route('admin.users.index', $user->id)->with('success', 'El rol del usuario ha sido actualizado con éxito.');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -179,7 +187,8 @@ class UserController extends Controller
         $criticas = Critica::where('user_id', $user->id)->paginate(4);
 
         return view('admin.users.miscriticas', compact(
-            'criticas'
+            'criticas',
+            'user'
         ));
     }
 

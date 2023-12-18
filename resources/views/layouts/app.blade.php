@@ -18,6 +18,9 @@
     <!-- Scripts -->
     <!-- Inclusión de estilos y scripts con Vite -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('img/FN.png') }}" type="image/x-icon"/>
 </head>
 
 <body class="font-sans antialiased">

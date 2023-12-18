@@ -97,7 +97,9 @@ Route::middleware(['auth', 'userEsAdmin'])->group(function () {
     Route::get('users/admin/index', [UserController::class, 'Index'])->name('admin.users.index');
     Route::put('/users/{user}/validar', [UserController::class, 'validar'])->name('admin.users.validar');
     Route::get('ver_criticas/user/{user}', [UserController::class, 'verCriticas'])->name('admin.verCriticas');
-    Route::delete('/criticas/{usuario_id}/{audiovisual_id}', [UserController::class, 'verCriticasDestroy'])->name('verCriticas.destroy');
+    Route::delete('/eliminar_criticas/{usuario_id}/{audiovisual_id}', [UserController::class, 'verCriticasDestroy'])->name('verCriticas.destroy');
+    Route::put('/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
+
 
     // Personas:
     Route::resource('personas', PersonaController::class);

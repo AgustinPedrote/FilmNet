@@ -44,7 +44,34 @@
     </div>
 
     @if ($criticas != null)
-        @foreach ($criticas->reverse() as $critica)
+
+        <!-- Lógica para que la crítica del usuario logueado siempre salga en primer lugar -->
+        @php
+            $criticasUsuarioLogueado = [];
+            $otrasCriticas = [];
+        @endphp
+
+        @foreach ($criticas->sortByDesc('created_at') as $critica)
+            @php
+                $votacion = $critica->audiovisual->obtenerVotacion($critica->user_id, $critica->audiovisual_id);
+            @endphp
+
+            @if ($critica->user_id == auth()->id())
+                @php
+                    $criticasUsuarioLogueado[] = $critica;
+                @endphp
+            @else
+                @php
+                    $otrasCriticas[] = $critica;
+                @endphp
+            @endif
+        @endforeach
+
+        @php
+            $todasLasCriticas = array_merge($criticasUsuarioLogueado, $otrasCriticas);
+        @endphp
+
+        @foreach ($todasLasCriticas as $critica)
             <!-- Votación del usuario al audiovisual -->
             @php
                 $votacion = $critica->audiovisual->obtenerVotacion($critica->user_id, $critica->audiovisual_id);
@@ -96,8 +123,8 @@
                                         </div>
                                         <!-- Ventana modal para editar una crítica -->
                                         @include('criticas.edit')
-                                        <!-- Ventana modal para editar una crítica -->
-                                        @include('criticas.delete', ['critica' => $critica])
+                                        <!-- Ventana modal para borrar una crítica -->
+                                        @include('criticas.delete')
                                     @endif
                                 </div>
                                 <!-- Número de críticas y votaciones realizadas por el usuario -->
@@ -157,5 +184,18 @@
     <!-- paginación -->
     <div class="mx-6 mt-4 mb-10">
         {{ $criticas->appends(request()->query())->links() }}
+    </div>
+
+    <!-- Botón para volver a la página anterior -->
+    <div class="mt-6">
+        <a href="{{ route('audiovisual.show', $audiovisual) }}" class="flex items-center ml-6">
+            <span class="px-3 py-1.5 bg-blue-500 border border-blue-600 text-white rounded-md hover:bg-blue-600">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    class="h-6 w-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+            </span>
+        </a>
     </div>
 </x-app-layout>

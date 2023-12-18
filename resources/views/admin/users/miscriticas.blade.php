@@ -15,10 +15,11 @@
     </div>
 
     <h1 class="text-2xl font-bold mb-8 mt-20 ml-10 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
-        Mis críticas
+        Críticas de {{ $user->name }}
     </h1>
 
-    @forelse ($criticas->reverse() as $critica)
+    @forelse ($criticas->sortByDesc('created_at') as $critica)
+
         <!-- Votación del usuario al audiovisual -->
         @php
             $votacion = $critica->audiovisual->obtenerVotacion($critica->user_id, $critica->audiovisual_id);
@@ -100,5 +101,18 @@
 
     <div class="mx-6 mt-4 mb-10">
         {{ $criticas->links() }}
+    </div>
+
+    <!-- Botón para volver a la página anterior -->
+    <div class="mt-6">
+        <a href="{{ route('admin.users.index') }}" class="flex items-center ml-6">
+            <span class="px-3 py-1.5 bg-blue-500 border border-blue-600 text-white rounded-md hover:bg-blue-600">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    class="h-6 w-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+            </span>
+        </a>
     </div>
 </x-app-layout>
