@@ -156,7 +156,7 @@
 
     <!-- Botón para volver a la página anterior -->
     <div class="mt-6">
-        <a href="{{ route('home.index') }}" class="flex items-center ml-6">
+        <a href="#" onclick="goBack()" class="flex items-center ml-6">
             <span class="px-3 py-1.5 bg-blue-500 border border-blue-600 text-white rounded-md hover:bg-blue-600">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                     class="h-6 w-6">
@@ -166,6 +166,12 @@
             </span>
         </a>
     </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 
     <script src="{{ asset('js/vote.js') }}"></script>
 </x-app-layout>

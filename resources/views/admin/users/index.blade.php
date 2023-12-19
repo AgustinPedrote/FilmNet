@@ -26,18 +26,18 @@
                 <table class="text-sm text-left text-gray-500 rounded-lg overflow-hidden w-full">
                     <thead class="text-xs text-white bg-gray-700 dark:bg-gray-800">
                         <tr>
-                            <th scope="col" class="py-3 px-6 text-center font-semibold text-lg">Nombre</th>
-                            <th scope="colgroup" class="py-3 px-6 text-center font-semibold text-lg">Datos Personales
+                            <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/6">Nombre</th>
+                            <th scope="colgroup" class="py-3 px-6 text-center font-semibold text-lg w-2/6">Datos Personales
                             </th>
-                            <th scope="col" class="py-3 px-6 text-center font-semibold text-lg">Rol</th>
-                            <th scope="col" class="py-3 px-6 text-center font-semibold text-lg">Acciones</th>
+                            <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/6">Rol</th>
+                            <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-2/6">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                <td class="py-4 px-6 text-center text-base w-1/6">{{ $user->name }}</td>
-                                <td class="py-4 px-6 text-base w-2/6">
+                                <td class="py-4 px-6 text-center text-base">{{ $user->name }}</td>
+                                <td class="py-4 px-6 text-base">
                                     <ul class="list-none p-0 m-0">
                                         <li><strong>Año de Nacimiento:</strong> {{ $user->nacimiento }}</li>
                                         <li><strong>Género:</strong> {{ $user->sexo }}</li>
@@ -47,7 +47,7 @@
                                     </ul>
                                 </td>
 
-                                <td class="py-4 px-6 text-center text-base w-1/6">
+                                <td class="py-4 px-6 text-center text-base">
                                     <form id="updateRoleForm" action="{{ route('admin.users.update', $user->id) }}"
                                         method="post">
                                         @csrf
@@ -70,7 +70,7 @@
                                     </script>
                                 </td>
 
-                                <td class="px-6 text-center space-x-2 w-2/6">
+                                <td class="px-6 text-center space-x-2">
                                     <div class="flex justify-center space-x-2">
                                         <a href="{{ route('admin.verCriticas', $user) }}" class="inline-block">
                                             <button

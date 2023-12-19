@@ -13,7 +13,7 @@ class PersonaController extends Controller
      */
     public function index()
     {
-        $personas = Persona::orderBy('updated_at', 'desc')->paginate(10);
+        $personas = Persona::orderBy('nombre')->paginate(10);
 
         return view('admin.personas.index', ['personas' => $personas]);
     }

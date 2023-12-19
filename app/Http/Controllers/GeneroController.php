@@ -13,7 +13,7 @@ class GeneroController extends Controller
      */
     public function index()
     {
-        $generos = Genero::orderBy('updated_at', 'desc')->paginate(10);
+        $generos = Genero::orderBy('nombre')->paginate(10);
 
         return view('admin.generos.index', ['generos' => $generos]);
     }

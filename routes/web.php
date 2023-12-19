@@ -100,7 +100,6 @@ Route::middleware(['auth', 'userEsAdmin'])->group(function () {
     Route::delete('/eliminar_criticas/{usuario_id}/{audiovisual_id}', [UserController::class, 'verCriticasDestroy'])->name('verCriticas.destroy');
     Route::put('/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
 
-
     // Personas:
     Route::resource('personas', PersonaController::class);
     Route::get('personas/admin/index', [PersonaController::class, 'Index'])->name('admin.personas.index');

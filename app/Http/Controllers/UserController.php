@@ -18,7 +18,7 @@ class UserController extends Controller
     // Usuarios en el panel de administración
     public function index()
     {
-        $users = User::orderBy('name')->paginate(10);
+        $users = User::orderBy('name')->paginate(4);
 
         return view('admin.users.index', ['users' => $users]);
     }

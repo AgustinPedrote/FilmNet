@@ -13,7 +13,7 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = Company::orderBy('updated_at', 'desc')->paginate(10);
+        $companies = Company::orderBy('nombre')->paginate(10);
 
         return view('admin.companies.index', ['companies' => $companies]);
     }

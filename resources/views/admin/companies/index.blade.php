@@ -26,14 +26,14 @@
                 <table class="text-sm text-left text-gray-500 rounded-lg overflow-hidden w-full">
                     <thead class="text-xs text-white bg-gray-700 dark:bg-gray-800">
                         <tr>
-                            <th scope="col" class="py-3 px-6 text-center font-semibold text-lg">Nombre</th>
-                            <th scope="col" class="py-3 px-6 text-center font-semibold text-lg">Acciones</th>
+                            <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/2">Nombre</th>
+                            <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/2">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($companies as $company)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                <td class="py-4 px-6 text-center text-base w-1/2">{{ $company->nombre }}</td>
+                                <td class="py-4 px-6 text-center text-base">{{ $company->nombre }}</td>
                                 <td class="px-6 text-center space-x-2">
                                     <a href="#" class="inline-block">
                                         <button

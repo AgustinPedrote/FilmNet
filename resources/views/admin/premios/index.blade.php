@@ -37,8 +37,7 @@
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <td class="py-4 px-6 text-center text-base w-1/4">{{ $premio->nombre }}</td>
                                 <td class="py-4 px-6 text-center text-base w-1/4">{{ $premio->year }}</td>
-                                <td class="py-4 px-6 text-center text-base w-1/4">{{ $premio->audiovisual->titulo }}
-                                </td>
+                                <td class="py-4 px-6 text-center text-base w-1/4">{{ $premio->audiovisual->titulo }}</td>
                                 <td class="px-6 text-center space-x-2 w-1/4">
                                     <a href="#" class="inline-block">
                                         <button

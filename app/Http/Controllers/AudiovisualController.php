@@ -62,7 +62,9 @@ class AudiovisualController extends Controller
     // Panel de control del administrador
     public function adminIndex()
     {
-        return view('admin.audiovisuales.index');
+        $audiovisuales = Audiovisual::orderBy('titulo')->paginate(5);
+
+        return view('admin.audiovisuales.index', ['audiovisuales' => $audiovisuales]);
     }
 
 
