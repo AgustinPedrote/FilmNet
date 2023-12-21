@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAudiovisualRequest;
 use App\Http\Requests\UpdateAudiovisualRequest;
 use App\Models\Audiovisual;
+use App\Models\Recomendacion;
+use App\Models\Tipo;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 
@@ -63,10 +65,15 @@ class AudiovisualController extends Controller
     public function adminIndex()
     {
         $audiovisuales = Audiovisual::orderBy('titulo')->paginate(5);
+        $tipos = Tipo::all();
+        $recomendaciones = Recomendacion::all();
 
-        return view('admin.audiovisuales.index', ['audiovisuales' => $audiovisuales]);
+        return view('admin.audiovisuales.index', [
+            'audiovisuales' => $audiovisuales,
+            'tipos' => $tipos,
+            'recomendaciones' => $recomendaciones
+        ]);
     }
-
 
     public function create()
     {
@@ -75,8 +82,34 @@ class AudiovisualController extends Controller
 
     public function store(StoreAudiovisualRequest $request)
     {
-        //
+        // Reemplaza los espacios en blanco con guiones bajos en el título
+        $titulo = str_replace(' ', '_', $request->titulo);
+
+        // Obtén la extensión del archivo original
+        $extension = $request->file('imagen')->getClientOriginalExtension();
+
+        // Construye el nombre de la imagen con el título modificado y la extensión
+        $img = $titulo . '.' . $extension;
+
+        // Mueve el archivo a la ubicación deseada
+        $request->file('imagen')->move(public_path('img'), $img);
+
+        Audiovisual::create([
+            'titulo' => $request->titulo,
+            'titulo_original' => $request->titulo_original,
+            'year' => $request->year,
+            'duracion' => $request->duracion,
+            'pais' => $request->pais,
+            'trailer' => $request->trailer,
+            'tipo_id' => $request->tipo_id,
+            'recomendacion_id' => $request->recomendacion_id,
+            'sinopsis' => $request->sinopsis,
+            'img' => 'img/' . $img
+        ]);
+
+        return redirect()->route('admin.audiovisuales.index')->with('success', 'El audiovisual ha sido creado con éxito');
     }
+
 
     // Ficha técnica del audiovisual
     public function show(Audiovisual $audiovisual)

@@ -23,8 +23,6 @@
             </h1>
 
             <div class="flex justify-center">
-
-
                 <table class="text-sm text-left text-gray-500 rounded-lg overflow-hidden w-full">
                     <thead class="text-xs text-white bg-gray-700 dark:bg-gray-800">
                         <tr>
@@ -42,7 +40,7 @@
                                     <div class="flex-shrink-0 h-16 w-16 mx-auto">
                                         <a href="{{ route('audiovisual.show', ['audiovisual' => $audiovisual]) }}">
                                             <img class="h-full w-full rounded-full object-cover border-2 border-gray-300 hover:border-blue-500 transition duration-300"
-                                                src="{{ $audiovisual->img }}" alt="Imagen">
+                                                src="{{ asset($audiovisual->img) }}" alt="Imagen">
                                         </a>
                                     </div>
                                 </td>
@@ -89,19 +87,19 @@
                 <a href="#" class="inline-block">
                     <button
                         class="px-4 py-2 bg-green-500 border border-green-600 text-white rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-red active:bg-green-600 mx-auto text-base font-semibold"
-                        data-modal-target="InsertarModal" data-modal-toggle="InsertarModal">
+                        data-modal-target="InsertarModal{{ $tipos }}{{ $recomendaciones }}"
+                        data-modal-toggle="InsertarModal{{ $tipos }}{{ $recomendaciones }}">
                         Insertar
                     </button>
                 </a>
-
-                <!-- Ventana modal para insertar una premio -->
-                @include('admin.audiovisuales.create')
             </div>
 
             <div class="mt-4">
-                {{ $audiovisuales->links() }}
+                {{ $audiovisuales }}
             </div>
         </div>
+
+        <!-- Ventana modal para insertar una premio -->
+        @include('admin.audiovisuales.create')
     </div>
-    </main>
 </x-admin>

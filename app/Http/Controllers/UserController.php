@@ -8,6 +8,7 @@ use App\Models\Audiovisual;
 use App\Models\Critica;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Rol;
 use App\Models\Votacion;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
@@ -19,8 +20,9 @@ class UserController extends Controller
     public function index()
     {
         $users = User::orderBy('name')->paginate(4);
+        $roles = Rol::all();
 
-        return view('admin.users.index', ['users' => $users]);
+        return view('admin.users.index', ['users' => $users, 'roles' => $roles]);
     }
 
     // Index en el panel de administración

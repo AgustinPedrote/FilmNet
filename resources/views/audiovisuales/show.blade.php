@@ -105,7 +105,7 @@
 
         <!-- Imagen del Audiovisual -->
         <div class="w-full md:w-1/3 p-4 flex flex-col items-center justify-center">
-            <img src="{{ $audiovisual->img }}" alt="{{ $audiovisual->titulo }}"
+            <img src="{{ asset($audiovisual->img) }}" alt="{{ $audiovisual->titulo }}"
                 class="w-full h-auto object-cover md:w-48 mx-auto mb-6 rounded-lg shadow-md">
 
             <div class="mb-6 text-center w-full md:w-48 bg-gray-100 rounded-md p-10 border-gray-300">

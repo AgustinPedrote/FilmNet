@@ -5,7 +5,7 @@
         <h1 class="text-6xl text-gray-800 font-bold">Panel de Administración</h1>
 
         <!-- Logo -->
-        <img src="{{ asset('img/logo.png') }}" alt="Logo" class="max-w-full max-h-full mx-auto">
+        <img src="{{ asset('logos/logo.png') }}" alt="Logo" class="max-w-full max-h-full mx-auto">
 
     </div>
 

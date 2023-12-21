@@ -4,7 +4,7 @@
 
         <!-- Imagen -->
         <div class="flex items-center justify-center mb-6">
-            <img src="{{ asset('img/logo3.png') }}" alt="Logo" class="w-3/4 object-contain">
+            <img src="{{ asset('logos/logo3.png') }}" alt="Logo" class="w-3/4 object-contain">
         </div>
 
         <!-- Email -->

@@ -17,7 +17,9 @@ class PremioController extends Controller
     {
         $premios = Premio::orderBy('nombre')->paginate(10);
 
-        return view('admin.premios.index', ['premios' => $premios]);
+        return view('admin.premios.index', [
+            'premios' => $premios
+        ]);
     }
 
     /**

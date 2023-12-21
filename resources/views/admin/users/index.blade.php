@@ -27,7 +27,8 @@
                     <thead class="text-xs text-white bg-gray-700 dark:bg-gray-800">
                         <tr>
                             <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/6">Nombre</th>
-                            <th scope="colgroup" class="py-3 px-6 text-center font-semibold text-lg w-2/6">Datos Personales
+                            <th scope="colgroup" class="py-3 px-6 text-center font-semibold text-lg w-2/6">Datos
+                                Personales
                             </th>
                             <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/6">Rol</th>
                             <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-2/6">Acciones</th>
@@ -53,13 +54,15 @@
                                         @csrf
                                         @method('put')
 
-                                        <select name="rol_id" class="w-full" onchange="submitForm(this)">
-                                            <option value="1" {{ $user->rol->id == 1 ? 'selected' : '' }}>
-                                                Usuario
-                                            </option>
-                                            <option value="2" {{ $user->rol->id == 2 ? 'selected' : '' }}>
-                                                Admin
-                                            </option>
+                                        <select name="rol_id"
+                                            class="w-full border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm"
+                                            onchange="submitForm(this)">
+                                            @foreach ($roles as $rol)
+                                                <option value="{{ $rol->id }}"
+                                                    {{ $rol->id == $user->rol->id ? 'selected' : '' }}>
+                                                    {{ $rol->nombre }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                     </form>
 

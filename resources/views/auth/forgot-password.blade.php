@@ -2,7 +2,7 @@
     <div class="bg-blue-500 py-8 px-6 rounded-lg w-full max-w-md mx-auto">
          <!-- Imagen -->
          <div class="flex items-center justify-center mb-6">
-            <img src="{{ asset('img/logo3.png') }}" alt="Logo" class="w-3/4 object-contain">
+            <img src="{{ asset('logos/logo3.png') }}" alt="Logo" class="w-3/4 object-contain">
         </div>
 
         <div class="mb-4 text-base text-white">
