@@ -1,5 +1,5 @@
 <!-- Ventana modal para editar un premio -->
-<div id="InsertarModal{{ $tipos }}{{ $recomendaciones }}" tabindex="-1" aria-hidden="true"
+<div id="InsertarModal" tabindex="-1" aria-hidden="true"
     class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-full max-w-7xl mx-auto">
         <!-- Modal content -->
@@ -8,7 +8,7 @@
             <div class="flex items-start justify-between p-1 border-b rounded-t dark:border-gray-600 bg-blue-500">
                 <button type="button"
                     class="text-white bg-transparent  hover:text-gray-100 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:text-white"
-                    data-modal-hide="InsertarModal{{ $tipos }}{{ $recomendaciones }}">
+                    data-modal-hide="InsertarModal">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -95,7 +95,11 @@
                                 <option value="0" disabled selected>Selecciona una recomendación</option>
                                 @foreach ($recomendaciones as $recomendacion)
                                     <option value="{{ $recomendacion->id }}">
-                                        + {{ $recomendacion->edad }} años
+                                        @if ($recomendacion->id == 1)
+                                            Todos los públicos
+                                        @else
+                                            + {{ $recomendacion->edad }} años
+                                        @endif
                                     </option>
                                 @endforeach
                             </select>
@@ -133,7 +137,7 @@
                     <div class="w-4"></div>
 
                     <!-- Botón "Cancelar" -->
-                    <button data-modal-hide="InsertarModal{{ $tipos }}{{ $recomendaciones }}" type="button"
+                    <button data-modal-hide="InsertarModal" type="button"
                         class="cursor-pointer bg-blue-500 border border-blue-600 hover:bg-blue-600 text-white rounded-md px-4 py-2 font-semibold focus:outline-none focus:shadow-outline-blue active:bg-blue-600">
                         Cancelar
                     </button>

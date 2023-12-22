@@ -91,7 +91,7 @@
 
                                             @if ($user->validado)
                                                 <button type="submit"
-                                                    class="w-20 h-10 bg-red-500 border border-red-600 text-white rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-red active:bg-red-600 font-semibold text-base">
+                                                    class="w-20 h-10 bg-orange-500 border border-orange-600 text-white rounded-md hover:bg-orange-600 focus:outline-none focus:shadow-outline-orange active:bg-orange-600 font-semibold text-base">
                                                     Invalidar
                                                 </button>
                                             @else

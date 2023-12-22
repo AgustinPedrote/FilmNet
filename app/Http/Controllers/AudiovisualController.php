@@ -143,7 +143,29 @@ class AudiovisualController extends Controller
 
     public function update(UpdateAudiovisualRequest $request, Audiovisual $audiovisual)
     {
-        //
+        // Verifica si se proporcionó una nueva imagen en la solicitud
+        if ($request->hasFile('imagen')) {
+
+            // Reemplaza los espacios en blanco con guiones bajos en el título
+            $titulo = str_replace(' ', '_', $request->titulo);
+
+            // Obtén la extensión del archivo original
+            $extension = $request->file('imagen')->getClientOriginalExtension();
+
+            // Construye el nombre de la imagen con el título modificado y la extensión
+            $img = $titulo . '.' . $extension;
+
+            // Mueve el archivo a la ubicación deseada
+            $request->file('imagen')->move(public_path('img'), $img);
+
+            // Guarda la nueva imagen
+            $audiovisual->img = 'img/' . $img;
+            $audiovisual->save();
+        }
+
+        $audiovisual->update($request->all());
+
+        return redirect()->route('admin.audiovisuales.index')->with('success', 'El audiovisual ha sido modificado con éxito');
     }
 
     public function destroy(Audiovisual $audiovisual)

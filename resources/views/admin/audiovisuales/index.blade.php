@@ -26,11 +26,11 @@
                 <table class="text-sm text-left text-gray-500 rounded-lg overflow-hidden w-full">
                     <thead class="text-xs text-white bg-gray-700 dark:bg-gray-800">
                         <tr>
-                            <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/4">Imagen</th>
-                            <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/4">Titulo</th>
-                            <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/4">Características
+                            <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/5">Imagen</th>
+                            <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/5">Titulo</th>
+                            <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/5">Características
                             </th>
-                            <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/4">Acciones</th>
+                            <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-2/5">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,9 +56,18 @@
                                 <td class="px-6 text-center space-x-2">
                                     <a href="#" class="inline-block">
                                         <button
+                                            class="px-4 py-2 bg-orange-500 border border-orange-600 text-white rounded-md hover:bg-orange-600 focus:outline-none focus:shadow-outline-red active:bg-orange-600 mx-auto font-semibold text-base"
+                                            {{-- data-modal-target="EditarModal{{ $audiovisual }}"
+                                            data-modal-toggle="EditarModal{{ $audiovisual }}" --}}>
+                                            Elenco
+                                        </button>
+                                    </a>
+
+                                    <a href="#" class="inline-block">
+                                        <button
                                             class="px-4 py-2 bg-blue-500 border border-blue-600 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-red active:bg-blue-600 mx-auto font-semibold text-base"
-                                            {{-- data-modal-target="EditarModal{{ $premio }}"
-                                            data-modal-toggle="EditarModal{{ $premio }}" --}}>
+                                            data-modal-target="EditarModal{{ $audiovisual }}"
+                                            data-modal-toggle="EditarModal{{ $audiovisual }}">
                                             Editar
                                         </button>
                                     </a>
@@ -74,7 +83,7 @@
                             </tr>
 
                             <!-- Ventana modal para editar una premio -->
-                            {{-- @include('admin.premios.edit') --}}
+                            @include('admin.audiovisuales.edit')
 
                             <!-- Ventana modal para borrar una premio -->
                             @include('admin.audiovisuales.delete')
@@ -87,8 +96,8 @@
                 <a href="#" class="inline-block">
                     <button
                         class="px-4 py-2 bg-green-500 border border-green-600 text-white rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-red active:bg-green-600 mx-auto text-base font-semibold"
-                        data-modal-target="InsertarModal{{ $tipos }}{{ $recomendaciones }}"
-                        data-modal-toggle="InsertarModal{{ $tipos }}{{ $recomendaciones }}">
+                        data-modal-target="InsertarModal"
+                        data-modal-toggle="InsertarModal">
                         Insertar
                     </button>
                 </a>
