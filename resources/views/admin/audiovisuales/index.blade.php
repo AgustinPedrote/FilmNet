@@ -65,8 +65,8 @@
 
                                     <button type="submit"
                                         class="px-4 py-2 bg-red-500 border border-red-600 text-white rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-red active:bg-red-600 mx-auto font-semibold text-base"
-                                        {{-- data-modal-target="popup-modal{{ $premio }}"
-                                        data-modal-toggle="popup-modal{{ $premio }}" --}}>
+                                        data-modal-target="popup-modal{{ $audiovisual }}"
+                                        data-modal-toggle="popup-modal{{ $audiovisual }}">
                                         Borrar
                                     </button>
                                     </form>
@@ -77,7 +77,7 @@
                             {{-- @include('admin.premios.edit') --}}
 
                             <!-- Ventana modal para borrar una premio -->
-                            {{-- @include('admin.premios.delete') --}}
+                            @include('admin.audiovisuales.delete')
                         @endforeach
                     </tbody>
                 </table>

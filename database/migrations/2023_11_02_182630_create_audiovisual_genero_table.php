@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('audiovisual_genero', function (Blueprint $table) {
             $table->foreignId('genero_id')->constrained('generos');
-            $table->foreignId('audiovisual_id')->constrained('audiovisuales');
+            $table->foreignId('audiovisual_id')->constrained('audiovisuales')->onDelete('cascade');
             $table->primary(['genero_id', 'audiovisual_id']);
         });
     }

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('criticas', function (Blueprint $table) {
             $table->text('critica');
             $table->foreignId('user_id')->constrained('users');
-            $table->foreignId('audiovisual_id')->constrained('audiovisuales');
+            $table->foreignId('audiovisual_id')->constrained('audiovisuales')->onDelete('cascade');
             $table->timestamps();
             $table->primary(['user_id', 'audiovisual_id']);
         });

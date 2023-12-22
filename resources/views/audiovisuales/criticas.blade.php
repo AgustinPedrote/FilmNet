@@ -24,7 +24,7 @@
         <a href="{{ route('audiovisual.show', ['audiovisual' => $audiovisual->id]) }}">
             <div class="max-w-5xl mx-auto relative">
                 <!-- Imagen panorámica -->
-                <img src="{{ $audiovisual->img }}" alt="{{ $audiovisual->titulo }}"
+                <img src="{{ asset($audiovisual->img) }}" alt="{{ $audiovisual->titulo }}"
                     class="w-full h-48 object-cover object-center rounded-md shadow-md mb-8">
 
                 <!-- Contenedor absoluto para el título y la nota media -->

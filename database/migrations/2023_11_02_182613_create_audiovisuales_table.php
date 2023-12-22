@@ -21,8 +21,8 @@ return new class extends Migration
             $table->text('sinopsis')->nullable();
             $table->string('img')->nullable();
             $table->string('trailer')->nullable();
-            $table->foreignId('tipo_id')->constrained('tipos')->nullable();
-            $table->foreignId('recomendacion_id')->constrained('recomendaciones')->nullable();
+            $table->foreignId('tipo_id')->constrained('tipos')->nullable()->onDelete('cascade');
+            $table->foreignId('recomendacion_id')->constrained('recomendaciones')->nullable()->onDelete('cascade');
             $table->timestamps();
         });
     }

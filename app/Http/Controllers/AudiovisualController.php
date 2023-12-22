@@ -148,7 +148,9 @@ class AudiovisualController extends Controller
 
     public function destroy(Audiovisual $audiovisual)
     {
-        //
+        $audiovisual->delete();
+
+        return redirect()->route('admin.audiovisuales.index')->with('success', 'El audiovisual ha sido eliminado con éxito.');
     }
 
     // Críticas del audiovisual (paginados)
