@@ -27,9 +27,7 @@
                     <thead class="text-xs text-white bg-gray-700 dark:bg-gray-800">
                         <tr>
                             <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/6">Nombre</th>
-                            <th scope="colgroup" class="py-3 px-6 text-center font-semibold text-lg w-2/6">Datos
-                                Personales
-                            </th>
+                            <th scope="colgroup" class="py-3 px-6 text-center font-semibold text-lg w-2/6">Datos Personales</th>
                             <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/6">Rol</th>
                             <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-2/6">Acciones</th>
                         </tr>
@@ -75,13 +73,7 @@
 
                                 <td class="px-6 text-center space-x-2">
                                     <div class="flex justify-center space-x-2">
-                                        <a href="{{ route('admin.verCriticas', $user) }}" class="inline-block">
-                                            <button
-                                                class="px-4 py-2 bg-blue-500 border border-blue-600 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-red active:bg-blue-600 mx-auto font-semibold text-base">
-                                                Críticas
-                                            </button>
-                                        </a>
-
+                                        <!-- Botón de validar e invalidar usuario -->
                                         <form action="{{ route('admin.users.validar', $user->id) }}" method="POST"
                                             class="flex items-center">
                                             @csrf
@@ -102,6 +94,15 @@
                                             @endif
                                         </form>
 
+                                        <!-- Botón para ver críticas del usuario -->
+                                        <a href="{{ route('admin.verCriticas', $user) }}" class="inline-block">
+                                            <button
+                                                class="px-4 py-2 bg-blue-500 border border-blue-600 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-red active:bg-blue-600 mx-auto font-semibold text-base">
+                                                Críticas
+                                            </button>
+                                        </a>
+
+                                        <!-- Botón para eliminar usuario -->
                                         <button type="submit"
                                             class="px-4 py-2 bg-red-500 border border-red-600 text-white rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-red active:bg-red-600 font-semibold text-base"
                                             data-modal-target="popup-modal{{ $user }}"

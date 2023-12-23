@@ -33,7 +33,7 @@
                     <!-- Columna 1: Imagen -->
                     <div class="relative w-1/5 h-auto overflow-hidden rounded-md shadow-md">
                         <a href="{{ route('audiovisual.show', ['audiovisual' => $critica->audiovisual]) }}">
-                            <img src="{{ $critica->audiovisual->img }}" alt="{{ $critica->audiovisual->titulo }}"
+                            <img src="{{ asset($critica->audiovisual->img) }}" alt="{{ $critica->audiovisual->titulo }}"
                                 class="object-cover w-full h-full rounded-md transition duration-300 ease-in-out transform scale-100 group-hover:scale-110" />
                         </a>
                     </div>
@@ -56,7 +56,7 @@
                         <!-- Nota del usuario al audiovisual -->
                         <div class="mt-2 flex space-x-4">
                             <p
-                                class="font-bold {{ $votacion && $votacion->voto ? 'text-xl text-white bg-blue-500 border border-blue-700 rounded-md p-3 mr-10 mb-4' : 'text-lg text-gray-500' }}">
+                                class="font-bold {{ $votacion && $votacion->voto ? 'font-bold text-2xl bg-white text-blue-500 bg-white-500 border border-gray-300 rounded-md p-3.5 mb-4' : 'text-lg text-gray-500' }}">
                                 @if ($votacion && $votacion->voto)
                                     {{ number_format($votacion->voto, 1) }}
                                 @else

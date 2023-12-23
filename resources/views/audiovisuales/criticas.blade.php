@@ -153,7 +153,7 @@
                             <div class="mt-2 flex space-x-4">
                                 <!-- Nota del usuario al audiovisual -->
                                 <p
-                                    class="font-bold {{ $votacion && $votacion->voto ? 'text-2xl text-white bg-blue-500 border border-blue-700 rounded-md p-3 mr-10 mb-4' : 'text-lg text-gray-500' }}">
+                                    class="font-bold {{ $votacion && $votacion->voto ? 'font-bold text-2xl bg-white text-blue-500 bg-white-500 border border-gray-300 rounded-md p-3.5 mb-4' : 'text-lg text-gray-500' }}">
                                     @if ($votacion && $votacion->voto)
                                         {{ number_format($votacion->voto, 1) }}
                                     @else

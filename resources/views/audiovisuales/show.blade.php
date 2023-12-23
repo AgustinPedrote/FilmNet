@@ -123,9 +123,9 @@
 
                 <!-- Nota media de las votaciones -->
                 <div class="space-y-4">
-                    <p class="font-bold text-lg text-white bg-blue-500 border border-blue-700 rounded-md p-3 mb-4"
+                    <p class="font-bold text-lg bg-white text-blue-500 bg-white-500 border border-gray-300 rounded-md p-3.5 mb-4"
                         id="nota">
-                        {{ $notaMedia ? number_format($notaMedia, 1) : 'Sin votaciones' }}
+                        {{ $notaMedia ? number_format($notaMedia, 1) : 'No vista' }}
                     </p>
                 </div>
 
