@@ -87,6 +87,17 @@
                     @endforeach
                 </div>
 
+                <!-- Premios -->
+                @if ($audiovisual->premios->count() > 0)
+                    <div class="mb-2"><strong>Premios:</strong>
+                        @foreach ($audiovisual->premios as $premio)
+                            {{ $premio->nombre }} ({{ $premio->year }})@if (!$loop->last)
+                                ,
+                            @endif
+                        @endforeach
+                    </div>
+                @endif
+
                 <!-- Recomendación de edad -->
                 <div class="mb-2">
                     @include('partials.recommendation')
@@ -157,7 +168,7 @@
     <!-- Botón para volver a la página anterior -->
     <div class="mt-6">
         <a href="#" onclick="goBack()" class="flex items-center ml-6">
-            <span class="px-3 py-1.5 bg-blue-500 border border-blue-600 text-white rounded-md hover:bg-blue-600">
+            <span class="bottom-4 right-4 p-2 bg-blue-500 text-white rounded-full cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                     class="h-6 w-6">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

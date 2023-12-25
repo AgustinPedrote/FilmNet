@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document;
             displayErrorMessage(
                 field,
-                "Por favor, ingrese un correo electrónico válido."
+                "Por favor, ingrese un correo electrónico válido (usuario@example.com)"
             );
             return false;
         }

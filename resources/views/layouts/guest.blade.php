@@ -16,7 +16,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <!-- Favicon -->
-    <link rel="icon" href="{{ asset('img/FN.png') }}" type="image/x-icon"/>
+    <link rel="icon" href="{{ asset('img/FN.png') }}" type="image/x-icon" />
 </head>
 
 <body class="font-sans antialiased">
@@ -38,6 +38,17 @@
             </div>
         </div>
     </div>
+
+    <!-- Flecha para volver arriba -->
+    <div id="scroll-to-top"
+        class="hidden fixed bottom-4 right-4 p-2 bg-blue-500 text-white rounded-full cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+            class="h-6 w-6">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </div>
+
+    <script src="{{ asset('js/up.js') }}"></script>
 </body>
 
 <!-- Inclusión del pie de página desde un componente -->
