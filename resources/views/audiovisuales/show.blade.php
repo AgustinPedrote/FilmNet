@@ -185,4 +185,6 @@
     </script>
 
     <script src="{{ asset('js/vote.js') }}"></script>
+
+    <script src="{{ asset('js/seguimiento.js') }}"></script>
 </x-app-layout>

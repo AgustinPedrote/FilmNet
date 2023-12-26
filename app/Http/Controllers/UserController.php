@@ -152,25 +152,22 @@ class UserController extends Controller
         return view('seguimientos.index', compact('seguimientosPaginados'));
     }
 
-    // Insertar audiovisual en mi lista de seguimientos
-    public function insertSeguimiento(Audiovisual $audiovisual)
+    // Botón asíncrono de lista de seguimiento
+    public function toggleSeguimiento(Request $request)
     {
-        $user =  User::find(auth()->user()->id);
-        $user->usuariosSeguimientos()->attach($audiovisual);
-
-        return redirect()->back()->with('status', 'Audiovisual añadido a la lista de seguimientos con éxito');
-    }
-
-    // Eliminar audiovisual en mi lista de seguimientos
-    public function quitarSeguimiento(Audiovisual $audiovisual)
-    {
+        $audiovisualId = $request->input('audiovisual_id');
         $user = User::find(auth()->user()->id);
-        $user->usuariosSeguimientos()->detach($audiovisual->id);
 
-        // Puedes redirigir o mostrar un mensaje de éxito
-        return redirect()->back()->with('status', 'Audiovisual eliminado de la lista de seguimientos con éxito');
+        if ($user->usuariosSeguimientos->contains('id', $audiovisualId)) {
+            $user->usuariosSeguimientos()->detach($audiovisualId);
+            return response()->json(['status' => 'removed', 'message' => 'Audiovisual eliminado de la lista de seguimientos con éxito']);
+        } else {
+            $user->usuariosSeguimientos()->attach($audiovisualId);
+            return response()->json(['status' => 'added', 'message' => 'Audiovisual añadido a la lista de seguimientos con éxito']);
+        }
     }
 
+    // Validar usuarios en el modo Admin
     public function validar(User $user)
     {
         $user->validado = !$user->validado;

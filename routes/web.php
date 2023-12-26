@@ -57,10 +57,8 @@ Route::post('/votaciones/show', [VotacionController::class, 'show'])->name('vota
 Route::get('audivisual/criticas/{audiovisual}', [AudiovisualController::class, 'criticas'])->name('ver.criticas');
 // Crear crítica del audiovisual.
 Route::post('criticas/create/{audiovisual}', [CriticaController::class, 'store'])->name('criticas.store');
-// Seguir audiovisual.
-Route::post('seguimientos/create/{audiovisual}', [UserController::class, 'insertSeguimiento'])->name('insert.seguimiento');
-// Borrar audiovisual.
-Route::delete('/seguimiento/{audiovisual}', [UserController::class, 'quitarSeguimiento'])->name('quitar.seguimiento');
+// Seguimiento asíncrono
+Route::post('/seguimiento/toggle', [UserController::class, 'toggleSeguimiento'])->name('toggle.seguimiento');
 
 
 /* MENÚ DE USUARIO */
