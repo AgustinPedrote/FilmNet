@@ -57,8 +57,8 @@
                                     <a href="#" class="inline-block">
                                         <button
                                             class="px-4 py-2 bg-orange-500 border border-orange-600 text-white rounded-md hover:bg-orange-600 focus:outline-none focus:shadow-outline-red active:bg-orange-600 mx-auto font-semibold text-base"
-                                            {{-- data-modal-target="EditarModal{{ $audiovisual }}"
-                                            data-modal-toggle="EditarModal{{ $audiovisual }}" --}}>
+                                            data-modal-target="ElencoModal{{ $audiovisual }}"
+                                            data-modal-toggle="ElencoModal{{ $audiovisual }}">
                                             Elenco
                                         </button>
                                     </a>
@@ -82,10 +82,13 @@
                                 </td>
                             </tr>
 
-                            <!-- Ventana modal para editar una premio -->
+                            <!-- Ventana modal para elenco de un audiovisual -->
+                            @include('admin.audiovisuales.elenco')
+
+                            <!-- Ventana modal para editar un audiovisual -->
                             @include('admin.audiovisuales.edit')
 
-                            <!-- Ventana modal para borrar una premio -->
+                            <!-- Ventana modal para borrar un audiovisual -->
                             @include('admin.audiovisuales.delete')
                         @endforeach
                     </tbody>

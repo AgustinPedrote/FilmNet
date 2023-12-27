@@ -54,7 +54,7 @@
 
                      <!-- Botón "Cancelar" -->
                      <button data-modal-hide="EditarModal{{ $company }}" type="button"
-                         class="cursor-pointer bg-blue-500 border border-blue-600 hover:bg-blue-600 text-white rounded-md px-4 py-2 font-semibold focus:outline-none focus:shadow-outline-blue active:bg-blue-600">
+                     class="cursor-pointer bg-red-500 border border-red-600 hover:bg-red-600 text-white rounded-md px-4 py-2 font-semibold focus:outline-none focus:shadow-outline-red active:bg-red-600">
                          Cancelar
                      </button>
                  </div>
