@@ -64,7 +64,20 @@ class AudiovisualController extends Controller
     // Panel de control del administrador
     public function adminIndex()
     {
-        $audiovisuales = Audiovisual::orderBy('titulo')->paginate(5);
+        // Cargar explícitamente las relaciones necesarias para el modal.
+        $audiovisuales = Audiovisual::with([
+            'tipo',
+            'companies',
+            'recomendacion',
+            'directores',
+            'compositores',
+            'fotografias',
+            'guionistas',
+            'repartos',
+            'generos'])
+            ->orderBy('titulo')
+            ->paginate(5);
+
         $tipos = Tipo::all();
         $recomendaciones = Recomendacion::all();
 

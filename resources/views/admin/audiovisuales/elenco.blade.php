@@ -116,57 +116,87 @@
                                      class="mt-2 space-y-2 cursor-pointer divide-y divide-gray-300 overflow-y-auto max-h-52">
                                  </ul>
                              </div>
+
+                              <!-- Nuevo campo de búsqueda para Guionista -->
+                              <div class="mb-6">
+
+                                <x-input-label for="search_guionista" :value="__('Guionista:')"
+                                    class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
+                                @if ($audiovisual->guionistas->isNotEmpty())
+                                    <label for="nombre"
+                                        class="block text-base font-medium text-gray-600">{{ implode(', ', $audiovisual->guionistas->pluck('nombre')->toArray()) }}</label>
+                                @else
+                                    <label for="nombre" class="block text-base font-medium text-gray-600">
+                                        Ningún guionista asignado
+                                    </label>
+                                @endif
+                                <div class="flex items-center">
+                                    <input {{-- id="search_audiovisual_{{ $premio->id }}" --}} {{-- value="{{ $premio->audiovisual->titulo }}" --}}
+                                        class="block w-full border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm"
+                                        type="text" name="search_guionista" placeholder="Buscar guionista..." />
+                                    <button type="button" {{-- onclick="buscarAudiovisual('{{ $premio->id }}')" --}}
+                                        class="px-4 py-2 ml-4 cursor-pointer bg-green-500 border border-green-600 hover:bg-green-600 text-white rounded-md font-semibold focus:outline-none focus:shadow-outline-green active:bg-green-600">
+                                        Buscar
+                                    </button>
+                                </div>
+
+                                <!-- Lista de resultados de la búsqueda -->
+                                <ul {{-- id="audiovisualResults_{{ $premio->id }}" --}}
+                                    class="mt-2 space-y-2 cursor-pointer divide-y divide-gray-300 overflow-y-auto max-h-52">
+                                </ul>
+                            </div>
                          </div>
 
                          <!-- Columna 2 -->
                          <div>
-                             <!-- Nuevo campo de búsqueda para Guionista -->
+                              <!-- Nuevo campo de búsqueda para Reparto -->
+                              <div class="mb-6">
+
+                                <x-input-label for="search_reparto" :value="__('Reparto:')"
+                                    class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
+                                @if ($audiovisual->repartos->isNotEmpty())
+                                    <label for="nombre"
+                                        class="block text-base font-medium text-gray-600">{{ implode(', ', $audiovisual->repartos->pluck('nombre')->toArray()) }}</label>
+                                @else
+                                    <label for="nombre" class="block text-base font-medium text-gray-600">
+                                        Ningún actor/actriz asignado
+                                    </label>
+                                @endif
+
+                                <div class="flex items-center">
+                                    <input {{-- id="search_audiovisual_{{ $premio->id }}" --}} {{-- value="{{ $premio->audiovisual->titulo }}" --}}
+                                        class="block w-full border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm"
+                                        type="text" name="search_reparto" placeholder="Buscar reparto..." />
+                                    <button type="button" {{-- onclick="buscarAudiovisual('{{ $premio->id }}')" --}}
+                                        class="px-4 py-2 ml-4 cursor-pointer bg-green-500 border border-green-600 hover:bg-green-600 text-white rounded-md font-semibold focus:outline-none focus:shadow-outline-green active:bg-green-600">
+                                        Buscar
+                                    </button>
+                                </div>
+
+                                <!-- Lista de resultados de la búsqueda -->
+                                <ul {{-- id="audiovisualResults_{{ $premio->id }}" --}}
+                                    class="mt-2 space-y-2 cursor-pointer divide-y divide-gray-300 overflow-y-auto max-h-52">
+                                </ul>
+                            </div>
+
+                             <!-- Nuevo campo de búsqueda para Compañía -->
                              <div class="mb-6">
 
-                                 <x-input-label for="search_guionista" :value="__('Guionista:')"
+                                 <x-input-label for="search_company" :value="__('Compañía:')"
                                      class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
-                                 @if ($audiovisual->guionistas->isNotEmpty())
+                                 @if ($audiovisual->companies->isNotEmpty())
                                      <label for="nombre"
-                                         class="block text-base font-medium text-gray-600">{{ implode(', ', $audiovisual->guionistas->pluck('nombre')->toArray()) }}</label>
+                                         class="block text-base font-medium text-gray-600">{{ implode(', ', $audiovisual->companies->pluck('nombre')->toArray()) }}</label>
                                  @else
                                      <label for="nombre" class="block text-base font-medium text-gray-600">
-                                         Ningún guionista asignado
+                                         Ninguna compañía asignada
                                      </label>
                                  @endif
+
                                  <div class="flex items-center">
                                      <input {{-- id="search_audiovisual_{{ $premio->id }}" --}} {{-- value="{{ $premio->audiovisual->titulo }}" --}}
                                          class="block w-full border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm"
-                                         type="text" name="search_guionista" placeholder="Buscar guionista..." />
-                                     <button type="button" {{-- onclick="buscarAudiovisual('{{ $premio->id }}')" --}}
-                                         class="px-4 py-2 ml-4 cursor-pointer bg-green-500 border border-green-600 hover:bg-green-600 text-white rounded-md font-semibold focus:outline-none focus:shadow-outline-green active:bg-green-600">
-                                         Buscar
-                                     </button>
-                                 </div>
-
-                                 <!-- Lista de resultados de la búsqueda -->
-                                 <ul {{-- id="audiovisualResults_{{ $premio->id }}" --}}
-                                     class="mt-2 space-y-2 cursor-pointer divide-y divide-gray-300 overflow-y-auto max-h-52">
-                                 </ul>
-                             </div>
-
-                             <!-- Nuevo campo de búsqueda para Reparto -->
-                             <div class="mb-6">
-
-                                 <x-input-label for="search_reparto" :value="__('Reparto:')"
-                                     class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
-                                 @if ($audiovisual->repartos->isNotEmpty())
-                                     <label for="nombre"
-                                         class="block text-base font-medium text-gray-600">{{ implode(', ', $audiovisual->repartos->pluck('nombre')->toArray()) }}</label>
-                                 @else
-                                     <label for="nombre" class="block text-base font-medium text-gray-600">
-                                         Ningún actor/actriz asignado
-                                     </label>
-                                 @endif
-
-                                 <div class="flex items-center">
-                                     <input {{-- id="search_audiovisual_{{ $premio->id }}" --}} {{-- value="{{ $premio->audiovisual->titulo }}" --}}
-                                         class="block w-full border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm"
-                                         type="text" name="search_reparto" placeholder="Buscar reparto..." />
+                                         type="text" name="search_company" placeholder="Buscar compañía..." />
                                      <button type="button" {{-- onclick="buscarAudiovisual('{{ $premio->id }}')" --}}
                                          class="px-4 py-2 ml-4 cursor-pointer bg-green-500 border border-green-600 hover:bg-green-600 text-white rounded-md font-semibold focus:outline-none focus:shadow-outline-green active:bg-green-600">
                                          Buscar
