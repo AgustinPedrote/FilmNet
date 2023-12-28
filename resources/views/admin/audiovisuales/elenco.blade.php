@@ -43,17 +43,17 @@
                                      </label>
                                  @endif
                                  <div class="flex items-center">
-                                     <input {{-- id="search_director_{{ $audiovisual->id }}" --}}
+                                     <input id="search_director"
                                          class="block w-full border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm"
                                          type="text" name="search_director" placeholder="Buscar director..." />
-                                     <button type="button" {{-- onclick="buscarDirector('{{ $audiovisual->id }}')" --}}
+                                     <button type="button" onclick="buscarDirector()"
                                          class="px-4 py-2 ml-4 cursor-pointer bg-green-500 border border-green-600 hover:bg-green-600 text-white rounded-md font-semibold focus:outline-none focus:shadow-outline-green active:bg-green-600">
                                          Buscar
                                      </button>
                                  </div>
 
                                  <!-- Lista de resultados de la búsqueda -->
-                                 <ul {{-- id="audiovisualResults_{{ $audiovisual->id }}" --}}
+                                 <ul id="directorResults"
                                      class="mt-2 space-y-2 cursor-pointer divide-y divide-gray-300 overflow-y-auto max-h-52">
                                  </ul>
                              </div>

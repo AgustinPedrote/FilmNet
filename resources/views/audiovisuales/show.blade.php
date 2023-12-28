@@ -184,7 +184,9 @@
         }
     </script>
 
+    <!-- Script para votación del audiovisual de forma asíncrona -->
     <script src="{{ asset('js/vote.js') }}"></script>
 
+    <!-- Script para seguimiento del audiovisual de forma asíncrona -->
     <script src="{{ asset('js/seguimiento.js') }}"></script>
 </x-app-layout>
