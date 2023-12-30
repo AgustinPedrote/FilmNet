@@ -8,6 +8,8 @@ use App\Models\Audiovisual;
 use App\Models\Recomendacion;
 use App\Models\Tipo;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Http\Request;
+use App\Models\Genero;
 
 
 class AudiovisualController extends Controller
@@ -74,7 +76,8 @@ class AudiovisualController extends Controller
             'fotografias',
             'guionistas',
             'repartos',
-            'generos'])
+            'generos'
+        ])
             ->orderBy('titulo')
             ->paginate(5);
 
@@ -223,5 +226,34 @@ class AudiovisualController extends Controller
             'criticas' => $criticasPaginadas,
             'notaMedia' => $notaMedia
         ]);
+    }
+
+    public function buscarGenero(Request $request)
+    {
+        // Obtener la consulta de búsqueda desde la solicitud
+        $query = $request->query('query');
+
+        // Realizar la búsqueda de géneros que coincidan con la consulta
+        $generos = Genero::where('nombre', 'like', '%' . $query . '%')->get();
+
+        // Devolver los resultados como respuesta JSON
+        return response()->json(['generos' => $generos]);
+    }
+
+    public function updateBusqueda(Request $request, Audiovisual $audiovisual)
+    {
+        // Actualiza los campos del audiovisual (sin el género por ahora)
+        $audiovisual->update($request->except('search_genero'));
+
+        // Obtén el nombre del género desde la solicitud
+        $nombreGenero = $request->input('search_genero');
+
+        // Busca el género en la base de datos o crea uno nuevo si no existe
+        $genero = Genero::firstOrCreate(['nombre' => $nombreGenero]);
+
+        // Asocia el género al audiovisual sin eliminar los géneros existentes
+        $audiovisual->generos()->attach($genero->id);
+
+        return redirect()->route('admin.audiovisuales.index')->with('success', 'El elenco ha sido modificado con éxito');
     }
 }

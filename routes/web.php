@@ -89,6 +89,8 @@ Route::middleware(['auth', 'userEsAdmin'])->group(function () {
     Route::get('/audiovisuales/{audiovisual}/editar', [AudiovisualController::class, 'edit'])->name('audiovisuales.edit');
     Route::put('/audiovisuales/{audiovisual}', [AudiovisualController::class, 'update'])->name('audiovisuales.update');
     Route::delete('/audiovisuales/{audiovisual}', [AudiovisualController::class, 'destroy'])->name('audiovisuales.borrar');
+    Route::put('/audiovisuales/{audiovisual}/updateBusqueda', [AudiovisualController::class, 'updateBusqueda'])->name('audiovisuales.updateBusqueda');
+    Route::get('/busqueda/genero', [AudiovisualController::class, 'buscarGenero'])->name('busqueda.genero');
 
     // Users:
     Route::resource('users', UserController::class);
