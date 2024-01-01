@@ -29,6 +29,16 @@
 
                          <!-- Columna 1 -->
                          <div>
+                             <!-- Titulo del audiovisual -->
+                             <div class="mb-20">
+                                 <div>
+                                     <a href="{{ route('audiovisual.show', ['audiovisual' => $audiovisual]) }}"
+                                         class="text-blue-500 hover:text-blue-600 block text-2xl font-bold dark:text-white mt-5">
+                                         {{ $audiovisual->titulo }}
+                                     </a>
+                                 </div>
+                             </div>
+
                              <!-- Nuevo campo de búsqueda para Director -->
                              <div class="mb-6">
 
@@ -116,7 +126,10 @@
                                      class="mt-2 space-y-2 cursor-pointer divide-y divide-gray-300 overflow-y-auto max-h-52">
                                  </ul>
                              </div>
+                         </div>
 
+                         <!-- Columna 2 -->
+                         <div>
                              <!-- Nuevo campo de búsqueda para Guionista -->
                              <div class="mb-6">
 
@@ -145,10 +158,6 @@
                                      class="mt-2 space-y-2 cursor-pointer divide-y divide-gray-300 overflow-y-auto max-h-52">
                                  </ul>
                              </div>
-                         </div>
-
-                         <!-- Columna 2 -->
-                         <div>
                              <!-- Nuevo campo de búsqueda para Reparto -->
                              <div class="mb-6">
 

@@ -28,7 +28,7 @@
                         <tr>
                             <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/5">Imagen</th>
                             <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/5">Titulo</th>
-                            <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/5">Elenco</th>
+                            <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/5">Elenco y Equipo</th>
                             <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-2/5">Acciones</th>
                         </tr>
                     </thead>
@@ -51,7 +51,7 @@
                                                 class="inline-block text-blue-500 hover:text-blue-600 focus:outline-none focus:shadow-outline-red active:text-blue-600 mx-auto font-semibold text-base"
                                                 data-modal-target="ElencoModal{{ $audiovisual }}"
                                                 data-modal-toggle="ElencoModal{{ $audiovisual }}">
-                                                Editar Elenco
+                                                Añadir
                                             </a>
                                         </li>
                                         <li>
@@ -59,7 +59,7 @@
                                                 class="inline-block text-red-500 hover:text-red-600 focus:outline-none focus:shadow-outline-red active:text-red-600 mx-auto font-semibold text-base"
                                                 data-modal-target="ElencoEliminar{{ $audiovisual->id }}"
                                                 data-modal-toggle="ElencoEliminar{{ $audiovisual->id }}">
-                                                Eliminar Elenco
+                                                Eliminar
                                             </a>
                                         </li>
                                     </ul>

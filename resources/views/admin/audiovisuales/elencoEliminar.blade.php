@@ -23,6 +23,16 @@
 
                      <!-- Columna 1 -->
                      <div>
+                         <!-- Titulo del audiovisual -->
+                         <div class="mb-11">
+                             <div>
+                                 <a href="{{ route('audiovisual.show', ['audiovisual' => $audiovisual]) }}"
+                                     class="text-blue-500 hover:text-blue-600 block text-2xl font-bold dark:text-white mt-2">
+                                     {{ $audiovisual->titulo }}
+                                 </a>
+                             </div>
+                         </div>
+
                          <!-- Nuevo campo de búsqueda para Director -->
                          <div class="mb-6">
 
@@ -68,10 +78,11 @@
                                      Ningún director de fotografía asignado
                                  </label>
                              @endif
-
-
                          </div>
+                     </div>
 
+                     <!-- Columna 2 -->
+                     <div>
                          <!-- Nuevo campo de búsqueda para Guionista -->
                          <div class="mb-6">
 
@@ -87,10 +98,6 @@
                              @endif
 
                          </div>
-                     </div>
-
-                     <!-- Columna 2 -->
-                     <div>
                          <!-- Nuevo campo de búsqueda para Reparto -->
                          <div class="mb-6">
 
@@ -104,8 +111,6 @@
                                      Ningún actor/actriz asignado
                                  </label>
                              @endif
-
-
                          </div>
 
                          <!-- Nuevo campo de búsqueda para Compañía -->
@@ -121,8 +126,6 @@
                                      Ninguna compañía asignada
                                  </label>
                              @endif
-
-
                          </div>
 
                          <!-- Agrega el botón para eliminar géneros en el modal -->
@@ -131,9 +134,9 @@
                                  class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
 
                              @if ($audiovisual->generos->isNotEmpty())
-                                 <ul>
+                                 <ul class="flex flex-wrap">
                                      @foreach ($audiovisual->generos as $genero)
-                                         <li>
+                                         <li class="mr-2 mb-2">
                                              <form
                                                  action="{{ route('audiovisuales.eliminarGenero', ['audiovisual' => $audiovisual->id, 'genero' => $genero->id]) }}"
                                                  method="post">

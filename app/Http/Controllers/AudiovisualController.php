@@ -257,7 +257,6 @@ class AudiovisualController extends Controller
         return redirect()->route('admin.audiovisuales.index')->with('success', 'El elenco ha sido modificado con éxito');
     }
 
-
     // Agrega el método para eliminar géneros
     public function eliminarGenero(Audiovisual $audiovisual, Genero $genero)
     {
