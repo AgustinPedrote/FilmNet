@@ -28,8 +28,7 @@
                         <tr>
                             <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/5">Imagen</th>
                             <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/5">Titulo</th>
-                            <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/5">Características
-                            </th>
+                            <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/5">Elenco</th>
                             <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-2/5">Acciones</th>
                         </tr>
                     </thead>
@@ -45,24 +44,27 @@
                                     </div>
                                 </td>
                                 <td class="py-4 px-6 text-center text-base">{{ $audiovisual->titulo }}</td>
-                                <td class="py-4 px-6 text-base">
+                                <td class="py-4 px-6 text-center text-base">
                                     <ul class="list-none p-0 m-0">
-                                        <li><strong>Tipo:</strong> {{ $audiovisual->tipo->nombre }} </li>
-                                        <li><strong>Año:</strong> {{ $audiovisual->year }} </li>
-                                        <li><strong>Duración:</strong> {{ $audiovisual->duracion }} min. </li>
-                                        <li><strong>País:</strong> {{ $audiovisual->pais }} </li>
+                                        <li>
+                                            <a href="#"
+                                                class="inline-block text-blue-500 hover:text-blue-600 focus:outline-none focus:shadow-outline-red active:text-blue-600 mx-auto font-semibold text-base"
+                                                data-modal-target="ElencoModal{{ $audiovisual }}"
+                                                data-modal-toggle="ElencoModal{{ $audiovisual }}">
+                                                Editar Elenco
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#"
+                                                class="inline-block text-red-500 hover:text-red-600 focus:outline-none focus:shadow-outline-red active:text-red-600 mx-auto font-semibold text-base"
+                                                data-modal-target="ElencoEliminar{{ $audiovisual->id }}"
+                                                data-modal-toggle="ElencoEliminar{{ $audiovisual->id }}">
+                                                Eliminar Elenco
+                                            </a>
+                                        </li>
                                     </ul>
                                 </td>
                                 <td class="px-6 text-center space-x-2">
-                                    <a href="#" class="inline-block">
-                                        <button
-                                            class="px-4 py-2 bg-orange-500 border border-orange-600 text-white rounded-md hover:bg-orange-600 focus:outline-none focus:shadow-outline-red active:bg-orange-600 mx-auto font-semibold text-base"
-                                            data-modal-target="ElencoModal{{ $audiovisual }}"
-                                            data-modal-toggle="ElencoModal{{ $audiovisual }}">
-                                            Elenco
-                                        </button>
-                                    </a>
-
                                     <a href="#" class="inline-block">
                                         <button
                                             class="px-4 py-2 bg-blue-500 border border-blue-600 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-red active:bg-blue-600 mx-auto font-semibold text-base"
@@ -85,6 +87,11 @@
                             <!-- Ventana modal para elenco de un audiovisual -->
                             @include('admin.audiovisuales.elenco')
 
+                            <!-- Ventana modal para elenco de un audiovisual -->
+                            @include('admin.audiovisuales.elencoEliminar', [
+                                'audiovisualId' => $audiovisual->id,
+                            ])
+
                             <!-- Ventana modal para editar un audiovisual -->
                             @include('admin.audiovisuales.edit')
 
@@ -99,8 +106,7 @@
                 <a href="#" class="inline-block">
                     <button
                         class="px-4 py-2 bg-green-500 border border-green-600 text-white rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-red active:bg-green-600 mx-auto text-base font-semibold"
-                        data-modal-target="InsertarModal"
-                        data-modal-toggle="InsertarModal">
+                        data-modal-target="InsertarModal" data-modal-toggle="InsertarModal">
                         Insertar
                     </button>
                 </a>
