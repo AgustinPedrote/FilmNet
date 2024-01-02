@@ -96,8 +96,8 @@
                                      Ningún guionista asignado
                                  </label>
                              @endif
-
                          </div>
+
                          <!-- Nuevo campo de búsqueda para Reparto -->
                          <div class="mb-6">
 
@@ -113,14 +113,33 @@
                              @endif
                          </div>
 
-                         <!-- Nuevo campo de búsqueda para Compañía -->
+                         <!-- Botón para eliminar compañías en el modal -->
                          <div class="mb-6">
-
-                             <x-input-label for="search_company" :value="__('Compañía:')"
+                             <x-input-label for="eliminar_compania" :value="__('Eliminar Compañía:')"
                                  class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
+
                              @if ($audiovisual->companies->isNotEmpty())
-                                 <label for="nombre"
-                                     class="block text-base font-medium text-gray-600">{{ implode(', ', $audiovisual->companies->pluck('nombre')->toArray()) }}</label>
+                                 <ul class="flex flex-wrap">
+                                     @foreach ($audiovisual->companies as $company)
+                                         <li class="mr-2 mb-2">
+                                             <form
+                                                 action="{{ route('audiovisuales.eliminarCompania', ['audiovisual' => $audiovisual->id, 'company' => $company->id]) }}"
+                                                 method="post">
+                                                 @csrf
+                                                 @method('DELETE')
+                                                 <button type="submit"
+                                                     class="text-red-500 hover:text-red-600 focus:outline-none inline-flex items-center">
+                                                     <span>{{ $company->nombre }}</span>
+                                                     <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor"
+                                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                         <path stroke-linecap="round" stroke-linejoin="round"
+                                                             stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                     </svg>
+                                                 </button>
+                                             </form>
+                                         </li>
+                                     @endforeach
+                                 </ul>
                              @else
                                  <label for="nombre" class="block text-base font-medium text-gray-600">
                                      Ninguna compañía asignada
@@ -128,7 +147,7 @@
                              @endif
                          </div>
 
-                         <!-- Agrega el botón para eliminar géneros en el modal -->
+                         <!-- Botón para eliminar géneros en el modal -->
                          <div class="mb-6">
                              <x-input-label for="eliminar_genero" :value="__('Eliminar Género:')"
                                  class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
@@ -143,8 +162,13 @@
                                                  @csrf
                                                  @method('DELETE')
                                                  <button type="submit"
-                                                     class="text-red-500 hover:text-red-600 focus:outline-none">
-                                                     {{ $genero->nombre }}
+                                                     class="text-red-500 hover:text-red-600 focus:outline-none inline-flex items-center">
+                                                     <span>{{ $genero->nombre }}</span>
+                                                     <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor"
+                                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                         <path stroke-linecap="round" stroke-linejoin="round"
+                                                             stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                     </svg>
                                                  </button>
                                              </form>
                                          </li>
@@ -156,6 +180,7 @@
                                  </label>
                              @endif
                          </div>
+
                      </div>
                  </div>
              </div>

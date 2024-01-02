@@ -92,6 +92,8 @@ Route::middleware(['auth', 'userEsAdmin'])->group(function () {
     Route::put('/audiovisuales/{audiovisual}/updateBusqueda', [AudiovisualController::class, 'updateBusqueda'])->name('audiovisuales.updateBusqueda');
     Route::get('/busqueda/genero', [AudiovisualController::class, 'buscarGenero'])->name('busqueda.genero');
     Route::delete('/audiovisuales/{audiovisual}/eliminar-genero/{genero}', [AudiovisualController::class, 'eliminarGenero'])->name('audiovisuales.eliminarGenero');
+    Route::delete('/audiovisuales/{audiovisual}/eliminar-compania/{company}', [AudiovisualController::class, 'eliminarCompania'])->name('audiovisuales.eliminarCompania');
+
 
 
 

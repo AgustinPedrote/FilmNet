@@ -10,6 +10,7 @@ use App\Models\Tipo;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 use App\Models\Genero;
+use App\Models\Company;
 
 
 class AudiovisualController extends Controller
@@ -257,12 +258,19 @@ class AudiovisualController extends Controller
         return redirect()->route('admin.audiovisuales.index')->with('success', 'El elenco ha sido modificado con éxito');
     }
 
-    // Agrega el método para eliminar géneros
     public function eliminarGenero(Audiovisual $audiovisual, Genero $genero)
     {
         $audiovisual->generos()->detach($genero->id);
 
         return redirect()->route('admin.audiovisuales.index', $audiovisual)
             ->with('success', 'Género eliminado correctamente.');
+    }
+
+    public function eliminarCompania(Audiovisual $audiovisual, Company $company)
+    {
+        $audiovisual->companies()->detach($company->id);
+
+        return redirect()->route('admin.audiovisuales.index', $audiovisual)
+            ->with('success', 'Compañía eliminada correctamente.');
     }
 }
