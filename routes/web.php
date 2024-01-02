@@ -93,9 +93,11 @@ Route::middleware(['auth', 'userEsAdmin'])->group(function () {
     Route::get('/busqueda/genero', [AudiovisualController::class, 'buscarGenero'])->name('busqueda.genero');
     Route::delete('/audiovisuales/{audiovisual}/eliminar-genero/{genero}', [AudiovisualController::class, 'eliminarGenero'])->name('audiovisuales.eliminarGenero');
     Route::delete('/audiovisuales/{audiovisual}/eliminar-compania/{company}', [AudiovisualController::class, 'eliminarCompania'])->name('audiovisuales.eliminarCompania');
-
-
-
+    Route::delete('/audiovisuales/{audiovisual}/eliminar-director/{director}', [AudiovisualController::class, 'eliminarDirector'])->name('audiovisuales.eliminarDirector');
+    Route::delete('/audiovisuales/{audiovisual}/eliminar-compositor/{compositor}', [AudiovisualController::class, 'eliminarCompositor'])->name('audiovisuales.eliminarCompositor');
+    Route::delete('/audiovisuales/{audiovisual}/eliminar-fotografia/{fotografia}', [AudiovisualController::class, 'eliminarFotografia'])->name('audiovisuales.eliminarFotografia');
+    Route::delete('/audiovisuales/{audiovisual}/eliminar-guionista/{guionista}', [AudiovisualController::class, 'eliminarGuionista'])->name('audiovisuales.eliminarGuionista');
+    Route::delete('/audiovisuales/{audiovisual}/eliminar-reparto/{reparto}', [AudiovisualController::class, 'eliminarReparto'])->name('audiovisuales.eliminarReparto');
 
     // Users:
     Route::resource('users', UserController::class);

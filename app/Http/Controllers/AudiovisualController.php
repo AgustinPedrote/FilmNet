@@ -11,6 +11,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 use App\Models\Genero;
 use App\Models\Company;
+use App\Models\Persona;
 
 
 class AudiovisualController extends Controller
@@ -229,6 +230,9 @@ class AudiovisualController extends Controller
         ]);
     }
 
+
+    // Funcionalidades del Panel de Administrador
+
     public function buscarGenero(Request $request)
     {
         // Obtener la consulta de búsqueda desde la solicitud
@@ -272,5 +276,45 @@ class AudiovisualController extends Controller
 
         return redirect()->route('admin.audiovisuales.index', $audiovisual)
             ->with('success', 'Compañía eliminada correctamente.');
+    }
+
+    public function eliminarDirector(Audiovisual $audiovisual, Persona $director)
+    {
+        $audiovisual->directores()->detach($director->id);
+
+        return redirect()->route('admin.audiovisuales.index', $audiovisual)
+            ->with('success', 'Director eliminado correctamente.');
+    }
+
+    public function eliminarCompositor(Audiovisual $audiovisual, Persona $compositor)
+    {
+        $audiovisual->compositores()->detach($compositor->id);
+
+        return redirect()->route('admin.audiovisuales.index', $audiovisual)
+            ->with('success', 'Compositor eliminado correctamente.');
+    }
+
+    public function eliminarFotografia(Audiovisual $audiovisual, Persona $fotografia)
+    {
+        $audiovisual->fotografias()->detach($fotografia->id);
+
+        return redirect()->route('admin.audiovisuales.index', $audiovisual)
+            ->with('success', 'Director de fotografía eliminado correctamente.');
+    }
+
+    public function eliminarGuionista(Audiovisual $audiovisual, Persona $guionista)
+    {
+        $audiovisual->guionistas()->detach($guionista->id);
+
+        return redirect()->route('admin.audiovisuales.index', $audiovisual)
+            ->with('success', 'Guionista eliminado correctamente.');
+    }
+
+    public function eliminarReparto(Audiovisual $audiovisual, Persona $reparto)
+    {
+        $audiovisual->repartos()->detach($reparto->id);
+
+        return redirect()->route('admin.audiovisuales.index', $audiovisual)
+            ->with('success', 'Actor/actriz eliminado correctamente.');
     }
 }

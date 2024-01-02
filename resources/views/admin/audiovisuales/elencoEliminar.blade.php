@@ -33,64 +33,136 @@
                              </div>
                          </div>
 
-                         <!-- Nuevo campo de búsqueda para Director -->
+                         <!-- Botón para eliminar directores -->
                          <div class="mb-6">
-
-                             <x-input-label for="search_director" :value="__('Director:')"
+                             <x-input-label for="eliminar_director" :value="__('Eliminar Director:')"
                                  class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
+
                              @if ($audiovisual->directores->isNotEmpty())
-                                 <label for="nombre"
-                                     class="block text-base font-medium text-gray-600">{{ implode(', ', $audiovisual->directores->pluck('nombre')->toArray()) }}</label>
+                                 <ul class="flex flex-wrap">
+                                     @foreach ($audiovisual->directores as $director)
+                                         <li class="mr-2 mb-2">
+                                             <form
+                                                 action="{{ route('audiovisuales.eliminarDirector', ['audiovisual' => $audiovisual->id, 'director' => $director->id]) }}"
+                                                 method="post">
+                                                 @csrf
+                                                 @method('DELETE')
+                                                 <button type="submit"
+                                                     class="text-red-500 hover:text-red-600 focus:outline-none inline-flex items-center">
+                                                     <span>{{ $director->nombre }}</span>
+                                                     <svg class="ml-0.5 w-4 h-4" fill="none" stroke="currentColor"
+                                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                         <path stroke-linecap="round" stroke-linejoin="round"
+                                                             stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                     </svg>
+                                                 </button>
+                                             </form>
+                                         </li>
+                                     @endforeach
+                                 </ul>
                              @else
                                  <label for="nombre" class="block text-base font-medium text-gray-600">
                                      Ningún director asignado
                                  </label>
                              @endif
-
                          </div>
 
-                         <!-- Nuevo campo de búsqueda para Compositor -->
+                         <!-- Botón para eliminar compositores -->
                          <div class="mb-6">
-
                              <x-input-label for="search_compositor" :value="__('Compositor:')"
                                  class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
                              @if ($audiovisual->compositores->isNotEmpty())
-                                 <label for="nombre"
-                                     class="block text-base font-medium text-gray-600">{{ implode(', ', $audiovisual->compositores->pluck('nombre')->toArray()) }}</label>
+                                 <ul class="flex flex-wrap">
+                                     @foreach ($audiovisual->compositores as $compositor)
+                                         <li class="mr-2 mb-2">
+                                             <form
+                                                 action="{{ route('audiovisuales.eliminarCompositor', ['audiovisual' => $audiovisual->id, 'compositor' => $compositor->id]) }}"
+                                                 method="post">
+                                                 @csrf
+                                                 @method('DELETE')
+                                                 <button type="submit"
+                                                     class="text-red-500 hover:text-red-600 focus:outline-none inline-flex items-center">
+                                                     <span>{{ $compositor->nombre }}</span>
+                                                     <svg class="ml-0.5 w-4 h-4" fill="none" stroke="currentColor"
+                                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                         <path stroke-linecap="round" stroke-linejoin="round"
+                                                             stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                     </svg>
+                                                 </button>
+                                             </form>
+                                         </li>
+                                     @endforeach
+                                 </ul>
                              @else
                                  <label for="nombre" class="block text-base font-medium text-gray-600">
                                      Ningún compositor asignado
                                  </label>
                              @endif
-
                          </div>
 
-                         <!-- Nuevo campo de búsqueda para Fotografía -->
+                         <!-- Botón para eliminar directores de fotografía -->
                          <div class="mb-6">
                              <x-input-label for="search_fotografia" :value="__('Fotografía:')"
                                  class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
-
                              @if ($audiovisual->fotografias->isNotEmpty())
-                                 <label for="nombre"
-                                     class="block text-base font-medium text-gray-600">{{ implode(', ', $audiovisual->fotografias->pluck('nombre')->toArray()) }}</label>
+                                 <ul class="flex flex-wrap">
+                                     @foreach ($audiovisual->fotografias as $fotografia)
+                                         <li class="mr-2 mb-2">
+                                             <form
+                                                 action="{{ route('audiovisuales.eliminarFotografia', ['audiovisual' => $audiovisual->id, 'fotografia' => $fotografia->id]) }}"
+                                                 method="post">
+                                                 @csrf
+                                                 @method('DELETE')
+                                                 <button type="submit"
+                                                     class="text-red-500 hover:text-red-600 focus:outline-none inline-flex items-center">
+                                                     <span>{{ $fotografia->nombre }}</span>
+                                                     <svg class="ml-0.5 w-4 h-4" fill="none" stroke="currentColor"
+                                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                         <path stroke-linecap="round" stroke-linejoin="round"
+                                                             stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                     </svg>
+                                                 </button>
+                                             </form>
+                                         </li>
+                                     @endforeach
+                                 </ul>
                              @else
                                  <label for="nombre" class="block text-base font-medium text-gray-600">
                                      Ningún director de fotografía asignado
                                  </label>
                              @endif
                          </div>
+
                      </div>
 
                      <!-- Columna 2 -->
                      <div>
-                         <!-- Nuevo campo de búsqueda para Guionista -->
+                         <!-- Botón para eliminar guionistas -->
                          <div class="mb-6">
-
                              <x-input-label for="search_guionista" :value="__('Guionista:')"
                                  class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
                              @if ($audiovisual->guionistas->isNotEmpty())
-                                 <label for="nombre"
-                                     class="block text-base font-medium text-gray-600">{{ implode(', ', $audiovisual->guionistas->pluck('nombre')->toArray()) }}</label>
+                                 <ul class="flex flex-wrap">
+                                     @foreach ($audiovisual->guionistas as $guionista)
+                                         <li class="mr-2 mb-2">
+                                             <form
+                                                 action="{{ route('audiovisuales.eliminarGuionista', ['audiovisual' => $audiovisual->id, 'guionista' => $guionista->id]) }}"
+                                                 method="post">
+                                                 @csrf
+                                                 @method('DELETE')
+                                                 <button type="submit"
+                                                     class="text-red-500 hover:text-red-600 focus:outline-none inline-flex items-center">
+                                                     <span>{{ $guionista->nombre }}</span>
+                                                     <svg class="ml-0.5 w-4 h-4" fill="none" stroke="currentColor"
+                                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                         <path stroke-linecap="round" stroke-linejoin="round"
+                                                             stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                     </svg>
+                                                 </button>
+                                             </form>
+                                         </li>
+                                     @endforeach
+                                 </ul>
                              @else
                                  <label for="nombre" class="block text-base font-medium text-gray-600">
                                      Ningún guionista asignado
@@ -98,14 +170,32 @@
                              @endif
                          </div>
 
-                         <!-- Nuevo campo de búsqueda para Reparto -->
+                         <!-- Botón para eliminar actores y actrices -->
                          <div class="mb-6">
-
                              <x-input-label for="search_reparto" :value="__('Reparto:')"
                                  class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
                              @if ($audiovisual->repartos->isNotEmpty())
-                                 <label for="nombre"
-                                     class="block text-base font-medium text-gray-600">{{ implode(', ', $audiovisual->repartos->pluck('nombre')->toArray()) }}</label>
+                                 <ul class="flex flex-wrap">
+                                     @foreach ($audiovisual->repartos as $reparto)
+                                         <li class="mr-2 mb-2">
+                                             <form
+                                                 action="{{ route('audiovisuales.eliminarReparto', ['audiovisual' => $audiovisual->id, 'reparto' => $reparto->id]) }}"
+                                                 method="post">
+                                                 @csrf
+                                                 @method('DELETE')
+                                                 <button type="submit"
+                                                     class="text-red-500 hover:text-red-600 focus:outline-none inline-flex items-center">
+                                                     <span>{{ $reparto->nombre }}</span>
+                                                     <svg class="ml-0.5 w-4 h-4" fill="none" stroke="currentColor"
+                                                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                         <path stroke-linecap="round" stroke-linejoin="round"
+                                                             stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                                     </svg>
+                                                 </button>
+                                             </form>
+                                         </li>
+                                     @endforeach
+                                 </ul>
                              @else
                                  <label for="nombre" class="block text-base font-medium text-gray-600">
                                      Ningún actor/actriz asignado
@@ -113,7 +203,7 @@
                              @endif
                          </div>
 
-                         <!-- Botón para eliminar compañías en el modal -->
+                         <!-- Botón para eliminar compañías -->
                          <div class="mb-6">
                              <x-input-label for="eliminar_compania" :value="__('Eliminar Compañía:')"
                                  class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
@@ -130,7 +220,7 @@
                                                  <button type="submit"
                                                      class="text-red-500 hover:text-red-600 focus:outline-none inline-flex items-center">
                                                      <span>{{ $company->nombre }}</span>
-                                                     <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor"
+                                                     <svg class="ml-0.5 w-4 h-4" fill="none" stroke="currentColor"
                                                          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                          <path stroke-linecap="round" stroke-linejoin="round"
                                                              stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -147,7 +237,7 @@
                              @endif
                          </div>
 
-                         <!-- Botón para eliminar géneros en el modal -->
+                         <!-- Botón para eliminar géneros -->
                          <div class="mb-6">
                              <x-input-label for="eliminar_genero" :value="__('Eliminar Género:')"
                                  class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
@@ -164,7 +254,7 @@
                                                  <button type="submit"
                                                      class="text-red-500 hover:text-red-600 focus:outline-none inline-flex items-center">
                                                      <span>{{ $genero->nombre }}</span>
-                                                     <svg class="ml-1 w-4 h-4" fill="none" stroke="currentColor"
+                                                     <svg class="ml-0.5 w-4 h-4" fill="none" stroke="currentColor"
                                                          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                          <path stroke-linecap="round" stroke-linejoin="round"
                                                              stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -180,7 +270,6 @@
                                  </label>
                              @endif
                          </div>
-
                      </div>
                  </div>
              </div>
