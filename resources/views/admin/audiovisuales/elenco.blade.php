@@ -231,21 +231,24 @@
                                      </label>
                                  @endif
                                  <div class="flex items-center">
-                                     <input id="search_genero"
+                                     <input id="search_genero{{ $audiovisual->id }}"
                                          class="block w-full border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm"
                                          type="text" name="search_genero" placeholder="Buscar género..." />
-                                     <button type="button" onclick="buscarGenero()"
+                                     <button type="button" onclick="buscarGenero('{{ $audiovisual->id }}')"
                                          class="px-4 py-2 ml-4 cursor-pointer bg-green-500 border border-green-600 hover:bg-green-600 text-white rounded-md font-semibold focus:outline-none focus:shadow-outline-green active:bg-green-600">
                                          Buscar
                                      </button>
                                  </div>
 
+                                 <!-- Agrega un campo de entrada oculto para almacenar el género -->
+                                 <input type="hidden" id="genero{{ $audiovisual->id }}"
+                                     name="genero{{ $audiovisual->id }}" />
+
                                  <!-- Lista de resultados de la búsqueda -->
-                                 <ul id="generoResults"
+                                 <ul id="generoResults{{ $audiovisual->id }}"
                                      class="mt-2 space-y-2 cursor-pointer divide-y divide-gray-300 overflow-y-auto max-h-52">
                                  </ul>
                              </div>
-
                          </div>
                      </div>
                  </div>
@@ -255,9 +258,6 @@
                  <div
                      class="flex items-center justify-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
                      <!-- Botón "Crear" -->
-
-                     <!-- Agrega un campo de entrada oculto para almacenar el género -->
-                     <input type="hidden" id="genero" name="genero" />
 
                      <button type="submit"
                          class="cursor-pointer bg-blue-500 border border-blue-600 hover:bg-blue-600 text-white rounded-md  px-4 py-2 font-semibold focus:outline-none focus:shadow-outline-blue active:bg-blue-600">

@@ -235,21 +235,18 @@ class AudiovisualController extends Controller
 
     public function buscarGenero(Request $request)
     {
-        // Obtener la consulta de búsqueda desde la solicitud
-        $query = $request->query('query');
+        $query = $request->input('query');
 
-        // Realizar la búsqueda de géneros que coincidan con la consulta
-        $generos = Genero::where('nombre', 'like', '%' . $query . '%')->get();
+        // Realiza la búsqueda en la base de datos y obtén los resultados
+        $resultados = Genero::where('nombre', 'like', '%' . $query . '%')->get();
 
-        // Devolver los resultados como respuesta JSON
-        return response()->json(['generos' => $generos]);
+        // Devuelve los resultados como parte de un arreglo asociativo
+        return response()->json(['generos' => $resultados]);
     }
+
 
     public function updateBusqueda(Request $request, Audiovisual $audiovisual)
     {
-        // Actualiza los campos del audiovisual (sin el género por ahora)
-        $audiovisual->update($request->except('search_genero'));
-
         // Obtén el nombre del género desde la solicitud
         $nombreGenero = $request->input('search_genero');
 
