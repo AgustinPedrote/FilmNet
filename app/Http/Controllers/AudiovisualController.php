@@ -244,20 +244,43 @@ class AudiovisualController extends Controller
         return response()->json(['generos' => $resultados]);
     }
 
+    public function buscarCompany(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Realiza la búsqueda en la base de datos y obtén los resultados
+        $resultados = Company::where('nombre', 'like', '%' . $query . '%')->get();
+
+        // Devuelve los resultados como parte de un arreglo asociativo
+        return response()->json(['companies' => $resultados]);
+    }
 
     public function updateBusqueda(Request $request, Audiovisual $audiovisual)
     {
-        // Obtén el nombre del género desde la solicitud
+        // Obtén el nombre del género y la compañía desde la solicitud
         $nombreGenero = $request->input('search_genero');
+        $nombreCompany = $request->input('search_company');
 
-        // Busca el género en la base de datos o crea uno nuevo si no existe
-        $genero = Genero::firstOrCreate(['nombre' => $nombreGenero]);
+        // Verificar si se proporcionó información para el género y la compañía
+        if ($nombreGenero) {
+            // Busca en la base de datos o crea uno nuevo si no existe
+            $genero = Genero::firstOrCreate(['nombre' => $nombreGenero]);
 
-        // Asocia el género al audiovisual sin eliminar los géneros existentes
-        $audiovisual->generos()->attach($genero->id);
+            // Asociar al audiovisual sin eliminar los existentes
+            $audiovisual->generos()->syncWithoutDetaching([$genero->id]);
+        }
+
+        if ($nombreCompany) {
+            // Busca en la base de datos o crea uno nuevo si no existe
+            $company = Company::firstOrCreate(['nombre' => $nombreCompany]);
+
+            // Asociar al audiovisual sin eliminar los existentes
+            $audiovisual->companies()->syncWithoutDetaching([$company->id]);
+        }
 
         return redirect()->route('admin.audiovisuales.index')->with('success', 'El elenco ha sido modificado con éxito');
     }
+
 
     public function eliminarGenero(Audiovisual $audiovisual, Genero $genero)
     {

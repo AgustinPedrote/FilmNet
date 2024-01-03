@@ -203,17 +203,21 @@
                                  @endif
 
                                  <div class="flex items-center">
-                                     <input {{-- id="search_audiovisual_{{ $premio->id }}" --}} {{-- value="{{ $premio->audiovisual->titulo }}" --}}
+                                     <input id="search_company{{ $audiovisual->id }}"
                                          class="block w-full border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm"
                                          type="text" name="search_company" placeholder="Buscar compañía..." />
-                                     <button type="button" {{-- onclick="buscarAudiovisual('{{ $premio->id }}')" --}}
+                                     <button type="button" onclick="buscarCompany('{{ $audiovisual->id }}')"
                                          class="px-4 py-2 ml-4 cursor-pointer bg-green-500 border border-green-600 hover:bg-green-600 text-white rounded-md font-semibold focus:outline-none focus:shadow-outline-green active:bg-green-600">
                                          Buscar
                                      </button>
                                  </div>
 
+                                 <!-- Agrega un campo de entrada oculto para almacenar la compañía -->
+                                 <input type="hidden" id="company{{ $audiovisual->id }}"
+                                     name="company{{ $audiovisual->id }}" />
+
                                  <!-- Lista de resultados de la búsqueda -->
-                                 <ul {{-- id="audiovisualResults_{{ $premio->id }}" --}}
+                                 <ul id="companyResults{{ $audiovisual->id }}"
                                      class="mt-2 space-y-2 cursor-pointer divide-y divide-gray-300 overflow-y-auto max-h-52">
                                  </ul>
                              </div>
@@ -278,5 +282,6 @@
      </div>
  </div>
 
- <!-- Script para el buscador de géneros de forma asíncrona -->
+ <!-- Scripts para los buscadores de forma asíncrona -->
  <script src="{{ asset('js/buscadorGeneros.js') }}"></script>
+ <script src="{{ asset('js/buscadorCompanies.js') }}"></script>
