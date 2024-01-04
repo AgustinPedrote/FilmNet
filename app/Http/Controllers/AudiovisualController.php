@@ -255,11 +255,71 @@ class AudiovisualController extends Controller
         return response()->json(['companies' => $resultados]);
     }
 
+    public function buscarReparto(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Realiza la búsqueda en la base de datos y obtén los resultados
+        $resultados = Persona::where('nombre', 'like', '%' . $query . '%')->get();
+
+        // Devuelve los resultados como parte de un arreglo asociativo
+        return response()->json(['repartos' => $resultados]);
+    }
+
+    public function buscarGuionista(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Realiza la búsqueda en la base de datos y obtén los resultados
+        $resultados = Persona::where('nombre', 'like', '%' . $query . '%')->get();
+
+        // Devuelve los resultados como parte de un arreglo asociativo
+        return response()->json(['guionistas' => $resultados]);
+    }
+
+    public function buscarFotografia(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Realiza la búsqueda en la base de datos y obtén los resultados
+        $resultados = Persona::where('nombre', 'like', '%' . $query . '%')->get();
+
+        // Devuelve los resultados como parte de un arreglo asociativo
+        return response()->json(['fotografias' => $resultados]);
+    }
+
+    public function buscarCompositor(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Realiza la búsqueda en la base de datos y obtén los resultados
+        $resultados = Persona::where('nombre', 'like', '%' . $query . '%')->get();
+
+        // Devuelve los resultados como parte de un arreglo asociativo
+        return response()->json(['compositores' => $resultados]);
+    }
+
+    public function buscarDirector(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Realiza la búsqueda en la base de datos y obtén los resultados
+        $resultados = Persona::where('nombre', 'like', '%' . $query . '%')->get();
+
+        // Devuelve los resultados como parte de un arreglo asociativo
+        return response()->json(['directores' => $resultados]);
+    }
+
     public function updateBusqueda(Request $request, Audiovisual $audiovisual)
     {
         // Obtén el nombre del género y la compañía desde la solicitud
         $nombreGenero = $request->input('search_genero');
         $nombreCompany = $request->input('search_company');
+        $nombreReparto = $request->input('search_reparto');
+        $nombreGuionista = $request->input('search_guionista');
+        $nombreFotografia = $request->input('search_fotografia');
+        $nombreCompositor = $request->input('search_compositor');
+        $nombreDirector = $request->input('search_director');
 
         // Verificar si se proporcionó información para el género y la compañía
         if ($nombreGenero) {
@@ -271,11 +331,39 @@ class AudiovisualController extends Controller
         }
 
         if ($nombreCompany) {
-            // Busca en la base de datos o crea uno nuevo si no existe
             $company = Company::firstOrCreate(['nombre' => $nombreCompany]);
 
-            // Asociar al audiovisual sin eliminar los existentes
             $audiovisual->companies()->syncWithoutDetaching([$company->id]);
+        }
+
+        if ($nombreReparto) {
+            $reparto = Persona::firstOrCreate(['nombre' => $nombreReparto]);
+
+            $audiovisual->repartos()->syncWithoutDetaching([$reparto->id]);
+        }
+
+        if ($nombreGuionista) {
+            $guionista = Persona::firstOrCreate(['nombre' => $nombreGuionista]);
+
+            $audiovisual->guionistas()->syncWithoutDetaching([$guionista->id]);
+        }
+
+        if ($nombreFotografia) {
+            $fotografia = Persona::firstOrCreate(['nombre' => $nombreFotografia]);
+
+            $audiovisual->fotografias()->syncWithoutDetaching([$fotografia->id]);
+        }
+
+        if ($nombreCompositor) {
+            $compositor = Persona::firstOrCreate(['nombre' => $nombreCompositor]);
+
+            $audiovisual->compositores()->syncWithoutDetaching([$compositor->id]);
+        }
+
+        if ($nombreDirector) {
+            $director = Persona::firstOrCreate(['nombre' => $nombreDirector]);
+
+            $audiovisual->directores()->syncWithoutDetaching([$director->id]);
         }
 
         return redirect()->route('admin.audiovisuales.index')->with('success', 'El elenco ha sido modificado con éxito');

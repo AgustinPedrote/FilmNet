@@ -44,6 +44,7 @@
 
                                  <x-input-label for="search_director" :value="__('Director:')"
                                      class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
+
                                  @if ($audiovisual->directores->isNotEmpty())
                                      <label for="nombre"
                                          class="block text-base font-medium text-gray-600">{{ implode(', ', $audiovisual->directores->pluck('nombre')->toArray()) }}</label>
@@ -52,27 +53,32 @@
                                          Ningún director asignado
                                      </label>
                                  @endif
+
                                  <div class="flex items-center">
-                                     <input id="search_director"
+                                     <input id="search_director{{ $audiovisual->id }}"
                                          class="block w-full border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm"
                                          type="text" name="search_director" placeholder="Buscar director..." />
-                                     <button type="button" onclick="buscarDirector()"
+                                     <button type="button" onclick="buscarDirector('{{ $audiovisual->id }}')"
                                          class="px-4 py-2 ml-4 cursor-pointer bg-green-500 border border-green-600 hover:bg-green-600 text-white rounded-md font-semibold focus:outline-none focus:shadow-outline-green active:bg-green-600">
                                          Buscar
                                      </button>
                                  </div>
 
+                                 <!-- Agrega un campo de entrada oculto -->
+                                 <input type="hidden" id="director{{ $audiovisual->id }}"
+                                     name="director{{ $audiovisual->id }}" />
+
                                  <!-- Lista de resultados de la búsqueda -->
-                                 <ul id="directorResults"
+                                 <ul id="directorResults{{ $audiovisual->id }}"
                                      class="mt-2 space-y-2 cursor-pointer divide-y divide-gray-300 overflow-y-auto max-h-52">
                                  </ul>
                              </div>
 
                              <!-- Nuevo campo de búsqueda para Compositor -->
                              <div class="mb-6">
-
                                  <x-input-label for="search_compositor" :value="__('Compositor:')"
                                      class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
+
                                  @if ($audiovisual->compositores->isNotEmpty())
                                      <label for="nombre"
                                          class="block text-base font-medium text-gray-600">{{ implode(', ', $audiovisual->compositores->pluck('nombre')->toArray()) }}</label>
@@ -81,18 +87,23 @@
                                          Ningún compositor asignado
                                      </label>
                                  @endif
+
                                  <div class="flex items-center">
-                                     <input {{-- id="search_compositor_{{ $premio->id }}" --}} {{-- value="{{ $premio->audiovisual->titulo }}" --}}
+                                     <input id="search_compositor{{ $audiovisual->id }}"
                                          class="block w-full border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm"
                                          type="text" name="search_compositor" placeholder="Buscar compositor..." />
-                                     <button type="button" {{-- onclick="buscarAudiovisual('{{ $premio->id }}')" --}}
+                                     <button type="button" onclick="buscarCompositor('{{ $audiovisual->id }}')"
                                          class="px-4 py-2 ml-4 cursor-pointer bg-green-500 border border-green-600 hover:bg-green-600 text-white rounded-md font-semibold focus:outline-none focus:shadow-outline-green active:bg-green-600">
                                          Buscar
                                      </button>
                                  </div>
 
+                                 <!-- Agrega un campo de entrada oculto -->
+                                 <input type="hidden" id="compositor{{ $audiovisual->id }}"
+                                     name="compositor{{ $audiovisual->id }}" />
+
                                  <!-- Lista de resultados de la búsqueda -->
-                                 <ul {{-- id="audiovisualResults_{{ $premio->id }}" --}}
+                                 <ul id="compositorResults{{ $audiovisual->id }}"
                                      class="mt-2 space-y-2 cursor-pointer divide-y divide-gray-300 overflow-y-auto max-h-52">
                                  </ul>
                              </div>
@@ -112,17 +123,21 @@
                                  @endif
 
                                  <div class="flex items-center">
-                                     <input
+                                     <input id="search_fotografia{{ $audiovisual->id }}"
                                          class="block w-full border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm"
                                          type="text" name="search_fotografia" placeholder="Buscar fotografía..." />
-                                     <button type="button"
+                                     <button type="button" onclick="buscarFotografia('{{ $audiovisual->id }}')"
                                          class="px-4 py-2 ml-4 cursor-pointer bg-green-500 border border-green-600 hover:bg-green-600 text-white rounded-md font-semibold focus:outline-none focus:shadow-outline-green active:bg-green-600">
                                          Buscar
                                      </button>
                                  </div>
 
+                                 <!-- Agrega un campo de entrada oculto -->
+                                 <input type="hidden" id="fotografia{{ $audiovisual->id }}"
+                                     name="fotografia{{ $audiovisual->id }}" />
+
                                  <!-- Lista de resultados de la búsqueda -->
-                                 <ul {{-- id="audiovisualResults_{{ $premio->id }}" --}}
+                                 <ul id="fotografiaResults{{ $audiovisual->id }}"
                                      class="mt-2 space-y-2 cursor-pointer divide-y divide-gray-300 overflow-y-auto max-h-52">
                                  </ul>
                              </div>
@@ -132,7 +147,6 @@
                          <div>
                              <!-- Nuevo campo de búsqueda para Guionista -->
                              <div class="mb-6">
-
                                  <x-input-label for="search_guionista" :value="__('Guionista:')"
                                      class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
                                  @if ($audiovisual->guionistas->isNotEmpty())
@@ -143,24 +157,29 @@
                                          Ningún guionista asignado
                                      </label>
                                  @endif
+
                                  <div class="flex items-center">
-                                     <input {{-- id="search_audiovisual_{{ $premio->id }}" --}} {{-- value="{{ $premio->audiovisual->titulo }}" --}}
+                                     <input id="search_guionista{{ $audiovisual->id }}"
                                          class="block w-full border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm"
                                          type="text" name="search_guionista" placeholder="Buscar guionista..." />
-                                     <button type="button" {{-- onclick="buscarAudiovisual('{{ $premio->id }}')" --}}
+                                     <button type="button" onclick="buscarGuionista('{{ $audiovisual->id }}')"
                                          class="px-4 py-2 ml-4 cursor-pointer bg-green-500 border border-green-600 hover:bg-green-600 text-white rounded-md font-semibold focus:outline-none focus:shadow-outline-green active:bg-green-600">
                                          Buscar
                                      </button>
                                  </div>
 
+                                 <!-- Agrega un campo de entrada oculto -->
+                                 <input type="hidden" id="guionista{{ $audiovisual->id }}"
+                                     name="guionista{{ $audiovisual->id }}" />
+
                                  <!-- Lista de resultados de la búsqueda -->
-                                 <ul {{-- id="audiovisualResults_{{ $premio->id }}" --}}
+                                 <ul id="guionistaResults{{ $audiovisual->id }}"
                                      class="mt-2 space-y-2 cursor-pointer divide-y divide-gray-300 overflow-y-auto max-h-52">
                                  </ul>
                              </div>
+
                              <!-- Nuevo campo de búsqueda para Reparto -->
                              <div class="mb-6">
-
                                  <x-input-label for="search_reparto" :value="__('Reparto:')"
                                      class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
                                  @if ($audiovisual->repartos->isNotEmpty())
@@ -173,24 +192,27 @@
                                  @endif
 
                                  <div class="flex items-center">
-                                     <input {{-- id="search_audiovisual_{{ $premio->id }}" --}} {{-- value="{{ $premio->audiovisual->titulo }}" --}}
+                                     <input id="search_reparto{{ $audiovisual->id }}"
                                          class="block w-full border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm"
                                          type="text" name="search_reparto" placeholder="Buscar reparto..." />
-                                     <button type="button" {{-- onclick="buscarAudiovisual('{{ $premio->id }}')" --}}
+                                     <button type="button" onclick="buscarReparto('{{ $audiovisual->id }}')"
                                          class="px-4 py-2 ml-4 cursor-pointer bg-green-500 border border-green-600 hover:bg-green-600 text-white rounded-md font-semibold focus:outline-none focus:shadow-outline-green active:bg-green-600">
                                          Buscar
                                      </button>
                                  </div>
 
+                                 <!-- Agrega un campo de entrada oculto -->
+                                 <input type="hidden" id="reparto{{ $audiovisual->id }}"
+                                     name="reparto{{ $audiovisual->id }}" />
+
                                  <!-- Lista de resultados de la búsqueda -->
-                                 <ul {{-- id="audiovisualResults_{{ $premio->id }}" --}}
+                                 <ul id="repartoResults{{ $audiovisual->id }}"
                                      class="mt-2 space-y-2 cursor-pointer divide-y divide-gray-300 overflow-y-auto max-h-52">
                                  </ul>
                              </div>
 
                              <!-- Nuevo campo de búsqueda para Compañía -->
                              <div class="mb-6">
-
                                  <x-input-label for="search_company" :value="__('Compañía:')"
                                      class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
                                  @if ($audiovisual->companies->isNotEmpty())
@@ -212,7 +234,7 @@
                                      </button>
                                  </div>
 
-                                 <!-- Agrega un campo de entrada oculto para almacenar la compañía -->
+                                 <!-- Agrega un campo de entrada oculto -->
                                  <input type="hidden" id="company{{ $audiovisual->id }}"
                                      name="company{{ $audiovisual->id }}" />
 
@@ -234,6 +256,7 @@
                                          Ningún género asignado
                                      </label>
                                  @endif
+
                                  <div class="flex items-center">
                                      <input id="search_genero{{ $audiovisual->id }}"
                                          class="block w-full border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm"
@@ -285,3 +308,8 @@
  <!-- Scripts para los buscadores de forma asíncrona -->
  <script src="{{ asset('js/buscadorGeneros.js') }}"></script>
  <script src="{{ asset('js/buscadorCompanies.js') }}"></script>
+ <script src="{{ asset('js/buscadorRepartos.js') }}"></script>
+ <script src="{{ asset('js/buscadorGuionistas.js') }}"></script>
+ <script src="{{ asset('js/buscadorFotografias.js') }}"></script>
+ <script src="{{ asset('js/buscadorCompositores.js') }}"></script>
+ <script src="{{ asset('js/buscadorDirectores.js') }}"></script>
