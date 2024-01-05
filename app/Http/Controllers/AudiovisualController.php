@@ -100,6 +100,21 @@ class AudiovisualController extends Controller
 
     public function store(StoreAudiovisualRequest $request)
     {
+        // Validar que se haya seleccionado un tipo de audiovisual
+        if (!$request->has('tipo_id') || $request->tipo_id == 0) {
+            return redirect()->route('admin.audiovisuales.index')->with('error', 'Debes seleccionar un tipo de audiovisual.');
+        }
+
+        // Validar que se haya seleccionado una recomendación de edad
+        if (!$request->has('recomendacion_id') || $request->recomendacion_id == 0) {
+            return redirect()->route('admin.audiovisuales.index')->with('error', 'Debes seleccionar una recomendación de edad.');
+        }
+
+        // Validar que se haya subido un archivo de imagen
+        if (!$request->hasFile('imagen')) {
+            return redirect()->route('admin.audiovisuales.index')->with('error', 'Debes seleccionar una imagen.');
+        }
+
         // Reemplaza los espacios en blanco con guiones bajos en el título
         $titulo = str_replace(' ', '_', $request->titulo);
 
@@ -111,6 +126,11 @@ class AudiovisualController extends Controller
 
         // Mueve el archivo a la ubicación deseada
         $request->file('imagen')->move(public_path('img'), $img);
+
+        // Validar que el año o la duración sea un número
+        if (!is_numeric($request->year) || !is_numeric($request->duracion)) {
+            return redirect()->route('admin.audiovisuales.index')->with('error', 'Los campos año y duración son numéricos');
+        }
 
         Audiovisual::create([
             'titulo' => $request->titulo,
@@ -179,6 +199,11 @@ class AudiovisualController extends Controller
             // Guarda la nueva imagen
             $audiovisual->img = 'img/' . $img;
             $audiovisual->save();
+        }
+
+        // Validar que el año o la duración sea un número
+        if (!is_numeric($request->year) || !is_numeric($request->duracion)) {
+            return redirect()->route('admin.audiovisuales.index')->with('error', 'Los campos año y duración son numéricos');
         }
 
         $audiovisual->update($request->all());

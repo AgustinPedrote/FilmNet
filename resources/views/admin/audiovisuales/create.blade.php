@@ -67,7 +67,7 @@
                             <x-input-label for="trailer" :value="__('Trailer')"
                                 class="block mb-2 text-base font-bold text-gray-900 dark:text-white mt-2" />
                             <x-text-input id="trailer" class="block mt-1 w-full text-md" type="text" name="trailer"
-                                required autofocus autocomplete="trailer" />
+                                autofocus autocomplete="trailer" />
                             <x-input-error :messages="$errors->get('trailer')" class="mt-2" />
                         </div>
 

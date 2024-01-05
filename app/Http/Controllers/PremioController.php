@@ -24,8 +24,34 @@ class PremioController extends Controller
         //
     }
 
+    /* public function store(StorePremioRequest $request)
+    {
+        $nombre = $request->nombre;
+        $year = $request->year;
+        $audiovisual_id = $request->audiovisual_;
+
+        Premio::create([
+            'nombre' => $nombre,
+            'year' => $year,
+            'audiovisual_id' => $audiovisual_id
+        ]);
+
+        return redirect()->route('admin.premios.index')->with('success', 'El premio ha sido creado con éxito');
+    } */
+
     public function store(StorePremioRequest $request)
     {
+        // Validar si la búsqueda está vacía o no coincide con un audiovisual
+        if (empty($request->audiovisual_)) {
+            return redirect()->route('admin.premios.index')->with('error', 'El premio no ha sido creado con éxito');
+        }
+
+        // Validar que el año sea un número
+        if (!is_numeric($request->year)) {
+            return redirect()->route('admin.premios.index')->with('error', 'El año debe ser un número');
+        }
+
+        // Crear el premio
         $nombre = $request->nombre;
         $year = $request->year;
         $audiovisual_id = $request->audiovisual_;
@@ -54,6 +80,12 @@ class PremioController extends Controller
         if ($request->audiovisual_ != null) {
             $premio->audiovisual_id = $request->audiovisual_;
         }
+
+        // Validar que el año sea un número
+        if (!is_numeric($request->year)) {
+            return redirect()->route('admin.premios.index')->with('error', 'El año debe ser un número');
+        }
+
         $premio->update($request->all());
 
         return redirect()->route('admin.premios.index')->with('success', 'El premio ha sido modificado con éxito');

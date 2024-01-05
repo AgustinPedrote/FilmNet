@@ -73,8 +73,7 @@
                              <x-input-label for="trailer" :value="__('Trailer')"
                                  class="block mb-2 text-base font-bold text-gray-900 dark:text-white mt-2" />
                              <x-text-input id="trailer" class="block mt-1 w-full text-md" type="text"
-                                 name="trailer" required autofocus autocomplete="trailer"
-                                 value="{{ $audiovisual->trailer }}" />
+                                 name="trailer" autofocus autocomplete="trailer" value="{{ $audiovisual->trailer }}" />
                              <x-input-error :messages="$errors->get('trailer')" class="mt-2" />
                          </div>
 
@@ -148,7 +147,7 @@
 
                      <!-- Botón "Cancelar" -->
                      <button data-modal-hide="EditarModal{{ $audiovisual }}" type="button"
-                     class="cursor-pointer bg-red-500 border border-red-600 hover:bg-red-600 text-white rounded-md px-4 py-2 font-semibold focus:outline-none focus:shadow-outline-red active:bg-red-600">
+                         class="cursor-pointer bg-red-500 border border-red-600 hover:bg-red-600 text-white rounded-md px-4 py-2 font-semibold focus:outline-none focus:shadow-outline-red active:bg-red-600">
                          Cancelar
                      </button>
                  </div>
