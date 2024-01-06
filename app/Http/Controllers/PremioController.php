@@ -105,7 +105,7 @@ class PremioController extends Controller
         // Obtención del parámetro de búsqueda
         $query = $request->input('query');
 
-        $resultados = Audiovisual::where('titulo', 'like', '%' . $query . '%')->get();
+        $resultados = Audiovisual::where('titulo', 'ilike', '%' . $query . '%')->get();
 
         return response()->json($resultados);
     }

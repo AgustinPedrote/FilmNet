@@ -61,6 +61,10 @@ Route::post('criticas/create/{audiovisual}', [CriticaController::class, 'store']
 Route::post('/seguimiento/toggle', [UserController::class, 'toggleSeguimiento'])->name('toggle.seguimiento');
 
 
+/* FILMOGRAFÍA DE LAS PERSONAS */
+Route::get('/personas/{audiovisual}', [PersonaController::class, 'show'])->name('filmoteca.show');
+
+
 /* MENÚ DE USUARIO */
 // Mis votaciones.
 Route::get('mis_votaciones', [UserController::class, 'misVotaciones'])->name('votaciones.index');

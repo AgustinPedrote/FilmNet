@@ -263,7 +263,7 @@ class AudiovisualController extends Controller
         $query = $request->input('query');
 
         // Realiza la búsqueda en la base de datos y obtén los resultados
-        $resultados = Genero::where('nombre', 'like', '%' . $query . '%')->get();
+        $resultados = Genero::where('nombre', 'ilike', '%' . $query . '%')->get();
 
         // Devuelve los resultados como parte de un arreglo asociativo
         return response()->json(['generos' => $resultados]);
@@ -274,7 +274,7 @@ class AudiovisualController extends Controller
         $query = $request->input('query');
 
         // Realiza la búsqueda en la base de datos y obtén los resultados
-        $resultados = Company::where('nombre', 'like', '%' . $query . '%')->get();
+        $resultados = Company::where('nombre', 'ilike', '%' . $query . '%')->get();
 
         // Devuelve los resultados como parte de un arreglo asociativo
         return response()->json(['companies' => $resultados]);
@@ -285,7 +285,7 @@ class AudiovisualController extends Controller
         $query = $request->input('query');
 
         // Realiza la búsqueda en la base de datos y obtén los resultados
-        $resultados = Persona::where('nombre', 'like', '%' . $query . '%')->get();
+        $resultados = Persona::where('nombre', 'ilike', '%' . $query . '%')->get();
 
         // Devuelve los resultados como parte de un arreglo asociativo
         return response()->json(['repartos' => $resultados]);
@@ -296,7 +296,7 @@ class AudiovisualController extends Controller
         $query = $request->input('query');
 
         // Realiza la búsqueda en la base de datos y obtén los resultados
-        $resultados = Persona::where('nombre', 'like', '%' . $query . '%')->get();
+        $resultados = Persona::where('nombre', 'ilike', '%' . $query . '%')->get();
 
         // Devuelve los resultados como parte de un arreglo asociativo
         return response()->json(['guionistas' => $resultados]);
@@ -307,7 +307,7 @@ class AudiovisualController extends Controller
         $query = $request->input('query');
 
         // Realiza la búsqueda en la base de datos y obtén los resultados
-        $resultados = Persona::where('nombre', 'like', '%' . $query . '%')->get();
+        $resultados = Persona::where('nombre', 'ilike', '%' . $query . '%')->get();
 
         // Devuelve los resultados como parte de un arreglo asociativo
         return response()->json(['fotografias' => $resultados]);
@@ -318,7 +318,7 @@ class AudiovisualController extends Controller
         $query = $request->input('query');
 
         // Realiza la búsqueda en la base de datos y obtén los resultados
-        $resultados = Persona::where('nombre', 'like', '%' . $query . '%')->get();
+        $resultados = Persona::where('nombre', 'ilike', '%' . $query . '%')->get();
 
         // Devuelve los resultados como parte de un arreglo asociativo
         return response()->json(['compositores' => $resultados]);
@@ -329,7 +329,7 @@ class AudiovisualController extends Controller
         $query = $request->input('query');
 
         // Realiza la búsqueda en la base de datos y obtén los resultados
-        $resultados = Persona::where('nombre', 'like', '%' . $query . '%')->get();
+        $resultados = Persona::where('nombre', 'ilike', '%' . $query . '%')->get();
 
         // Devuelve los resultados como parte de un arreglo asociativo
         return response()->json(['directores' => $resultados]);

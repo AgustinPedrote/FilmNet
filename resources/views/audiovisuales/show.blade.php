@@ -37,42 +37,67 @@
                 <div class="mb-2"><strong>País:</strong> {{ $audiovisual->pais }}</div>
 
                 <!-- Mostrar información de las personas relacionadas -->
-                <div class="mb-2"><strong>Director:</strong>
+
+                <!-- Directores -->
+                <div class="mb-2">
+                    <strong>Director:</strong>
                     @foreach ($audiovisual->directores as $director)
-                        {{ $director->nombre }}@if (!$loop->last)
+                        <a href="{{ route('personas.show', $director) }}" class="hover:text-blue-500 hover:underline">
+                            {{ $director->nombre }}
+                        </a>
+                        @if (!$loop->last)
                             ,
                         @endif
                     @endforeach
                 </div>
 
-                <div class="mb-2"><strong>Compositor:</strong>
+                <!-- Compositores -->
+                <div class="mb-2">
+                    <strong>Compositor:</strong>
                     @foreach ($audiovisual->compositores as $compositor)
-                        {{ $compositor->nombre }}@if (!$loop->last)
+                        <a href="{{ route('personas.show', $compositor) }}" class="hover:text-blue-500 hover:underline">
+                            {{ $compositor->nombre }}
+                        </a>
+                        @if (!$loop->last)
                             ,
                         @endif
                     @endforeach
                 </div>
 
-                <div class="mb-2"><strong>Fotografía:</strong>
+                <!-- Directores de fotografía -->
+                <div class="mb-2">
+                    <strong>Fotografía:</strong>
                     @foreach ($audiovisual->fotografias as $fotografia)
-                        {{ $fotografia->nombre }}@if (!$loop->last)
+                        <a href="{{ route('personas.show', $fotografia) }}" class="hover:text-blue-500 hover:underline">
+                            {{ $fotografia->nombre }}
+                        </a>
+                        @if (!$loop->last)
                             ,
                         @endif
                     @endforeach
                 </div>
 
-                <div class="mb-2"><strong>Guionista:</strong>
+                <!-- Guionistas -->
+                <div class="mb-2">
+                    <strong>Guionista:</strong>
                     @foreach ($audiovisual->guionistas as $guionista)
-                        {{ $guionista->nombre }}@if (!$loop->last)
+                        <a href="{{ route('personas.show', $guionista) }}" class="hover:text-blue-500 hover:underline">
+                            {{ $guionista->nombre }}
+                        </a>
+                        @if (!$loop->last)
                             ,
                         @endif
                     @endforeach
                 </div>
 
                 <!-- Reparto -->
-                <div class="mb-2"><strong>Reparto:</strong>
+                <div class="mb-2">
+                    <strong>Reparto:</strong>
                     @foreach ($audiovisual->repartos as $reparto)
-                        {{ $reparto->nombre }}@if (!$loop->last)
+                        <a href="{{ route('personas.show', $reparto) }}" class="hover:text-blue-500 hover:underline">
+                            {{ $reparto->nombre }}
+                        </a>
+                        @if (!$loop->last)
                             ,
                         @endif
                     @endforeach
