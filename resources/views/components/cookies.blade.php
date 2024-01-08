@@ -12,7 +12,7 @@
     class="cookie-notice-container fixed bottom-10 left-1/2 transform -translate-x-1/2 w-full max-w-2xl mx-auto opacity-95 transition-opacity duration-500 ease-in-out z-50 bg-gray-800 text-white p-8 rounded-lg shadow-lg">
     <!-- Imagen -->
     <div class="flex items-center justify-center mb-4">
-        <img src="{{ asset('img/logo3.png') }}" alt="Logo" class="w-full h-auto max-h-28 object-contain">
+        <img src="{{ asset('logos/logo3.png') }}" alt="Logo" class="w-full h-auto max-h-28 object-contain">
     </div>
 
     <!-- Párrafo explicativo sobre privacidad y cookies -->

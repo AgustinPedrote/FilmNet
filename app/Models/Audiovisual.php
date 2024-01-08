@@ -21,7 +21,7 @@ class Audiovisual extends Model
         'img',
         'trailer',
         'tipo_id',
-        'recomendaciones'
+        'recomendacion_id'
     ];
 
     // Relación muchos a muchos:

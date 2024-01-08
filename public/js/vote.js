@@ -14,7 +14,7 @@ async function saveVote(event, audiovisual) {
 
     console.log("Voto seleccionado:", voto);
 
-    // Solicitud POST asíncrona utilizando fetch para enviar los datos del voto al servidor
+    // Enviar votaciones
     const result = await fetch("http://127.0.0.1:8000/votaciones/create", {
         method: "POST",
         body: JSON.stringify(audiovisual),
@@ -47,7 +47,7 @@ async function saveVote(event, audiovisual) {
 
     // Calcular el promedio de votos
     var sum = 0;
-    var avg = "Sin Votaciones";
+    var avg = "No vista";
 
     // Verificar si hay votos en los datos recibidos
     if (data.length !== 0) {
@@ -71,13 +71,13 @@ async function saveVote(event, audiovisual) {
     console.log("Comparación:", voto.trim().toLowerCase() === "no vista");
 
     if (voto.trim().toLowerCase() === "no vista") {
-        avg = "Sin Votaciones";
+        avg = "No vista";
     } else if (totalVotos > 0) {
         avg = sum / totalVotos;
     }
 
     // Actualizar el elemento en la interfaz con el promedio de votos
-    elem.innerText = avg !== "Sin Votaciones" ? `${avg.toFixed(1)}` : avg;
+    elem.innerText = avg !== "No vista" ? `${avg.toFixed(1)}` : avg;
 
     // Actualizar las estrellas
     updateStars(avg);

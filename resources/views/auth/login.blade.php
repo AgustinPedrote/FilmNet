@@ -4,12 +4,28 @@
 
         <!-- Imagen -->
         <div class="flex items-center justify-center mb-6">
-            <img src="{{ asset('img/logo3.png') }}" alt="Logo" class="w-3/4 object-contain">
+            <img src="{{ asset('logos/logo3.png') }}" alt="Logo" class="w-3/4 object-contain">
         </div>
 
         <!-- Email -->
         <!-- Session Status -->
         <x-auth-session-status class="mb-2" :status="session('status')" />
+
+        <!-- Mensajes de éxito y error -->
+        <div class="relative z-10">
+
+            @if (session('success'))
+                <div>
+                    <x-success :status="session('success')" />
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div>
+                    <x-error :status="session('error')" />
+                </div>
+            @endif
+        </div>
 
         <div class="mb-4">
             <x-input-label class="text-white text-lg" for="email" :value="__('Email')" />

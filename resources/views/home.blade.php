@@ -24,7 +24,7 @@
                     {{-- Contenedor de la imagen del elemento --}}
                     <div class="relative w-full h-64 overflow-hidden rounded-md shadow-md">
                         {{-- Mostrar la imagen del elemento --}}
-                        <img src="{{ $item->img }}" alt="{{ $item->titulo }}"
+                        <img src="{{ asset($item->img) }}" alt="{{ $item->titulo }}"
                             class="object-cover w-full h-full transition duration-300 ease-in-out transform scale-100 group-hover:scale-110" />
                     </div>
 

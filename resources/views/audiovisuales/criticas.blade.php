@@ -24,7 +24,7 @@
         <a href="{{ route('audiovisual.show', ['audiovisual' => $audiovisual->id]) }}">
             <div class="max-w-5xl mx-auto relative">
                 <!-- Imagen panorámica -->
-                <img src="{{ $audiovisual->img }}" alt="{{ $audiovisual->titulo }}"
+                <img src="{{ asset($audiovisual->img) }}" alt="{{ $audiovisual->titulo }}"
                     class="w-full h-48 object-cover object-center rounded-md shadow-md mb-8">
 
                 <!-- Contenedor absoluto para el título y la nota media -->
@@ -44,7 +44,34 @@
     </div>
 
     @if ($criticas != null)
-        @foreach ($criticas->reverse() as $critica)
+
+        <!-- Lógica para que la crítica del usuario logueado siempre salga en primer lugar -->
+        @php
+            $criticasUsuarioLogueado = [];
+            $otrasCriticas = [];
+        @endphp
+
+        @foreach ($criticas->sortByDesc('created_at') as $critica)
+            @php
+                $votacion = $critica->audiovisual->obtenerVotacion($critica->user_id, $critica->audiovisual_id);
+            @endphp
+
+            @if ($critica->user_id == auth()->id())
+                @php
+                    $criticasUsuarioLogueado[] = $critica;
+                @endphp
+            @else
+                @php
+                    $otrasCriticas[] = $critica;
+                @endphp
+            @endif
+        @endforeach
+
+        @php
+            $todasLasCriticas = array_merge($criticasUsuarioLogueado, $otrasCriticas);
+        @endphp
+
+        @foreach ($todasLasCriticas as $critica)
             <!-- Votación del usuario al audiovisual -->
             @php
                 $votacion = $critica->audiovisual->obtenerVotacion($critica->user_id, $critica->audiovisual_id);
@@ -96,8 +123,8 @@
                                         </div>
                                         <!-- Ventana modal para editar una crítica -->
                                         @include('criticas.edit')
-                                        <!-- Ventana modal para editar una crítica -->
-                                        @include('criticas.delete', ['critica' => $critica])
+                                        <!-- Ventana modal para borrar una crítica -->
+                                        @include('criticas.delete')
                                     @endif
                                 </div>
                                 <!-- Número de críticas y votaciones realizadas por el usuario -->
@@ -126,7 +153,7 @@
                             <div class="mt-2 flex space-x-4">
                                 <!-- Nota del usuario al audiovisual -->
                                 <p
-                                    class="font-bold {{ $votacion && $votacion->voto ? 'text-2xl text-white bg-blue-500 border border-blue-700 rounded-md p-3 mr-10 mb-4' : 'text-lg text-gray-500' }}">
+                                    class="font-bold {{ $votacion && $votacion->voto ? 'font-bold text-2xl bg-white text-blue-500 bg-white-500 border border-gray-300 rounded-md p-3.5 mb-4' : 'text-lg text-gray-500' }}">
                                     @if ($votacion && $votacion->voto)
                                         {{ number_format($votacion->voto, 1) }}
                                     @else
@@ -158,4 +185,16 @@
     <div class="mx-6 mt-4 mb-10">
         {{ $criticas->appends(request()->query())->links() }}
     </div>
+
+    <!-- Botón para volver a la página anterior -->
+    <div class="mt-6">
+        <a href="{{ route('audiovisual.show', $audiovisual) }}" onclick="goBack()" class="flex items-center ml-6">
+            <span class="bottom-4 right-4 p-2 bg-blue-500 text-white rounded-full cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    class="h-6 w-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+            </span>
+        </a>
 </x-app-layout>

@@ -5,7 +5,7 @@
 
         <!-- Imagen -->
         <div class="flex items-center justify-center mb-2">
-            <img src="{{ asset('img/logo3.png') }}" alt="Logo" class="w-1/3 object-contain">
+            <img src="{{ asset('logos/logo3.png') }}" alt="Logo" class="w-1/3 object-contain">
         </div>
 
         <!-- Dos columnas con los campos requerídos -->

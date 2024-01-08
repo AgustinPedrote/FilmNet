@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->integer('year');
-            $table->foreignId('audiovisual_id')->constrained('audiovisuales');
+            $table->foreignId('audiovisual_id')->constrained('audiovisuales')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function () {
 
 
 /* INICIO FILMNET */
-Route::get('/', [AudiovisualController::class, 'index'])->name('home.index');
+Route::get('/', [AudiovisualController::class, 'index'])->name('home.index')->middleware('ValidadoMiddleware');
 
 
 /* SECCIONES DE AUDIOVISUALES */
@@ -57,10 +57,12 @@ Route::post('/votaciones/show', [VotacionController::class, 'show'])->name('vota
 Route::get('audivisual/criticas/{audiovisual}', [AudiovisualController::class, 'criticas'])->name('ver.criticas');
 // Crear crítica del audiovisual.
 Route::post('criticas/create/{audiovisual}', [CriticaController::class, 'store'])->name('criticas.store');
-// Seguir audiovisual.
-Route::post('seguimientos/create/{audiovisual}', [UserController::class, 'insertSeguimiento'])->name('insert.seguimiento');
-// Borrar audiovisual.
-Route::delete('/seguimiento/{audiovisual}', [UserController::class, 'quitarSeguimiento'])->name('quitar.seguimiento');
+// Seguimiento asíncrono
+Route::post('/seguimiento/toggle', [UserController::class, 'toggleSeguimiento'])->name('toggle.seguimiento');
+
+
+/* FILMOGRAFÍA DE LAS PERSONAS */
+Route::get('/personas/{audiovisual}', [PersonaController::class, 'show'])->name('filmoteca.show');
 
 
 /* MENÚ DE USUARIO */
@@ -91,21 +93,46 @@ Route::middleware(['auth', 'userEsAdmin'])->group(function () {
     Route::get('/audiovisuales/{audiovisual}/editar', [AudiovisualController::class, 'edit'])->name('audiovisuales.edit');
     Route::put('/audiovisuales/{audiovisual}', [AudiovisualController::class, 'update'])->name('audiovisuales.update');
     Route::delete('/audiovisuales/{audiovisual}', [AudiovisualController::class, 'destroy'])->name('audiovisuales.borrar');
+    Route::put('/audiovisuales/{audiovisual}/updateBusqueda', [AudiovisualController::class, 'updateBusqueda'])->name('audiovisuales.updateBusqueda');
+    Route::get('/busqueda/genero', [AudiovisualController::class, 'buscarGenero'])->name('busqueda.genero');
+    Route::get('/busqueda/company', [AudiovisualController::class, 'buscarCompany'])->name('busqueda.company');
+    Route::get('/busqueda/reparto', [AudiovisualController::class, 'buscarReparto'])->name('busqueda.reparto');
+    Route::get('/busqueda/guionista', [AudiovisualController::class, 'buscarGuionista'])->name('busqueda.guionista');
+    Route::get('/busqueda/fotografia', [AudiovisualController::class, 'buscarFotografia'])->name('busqueda.fotografia');
+    Route::get('/busqueda/compositor', [AudiovisualController::class, 'buscarCompositor'])->name('busqueda.compositor');
+    Route::get('/busqueda/director', [AudiovisualController::class, 'buscarDirector'])->name('busqueda.director');
+    Route::delete('/audiovisuales/{audiovisual}/eliminar-genero/{genero}', [AudiovisualController::class, 'eliminarGenero'])->name('audiovisuales.eliminarGenero');
+    Route::delete('/audiovisuales/{audiovisual}/eliminar-compania/{company}', [AudiovisualController::class, 'eliminarCompania'])->name('audiovisuales.eliminarCompania');
+    Route::delete('/audiovisuales/{audiovisual}/eliminar-director/{director}', [AudiovisualController::class, 'eliminarDirector'])->name('audiovisuales.eliminarDirector');
+    Route::delete('/audiovisuales/{audiovisual}/eliminar-compositor/{compositor}', [AudiovisualController::class, 'eliminarCompositor'])->name('audiovisuales.eliminarCompositor');
+    Route::delete('/audiovisuales/{audiovisual}/eliminar-fotografia/{fotografia}', [AudiovisualController::class, 'eliminarFotografia'])->name('audiovisuales.eliminarFotografia');
+    Route::delete('/audiovisuales/{audiovisual}/eliminar-guionista/{guionista}', [AudiovisualController::class, 'eliminarGuionista'])->name('audiovisuales.eliminarGuionista');
+    Route::delete('/audiovisuales/{audiovisual}/eliminar-reparto/{reparto}', [AudiovisualController::class, 'eliminarReparto'])->name('audiovisuales.eliminarReparto');
 
     // Users:
     Route::resource('users', UserController::class);
+    Route::get('users/admin/index', [UserController::class, 'Index'])->name('admin.users.index');
+    Route::put('/users/{user}/validar', [UserController::class, 'validar'])->name('admin.users.validar');
+    Route::get('ver_criticas/user/{user}', [UserController::class, 'verCriticas'])->name('admin.verCriticas');
+    Route::delete('/eliminar_criticas/{usuario_id}/{audiovisual_id}', [UserController::class, 'verCriticasDestroy'])->name('verCriticas.destroy');
+    Route::put('/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
 
     // Personas:
     Route::resource('personas', PersonaController::class);
+    Route::get('personas/admin/index', [PersonaController::class, 'Index'])->name('admin.personas.index');
 
     // Géneros:
     Route::resource('generos', GeneroController::class);
+    Route::get('generos/admin/index', [GeneroController::class, 'Index'])->name('admin.generos.index');
 
     // Companies:
     Route::resource('companies', CompanyController::class);
+    Route::get('companies/admin/index', [CompanyController::class, 'Index'])->name('admin.companies.index');
 
     // Premios:
     Route::resource('premios', PremioController::class);
+    Route::get('premios/admin/index', [PremioController::class, 'Index'])->name('admin.premios.index');
+    Route::get('/busqueda/audiovisual', [PremioController::class, 'buscarAudiovisual']);
 });
 
 

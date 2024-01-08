@@ -37,42 +37,67 @@
                 <div class="mb-2"><strong>País:</strong> {{ $audiovisual->pais }}</div>
 
                 <!-- Mostrar información de las personas relacionadas -->
-                <div class="mb-2"><strong>Director:</strong>
+
+                <!-- Directores -->
+                <div class="mb-2">
+                    <strong>Director:</strong>
                     @foreach ($audiovisual->directores as $director)
-                        {{ $director->nombre }}@if (!$loop->last)
+                        <a href="{{ route('personas.show', $director) }}" class="hover:text-blue-500 hover:underline">
+                            {{ $director->nombre }}
+                        </a>
+                        @if (!$loop->last)
                             ,
                         @endif
                     @endforeach
                 </div>
 
-                <div class="mb-2"><strong>Compositor:</strong>
+                <!-- Compositores -->
+                <div class="mb-2">
+                    <strong>Compositor:</strong>
                     @foreach ($audiovisual->compositores as $compositor)
-                        {{ $compositor->nombre }}@if (!$loop->last)
+                        <a href="{{ route('personas.show', $compositor) }}" class="hover:text-blue-500 hover:underline">
+                            {{ $compositor->nombre }}
+                        </a>
+                        @if (!$loop->last)
                             ,
                         @endif
                     @endforeach
                 </div>
 
-                <div class="mb-2"><strong>Fotografía:</strong>
+                <!-- Directores de fotografía -->
+                <div class="mb-2">
+                    <strong>Fotografía:</strong>
                     @foreach ($audiovisual->fotografias as $fotografia)
-                        {{ $fotografia->nombre }}@if (!$loop->last)
+                        <a href="{{ route('personas.show', $fotografia) }}" class="hover:text-blue-500 hover:underline">
+                            {{ $fotografia->nombre }}
+                        </a>
+                        @if (!$loop->last)
                             ,
                         @endif
                     @endforeach
                 </div>
 
-                <div class="mb-2"><strong>Guionista:</strong>
+                <!-- Guionistas -->
+                <div class="mb-2">
+                    <strong>Guionista:</strong>
                     @foreach ($audiovisual->guionistas as $guionista)
-                        {{ $guionista->nombre }}@if (!$loop->last)
+                        <a href="{{ route('personas.show', $guionista) }}" class="hover:text-blue-500 hover:underline">
+                            {{ $guionista->nombre }}
+                        </a>
+                        @if (!$loop->last)
                             ,
                         @endif
                     @endforeach
                 </div>
 
                 <!-- Reparto -->
-                <div class="mb-2"><strong>Reparto:</strong>
+                <div class="mb-2">
+                    <strong>Reparto:</strong>
                     @foreach ($audiovisual->repartos as $reparto)
-                        {{ $reparto->nombre }}@if (!$loop->last)
+                        <a href="{{ route('personas.show', $reparto) }}" class="hover:text-blue-500 hover:underline">
+                            {{ $reparto->nombre }}
+                        </a>
+                        @if (!$loop->last)
                             ,
                         @endif
                     @endforeach
@@ -86,6 +111,17 @@
                         @endif
                     @endforeach
                 </div>
+
+                <!-- Premios -->
+                @if ($audiovisual->premios->count() > 0)
+                    <div class="mb-2"><strong>Premios:</strong>
+                        @foreach ($audiovisual->premios as $premio)
+                            {{ $premio->nombre }} ({{ $premio->year }})@if (!$loop->last)
+                                ,
+                            @endif
+                        @endforeach
+                    </div>
+                @endif
 
                 <!-- Recomendación de edad -->
                 <div class="mb-2">
@@ -105,7 +141,7 @@
 
         <!-- Imagen del Audiovisual -->
         <div class="w-full md:w-1/3 p-4 flex flex-col items-center justify-center">
-            <img src="{{ $audiovisual->img }}" alt="{{ $audiovisual->titulo }}"
+            <img src="{{ asset($audiovisual->img) }}" alt="{{ $audiovisual->titulo }}"
                 class="w-full h-auto object-cover md:w-48 mx-auto mb-6 rounded-lg shadow-md">
 
             <div class="mb-6 text-center w-full md:w-48 bg-gray-100 rounded-md p-10 border-gray-300">
@@ -123,9 +159,9 @@
 
                 <!-- Nota media de las votaciones -->
                 <div class="space-y-4">
-                    <p class="font-bold text-lg text-white bg-blue-500 border border-blue-700 rounded-md p-3 mb-4"
+                    <p class="font-bold text-lg bg-white text-blue-500 bg-white-500 border border-gray-300 rounded-md p-3.5 mb-4"
                         id="nota">
-                        {{ $notaMedia ? number_format($notaMedia, 1) : 'Sin votaciones' }}
+                        {{ $notaMedia ? number_format($notaMedia, 1) : 'No vista' }}
                     </p>
                 </div>
 
@@ -154,5 +190,28 @@
         </div>
     </div>
 
+    <!-- Botón para volver a la página anterior -->
+    <div class="mt-6">
+        <a href="#" onclick="goBack()" class="flex items-center ml-6">
+            <span class="bottom-4 right-4 p-2 bg-blue-500 text-white rounded-full cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    class="h-6 w-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+            </span>
+        </a>
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+    <!-- Script para votación del audiovisual de forma asíncrona -->
     <script src="{{ asset('js/vote.js') }}"></script>
+
+    <!-- Script para seguimiento del audiovisual de forma asíncrona -->
+    <script src="{{ asset('js/seguimiento.js') }}"></script>
 </x-app-layout>

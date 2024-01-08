@@ -18,16 +18,19 @@
     <!-- Scripts -->
     <!-- Inclusión de estilos y scripts con Vite -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('logos/FN.png') }}" type="image/x-icon"/>
 </head>
 
-<body class="font-sans bg-gray-100">
+<body class="font-sans bg-gray-200">
 
     <div class="flex h-screen">
 
         @include('components.navAdmin')
 
         <!-- Contenido principal -->
-        <main>
+        <main class="w-full">
             {{ $slot }}
         </main>
     </div>

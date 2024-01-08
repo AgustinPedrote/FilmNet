@@ -108,6 +108,6 @@ class CriticaController extends Controller
             ->delete();
 
         // Redireccionar de nuevo a la página anterior
-        return redirect()->back()->with('success', 'La crítica se ha eliminado correctamente.');;
+        return redirect()->back()->with('success', 'La crítica se ha eliminado correctamente.');
     }
 }

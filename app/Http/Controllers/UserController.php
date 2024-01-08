@@ -2,20 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCriticaRequest;
 use App\Models\User;
 use App\Models\Audiovisual;
 use App\Models\Critica;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\Rol;
 use App\Models\Votacion;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Http\Request;
+
 
 class UserController extends Controller
 {
     // Usuarios en el panel de administración
     public function index()
     {
-        return view('admin.users.index');
+        $users = User::orderBy('name')->paginate(4);
+        $roles = Rol::all();
+
+        return view('admin.users.index', ['users' => $users, 'roles' => $roles]);
     }
 
     // Index en el panel de administración
@@ -43,7 +50,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $premio)
+    public function show(User $user)
     {
         //
     }
@@ -51,7 +58,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $premio)
+    public function edit(User $user)
     {
         //
     }
@@ -59,17 +66,25 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateUserRequest $request, User $premio)
+    public function update(Request $request, User $user)
     {
-        //
+        $user->update([
+            'rol_id' => $request->input('rol_id'),
+        ]);
+
+        // Puedes redirigir a la vista de detalles del usuario o a donde desees
+        return redirect()->route('admin.users.index', $user->id)->with('success', 'El rol del usuario ha sido actualizado con éxito.');
     }
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $premio)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect()->route('admin.users.index')->with('success', 'El usuario ha sido eliminado con éxito.');
     }
 
     // Las votaciones del usuario logueado
@@ -137,22 +152,54 @@ class UserController extends Controller
         return view('seguimientos.index', compact('seguimientosPaginados'));
     }
 
-    // Insertar audiovisual en mi lista de seguimientos
-    public function insertSeguimiento(Audiovisual $audiovisual)
+    // Botón asíncrono de lista de seguimiento
+    public function toggleSeguimiento(Request $request)
     {
-        $user =  User::find(auth()->user()->id);
-        $user->usuariosSeguimientos()->attach($audiovisual);
+        $audiovisualId = $request->input('audiovisual_id');
+        $user = User::find(auth()->user()->id);
 
-        return redirect()->back()->with('status', 'Audiovisual añadido a la lista de seguimientos con éxito');
+        if ($user->usuariosSeguimientos->contains('id', $audiovisualId)) {
+            $user->usuariosSeguimientos()->detach($audiovisualId);
+            return response()->json(['status' => 'removed', 'message' => 'Audiovisual eliminado de la lista de seguimientos con éxito']);
+        } else {
+            $user->usuariosSeguimientos()->attach($audiovisualId);
+            return response()->json(['status' => 'added', 'message' => 'Audiovisual añadido a la lista de seguimientos con éxito']);
+        }
     }
 
-    // Eliminar audiovisual en mi lista de seguimientos
-    public function quitarSeguimiento(Audiovisual $audiovisual)
+    // Validar usuarios en el modo Admin
+    public function validar(User $user)
     {
-        $user = User::find(auth()->user()->id);
-        $user->usuariosSeguimientos()->detach($audiovisual->id);
+        $user->validado = !$user->validado;
+        $user->save();
 
-        // Puedes redirigir o mostrar un mensaje de éxito
-        return redirect()->back()->with('status', 'Audiovisual eliminado de la lista de seguimientos con éxito');
+        return redirect()
+            ->route('admin.users.index')
+            ->with('success', 'Usuario validado/invalidado correctamente');
+    }
+
+    // ver críticas como
+    public function verCriticas(User $user)
+    {
+
+        // Críticas del usuario logado paginadas
+        $criticas = Critica::where('user_id', $user->id)->paginate(4);
+
+        return view('admin.users.miscriticas', compact(
+            'criticas',
+            'user'
+        ));
+    }
+
+    // Eliminar una crítica como administrador
+    public function verCriticasDestroy($usuario_id, $audiovisual_id)
+    {
+        // Buscar la crítica pasandole el usuario y el audiovisual.
+        Critica::where('audiovisual_id', $audiovisual_id)
+            ->where('user_id', $usuario_id)
+            ->delete();
+
+        // Redireccionar de nuevo a la página anterior
+        return redirect()->back()->with('success', 'Crítica eliminada con éxito');
     }
 }

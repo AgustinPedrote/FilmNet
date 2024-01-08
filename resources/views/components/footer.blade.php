@@ -6,7 +6,7 @@
         <div>
             <a href="{{ route('home.index') }}" class="flex items-center">
                 <!-- Logo del sitio -->
-                <img src="{{ asset('img/logo.png') }}" alt="logo" class="w-16 h-auto mr-2">
+                <img src="{{ asset('logos/logo.png') }}" alt="logo" class="w-16 h-auto mr-2">
                 <!-- Nombre del sitio -->
                 <span class="text-base text-gray-900 ">© 2023 FilmNet</span>
             </a>

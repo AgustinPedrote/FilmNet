@@ -5,7 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAudiovisualRequest;
 use App\Http\Requests\UpdateAudiovisualRequest;
 use App\Models\Audiovisual;
+use App\Models\Recomendacion;
+use App\Models\Tipo;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Http\Request;
+use App\Models\Genero;
+use App\Models\Company;
+use App\Models\Persona;
 
 
 class AudiovisualController extends Controller
@@ -62,9 +68,30 @@ class AudiovisualController extends Controller
     // Panel de control del administrador
     public function adminIndex()
     {
-        return view('admin.audiovisuales.index');
-    }
+        // Cargar explícitamente las relaciones necesarias para el modal.
+        $audiovisuales = Audiovisual::with([
+            'tipo',
+            'companies',
+            'recomendacion',
+            'directores',
+            'compositores',
+            'fotografias',
+            'guionistas',
+            'repartos',
+            'generos'
+        ])
+            ->orderBy('titulo')
+            ->paginate(5);
 
+        $tipos = Tipo::all();
+        $recomendaciones = Recomendacion::all();
+
+        return view('admin.audiovisuales.index', [
+            'audiovisuales' => $audiovisuales,
+            'tipos' => $tipos,
+            'recomendaciones' => $recomendaciones
+        ]);
+    }
 
     public function create()
     {
@@ -73,8 +100,54 @@ class AudiovisualController extends Controller
 
     public function store(StoreAudiovisualRequest $request)
     {
-        //
+        // Validar que se haya seleccionado un tipo de audiovisual
+        if (!$request->has('tipo_id') || $request->tipo_id == 0) {
+            return redirect()->route('admin.audiovisuales.index')->with('error', 'Debes seleccionar un tipo de audiovisual.');
+        }
+
+        // Validar que se haya seleccionado una recomendación de edad
+        if (!$request->has('recomendacion_id') || $request->recomendacion_id == 0) {
+            return redirect()->route('admin.audiovisuales.index')->with('error', 'Debes seleccionar una recomendación de edad.');
+        }
+
+        // Validar que se haya subido un archivo de imagen
+        if (!$request->hasFile('imagen')) {
+            return redirect()->route('admin.audiovisuales.index')->with('error', 'Debes seleccionar una imagen.');
+        }
+
+        // Reemplaza los espacios en blanco con guiones bajos en el título
+        $titulo = str_replace(' ', '_', $request->titulo);
+
+        // Obtén la extensión del archivo original
+        $extension = $request->file('imagen')->getClientOriginalExtension();
+
+        // Construye el nombre de la imagen con el título modificado y la extensión
+        $img = $titulo . '.' . $extension;
+
+        // Mueve el archivo a la ubicación deseada
+        $request->file('imagen')->move(public_path('img'), $img);
+
+        // Validar que el año o la duración sea un número
+        if (!is_numeric($request->year) || !is_numeric($request->duracion)) {
+            return redirect()->route('admin.audiovisuales.index')->with('error', 'Los campos año y duración son numéricos');
+        }
+
+        Audiovisual::create([
+            'titulo' => $request->titulo,
+            'titulo_original' => $request->titulo_original,
+            'year' => $request->year,
+            'duracion' => $request->duracion,
+            'pais' => $request->pais,
+            'trailer' => $request->trailer,
+            'tipo_id' => $request->tipo_id,
+            'recomendacion_id' => $request->recomendacion_id,
+            'sinopsis' => $request->sinopsis,
+            'img' => 'img/' . $img
+        ]);
+
+        return redirect()->route('admin.audiovisuales.index')->with('success', 'El audiovisual ha sido creado con éxito');
     }
+
 
     // Ficha técnica del audiovisual
     public function show(Audiovisual $audiovisual)
@@ -108,12 +181,41 @@ class AudiovisualController extends Controller
 
     public function update(UpdateAudiovisualRequest $request, Audiovisual $audiovisual)
     {
-        //
+        // Verifica si se proporcionó una nueva imagen en la solicitud
+        if ($request->hasFile('imagen')) {
+
+            // Reemplaza los espacios en blanco con guiones bajos en el título
+            $titulo = str_replace(' ', '_', $request->titulo);
+
+            // Obtén la extensión del archivo original
+            $extension = $request->file('imagen')->getClientOriginalExtension();
+
+            // Construye el nombre de la imagen con el título modificado y la extensión
+            $img = $titulo . '.' . $extension;
+
+            // Mueve el archivo a la ubicación deseada
+            $request->file('imagen')->move(public_path('img'), $img);
+
+            // Guarda la nueva imagen
+            $audiovisual->img = 'img/' . $img;
+            $audiovisual->save();
+        }
+
+        // Validar que el año o la duración sea un número
+        if (!is_numeric($request->year) || !is_numeric($request->duracion)) {
+            return redirect()->route('admin.audiovisuales.index')->with('error', 'Los campos año y duración son numéricos');
+        }
+
+        $audiovisual->update($request->all());
+
+        return redirect()->route('admin.audiovisuales.index')->with('success', 'El audiovisual ha sido modificado con éxito');
     }
 
     public function destroy(Audiovisual $audiovisual)
     {
-        //
+        $audiovisual->delete();
+
+        return redirect()->route('admin.audiovisuales.index')->with('success', 'El audiovisual ha sido eliminado con éxito.');
     }
 
     // Críticas del audiovisual (paginados)
@@ -151,5 +253,201 @@ class AudiovisualController extends Controller
             'criticas' => $criticasPaginadas,
             'notaMedia' => $notaMedia
         ]);
+    }
+
+
+    // Funcionalidades del Panel de Administrador
+
+    public function buscarGenero(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Realiza la búsqueda en la base de datos y obtén los resultados
+        $resultados = Genero::where('nombre', 'ilike', '%' . $query . '%')->get();
+
+        // Devuelve los resultados como parte de un arreglo asociativo
+        return response()->json(['generos' => $resultados]);
+    }
+
+    public function buscarCompany(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Realiza la búsqueda en la base de datos y obtén los resultados
+        $resultados = Company::where('nombre', 'ilike', '%' . $query . '%')->get();
+
+        // Devuelve los resultados como parte de un arreglo asociativo
+        return response()->json(['companies' => $resultados]);
+    }
+
+    public function buscarReparto(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Realiza la búsqueda en la base de datos y obtén los resultados
+        $resultados = Persona::where('nombre', 'ilike', '%' . $query . '%')->get();
+
+        // Devuelve los resultados como parte de un arreglo asociativo
+        return response()->json(['repartos' => $resultados]);
+    }
+
+    public function buscarGuionista(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Realiza la búsqueda en la base de datos y obtén los resultados
+        $resultados = Persona::where('nombre', 'ilike', '%' . $query . '%')->get();
+
+        // Devuelve los resultados como parte de un arreglo asociativo
+        return response()->json(['guionistas' => $resultados]);
+    }
+
+    public function buscarFotografia(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Realiza la búsqueda en la base de datos y obtén los resultados
+        $resultados = Persona::where('nombre', 'ilike', '%' . $query . '%')->get();
+
+        // Devuelve los resultados como parte de un arreglo asociativo
+        return response()->json(['fotografias' => $resultados]);
+    }
+
+    public function buscarCompositor(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Realiza la búsqueda en la base de datos y obtén los resultados
+        $resultados = Persona::where('nombre', 'ilike', '%' . $query . '%')->get();
+
+        // Devuelve los resultados como parte de un arreglo asociativo
+        return response()->json(['compositores' => $resultados]);
+    }
+
+    public function buscarDirector(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Realiza la búsqueda en la base de datos y obtén los resultados
+        $resultados = Persona::where('nombre', 'ilike', '%' . $query . '%')->get();
+
+        // Devuelve los resultados como parte de un arreglo asociativo
+        return response()->json(['directores' => $resultados]);
+    }
+
+    public function updateBusqueda(Request $request, Audiovisual $audiovisual)
+    {
+        // Obtén el nombre del género y la compañía desde la solicitud
+        $nombreGenero = $request->input('search_genero');
+        $nombreCompany = $request->input('search_company');
+        $nombreReparto = $request->input('search_reparto');
+        $nombreGuionista = $request->input('search_guionista');
+        $nombreFotografia = $request->input('search_fotografia');
+        $nombreCompositor = $request->input('search_compositor');
+        $nombreDirector = $request->input('search_director');
+
+        // Verificar si se proporcionó información para el género y la compañía
+        if ($nombreGenero) {
+            // Busca en la base de datos o crea uno nuevo si no existe
+            $genero = Genero::firstOrCreate(['nombre' => $nombreGenero]);
+
+            // Asociar al audiovisual sin eliminar los existentes
+            $audiovisual->generos()->syncWithoutDetaching([$genero->id]);
+        }
+
+        if ($nombreCompany) {
+            $company = Company::firstOrCreate(['nombre' => $nombreCompany]);
+
+            $audiovisual->companies()->syncWithoutDetaching([$company->id]);
+        }
+
+        if ($nombreReparto) {
+            $reparto = Persona::firstOrCreate(['nombre' => $nombreReparto]);
+
+            $audiovisual->repartos()->syncWithoutDetaching([$reparto->id]);
+        }
+
+        if ($nombreGuionista) {
+            $guionista = Persona::firstOrCreate(['nombre' => $nombreGuionista]);
+
+            $audiovisual->guionistas()->syncWithoutDetaching([$guionista->id]);
+        }
+
+        if ($nombreFotografia) {
+            $fotografia = Persona::firstOrCreate(['nombre' => $nombreFotografia]);
+
+            $audiovisual->fotografias()->syncWithoutDetaching([$fotografia->id]);
+        }
+
+        if ($nombreCompositor) {
+            $compositor = Persona::firstOrCreate(['nombre' => $nombreCompositor]);
+
+            $audiovisual->compositores()->syncWithoutDetaching([$compositor->id]);
+        }
+
+        if ($nombreDirector) {
+            $director = Persona::firstOrCreate(['nombre' => $nombreDirector]);
+
+            $audiovisual->directores()->syncWithoutDetaching([$director->id]);
+        }
+
+        return redirect()->route('admin.audiovisuales.index')->with('success', 'El elenco ha sido modificado con éxito');
+    }
+
+
+    public function eliminarGenero(Audiovisual $audiovisual, Genero $genero)
+    {
+        $audiovisual->generos()->detach($genero->id);
+
+        return redirect()->route('admin.audiovisuales.index', $audiovisual)
+            ->with('success', 'Género eliminado correctamente.');
+    }
+
+    public function eliminarCompania(Audiovisual $audiovisual, Company $company)
+    {
+        $audiovisual->companies()->detach($company->id);
+
+        return redirect()->route('admin.audiovisuales.index', $audiovisual)
+            ->with('success', 'Compañía eliminada correctamente.');
+    }
+
+    public function eliminarDirector(Audiovisual $audiovisual, Persona $director)
+    {
+        $audiovisual->directores()->detach($director->id);
+
+        return redirect()->route('admin.audiovisuales.index', $audiovisual)
+            ->with('success', 'Director eliminado correctamente.');
+    }
+
+    public function eliminarCompositor(Audiovisual $audiovisual, Persona $compositor)
+    {
+        $audiovisual->compositores()->detach($compositor->id);
+
+        return redirect()->route('admin.audiovisuales.index', $audiovisual)
+            ->with('success', 'Compositor eliminado correctamente.');
+    }
+
+    public function eliminarFotografia(Audiovisual $audiovisual, Persona $fotografia)
+    {
+        $audiovisual->fotografias()->detach($fotografia->id);
+
+        return redirect()->route('admin.audiovisuales.index', $audiovisual)
+            ->with('success', 'Director de fotografía eliminado correctamente.');
+    }
+
+    public function eliminarGuionista(Audiovisual $audiovisual, Persona $guionista)
+    {
+        $audiovisual->guionistas()->detach($guionista->id);
+
+        return redirect()->route('admin.audiovisuales.index', $audiovisual)
+            ->with('success', 'Guionista eliminado correctamente.');
+    }
+
+    public function eliminarReparto(Audiovisual $audiovisual, Persona $reparto)
+    {
+        $audiovisual->repartos()->detach($reparto->id);
+
+        return redirect()->route('admin.audiovisuales.index', $audiovisual)
+            ->with('success', 'Actor/actriz eliminado correctamente.');
     }
 }
