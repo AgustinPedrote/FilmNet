@@ -7,36 +7,28 @@
             <!-- Contenedor para el logo y enlaces de navegación -->
             <div class="flex h-14">
                 <!-- Logo con espacio a la derecha -->
-                <div class="shrink-0 flex items-center mb-10 mr-4">
+                <div class="shrink-0 flex items-center mb-10 mr-8">
                     <a href="{{ route('home.index') }}">
                         <x-application-logo class="block fill-current text-gray-800" />
                     </a>
                 </div>
                 <!-- Enlaces de navegación -->
                 <div class="flex space-x-4 sm:space-x-6 relative z-20">
-                    <x-nav-link :href="route('home.index')" :active="request()->routeIs('home.index')">
+                    <x-nav-link :href="route('home.index')" :active="request()->routeIs('home.index')" class="text-xl">
                         {{ __('Inicio') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('peliculas.index')" :active="request()->routeIs('peliculas.index')">
+                    <x-nav-link :href="route('peliculas.index')" :active="request()->routeIs('peliculas.index')" class="text-xl">
                         {{ __('Peliculas') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('series.index')" :active="request()->routeIs('series.index')">
+                    <x-nav-link :href="route('series.index')" :active="request()->routeIs('series.index')" class="text-xl">
                         {{ __('Series') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('documentales.index')" :active="request()->routeIs('documentales.index')">
+                    <x-nav-link :href="route('documentales.index')" :active="request()->routeIs('documentales.index')" class="text-xl">
                         {{ __('Documentales') }}
                     </x-nav-link>
-                </div>
-
-                {{-- Buscador --}}
-                <div class="w-72 items-center hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <input type="text" id="search-navbar"
-                        class="h-10 block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500
-                        focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Buscar...">
                 </div>
             </div>
 
@@ -50,7 +42,7 @@
                             <x-slot name="trigger">
                                 <button
                                     class="inline-flex items-center px-3 py-2 border border-transparent text-md leading-4 font-semibold rounded-md text-white bg-blue-500 hover:text-yellow-300 focus:outline-none transition ease-in-out duration-150">
-                                    <div>{{ Auth::user()->name }}</div>
+                                    <div class="text-base">{{ Auth::user()->name }}</div>
                                     <div class="ml-1">
                                         <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 20 20">
@@ -65,9 +57,9 @@
                             <!-- Contenido del menú desplegable -->
                             <x-slot name="content">
                                 @if (Auth::user()->rol_id == 2)
-                                <x-dropdown-link :href="route('admin.index')">
-                                    {{ __('Panel de administración') }}
-                                </x-dropdown-link>
+                                    <x-dropdown-link :href="route('admin.index')">
+                                        {{ __('Panel de administración') }}
+                                    </x-dropdown-link>
                                 @endif
                                 <x-dropdown-link :href="route('votaciones.index')">
                                     {{ __('Mis votaciones') }}
@@ -104,11 +96,14 @@
                     @else
                         {{-- Iniciar sesión y Registrar --}}
                         <a href="{{ route('login') }}"
-                            class="text-md font-semibold text-white hover:text-yellow-300 dark:text-gray-400 dark:hover:text-white">Iniciar
-                            sesión</a>
+                            class="text-base font-semibold text-white hover:text-yellow-300 dark:text-gray-400 dark:hover:text-white">
+                            Iniciar sesión
+                        </a>
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}"
-                                class="text-md ml-4 font-semibold text-white hover:text-yellow-300 dark:text-gray-400 dark:hover:text-white">Registrarse</a>
+                                class="text-base ml-4 font-semibold text-white hover:text-yellow-300 dark:text-gray-400 dark:hover:text-white">
+                                Registrarse
+                            </a>
                         @endif
                     @endauth
                 @endif
