@@ -48,9 +48,9 @@
                                                  @csrf
                                                  @method('DELETE')
                                                  <button type="submit"
-                                                     class="text-red-500 hover:text-red-600 focus:outline-none inline-flex items-center">
-                                                     <span>{{ $director->nombre }}</span>
-                                                     <svg class="ml-0.5 w-4 h-4" fill="none" stroke="currentColor"
+                                                     class="text-red-500 hover:text-red-600 focus:outline-none flex items-center bg-red-100 dark:bg-red-800 rounded p-2">
+                                                     <span class="mr-2">{{ $director->nombre }}</span>
+                                                     <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                                          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                          <path stroke-linecap="round" stroke-linejoin="round"
                                                              stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -61,9 +61,7 @@
                                      @endforeach
                                  </ul>
                              @else
-                                 <label for="nombre" class="block text-base font-medium text-gray-600">
-                                     Ningún director asignado
-                                 </label>
+                                 <p class="text-gray-600">Ningún director asignado</p>
                              @endif
                          </div>
 
@@ -71,6 +69,7 @@
                          <div class="mb-6">
                              <x-input-label for="search_compositor" :value="__('Compositor:')"
                                  class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
+
                              @if ($audiovisual->compositores->isNotEmpty())
                                  <ul class="flex flex-wrap">
                                      @foreach ($audiovisual->compositores as $compositor)
@@ -81,9 +80,9 @@
                                                  @csrf
                                                  @method('DELETE')
                                                  <button type="submit"
-                                                     class="text-red-500 hover:text-red-600 focus:outline-none inline-flex items-center">
-                                                     <span>{{ $compositor->nombre }}</span>
-                                                     <svg class="ml-0.5 w-4 h-4" fill="none" stroke="currentColor"
+                                                     class="text-red-500 hover:text-red-600 focus:outline-none flex items-center bg-red-100 dark:bg-red-800 rounded p-2">
+                                                     <span class="mr-2">{{ $compositor->nombre }}</span>
+                                                     <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                                          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                          <path stroke-linecap="round" stroke-linejoin="round"
                                                              stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -94,9 +93,7 @@
                                      @endforeach
                                  </ul>
                              @else
-                                 <label for="nombre" class="block text-base font-medium text-gray-600">
-                                     Ningún compositor asignado
-                                 </label>
+                                 <p class="text-gray-600">Ningún compositor asignado</p>
                              @endif
                          </div>
 
@@ -104,6 +101,7 @@
                          <div class="mb-6">
                              <x-input-label for="search_fotografia" :value="__('Fotografía:')"
                                  class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
+
                              @if ($audiovisual->fotografias->isNotEmpty())
                                  <ul class="flex flex-wrap">
                                      @foreach ($audiovisual->fotografias as $fotografia)
@@ -114,9 +112,9 @@
                                                  @csrf
                                                  @method('DELETE')
                                                  <button type="submit"
-                                                     class="text-red-500 hover:text-red-600 focus:outline-none inline-flex items-center">
-                                                     <span>{{ $fotografia->nombre }}</span>
-                                                     <svg class="ml-0.5 w-4 h-4" fill="none" stroke="currentColor"
+                                                     class="text-red-500 hover:text-red-600 focus:outline-none flex items-center bg-red-100 dark:bg-red-800 rounded p-2">
+                                                     <span class="mr-2">{{ $fotografia->nombre }}</span>
+                                                     <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                                          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                          <path stroke-linecap="round" stroke-linejoin="round"
                                                              stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -127,12 +125,9 @@
                                      @endforeach
                                  </ul>
                              @else
-                                 <label for="nombre" class="block text-base font-medium text-gray-600">
-                                     Ningún director de fotografía asignado
-                                 </label>
+                                 <p class="text-gray-600">Ningún director de fotografía asignado</p>
                              @endif
                          </div>
-
                      </div>
 
                      <!-- Columna 2 -->
@@ -141,6 +136,7 @@
                          <div class="mb-6">
                              <x-input-label for="search_guionista" :value="__('Guionista:')"
                                  class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
+
                              @if ($audiovisual->guionistas->isNotEmpty())
                                  <ul class="flex flex-wrap">
                                      @foreach ($audiovisual->guionistas as $guionista)
@@ -151,9 +147,9 @@
                                                  @csrf
                                                  @method('DELETE')
                                                  <button type="submit"
-                                                     class="text-red-500 hover:text-red-600 focus:outline-none inline-flex items-center">
-                                                     <span>{{ $guionista->nombre }}</span>
-                                                     <svg class="ml-0.5 w-4 h-4" fill="none" stroke="currentColor"
+                                                     class="text-red-500 hover:text-red-600 focus:outline-none flex items-center bg-red-100 dark:bg-red-800 rounded p-2">
+                                                     <span class="mr-2">{{ $guionista->nombre }}</span>
+                                                     <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                                          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                          <path stroke-linecap="round" stroke-linejoin="round"
                                                              stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -164,9 +160,7 @@
                                      @endforeach
                                  </ul>
                              @else
-                                 <label for="nombre" class="block text-base font-medium text-gray-600">
-                                     Ningún guionista asignado
-                                 </label>
+                                 <p class="text-gray-600">Ningún guionista asignado</p>
                              @endif
                          </div>
 
@@ -174,6 +168,7 @@
                          <div class="mb-6">
                              <x-input-label for="search_reparto" :value="__('Reparto:')"
                                  class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
+
                              @if ($audiovisual->repartos->isNotEmpty())
                                  <ul class="flex flex-wrap">
                                      @foreach ($audiovisual->repartos as $reparto)
@@ -184,9 +179,9 @@
                                                  @csrf
                                                  @method('DELETE')
                                                  <button type="submit"
-                                                     class="text-red-500 hover:text-red-600 focus:outline-none inline-flex items-center">
-                                                     <span>{{ $reparto->nombre }}</span>
-                                                     <svg class="ml-0.5 w-4 h-4" fill="none" stroke="currentColor"
+                                                     class="text-red-500 hover:text-red-600 focus:outline-none flex items-center bg-red-100 dark:bg-red-800 rounded p-2">
+                                                     <span class="mr-2">{{ $reparto->nombre }}</span>
+                                                     <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                                          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                          <path stroke-linecap="round" stroke-linejoin="round"
                                                              stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -197,9 +192,7 @@
                                      @endforeach
                                  </ul>
                              @else
-                                 <label for="nombre" class="block text-base font-medium text-gray-600">
-                                     Ningún actor/actriz asignado
-                                 </label>
+                                 <p class="text-gray-600">Ningún actor/actriz asignado</p>
                              @endif
                          </div>
 
@@ -218,9 +211,9 @@
                                                  @csrf
                                                  @method('DELETE')
                                                  <button type="submit"
-                                                     class="text-red-500 hover:text-red-600 focus:outline-none inline-flex items-center">
-                                                     <span>{{ $company->nombre }}</span>
-                                                     <svg class="ml-0.5 w-4 h-4" fill="none" stroke="currentColor"
+                                                     class="text-red-500 hover:text-red-600 focus:outline-none flex items-center bg-red-100 dark:bg-red-800 rounded p-2">
+                                                     <span class="mr-2">{{ $company->nombre }}</span>
+                                                     <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                                          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                          <path stroke-linecap="round" stroke-linejoin="round"
                                                              stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -231,9 +224,7 @@
                                      @endforeach
                                  </ul>
                              @else
-                                 <label for="nombre" class="block text-base font-medium text-gray-600">
-                                     Ninguna compañía asignada
-                                 </label>
+                                 <p class="text-gray-600">Ninguna compañía asignada</p>
                              @endif
                          </div>
 
@@ -252,9 +243,9 @@
                                                  @csrf
                                                  @method('DELETE')
                                                  <button type="submit"
-                                                     class="text-red-500 hover:text-red-600 focus:outline-none inline-flex items-center">
-                                                     <span>{{ $genero->nombre }}</span>
-                                                     <svg class="ml-0.5 w-4 h-4" fill="none" stroke="currentColor"
+                                                     class="text-red-500 hover:text-red-600 focus:outline-none flex items-center bg-red-100 dark:bg-red-800 rounded p-2">
+                                                     <span class="mr-2">{{ $genero->nombre }}</span>
+                                                     <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                                          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                          <path stroke-linecap="round" stroke-linejoin="round"
                                                              stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -265,9 +256,7 @@
                                      @endforeach
                                  </ul>
                              @else
-                                 <label for="nombre" class="block text-base font-medium text-gray-600">
-                                     Ningún género asignado
-                                 </label>
+                                 <p class="text-gray-600">Ningún género asignado</p>
                              @endif
                          </div>
                      </div>
