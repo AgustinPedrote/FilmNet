@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
 
 /* INICIO FILMNET */
 Route::get('/', [AudiovisualController::class, 'index'])->name('home.index')->middleware('ValidadoMiddleware');
+Route::get('/buscar-audiovisual', [AudiovisualController::class, 'buscarAudiovisual'])->name('buscar.audiovisual');
 
 
 /* SECCIONES DE AUDIOVISUALES */

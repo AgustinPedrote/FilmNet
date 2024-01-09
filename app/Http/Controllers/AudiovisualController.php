@@ -25,6 +25,24 @@ class AudiovisualController extends Controller
         ]);
     }
 
+    public function buscarAudiovisual(Request $request)
+    {
+        // Recoge los datos del formulario de búsqueda.
+        $titulo = $request->input('search');
+
+        // Consulta la base de datos
+        $resultados = Audiovisual::query()
+            ->whereRaw('LOWER(titulo) like ?', ['%' . strtolower($titulo) . '%'])
+            ->orderBy('titulo')
+            ->get();
+
+        $view = view('audiovisuales._busqueda', ['items' => $resultados]);
+
+        return $view->render();
+    }
+
+
+
     public function peliculasIndex()
     {
         // Obtener todas las películas ordenadas por id de forma descendente paginadas de 10 en 10

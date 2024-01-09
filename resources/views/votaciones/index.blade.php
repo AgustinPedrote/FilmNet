@@ -4,10 +4,10 @@
     </h1>
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
-            @if ($votaciones->isEmpty())
-                <p class="text-center text-lg text-gray-500">No has realizado votaciones.</p>
-            @else
+        @if ($votaciones->isEmpty())
+            <p class="text-gray-500 text-lg text-center mt-8 h-screen">No has realizado votaciones.</p>
+        @else
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
                 <table class="min-w-full divide-y divide-gray-100 text-left">
                     <thead class="bg-gray-100">
                         <tr>
@@ -78,8 +78,8 @@
                         @endforeach
                     </tbody>
                 </table>
-            @endif
-        </div>
+        @endif
+    </div>
     </div>
 
     <!-- Botón para volver a la página anterior -->

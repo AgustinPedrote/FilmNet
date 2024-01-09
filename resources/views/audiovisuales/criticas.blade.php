@@ -43,8 +43,7 @@
         </a>
     </div>
 
-    @if ($criticas != null)
-
+    @if (!$criticas->isEmpty())
         <!-- Lógica para que la crítica del usuario logueado siempre salga en primer lugar -->
         @php
             $criticasUsuarioLogueado = [];
@@ -178,7 +177,7 @@
         @endforeach
     @else
         <!-- Mensaje si no hay críticas -->
-        <p class="text-lg text-center font-semibold">No hay críticas disponibles.</p>
+        <p class="text-gray-500 text-lg text-center mt-8 h-screen">No hay críticas disponibles.</p>
     @endif
 
     <!-- paginación -->
