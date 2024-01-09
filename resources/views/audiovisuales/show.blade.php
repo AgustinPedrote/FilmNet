@@ -17,7 +17,7 @@
     <!-- Contenido de la Página -->
     <div class="flex flex-wrap items-start ml-6">
         <!-- Título del Audiovisual -->
-        <div class="w-full p-4 mt-4">
+        <div class="w-full p-4 mt-16">
             <!-- Título -->
             <h2 class="font-semibold text-2xl text-gray-800 leading-tight border-b-2 border-blue-500 w-11/12">
                 {{ $audiovisual->titulo }}
@@ -42,7 +42,7 @@
                 <div class="mb-2">
                     <strong>Director:</strong>
                     @foreach ($audiovisual->directores as $director)
-                        <a href="{{ route('personas.show', $director) }}" class="hover:text-blue-500 hover:underline">
+                        <a href="{{ route('personas.show', $director) }}" class="text-blue-500 hover:underline">
                             {{ $director->nombre }}
                         </a>
                         @if (!$loop->last)
@@ -55,7 +55,7 @@
                 <div class="mb-2">
                     <strong>Compositor:</strong>
                     @foreach ($audiovisual->compositores as $compositor)
-                        <a href="{{ route('personas.show', $compositor) }}" class="hover:text-blue-500 hover:underline">
+                        <a href="{{ route('personas.show', $compositor) }}" class="text-blue-500 hover:underline">
                             {{ $compositor->nombre }}
                         </a>
                         @if (!$loop->last)
@@ -68,7 +68,7 @@
                 <div class="mb-2">
                     <strong>Fotografía:</strong>
                     @foreach ($audiovisual->fotografias as $fotografia)
-                        <a href="{{ route('personas.show', $fotografia) }}" class="hover:text-blue-500 hover:underline">
+                        <a href="{{ route('personas.show', $fotografia) }}" class="text-blue-500 hover:underline">
                             {{ $fotografia->nombre }}
                         </a>
                         @if (!$loop->last)
@@ -81,7 +81,7 @@
                 <div class="mb-2">
                     <strong>Guionista:</strong>
                     @foreach ($audiovisual->guionistas as $guionista)
-                        <a href="{{ route('personas.show', $guionista) }}" class="hover:text-blue-500 hover:underline">
+                        <a href="{{ route('personas.show', $guionista) }}" class="text-blue-500 hover:underline">
                             {{ $guionista->nombre }}
                         </a>
                         @if (!$loop->last)
@@ -94,7 +94,7 @@
                 <div class="mb-2">
                     <strong>Reparto:</strong>
                     @foreach ($audiovisual->repartos as $reparto)
-                        <a href="{{ route('personas.show', $reparto) }}" class="hover:text-blue-500 hover:underline">
+                        <a href="{{ route('personas.show', $reparto) }}" class="text-blue-500 hover:underline">
                             {{ $reparto->nombre }}
                         </a>
                         @if (!$loop->last)

@@ -1,5 +1,5 @@
 <x-app-layout>
-    <h1 class="text-2xl font-bold mb-6 mt-4 ml-10 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
+    <h1 class="text-2xl font-bold mb-6 mt-16 ml-10 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
         Mis votaciones
     </h1>
 
