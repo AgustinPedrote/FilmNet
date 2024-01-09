@@ -17,7 +17,7 @@
     <!-- Contenido de la Página -->
     <div class="flex flex-wrap items-start ml-6">
         <!-- Título del Audiovisual -->
-        <div class="w-full p-4 mt-16">
+        <div class="w-full p-4 mt-4">
             <!-- Título -->
             <h2 class="font-semibold text-2xl text-gray-800 leading-tight border-b-2 border-blue-500 w-11/12">
                 {{ $audiovisual->titulo }}

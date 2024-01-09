@@ -27,12 +27,9 @@ class AudiovisualController extends Controller
 
     public function buscarAudiovisual(Request $request)
     {
-        // Recoge los datos del formulario de búsqueda.
         $titulo = $request->input('search');
 
-        // Consulta la base de datos
-        $resultados = Audiovisual::query()
-            ->whereRaw('LOWER(titulo) like ?', ['%' . strtolower($titulo) . '%'])
+        $resultados = Audiovisual::where('titulo', 'ilike', '%' . $titulo . '%')
             ->orderBy('titulo')
             ->get();
 
@@ -40,8 +37,6 @@ class AudiovisualController extends Controller
 
         return $view->render();
     }
-
-
 
     public function peliculasIndex()
     {

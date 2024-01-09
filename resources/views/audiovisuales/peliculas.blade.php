@@ -1,6 +1,6 @@
 <x-app-layout>
     <!-- Título de Novedades -->
-    <h1 class="text-3xl font-extrabold text-center">
+    <h1 class="text-3xl font-extrabold text-center mt-4">
         <span class="relative inline-block rounded-lg overflow-hidden">
             <span class="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-500 border border-blue-600"></span>
             <span class="relative text-white z-10 p-4">Novedades</span>
