@@ -128,10 +128,26 @@ class UserController extends Controller
     public function misAmigos()
     {
         $amigos = auth()->user()->users;
+        $usuarios = User::all();
 
         return view('amigos.index', compact(
-            'amigos'
+            'amigos', 'usuarios'
         ));
+    }
+
+    public function buscarAmigo(Request $request)
+    {
+        $query = $request->input('query');
+        $resultados = User::where('name', 'ilike', '%' . $query . '%')->get();
+        return response()->json(['amigos' => $resultados]);
+    }
+
+    public function seguirAmigo(Request $request)
+    {
+        $usuario = User::where('id', auth()->user()->id)->first();
+        $usuario->users()->attach($request->amigo);
+
+        return redirect()->back()->with('success', 'Amigo seguído con éxito');
     }
 
     // Mi lista de audiovisuales en seguimiento (paginados)
