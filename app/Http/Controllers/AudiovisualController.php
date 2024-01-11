@@ -19,20 +19,38 @@ class AudiovisualController extends Controller
     public function index()
     {
         $audiovisuales = Audiovisual::orderBy('titulo')->get();
+        $generos = Genero::all();
 
         return view('home', [
             'audiovisuales' => $audiovisuales,
+            'generos' => $generos,
         ]);
     }
 
     public function buscarAudiovisual(Request $request)
     {
+        // Obtener los parámetros de búsqueda desde la solicitud
         $titulo = $request->input('search');
+        $genero = $request->input('genre');
 
-        $resultados = Audiovisual::where('titulo', 'ilike', '%' . $titulo . '%')
-            ->orderBy('titulo')
-            ->get();
+        // Crear una instancia de la consulta Eloquent para el modelo Audiovisual
+        $query = Audiovisual::query();
 
+        // Agregar condiciones a la consulta en función de los parámetros de búsqueda
+        if (!empty($titulo)) {
+            $query->where('titulo', 'ilike', '%' . $titulo . '%');
+        }
+
+        if (!empty($genero)) {
+            $query->whereHas('generos', function ($q) use ($genero) {
+                $q->where('genero_id', $genero);
+            });
+        }
+
+        // Ejecutar la consulta y obtener los resultados
+        $resultados = $query->orderBy('titulo')->get();
+
+        // Cargar la vista parcial '_busqueda' con los resultados y renderizarla
         $view = view('audiovisuales._busqueda', ['items' => $resultados]);
 
         return $view->render();

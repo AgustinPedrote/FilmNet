@@ -6,6 +6,17 @@
                 class="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition duration-300 ease-in-out">
         </div>
 
+        {{-- Desplegable de géneros --}}
+        <div class="md:w-1/3 mx-auto mt-2">
+            <select x-model="selectedGenre" x-on:change="buscarAudiovisual2"
+                class="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition duration-300 ease-in-out">
+                <option value="">Todos los géneros</option>
+                @foreach ($generos as $genero)
+                    <option value="{{ $genero->id }}">{{ $genero->nombre }}</option>
+                @endforeach
+            </select>
+        </div>
+
         {{-- Mostrar el título --}}
         <h1 class="text-2xl font-bold mb-6 mt-9 ml-10 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
             Audiovisuales

@@ -1,22 +1,26 @@
 function buscarAudiovisual() {
     return {
-        searchTerm: '',
+        searchTerm: "",
+        selectedGenre: "",
         resultados: [],
 
         buscarAudiovisual2() {
             let titulo = this.searchTerm.trim().toLowerCase();
+            let genero = this.selectedGenre;
 
-            axios.get(`/buscar-audiovisual`, {
+            axios
+                .get(`/buscar-audiovisual`, {
                     params: {
                         search: titulo,
-                    }
+                        genre: genero,
+                    },
                 })
-                .then(response => {
+                .then((response) => {
                     this.resultados = response.data;
                 })
-                .catch(error => {
+                .catch((error) => {
                     console.error(error);
                 });
-        }
+        },
     };
 }
