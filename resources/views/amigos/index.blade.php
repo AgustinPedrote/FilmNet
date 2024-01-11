@@ -1,5 +1,20 @@
 <x-app-layout>
-    <h1 class="text-2xl font-bold mb-6 mt-16 ml-10 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
+    <!-- Mensajes de éxito y error -->
+    <div class="relative z-10">
+        @if (session('success'))
+            <div class="absolute top-[-10px] left-0 w-full mr-10 z-50">
+                <x-success :status="session('success')" />
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="absolute top-[-10px] left-0 w-full mr-10 z-50">
+                <x-error :status="session('error')" />
+            </div>
+        @endif
+    </div>
+
+    <h1 class="text-2xl font-bold mb-6 mt-20 ml-10 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
         Amigos
     </h1>
 
@@ -32,18 +47,18 @@
 
             <!-- Lista de resultados de la búsqueda -->
             <ul id="amigoResults"
-                class="mt-2 space-y-2 cursor-pointer divide-y divide-gray-300 overflow-y-auto max-h-52">
+                class="absolute bg-white borde divide-y divide-gray-300 overflow-y-auto max-h-52 w-52 mt-1 z-10">
             </ul>
         </form>
     </div>
 
     @if ($amigos->isEmpty())
-        <div class="text-gray-500 text-lg text-center mt-8 h-screen">
+        <div class="text-gray-500 text-lg text-center mt-10 h-screen">
             <p>No sigues a ningún amigo.</p>
         </div>
     @else
         <div class="mx-auto w-11/12 h-screen">
-            <table class="min-w-full table-auto border border-gray-300 divide-y divide-gray-300">
+            <table class="min-w-full mt-10 table-auto border border-gray-300 divide-y divide-gray-300">
                 <thead>
                     <tr>
                         <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">Nombre</th>
@@ -105,6 +120,8 @@
                     var amigos = response.data.amigos;
 
                     if (Array.isArray(amigos) && amigos.length > 0) {
+                        amigoResults.classList.add("border", "border-gray-500", "rounded-lg", "p-2");
+
                         amigos.forEach(function(resultado) {
                             var li = document.createElement("li");
                             li.classList.add(
@@ -122,7 +139,9 @@
                                 var amigoHiddenInput = document.getElementById("amigoId");
                                 amigoHiddenInput.value = resultado.id;
 
+                                // Cerrar la lista de resultados y quitar algunos estilos
                                 amigoResults.innerHTML = "";
+                                amigoResults.classList.remove("border", "border-gray-300");
                             });
 
                             amigoResults.appendChild(li);

@@ -131,23 +131,40 @@ class UserController extends Controller
         $usuarios = User::all();
 
         return view('amigos.index', compact(
-            'amigos', 'usuarios'
+            'amigos',
+            'usuarios'
         ));
     }
 
     public function buscarAmigo(Request $request)
     {
         $query = $request->input('query');
+
         $resultados = User::where('name', 'ilike', '%' . $query . '%')->get();
         return response()->json(['amigos' => $resultados]);
     }
 
     public function seguirAmigo(Request $request)
     {
-        $usuario = User::where('id', auth()->user()->id)->first();
-        $usuario->users()->attach($request->amigo);
+        $usuario = User::find(auth()->user()->id);
+        $amigoId = $request->amigo;
 
-        return redirect()->back()->with('success', 'Amigo seguído con éxito');
+        // Verificar si el usuario ya sigue al amigo
+        if ($usuario->users()->where('id', $amigoId)->exists()) {
+            return redirect()->back()->with('error', 'Ya sigues a este amigo.');
+        }
+
+        // Verificar si el amigo con el ID proporcionado existe
+        $amigo = User::find($amigoId);
+
+        if (!$amigo) {
+            return redirect()->back()->with('error', 'El usuario no existe.');
+        }
+
+        // Agregar la relación sin duplicados
+        $usuario->users()->syncWithoutDetaching($amigoId);
+
+        return redirect()->back()->with('success', 'Amigo seguido con éxito');
     }
 
     // Mi lista de audiovisuales en seguimiento (paginados)
