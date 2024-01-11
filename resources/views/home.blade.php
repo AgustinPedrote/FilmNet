@@ -1,15 +1,15 @@
 <x-app-layout>
-    {{-- Campo de busqueda con Alpine.js --}}
-    <div x-data="buscarAudiovisual" x-init="buscarAudiovisual2" class="h-full">
-        <div class="md:w-1/3 mx-auto mt-2">
+    {{-- Campo de búsqueda con Alpine.js --}}
+    <div x-data="buscarAudiovisual" x-init="buscarAudiovisual2" class="container mx-auto py-8">
+        <div class="md:w-1/2 mx-auto mb-4">
             <input type="text" x-model="searchTerm" x-on:keyup="buscarAudiovisual2" placeholder="Buscar..."
-                class="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition duration-300 ease-in-out">
+                class="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition duration-300 ease-in-out">
         </div>
 
         {{-- Desplegable de géneros --}}
-        <div class="md:w-1/3 mx-auto mt-2">
+        <div class="md:w-1/2 mx-auto mb-4">
             <select x-model="selectedGenre" x-on:change="buscarAudiovisual2"
-                class="w-full p-3 mb-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition duration-300 ease-in-out">
+                class="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition duration-300 ease-in-out">
                 <option value="">Todos los géneros</option>
                 @foreach ($generos as $genero)
                     <option value="{{ $genero->id }}">{{ $genero->nombre }}</option>
