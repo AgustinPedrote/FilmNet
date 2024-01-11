@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCriticaRequest;
 use App\Http\Requests\UpdateCriticaRequest;
 use App\Models\Audiovisual;
 use App\Models\Critica;
+use App\Notifications\NewCriticaNotification;
 
 class CriticaController extends Controller
 {
@@ -22,13 +23,20 @@ class CriticaController extends Controller
     // Crear crítica para un audiovisual
     public function store(StoreCriticaRequest $request)
     {
+
         try {
             // Obtener el ID del usuario autenticado
             $user = auth()->user()->id;
 
+            $seguidores = auth()->user()->seguidores;
+
+            $usuarioCritica = auth()->user()->name;
+
+
             // Obtener la crítica y el ID del audiovisual del formulario de solicitud
             $critica = $request->critica;
             $audiovisual = $request->audiovisual;
+            $tituloAudiovisual = Audiovisual::find($audiovisual);
 
             $existeCritica = Critica::where('user_id', $user)->where('audiovisual_id', $audiovisual)->first();
 
@@ -48,6 +56,11 @@ class CriticaController extends Controller
                 'user_id' => $user,
                 'critica' => $critica,
             ]);
+
+            // Envia la notificación a cada seguidor
+            foreach ($seguidores as $seguidor) {
+                $seguidor->notify(new NewCriticaNotification($usuarioCritica, $tituloAudiovisual->titulo));
+            }
 
             // Redireccionar de nuevo a la ficha técnica del audiovisual
             return redirect()->back()->with('success', 'La crítica ha sido creada con éxito.');

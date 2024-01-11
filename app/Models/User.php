@@ -11,6 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -75,6 +76,12 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'amigos', 'user_id', 'amigo_id');
     }
 
+    public function seguidores()
+    {
+        return $this->belongsToMany(User::class, 'amigos', 'amigo_id', 'user_id');
+    }
+
+    // Audiovisuales que tengo en seguimiento
     public function usuariosSeguimientos()
     {
         return $this->belongsToMany(Audiovisual::class, 'seguimientos');
