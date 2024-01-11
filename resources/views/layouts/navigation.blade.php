@@ -70,11 +70,15 @@
                                 </x-dropdown-link>
 
                                 <x-dropdown-link :href="route('seguimientos.index')">
-                                    {{ __('Lista de seguimiento') }}
+                                    {{ __('Quiero ver') }}
                                 </x-dropdown-link>
 
-                                <x-dropdown-link :href="route('amigos.index')">
-                                    {{ __('Amigos') }}
+                                <x-dropdown-link :href="route('amigos.usuariosSeguidos')">
+                                    {{ __('Seguidos') }}
+                                </x-dropdown-link>
+
+                                <x-dropdown-link :href="route('amigos.usuariosSeguidores')">
+                                    {{ __('Seguidores') }}
                                 </x-dropdown-link>
 
                                 <x-dropdown-link :href="route('profile.edit')">

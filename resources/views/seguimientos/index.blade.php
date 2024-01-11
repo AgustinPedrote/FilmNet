@@ -1,11 +1,11 @@
 <x-app-layout>
     <h1 class="text-2xl font-bold mb-6 mt-20 ml-10 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
-        Lista de seguimiento
+        Quiero ver
     </h1>
 
     @if ($seguimientosPaginados->isEmpty())
         <div class="text-gray-500 text-lg text-center mt-8 h-screen">
-            <p>No hay seguimientos disponibles.</p>
+            <p>No hay audiovisuales.</p>
         </div>
     @else
         <div

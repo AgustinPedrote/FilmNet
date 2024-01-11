@@ -76,7 +76,8 @@ Route::put('/criticas/edit/{usuario_id}/{audiovisual_id}', [CriticaController::c
 // Mis críticas, borrar.
 Route::delete('/criticas/{usuario_id}/{audiovisual_id}', [CriticaController::class, 'destroy'])->name('criticas.destroy');
 // Mis amigos.
-Route::get('amigos', [UserController::class, 'misAmigos'])->name('amigos.index');
+Route::get('seguidores', [UserController::class, 'seguidores'])->name('amigos.usuariosSeguidores');
+Route::get('seguidos', [UserController::class, 'seguidos'])->name('amigos.usuariosSeguidos');
 Route::get('/busqueda/amigo', [UserController::class, 'buscarAmigo'])->name('busqueda.amigo');
 Route::post('/seguir/amigo', [UserController::class, 'seguirAmigo'])->name('seguir.amigo');
 // Mis seguimientos de audiovisuales.

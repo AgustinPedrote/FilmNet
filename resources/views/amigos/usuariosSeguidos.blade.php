@@ -15,10 +15,9 @@
     </div>
 
     <h1 class="text-2xl font-bold mb-6 mt-20 ml-10 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
-        Amigos
+        Usuarios seguidos
     </h1>
 
-    <!-- Nuevo campo de búsqueda para Audiovisual al que pertenece el premio -->
     <div class="md:w-1/3 mx-auto mt-2 mb-6">
         <form action="{{ route('seguir.amigo') }}" method="POST">
             @csrf
@@ -28,7 +27,7 @@
             <div class="flex items-center">
                 <input id="search_amigo"
                     class="block w-full border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm"
-                    type="text" name="search_amigo" placeholder="Buscar amigos..." />
+                    type="text" name="search_amigo" placeholder="Buscar usuarios..." />
 
                 <!-- Campo oculto -->
                 <input type="hidden" name="amigo" id="amigoId" class="amigo">
@@ -54,7 +53,7 @@
 
     @if ($amigos->isEmpty())
         <div class="text-gray-500 text-lg text-center mt-10 h-screen">
-            <p>No sigues a ningún amigo.</p>
+            <p>No sigues a ningún usuario.</p>
         </div>
     @else
         <div class="mx-auto w-11/12 h-screen">

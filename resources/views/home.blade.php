@@ -2,7 +2,7 @@
     {{-- Campo de búsqueda con Alpine.js --}}
     <div x-data="buscarAudiovisual" x-init="buscarAudiovisual2" class="container mx-auto py-8">
         <div class="md:w-1/2 mx-auto mb-4">
-            <input type="text" x-model="searchTerm" x-on:keyup="buscarAudiovisual2" placeholder="Buscar..."
+            <input type="text" x-model="searchTerm" x-on:keyup="buscarAudiovisual2" placeholder="Buscar audiovisual..."
                 class="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition duration-300 ease-in-out">
         </div>
 

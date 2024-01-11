@@ -124,15 +124,25 @@ class UserController extends Controller
         ));
     }
 
-    // Amigos del usuario logueado
-    public function misAmigos()
+    // Usuarios seguidos
+    public function seguidos()
     {
         $amigos = auth()->user()->users;
         $usuarios = User::all();
 
-        return view('amigos.index', compact(
+        return view('amigos.usuariosSeguidos', compact(
             'amigos',
             'usuarios'
+        ));
+    }
+
+    // Usuarios seguidores
+    public function seguidores()
+    {
+        $seguidores = auth()->user()->seguidores;
+
+        return view('amigos.usuariosSeguidores', compact(
+            'seguidores'
         ));
     }
 
