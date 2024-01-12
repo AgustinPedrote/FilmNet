@@ -105,7 +105,9 @@
         @include('criticas.delete')
 
     @empty
-        <p class="text-gray-500 text-lg text-center mt-8 h-screen">No has realizado críticas.</p>
+        <p class="text-gray-500 text-lg text-center mt-8 min-h-screen">
+            No has realizado críticas.
+        </p>
     @endforelse
 
     <!-- Botón para volver a la página anterior -->

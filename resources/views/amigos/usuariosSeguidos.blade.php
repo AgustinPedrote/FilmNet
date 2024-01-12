@@ -52,11 +52,11 @@
     </div>
 
     @if ($amigos->isEmpty())
-        <div class="text-gray-500 text-lg text-center mt-10 h-screen">
+        <div class="text-gray-500 text-lg text-center mt-10 min-h-screen">
             <p>No sigues a ningún usuario.</p>
         </div>
     @else
-        <div class="mx-auto w-11/12 h-screen">
+        <div class="mx-auto w-11/12 min-h-screen">
             <table class="min-w-full mt-10 table-auto border border-gray-300 divide-y divide-gray-300">
                 <thead>
                     <tr>
@@ -92,23 +92,22 @@
                 </tbody>
             </table>
         </div>
-
-        <!-- Botón para volver a la página anterior -->
-        <div class="mt-6">
-            <a href="#" onclick="goBack()" class="flex items-center ml-6">
-                <span class="bottom-4 right-4 p-2 bg-blue-500 text-white rounded-full cursor-pointer">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                        class="h-6 w-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                    </svg>
-                </span>
-            </a>
-        </div>
     @endif
+
+    <!-- Botón para volver a la página anterior -->
+    <div class="mt-6">
+        <a href="#" onclick="goBack()" class="flex items-center ml-6">
+            <span class="bottom-4 right-4 p-2 bg-blue-500 text-white rounded-full cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    class="h-6 w-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+            </span>
+        </a>
+    </div>
 
     <!-- Script para buscador de usuarios -->
     <script src="{{ asset('js/buscadorUsuarios.js') }}"></script>
 
 </x-app-layout>
-

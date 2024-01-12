@@ -4,7 +4,7 @@
     </h1>
 
     <div
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 justify-center mx-auto">
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 justify-center mx-auto min-h-screen">
         @foreach ($filmografia as $audiovisual)
             <a href="{{ route('audiovisual.show', $audiovisual) }}"
                 class="group p-4 transition duration-300 ease-in-out transform hover:scale-105">

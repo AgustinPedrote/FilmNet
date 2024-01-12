@@ -7,7 +7,7 @@
         <label for="critica" class="block text-lg font-bold text-gray-500">Tu Crítica:</label>
 
         <!-- Mensaje de error -->
-        <div id="error" class="text-red-500 ml-3">
+        <div id="error" class="text-red-500 ml-3 font-semibold text-lg">
             <!-- Contenido del mensaje de error -->
         </div>
     </div>

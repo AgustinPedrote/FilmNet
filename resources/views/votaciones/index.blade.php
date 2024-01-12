@@ -5,9 +5,9 @@
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         @if ($votaciones->isEmpty())
-            <p class="text-gray-500 text-lg text-center mt-8 h-screen">No has realizado votaciones.</p>
+            <p class="text-gray-500 text-lg text-center mt-8 min-h-screen">No has realizado votaciones.</p>
         @else
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6 min-h-screen">
                 <table class="min-w-full divide-y divide-gray-100 text-left">
                     <thead class="bg-gray-100">
                         <tr>
@@ -35,7 +35,7 @@
                                         <div class="flex-shrink-0 h-20 w-20">
                                             <a
                                                 href="{{ route('audiovisual.show', ['audiovisual' => $votacion->audiovisual]) }}">
-                                                <img class="h-20 w-20 rounded-full object-cover"
+                                                <img class="h-20 w-20 rounded-full object-cover border-2 border-gray-300 hover:border-blue-500 transition duration-300"
                                                     src="{{ $votacion->audiovisual->img }}"
                                                     alt="{{ $votacion->audiovisual->titulo }}">
                                             </a>
@@ -78,9 +78,10 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
         @endif
     </div>
-    </div>
+
 
     <!-- Botón para volver a la página anterior -->
     <div class="mt-6">
