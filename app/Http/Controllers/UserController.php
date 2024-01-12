@@ -124,6 +124,16 @@ class UserController extends Controller
         ));
     }
 
+    // Usuarios seguidores
+    public function seguidores()
+    {
+        $seguidores = auth()->user()->seguidores;
+
+        return view('amigos.usuariosSeguidores', compact(
+            'seguidores'
+        ));
+    }
+
     // Usuarios seguidos
     public function seguidos()
     {
@@ -133,16 +143,6 @@ class UserController extends Controller
         return view('amigos.usuariosSeguidos', compact(
             'amigos',
             'usuarios'
-        ));
-    }
-
-    // Usuarios seguidores
-    public function seguidores()
-    {
-        $seguidores = auth()->user()->seguidores;
-
-        return view('amigos.usuariosSeguidores', compact(
-            'seguidores'
         ));
     }
 
@@ -175,6 +175,19 @@ class UserController extends Controller
         $usuario->users()->syncWithoutDetaching($amigoId);
 
         return redirect()->back()->with('success', 'Amigo seguido con éxito');
+    }
+
+    public function dejarDeSeguir(User $amigo)
+    {
+        $usuario = User::find(auth()->user()->id);
+
+        // Verificar si el usuario sigue al amigo
+        if ($usuario->users()->where('id', $amigo->id)->exists()) {
+            $usuario->users()->detach($amigo->id);
+            return redirect()->back()->with('success', 'Dejaste de seguir a ' . $amigo->name);
+        }
+
+        return redirect()->back()->with('error', 'No estás siguiendo a ' . $amigo->name);
     }
 
     // Mi lista de audiovisuales en seguimiento (paginados)

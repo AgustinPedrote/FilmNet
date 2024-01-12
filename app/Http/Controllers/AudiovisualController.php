@@ -20,10 +20,14 @@ class AudiovisualController extends Controller
     {
         $audiovisuales = Audiovisual::orderBy('titulo')->get();
         $generos = Genero::all();
+        $tipos = Tipo::all();
+        $recomendaciones = Recomendacion::all();
 
         return view('home', [
             'audiovisuales' => $audiovisuales,
             'generos' => $generos,
+            'tipos' => $tipos,
+            'recomendaciones' => $recomendaciones,
         ]);
     }
 
@@ -32,6 +36,8 @@ class AudiovisualController extends Controller
         // Obtener los parámetros de búsqueda desde la solicitud
         $titulo = $request->input('search');
         $genero = $request->input('genre');
+        $tipo = $request->input('type');
+        $recomendacion = $request->input('recommendation');
 
         // Crear una instancia de la consulta Eloquent para el modelo Audiovisual
         $query = Audiovisual::query();
@@ -45,6 +51,21 @@ class AudiovisualController extends Controller
             $query->whereHas('generos', function ($q) use ($genero) {
                 $q->where('genero_id', $genero);
             });
+        }
+
+        if (!empty($tipo)) {
+            $query->where('tipo_id', $tipo);
+        }
+
+        // Agregar condición para recomendación de edad
+        if (!empty($recomendacion)) {
+            if ($recomendacion === 'todos') {
+                $query->where('recomendacion_id', '=', 1);
+            } elseif ($recomendacion === 'mayores_13') {
+                $query->where('recomendacion_id', '=', 2);
+            } elseif ($recomendacion === 'mayores_18') {
+                $query->where('recomendacion_id', '=', 3);
+            }
         }
 
         // Ejecutar la consulta y obtener los resultados

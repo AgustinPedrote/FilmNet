@@ -15,7 +15,7 @@
     </div>
 
     <h1 class="text-2xl font-bold mb-6 mt-20 ml-10 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
-        Usuarios seguidos
+        Usuarios seguidos ({{ $amigos->count() }})
     </h1>
 
     <div class="md:w-1/3 mx-auto mt-2 mb-6">
@@ -65,6 +65,7 @@
                         <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">Ciudad</th>
                         <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">Votaciones</th>
                         <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">Críticas</th>
+                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,6 +76,17 @@
                             <td class="py-2 px-4 border text-center">{{ $amigo->ciudad }}</td>
                             <td class="py-2 px-4 border text-center">{{ $amigo->votaciones->count() }}</td>
                             <td class="py-2 px-4 border text-center">{{ $amigo->criticas->count() }}</td>
+                            <td class="py-2 px-4 border text-center">
+                                <form action="{{ route('dejar.dejarSeguir', $amigo->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button type="submit"
+                                        class="cursor-pointer bg-red-500 border border-red-600 hover:bg-red-600 text-white rounded-md px-4 py-2 font-semibold focus:outline-none focus:shadow-outline-red active:bg-red-600">
+                                        Dejar de seguir
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -95,65 +107,8 @@
         </div>
     @endif
 
-    <script>
-        function goBack() {
-            window.history.back();
-        }
+    <!-- Script para buscador de usuarios -->
+    <script src="{{ asset('js/buscadorUsuarios.js') }}"></script>
 
-        function buscarAmigo() {
-            var searchQuery = document.getElementById("search_amigo").value.trim();
-            var amigoResults = document.getElementById("amigoResults");
-
-            if (searchQuery === "") {
-                amigoResults.innerHTML = "";
-                return;
-            }
-
-            axios.get("/busqueda/amigo", {
-                    params: {
-                        query: searchQuery,
-                    },
-                })
-                .then(function(response) {
-                    amigoResults.innerHTML = "";
-                    var amigos = response.data.amigos;
-
-                    if (Array.isArray(amigos) && amigos.length > 0) {
-                        amigoResults.classList.add("border", "border-gray-500", "rounded-lg", "p-2");
-
-                        amigos.forEach(function(resultado) {
-                            var li = document.createElement("li");
-                            li.classList.add(
-                                "hover:bg-blue-200",
-                                "transition",
-                                "duration-300",
-                                "ease-in-out"
-                            );
-                            li.textContent = resultado.name;
-
-                            li.addEventListener("click", function() {
-                                document.getElementById("search_amigo").value = resultado.name;
-
-                                // Cambia la línea para obtener el campo de entrada oculto correctamente
-                                var amigoHiddenInput = document.getElementById("amigoId");
-                                amigoHiddenInput.value = resultado.id;
-
-                                // Cerrar la lista de resultados y quitar algunos estilos
-                                amigoResults.innerHTML = "";
-                                amigoResults.classList.remove("border", "border-gray-300");
-                            });
-
-                            amigoResults.appendChild(li);
-                        });
-                    } else {
-                        console.error("No se encontraron amigos.");
-                        amigoResults.innerHTML = "<li>No se encontraron amigos.</li>";
-                    }
-                })
-                .catch(function(error) {
-                    console.error("Error al realizar la búsqueda:", error);
-                    amigoResults.innerHTML = "<li>Error en la búsqueda.</li>";
-                });
-        }
-    </script>
 </x-app-layout>
+
