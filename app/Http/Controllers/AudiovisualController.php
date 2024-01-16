@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreAudiovisualRequest;
 use App\Http\Requests\UpdateAudiovisualRequest;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Http\Request;
 use App\Models\Audiovisual;
 use App\Models\Recomendacion;
 use App\Models\Tipo;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Http\Request;
 use App\Models\Genero;
 use App\Models\Company;
 use App\Models\Persona;
@@ -16,6 +16,7 @@ use App\Models\Persona;
 
 class AudiovisualController extends Controller
 {
+    // Mostrar la página principal con la lista de audiovisuales
     public function index()
     {
         $audiovisuales = Audiovisual::orderBy('titulo')->get();
@@ -31,6 +32,7 @@ class AudiovisualController extends Controller
         ]);
     }
 
+    // Realizar la búsqueda de audiovisuales con filtros
     public function buscarAudiovisual(Request $request)
     {
         // Obtener los parámetros de búsqueda desde la solicitud
@@ -77,6 +79,7 @@ class AudiovisualController extends Controller
         return $view->render();
     }
 
+    // Mostrar listas de novedades de películas.
     public function peliculasIndex()
     {
         // Obtener todas las películas ordenadas por id de forma descendente paginadas de 10 en 10
@@ -87,6 +90,7 @@ class AudiovisualController extends Controller
         ]);
     }
 
+    // Mostrar listas de novedades de series.
     public function seriesIndex()
     {
         // Obtener todas las series ordenadas por id de forma descendente paginadas de 10 en 10
@@ -97,6 +101,7 @@ class AudiovisualController extends Controller
         ]);
     }
 
+    // Mostrar listas de novedades de documentales.
     public function documentalesIndex()
     {
         // Obtener todas las documentales ordenadas por id de forma descendente paginadas de 10 en 10
@@ -108,10 +113,9 @@ class AudiovisualController extends Controller
         );
     }
 
-    // Panel de control del administrador
+    // Mostrar la página principal de adminitración de audiovisuales (Admin)
     public function adminIndex()
     {
-        // Cargar explícitamente las relaciones necesarias para el modal.
         $audiovisuales = Audiovisual::with([
             'tipo',
             'companies',
@@ -141,6 +145,7 @@ class AudiovisualController extends Controller
         //
     }
 
+    // Almacenar un nuevo audiovisual en la base de datos (Admin)
     public function store(StoreAudiovisualRequest $request)
     {
         // Validar que se haya seleccionado un tipo de audiovisual
@@ -192,7 +197,7 @@ class AudiovisualController extends Controller
     }
 
 
-    // Ficha técnica del audiovisual
+    // Mostrar la ficha técnica de un audiovisual
     public function show(Audiovisual $audiovisual)
     {
         // Verifica si el usuario está autenticado
@@ -222,6 +227,7 @@ class AudiovisualController extends Controller
         //
     }
 
+    // actualizar la información de un audiovisual (Admin)
     public function update(UpdateAudiovisualRequest $request, Audiovisual $audiovisual)
     {
         // Verifica si se proporcionó una nueva imagen en la solicitud
@@ -254,6 +260,7 @@ class AudiovisualController extends Controller
         return redirect()->route('admin.audiovisuales.index')->with('success', 'El audiovisual ha sido modificado con éxito');
     }
 
+    // Eliminar un audiovisual de la base de datos (Admin)
     public function destroy(Audiovisual $audiovisual)
     {
         $audiovisual->delete();
@@ -298,9 +305,7 @@ class AudiovisualController extends Controller
         ]);
     }
 
-
-    // Funcionalidades del Panel de Administrador
-
+    // Buscar géneros en la base de datos y devolver los resultados (Admin)
     public function buscarGenero(Request $request)
     {
         $query = $request->input('query');
@@ -312,6 +317,7 @@ class AudiovisualController extends Controller
         return response()->json(['generos' => $resultados]);
     }
 
+    // Buscar compañías en la base de datos y devolver los resultados (Admin)
     public function buscarCompany(Request $request)
     {
         $query = $request->input('query');
@@ -323,6 +329,7 @@ class AudiovisualController extends Controller
         return response()->json(['companies' => $resultados]);
     }
 
+    // Buscar reparto en la base de datos y devolver los resultados (Admin)
     public function buscarReparto(Request $request)
     {
         $query = $request->input('query');
@@ -334,6 +341,7 @@ class AudiovisualController extends Controller
         return response()->json(['repartos' => $resultados]);
     }
 
+    // Buscar guionistas en la base de datos y devolver los resultados (Admin)
     public function buscarGuionista(Request $request)
     {
         $query = $request->input('query');
@@ -345,6 +353,7 @@ class AudiovisualController extends Controller
         return response()->json(['guionistas' => $resultados]);
     }
 
+    // Buscar directores de fotografía en la base de datos y devolver los resultados (Admin)
     public function buscarFotografia(Request $request)
     {
         $query = $request->input('query');
@@ -356,6 +365,7 @@ class AudiovisualController extends Controller
         return response()->json(['fotografias' => $resultados]);
     }
 
+    // Buscar compositores en la base de datos y devolver los resultados (Admin)
     public function buscarCompositor(Request $request)
     {
         $query = $request->input('query');
@@ -367,6 +377,7 @@ class AudiovisualController extends Controller
         return response()->json(['compositores' => $resultados]);
     }
 
+    // Buscar directores en la base de datos y devolver los resultados (Admin)
     public function buscarDirector(Request $request)
     {
         $query = $request->input('query');
@@ -378,6 +389,7 @@ class AudiovisualController extends Controller
         return response()->json(['directores' => $resultados]);
     }
 
+    // Actualizar la información del elenco del audiovisual (Admin)
     public function updateBusqueda(Request $request, Audiovisual $audiovisual)
     {
         // Obtén el nombre del género y la compañía desde la solicitud
@@ -437,7 +449,7 @@ class AudiovisualController extends Controller
         return redirect()->route('admin.audiovisuales.index')->with('success', 'El elenco ha sido modificado con éxito');
     }
 
-
+    // Eliminar relaciones del audiovisual de la base de datos
     public function eliminarGenero(Audiovisual $audiovisual, Genero $genero)
     {
         $audiovisual->generos()->detach($genero->id);
@@ -446,6 +458,7 @@ class AudiovisualController extends Controller
             ->with('success', 'Género eliminado correctamente.');
     }
 
+    // Eliminar relaciones del audiovisual de la base de datos
     public function eliminarCompania(Audiovisual $audiovisual, Company $company)
     {
         $audiovisual->companies()->detach($company->id);
@@ -454,6 +467,7 @@ class AudiovisualController extends Controller
             ->with('success', 'Compañía eliminada correctamente.');
     }
 
+    // Eliminar relaciones del audiovisual de la base de datos
     public function eliminarDirector(Audiovisual $audiovisual, Persona $director)
     {
         $audiovisual->directores()->detach($director->id);
@@ -462,6 +476,7 @@ class AudiovisualController extends Controller
             ->with('success', 'Director eliminado correctamente.');
     }
 
+    // Eliminar relaciones del audiovisual de la base de datos
     public function eliminarCompositor(Audiovisual $audiovisual, Persona $compositor)
     {
         $audiovisual->compositores()->detach($compositor->id);
@@ -470,6 +485,7 @@ class AudiovisualController extends Controller
             ->with('success', 'Compositor eliminado correctamente.');
     }
 
+    // Eliminar relaciones del audiovisual de la base de datos
     public function eliminarFotografia(Audiovisual $audiovisual, Persona $fotografia)
     {
         $audiovisual->fotografias()->detach($fotografia->id);
@@ -478,6 +494,7 @@ class AudiovisualController extends Controller
             ->with('success', 'Director de fotografía eliminado correctamente.');
     }
 
+    // Eliminar relaciones del audiovisual de la base de datos
     public function eliminarGuionista(Audiovisual $audiovisual, Persona $guionista)
     {
         $audiovisual->guionistas()->detach($guionista->id);
@@ -486,6 +503,7 @@ class AudiovisualController extends Controller
             ->with('success', 'Guionista eliminado correctamente.');
     }
 
+    // Eliminar relaciones del audiovisual de la base de datos
     public function eliminarReparto(Audiovisual $audiovisual, Persona $reparto)
     {
         $audiovisual->repartos()->detach($reparto->id);

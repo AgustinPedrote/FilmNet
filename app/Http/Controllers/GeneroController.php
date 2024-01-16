@@ -8,9 +8,7 @@ use App\Models\Genero;
 
 class GeneroController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Mostrar la lista paginada de géneros
     public function index()
     {
         $generos = Genero::orderBy('nombre')->paginate(10);
@@ -18,17 +16,12 @@ class GeneroController extends Controller
         return view('admin.generos.index', ['generos' => $generos]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Almacenar un nuevo género en la base de datos
     public function store(StoreGeneroRequest $request)
     {
         $nombre = $request->nombre;
@@ -39,25 +32,17 @@ class GeneroController extends Controller
         return redirect()->route('admin.generos.index')->with('success', 'El género ha sido creado con éxito');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Genero $genero)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Genero $genero)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // Método para actualizar la información de un género en la base de datos
     public function update(UpdateGeneroRequest $request, Genero $genero)
     {
         $genero->update($request->all());
@@ -65,9 +50,7 @@ class GeneroController extends Controller
         return redirect()->route('admin.generos.index')->with('success', 'El género ha sido modificado con éxito');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Método para eliminar un género, verificando si tiene roles relacionados
     public function destroy(Genero $genero)
     {
         // Verificar si el género tiene roles relacionados (audiovisuales)

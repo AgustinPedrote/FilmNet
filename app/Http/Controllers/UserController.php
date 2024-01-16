@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreCriticaRequest;
-use App\Models\User;
-use App\Models\Audiovisual;
-use App\Models\Critica;
 use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
-use App\Models\Rol;
-use App\Models\Votacion;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
-
+use App\Models\User;
+use App\Models\Critica;
+use App\Models\Rol;
+use App\Models\Votacion;
 
 class UserController extends Controller
 {
-    // Usuarios en el panel de administración
+    // Mostrar la lista paginada de usuarios en el panel de administración (Admin)
     public function index()
     {
         $users = User::orderBy('name')->paginate(4);
@@ -25,61 +21,43 @@ class UserController extends Controller
         return view('admin.users.index', ['users' => $users, 'roles' => $roles]);
     }
 
-    // Index en el panel de administración
+    // Vista del panel de administración (Admin)
     public function adminIndex()
     {
         return view('admin.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreUserRequest $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(User $user)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(User $user)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // Actualizar el rol de un usuario en la base de datos (Admin)
     public function update(Request $request, User $user)
     {
         $user->update([
             'rol_id' => $request->input('rol_id'),
         ]);
 
-        // Puedes redirigir a la vista de detalles del usuario o a donde desees
         return redirect()->route('admin.users.index', $user->id)->with('success', 'El rol del usuario ha sido actualizado con éxito.');
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Eliminar un usuario de la base de datos (Admin)
     public function destroy(User $user)
     {
         $user->delete();
@@ -87,7 +65,7 @@ class UserController extends Controller
         return redirect()->route('admin.users.index')->with('success', 'El usuario ha sido eliminado con éxito.');
     }
 
-    // Las votaciones del usuario logueado
+    // Mostrar las votaciones del usuario logueado
     public function misVotaciones()
     {
         // Votaciones del usuario logado y paginado
@@ -113,10 +91,9 @@ class UserController extends Controller
         ));
     }
 
-    // Las críticas del usuario logueado
+    // Mostrar las críticas del usuario logueado
     public function misCriticas()
     {
-        // Críticas del usuario logado paginadas
         $criticas = Critica::where('user_id', auth()->user()->id)->paginate(4);
 
         return view('criticas.miscriticas', compact(
@@ -124,7 +101,7 @@ class UserController extends Controller
         ));
     }
 
-    // Usuarios seguidores
+    // Mostrar los seguidores del usuario logueado
     public function seguidores()
     {
         $seguidores = auth()->user()->seguidores;
@@ -134,7 +111,7 @@ class UserController extends Controller
         ));
     }
 
-    // Usuarios seguidos
+    // Mostrar los usuarios seguidos por el usuario logueado
     public function seguidos()
     {
         $amigos = auth()->user()->users;
@@ -146,6 +123,7 @@ class UserController extends Controller
         ));
     }
 
+    // Buscar amigos (usuarios seguidos) de forma asíncrona
     public function buscarAmigo(Request $request)
     {
         $query = $request->input('query');
@@ -154,6 +132,7 @@ class UserController extends Controller
         return response()->json(['amigos' => $resultados]);
     }
 
+    // Seguir a un amigo (usuario seguido)
     public function seguirAmigo(Request $request)
     {
         $usuario = User::find(auth()->user()->id);
@@ -177,6 +156,7 @@ class UserController extends Controller
         return redirect()->back()->with('success', 'Amigo seguido con éxito');
     }
 
+    // Dejar de seguir a un amigo (usuario seguido)
     public function dejarDeSeguir(User $amigo)
     {
         $usuario = User::find(auth()->user()->id);
@@ -190,7 +170,7 @@ class UserController extends Controller
         return redirect()->back()->with('error', 'No estás siguiendo a ' . $amigo->name);
     }
 
-    // Mi lista de audiovisuales en seguimiento (paginados)
+    // Mostrar la lista de audiovisuales en seguimiento del usuario logueado (paginados)
     public function seguimientos()
     {
         // Audiovisuales en seguimiento sin paginar
@@ -208,7 +188,7 @@ class UserController extends Controller
         return view('seguimientos.index', compact('seguimientosPaginados'));
     }
 
-    // Botón asíncrono de lista de seguimiento
+    // Alternar el seguimiento de un audiovisual por el usuario logueado de forma asíncrona
     public function toggleSeguimiento(Request $request)
     {
         $audiovisualId = $request->input('audiovisual_id');
@@ -223,7 +203,7 @@ class UserController extends Controller
         }
     }
 
-    // Validar usuarios en el modo Admin
+    // Validar o invalidar a un usuario en el modo administrador (Admin)
     public function validar(User $user)
     {
         $user->validado = !$user->validado;
@@ -234,10 +214,9 @@ class UserController extends Controller
             ->with('success', 'Usuario validado/invalidado correctamente');
     }
 
-    // ver críticas como
+    // Ver críticas de un usuario específico en el modo administrador (Admin)
     public function verCriticas(User $user)
     {
-
         // Críticas del usuario logado paginadas
         $criticas = Critica::where('user_id', $user->id)->paginate(4);
 
@@ -247,7 +226,7 @@ class UserController extends Controller
         ));
     }
 
-    // Críticas de amigos
+    // Ver críticas de un usuario específico
     public function usuarioCriticas(User $usuario)
     {
         $criticas = $usuario->criticas;
@@ -255,7 +234,7 @@ class UserController extends Controller
         return view('amigos.usuarioCriticas', compact('usuario', 'criticas'));
     }
 
-    // Votaciones de amigos
+    // Ver votaciones de un usuario específico
     public function usuarioVotaciones(User $usuario)
     {
         // Votaciones del usuario y paginado
@@ -278,7 +257,7 @@ class UserController extends Controller
         return view('amigos.usuarioVotaciones', compact('votaciones', 'puntuacionesNombres', 'usuario'));
     }
 
-    // Eliminar una crítica como administrador
+    // Eliminar una crítica de un usuario específico como administrador (Admin)
     public function verCriticasDestroy($usuario_id, $audiovisual_id)
     {
         // Buscar la crítica pasandole el usuario y el audiovisual.

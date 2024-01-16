@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreVotacionRequest;
 use App\Http\Requests\UpdateVotacionRequest;
-use App\Models\Audiovisual;
 use App\Models\Votacion;
 
 class VotacionController extends Controller
@@ -19,7 +18,7 @@ class VotacionController extends Controller
         //
     }
 
-    // Votación del audiovisual por un usuario logueado
+    // Almacenar la votación de un audiovisual por un usuario logueado
     public function store(StoreVotacionRequest $request)
     {
         // Obtener el ID del usuario autenticado
@@ -51,6 +50,7 @@ class VotacionController extends Controller
         return response()->json('Voto guardado');
     }
 
+    // Mostrar las votaciones para un audiovisual específico
     public function show(StoreVotacionRequest $request)
     {
         // Obtener el ID del audiovisual desde la solicitud

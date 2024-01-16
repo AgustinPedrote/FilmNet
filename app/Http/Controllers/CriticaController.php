@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCriticaRequest;
 use App\Http\Requests\UpdateCriticaRequest;
+use App\Notifications\NewCriticaNotification;
 use App\Models\Audiovisual;
 use App\Models\Critica;
-use App\Notifications\NewCriticaNotification;
 
 class CriticaController extends Controller
 {
@@ -28,10 +28,11 @@ class CriticaController extends Controller
             // Obtener el ID del usuario autenticado
             $user = auth()->user()->id;
 
+            // Obtener los seguidores del usuario
             $seguidores = auth()->user()->seguidores;
 
+            // Obtener el nombre de usuario para la notificación
             $usuarioCritica = auth()->user()->name;
-
 
             // Obtener la crítica y el ID del audiovisual del formulario de solicitud
             $critica = $request->critica;
@@ -65,7 +66,6 @@ class CriticaController extends Controller
             // Redireccionar de nuevo a la ficha técnica del audiovisual
             return redirect()->back()->with('success', 'La crítica ha sido creada con éxito.');
         } catch (\Exception $e) {
-            // Manejar cualquier excepción que pueda ocurrir durante el proceso
             return redirect()->back()->with('error', 'Error al procesar la solicitud. Por favor, inténtalo de nuevo.');
         }
     }
@@ -101,7 +101,6 @@ class CriticaController extends Controller
                 return redirect()->route('ver.criticas', $audiovisual_id)->with('success', 'La crítica se ha modificado correctamente.');
             }
         } catch (\Exception $e) {
-            // Maneja cualquier excepción que pueda ocurrir durante el proceso
             return redirect()->back()->with('error', 'Error al procesar la solicitud. Por favor, inténtalo de nuevo.');
         }
     }

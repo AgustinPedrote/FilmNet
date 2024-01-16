@@ -8,6 +8,7 @@ use App\Models\Persona;
 
 class PersonaController extends Controller
 {
+    // Mostrar la lista paginada de personas
     public function index()
     {
         $personas = Persona::orderBy('nombre')->paginate(10);
@@ -20,6 +21,7 @@ class PersonaController extends Controller
         //
     }
 
+    // Almacenar una nueva persona en la base de datos
     public function store(StorePersonaRequest $request)
     {
         $nombre = $request->nombre;
@@ -31,9 +33,7 @@ class PersonaController extends Controller
         return redirect()->route('admin.personas.index')->with('success', 'La persona ha sido creada con éxito.');
     }
 
-    // Hay que comprobar si es director, actor, etc y poner sus audiovisuales.
-    // PersonaController.php
-
+    // Mostrar detalles de una persona y su filmografía
     public function show(Persona $audiovisual)
     {
         $persona = $audiovisual;
@@ -67,13 +67,12 @@ class PersonaController extends Controller
         return view('personas.show', compact('persona', 'filmografia'));
     }
 
-
-
     public function edit(Persona $persona)
     {
         //
     }
 
+    // Actualizar la información de una persona en la base de datos
     public function update(UpdatePersonaRequest $request, Persona $persona)
     {
 
@@ -83,6 +82,7 @@ class PersonaController extends Controller
         return redirect()->route('admin.personas.index')->with('success', 'La persona ha sido modificada con éxito.');
     }
 
+    // Eliminar una persona, verificando roles relacionados antes de la eliminación
     public function destroy(Persona $persona)
     {
         // Verificar si la persona tiene roles relacionados
