@@ -126,16 +126,26 @@
                                             @include('criticas.delete')
                                         @endif
                                     </div>
+
                                     <!-- Número de críticas y votaciones realizadas por el usuario -->
                                     <div class="font-medium mb-2 text-lg flex items-center">
                                         <span class="mr-2">
-                                            {{ $critica->user->criticas->count() }} críticas
+                                            <a href="{{ route('usuario.criticas', ['usuario' => $critica->user]) }}"
+                                                class="text-blue-500 hover:underline">
+                                                {{ $critica->user->criticas->count() }} críticas
+                                            </a>
                                         </span>
+
                                         <span class="text-gray-500">|</span>
+
                                         <span class="ml-2">
-                                            {{ $critica->user->votaciones->count() }} votaciones
+                                            <a href="{{ route('usuario.votaciones', ['usuario' => $critica->user]) }}"
+                                                class="text-blue-500 hover:underline">
+                                                {{ $critica->user->votaciones->count() }} votaciones
+                                            </a>
                                         </span>
                                     </div>
+
                                     <!-- Fecha de la crítica -->
                                     <div class="font-medium mb-2 text-lg flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14"
@@ -186,8 +196,8 @@
         </div>
     </div>
 
-     <!-- Botón para volver a la página anterior -->
-     <div class="mt-6">
+    <!-- Botón para volver a la página anterior -->
+    <div class="mt-6">
         <a href="{{ route('audiovisual.show', $audiovisual) }}" onclick="goBack()" class="flex items-center ml-6">
             <span class="bottom-4 right-4 p-2 bg-blue-500 text-white rounded-full cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"

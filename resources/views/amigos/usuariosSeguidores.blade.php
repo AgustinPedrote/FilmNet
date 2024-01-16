@@ -25,8 +25,18 @@
                             <td class="py-2 px-4 border text-center">{{ $seguido->name }}</td>
                             <td class="py-2 px-4 border text-center">{{ $seguido->pais }}</td>
                             <td class="py-2 px-4 border text-center">{{ $seguido->ciudad }}</td>
-                            <td class="py-2 px-4 border text-center">{{ $seguido->votaciones->count() }}</td>
-                            <td class="py-2 px-4 border text-center">{{ $seguido->criticas->count() }}</td>
+                            <td class="py-2 px-4 border text-center">
+                                <a href="{{ route('usuario.votaciones', ['usuario' => $seguido]) }}"
+                                    class="text-blue-500 hover:underline">
+                                    {{ $seguido->votaciones->count() }}
+                                </a>
+                            </td>
+                            <td class="py-2 px-4 border text-center">
+                                <a href="{{ route('usuario.criticas', ['usuario' => $seguido]) }}"
+                                    class="text-blue-500 hover:underline">
+                                    {{ $seguido->criticas->count() }}
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

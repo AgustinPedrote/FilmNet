@@ -247,6 +247,37 @@ class UserController extends Controller
         ));
     }
 
+    // Críticas de amigos
+    public function usuarioCriticas(User $usuario)
+    {
+        $criticas = $usuario->criticas;
+
+        return view('amigos.usuarioCriticas', compact('usuario', 'criticas'));
+    }
+
+    // Votaciones de amigos
+    public function usuarioVotaciones(User $usuario)
+    {
+        // Votaciones del usuario y paginado
+        $votaciones = Votacion::where('user_id', $usuario->id)->paginate(10);
+
+        // Array asociativo de nombres de puntuaciones
+        $puntuacionesNombres = [
+            1 => 'Muy mala',
+            2 => 'Mala',
+            3 => 'Floja',
+            4 => 'Regular',
+            5 => 'Pasable',
+            6 => 'Interesante',
+            7 => 'Buena',
+            8 => 'Notable',
+            9 => 'Muy buena',
+            10 => 'Excelente',
+        ];
+
+        return view('amigos.usuarioVotaciones', compact('votaciones', 'puntuacionesNombres', 'usuario'));
+    }
+
     // Eliminar una crítica como administrador
     public function verCriticasDestroy($usuario_id, $audiovisual_id)
     {

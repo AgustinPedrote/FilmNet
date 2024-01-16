@@ -74,8 +74,18 @@
                             <td class="py-2 px-4 border text-center">{{ $amigo->name }}</td>
                             <td class="py-2 px-4 border text-center">{{ $amigo->pais }}</td>
                             <td class="py-2 px-4 border text-center">{{ $amigo->ciudad }}</td>
-                            <td class="py-2 px-4 border text-center">{{ $amigo->votaciones->count() }}</td>
-                            <td class="py-2 px-4 border text-center">{{ $amigo->criticas->count() }}</td>
+                            <td class="py-2 px-4 border text-center">
+                                <a href="{{ route('usuario.votaciones', ['usuario' => $amigo]) }}"
+                                    class="text-blue-500 hover:underline">
+                                    {{$amigo->votaciones->count()}}
+                                </a>
+                            </td>
+                            <td class="py-2 px-4 border text-center">
+                                <a href="{{ route('usuario.criticas', ['usuario' => $amigo]) }}"
+                                    class="text-blue-500 hover:underline">
+                                    {{$amigo->criticas->count()}}
+                                </a>
+                            </td>
                             <td class="py-2 px-4 border text-center">
                                 <form action="{{ route('dejar.dejarSeguir', $amigo->id) }}" method="POST">
                                     @csrf

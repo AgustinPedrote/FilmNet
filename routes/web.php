@@ -81,6 +81,8 @@ Route::get('seguidos', [UserController::class, 'seguidos'])->name('amigos.usuari
 Route::get('/busqueda/amigo', [UserController::class, 'buscarAmigo'])->name('busqueda.amigo');
 Route::post('/seguir/amigo', [UserController::class, 'seguirAmigo'])->name('seguir.amigo');
 Route::delete('/dejar/seguir/{amigo}', [UserController::class, 'dejarDeSeguir'])->name('dejar.dejarSeguir');
+Route::get('usuario/{usuario}/criticas', [UserController::class, 'usuarioCriticas'])->name('usuario.criticas');
+Route::get('usuario/{usuario}/votaciones', [UserController::class, 'usuarioVotaciones'])->name('usuario.votaciones');
 // Mis seguimientos de audiovisuales.
 Route::get('seguimientos', [UserController::class, 'seguimientos'])->name('seguimientos.index');
 
