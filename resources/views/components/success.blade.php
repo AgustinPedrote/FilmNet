@@ -1,7 +1,7 @@
 @props(['status'])
 
 @if ($status)
-    <div id="alert-3" class="flex items-center justify-center text-green-500 bg-green-200 border-green-500 rounded-lg p-2 my-4"
+    <div id="alert-3" class="text-lg flex items-center justify-center text-green-500 bg-green-200 border-green-500 rounded-lg p-2 my-4 transition-all duration-500 ease-in-out"
         role="alert">
         <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
             viewBox="0 0 20 20">
@@ -23,4 +23,18 @@
             </svg>
         </button>
     </div>
+
+    <script>
+        // Oculta el mensaje automáticamente después de 5 segundos
+        setTimeout(function () {
+            var alert = document.getElementById('alert-3');
+            if (alert) {
+                alert.classList.add('opacity-0', 'transform', '-translate-y-2');
+                setTimeout(function () {
+                    alert.style.display = 'none';
+                }, 500);
+            }
+        }, 3000);
+    </script>
 @endif
+

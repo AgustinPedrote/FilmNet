@@ -449,66 +449,43 @@ class AudiovisualController extends Controller
         return redirect()->route('admin.audiovisuales.index')->with('success', 'El elenco ha sido modificado con éxito');
     }
 
-    // Eliminar relaciones del audiovisual de la base de datos
-    public function eliminarGenero(Audiovisual $audiovisual, Genero $genero)
+    // Eliminar relaciones del audiovisual, relacionados con el Elenco y el Equipo, de la base de datos (Admin)
+    public function eliminarRelacion(Audiovisual $audiovisual, $tipoRelacion, $idRelacion)
     {
-        $audiovisual->generos()->detach($genero->id);
+        $relacion = $audiovisual->{$tipoRelacion}()->find($idRelacion);
 
-        return redirect()->route('admin.audiovisuales.index', $audiovisual)
-            ->with('success', 'Género eliminado correctamente.');
+        if ($relacion) {
+            $audiovisual->{$tipoRelacion}()->detach($idRelacion);
+            $mensaje = "{$relacion->nombre} eliminado correctamente.";
+            $success = true;
+        } else {
+            $mensaje = 'Error al eliminar la relación.';
+            $success = false;
+        }
+
+        return response()->json(['success' => $success, 'message' => $mensaje]);
     }
 
-    // Eliminar relaciones del audiovisual de la base de datos
-    public function eliminarCompania(Audiovisual $audiovisual, Company $company)
+    // Eliminar todas las relaciones de Elenco y Equipo
+    public function eliminarTodoElenco($audiovisualId)
     {
-        $audiovisual->companies()->detach($company->id);
+        // Lógica para eliminar todas las relaciones del audiovisual
+        // Puedes usar el mismo enfoque que en la función eliminarRelacion
 
-        return redirect()->route('admin.audiovisuales.index', $audiovisual)
-            ->with('success', 'Compañía eliminada correctamente.');
-    }
+        // Ejemplo:
+        $audiovisual = Audiovisual::find($audiovisualId);
+        if (!$audiovisual) {
+            return response()->json(['success' => false, 'message' => 'Audiovisual no encontrado'], 404);
+        }
 
-    // Eliminar relaciones del audiovisual de la base de datos
-    public function eliminarDirector(Audiovisual $audiovisual, Persona $director)
-    {
-        $audiovisual->directores()->detach($director->id);
+        $audiovisual->directores()->detach();
+        $audiovisual->compositores()->detach();
+        $audiovisual->fotografias()->detach();
+        $audiovisual->guionistas()->detach();
+        $audiovisual->repartos()->detach();
+        $audiovisual->companies()->detach();
+        $audiovisual->generos()->detach();
 
-        return redirect()->route('admin.audiovisuales.index', $audiovisual)
-            ->with('success', 'Director eliminado correctamente.');
-    }
-
-    // Eliminar relaciones del audiovisual de la base de datos
-    public function eliminarCompositor(Audiovisual $audiovisual, Persona $compositor)
-    {
-        $audiovisual->compositores()->detach($compositor->id);
-
-        return redirect()->route('admin.audiovisuales.index', $audiovisual)
-            ->with('success', 'Compositor eliminado correctamente.');
-    }
-
-    // Eliminar relaciones del audiovisual de la base de datos
-    public function eliminarFotografia(Audiovisual $audiovisual, Persona $fotografia)
-    {
-        $audiovisual->fotografias()->detach($fotografia->id);
-
-        return redirect()->route('admin.audiovisuales.index', $audiovisual)
-            ->with('success', 'Director de fotografía eliminado correctamente.');
-    }
-
-    // Eliminar relaciones del audiovisual de la base de datos
-    public function eliminarGuionista(Audiovisual $audiovisual, Persona $guionista)
-    {
-        $audiovisual->guionistas()->detach($guionista->id);
-
-        return redirect()->route('admin.audiovisuales.index', $audiovisual)
-            ->with('success', 'Guionista eliminado correctamente.');
-    }
-
-    // Eliminar relaciones del audiovisual de la base de datos
-    public function eliminarReparto(Audiovisual $audiovisual, Persona $reparto)
-    {
-        $audiovisual->repartos()->detach($reparto->id);
-
-        return redirect()->route('admin.audiovisuales.index', $audiovisual)
-            ->with('success', 'Actor/actriz eliminado correctamente.');
+        return response()->json(['success' => true, 'message' => 'Todas las relaciones eliminadas con éxito']);
     }
 }

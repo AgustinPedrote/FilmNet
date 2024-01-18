@@ -50,7 +50,7 @@ class VotacionController extends Controller
         return response()->json('Voto guardado');
     }
 
-    // Mostrar las votaciones para un audiovisual específico
+    // Mostrar las votaciones del usuario para un audiovisual específico
     public function show(StoreVotacionRequest $request)
     {
         // Obtener el ID del audiovisual desde la solicitud
