@@ -5,7 +5,7 @@
          <!-- Modal content -->
          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
              <!-- Modal header -->
-             <div class="flex items-start justify-between p-1 border-b rounded-t dark:border-gray-600 bg-blue-500">
+             <div class="flex items-start justify-between p-1 border-b rounded-t dark:border-gray-600 bg-gray-700">
                  <button type="button"
                      class="text-white bg-transparent  hover:text-gray-100 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:text-white"
                      data-modal-hide="InsertarModal">
@@ -22,7 +22,7 @@
              <form action="{{ route('personas.store') }}" method="POST">
                  @csrf
                  <div class="p-6 space-y-6">
-                     <div class="mb-6">
+                     <div class="mb-4 p-4 border border-gray-300 rounded shadow-md">
                          <x-input-label for="nombre" :value="__('Nombre')"
                              class="block mb-2 text-xl font-bold text-gray-900 dark:text-white" />
 
@@ -53,7 +53,7 @@
 
                      <!-- Botón "Cancelar" -->
                      <button data-modal-hide="InsertarModal" type="button"
-                     class="cursor-pointer bg-red-500 border border-red-600 hover:bg-red-600 text-white rounded-md px-4 py-2 font-semibold focus:outline-none focus:shadow-outline-red active:bg-red-600">
+                         class="cursor-pointer bg-red-500 border border-red-600 hover:bg-red-600 text-white rounded-md px-4 py-2 font-semibold focus:outline-none focus:shadow-outline-red active:bg-red-600">
                          Cancelar
                      </button>
                  </div>

@@ -452,8 +452,10 @@ class AudiovisualController extends Controller
     // Eliminar relaciones del audiovisual, relacionados con el Elenco y el Equipo, de la base de datos (Admin)
     public function eliminarRelacion(Audiovisual $audiovisual, $tipoRelacion, $idRelacion)
     {
+        // Buscar la relación específica en el modelo de Audiovisual
         $relacion = $audiovisual->{$tipoRelacion}()->find($idRelacion);
 
+        // Verificar si se encontró la relación
         if ($relacion) {
             $audiovisual->{$tipoRelacion}()->detach($idRelacion);
             $mensaje = "{$relacion->nombre} eliminado correctamente.";
@@ -463,21 +465,22 @@ class AudiovisualController extends Controller
             $success = false;
         }
 
+        // Devolver una respuesta JSON indicando el éxito de la operación y un mensaje descriptivo
         return response()->json(['success' => $success, 'message' => $mensaje]);
     }
 
     // Eliminar todas las relaciones de Elenco y Equipo
     public function eliminarTodoElenco($audiovisualId)
     {
-        // Lógica para eliminar todas las relaciones del audiovisual
-        // Puedes usar el mismo enfoque que en la función eliminarRelacion
-
-        // Ejemplo:
+        // Buscar el audiovisual
         $audiovisual = Audiovisual::find($audiovisualId);
+
+        // Verificar si el audiovisual existe
         if (!$audiovisual) {
             return response()->json(['success' => false, 'message' => 'Audiovisual no encontrado'], 404);
         }
 
+        // Desvincular todas las relaciones
         $audiovisual->directores()->detach();
         $audiovisual->compositores()->detach();
         $audiovisual->fotografias()->detach();
@@ -486,6 +489,7 @@ class AudiovisualController extends Controller
         $audiovisual->companies()->detach();
         $audiovisual->generos()->detach();
 
+        // Devolver una respuesta JSON
         return response()->json(['success' => true, 'message' => 'Todas las relaciones eliminadas con éxito']);
     }
 }

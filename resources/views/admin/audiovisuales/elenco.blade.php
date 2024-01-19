@@ -5,7 +5,7 @@
          <!-- Modal content -->
          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
              <!-- Modal header -->
-             <div class="flex items-start justify-between p-1 border-b rounded-t dark:border-gray-600 bg-blue-500">
+             <div class="flex items-start justify-between p-1 border-b rounded-t dark:border-gray-600 bg-gray-700">
                  <button type="button"
                      class="text-white bg-transparent  hover:text-gray-100 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:text-white"
                      data-modal-hide="ElencoModal{{ $audiovisual }}">
@@ -30,17 +30,23 @@
                          <!-- Columna 1 -->
                          <div>
                              <!-- Titulo del audiovisual -->
-                             <div class="mb-20">
+                             <div class="mb-12 p-2">
                                  <div>
                                      <a href="{{ route('audiovisual.show', ['audiovisual' => $audiovisual]) }}"
-                                         class="text-blue-500 hover:text-blue-600 block text-2xl font-bold dark:text-white mt-5">
+                                         class="text-gray-700 hover:text-gray-900 border-b-2 border-blue-500 block text-2xl font-bold dark:text-white mt-5">
                                          {{ $audiovisual->titulo }}
                                      </a>
+                                     <div class="mt-3">
+
+                                         <span class="text-gray-600 dark:text-gray-400">
+                                             Tipo: {{ $audiovisual->tipo->nombre }}
+                                         </span>
+                                     </div>
                                  </div>
                              </div>
 
                              <!-- Nuevo campo de búsqueda para Director -->
-                             <div class="mb-6">
+                             <div class="mb-4 p-2 border border-gray-300 rounded shadow-md">
 
                                  <x-input-label for="search_director" :value="__('Director:')"
                                      class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
@@ -75,7 +81,7 @@
                              </div>
 
                              <!-- Nuevo campo de búsqueda para Compositor -->
-                             <div class="mb-6">
+                             <div class="mb-4 p-2 border border-gray-300 rounded shadow-md">
                                  <x-input-label for="search_compositor" :value="__('Compositor:')"
                                      class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
 
@@ -109,7 +115,7 @@
                              </div>
 
                              <!-- Nuevo campo de búsqueda para Fotografía -->
-                             <div class="mb-6">
+                             <div class="mb-4 p-2 border border-gray-300 rounded shadow-md">
                                  <x-input-label for="search_fotografia" :value="__('Fotografía:')"
                                      class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
 
@@ -146,7 +152,7 @@
                          <!-- Columna 2 -->
                          <div>
                              <!-- Nuevo campo de búsqueda para Guionista -->
-                             <div class="mb-6">
+                             <div class="mb-4 mt-2 p-2 border border-gray-300 rounded shadow-md">
                                  <x-input-label for="search_guionista" :value="__('Guionista:')"
                                      class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
                                  @if ($audiovisual->guionistas->isNotEmpty())
@@ -179,7 +185,7 @@
                              </div>
 
                              <!-- Nuevo campo de búsqueda para Reparto -->
-                             <div class="mb-6">
+                             <div class="mb-4 p-2 border border-gray-300 rounded shadow-md">
                                  <x-input-label for="search_reparto" :value="__('Reparto:')"
                                      class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
                                  @if ($audiovisual->repartos->isNotEmpty())
@@ -212,7 +218,7 @@
                              </div>
 
                              <!-- Nuevo campo de búsqueda para Compañía -->
-                             <div class="mb-6">
+                             <div class="mb-4 p-2 border border-gray-300 rounded shadow-md">
                                  <x-input-label for="search_company" :value="__('Compañía:')"
                                      class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
                                  @if ($audiovisual->companies->isNotEmpty())
@@ -245,7 +251,7 @@
                              </div>
 
                              <!-- Nuevo campo de búsqueda para Género -->
-                             <div class="mb-6">
+                             <div class="mb-4 p-2 border border-gray-300 rounded shadow-md">
                                  <x-input-label for="search_genero" :value="__('Género:')"
                                      class="block text-xl font-bold text-gray-900 dark:text-white mt-2" />
                                  @if ($audiovisual->generos->isNotEmpty())

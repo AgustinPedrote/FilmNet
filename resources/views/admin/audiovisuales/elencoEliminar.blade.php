@@ -4,8 +4,9 @@
      <div class="relative w-full max-w-7xl mx-auto">
          <!-- Modal content -->
          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+
              <!-- Modal header -->
-             <div class="flex items-start justify-between p-1 border-b rounded-t dark:border-gray-600 bg-blue-500">
+             <div class="flex items-start justify-between p-1 border-b rounded-t dark:border-gray-600 bg-gray-700">
                  <button type="button"
                      class="text-white bg-transparent  hover:text-gray-100 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:text-white"
                      data-modal-hide="ElencoEliminar{{ $audiovisualId }}">
@@ -14,27 +15,26 @@
                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                      </svg>
+                     <!-- Botón para cerrar el modal -->
                      <span class="sr-only">Close modal</span>
                  </button>
              </div>
 
-             {{-- HASTA AQUI ESTA CORRECTO --}}
-
+             <!-- Modal Content -->
              <div class="p-8 space-y-5">
                  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-
                      <!-- Columna 1 -->
                      <div>
                          <!-- Titulo del audiovisual -->
                          <div class="mb-5 p-2">
                              <div>
                                  <a href="{{ route('audiovisual.show', ['audiovisual' => $audiovisual]) }}"
-                                     class="text-blue-500 hover:text-blue-600 block text-2xl font-bold dark:text-white mt-3 mb-3">
+                                     class="text-gray-700 hover:text-gray-900 block text-2xl font-bold dark:text-white mt-3 mb-3 border-b-2 border-blue-500">
                                      {{ $audiovisual->titulo }}
                                  </a>
-                                 <!-- Enlace para eliminar todo el elenco y equipo -->
+
                                  <div class="flex items-center justify-between text-gray-600 dark:text-gray-400">
-                                     <span class="ttext-gray-600">
+                                     <span>
                                          Tipo: {{ $audiovisual->tipo->nombre }}
                                      </span>
                                      <!-- Enlace para eliminar todo el elenco y equipo -->
@@ -55,6 +55,7 @@
                                  <ul class="flex flex-wrap">
                                      @foreach ($audiovisual->directores as $director)
                                          <li class="mr-2 mb-2">
+                                             <!-- El formulario no se enviará a una URL convencional, sino que se manejará mediante JavaScript -->
                                              <form action="javascript:void(0)"
                                                  onsubmit="eliminarRelacion('{{ $audiovisual->id }}', 'directores', '{{ $director->id }}', this.parentElement); return false;">
                                                  @csrf
@@ -268,6 +269,7 @@
                      </div>
                  </div>
              </div>
+
              <!-- Modal footer -->
              <div
                  class="flex items-center justify-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
@@ -299,24 +301,26 @@
          document.querySelector(`[data-modal-hide="ElencoEliminar${audiovisualId}"]`).click();
      }
 
+     // Función confirm para mostrar una ventana emergente de confirmación
      function confirmarEliminarTodo(audiovisualId) {
-         // Utiliza la función confirm para mostrar una ventana emergente de confirmación
          if (confirm('¿Estás seguro de que deseas eliminar todo el elenco y equipo?')) {
              eliminarTodoElenco(audiovisualId);
          }
      }
 
+     // Función para eliminar todo el elenco de un audiovisual
      function eliminarTodoElenco(audiovisualId) {
          var xhr = new XMLHttpRequest();
 
+         // La función se llamará cada vez que cambie el estado de la solicitud
          xhr.onreadystatechange = function() {
              if (xhr.readyState === XMLHttpRequest.DONE) {
+                 // Verificar si la respuesta del servidor es exitosa (código 200)
                  if (xhr.status === 200) {
                      var response = JSON.parse(xhr.responseText);
                      if (response.success) {
-                         // Recargar la página antes de cerrar el modal
-                         location.reload();
                          document.querySelector(`[data-modal-hide="ElencoEliminar${audiovisualId}"]`).click();
+                         location.reload();
                      } else {
                          mostrarMensaje(response.message, 'alert');
                      }
@@ -326,17 +330,26 @@
              }
          };
 
+         // Configurar la solicitud DELETE a la URL  específica para eliminar elenco
          xhr.open('DELETE', `/audiovisuales/${audiovisualId}/eliminar-todo-elenco`, true);
+
+         // Configurar el encabezado para incluir el token CSRF
          xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').content);
+
+         // Enviar la solicitud DELETE al servidor
          xhr.send();
      }
 
+     // Envía una solicitud DELETE al servidor para eliminar una relación y maneja la respuesta.
      function eliminarRelacion(audiovisualId, tipoRelacion, relacionId, listItemElement) {
+         // Crear una nueva instancia de XMLHttpRequest
          var xhr = new XMLHttpRequest();
 
+         // La función se ejecutará cada vez que cambie el estado de la solicitud
          xhr.onreadystatechange = function() {
              if (xhr.readyState === XMLHttpRequest.DONE) {
                  if (xhr.status === 200) {
+                     // Analizar la respuesta JSON del servidor
                      var response = JSON.parse(xhr.responseText);
                      if (response.success) {
                          // Eliminar el elemento de la lista en el modal
@@ -351,13 +364,21 @@
              }
          };
 
+         // Configurar la solicitud DELETE a la URL específica para eliminar la relación
          xhr.open('DELETE', `/audiovisuales/${audiovisualId}/eliminar-relacion/${tipoRelacion}/${relacionId}`, true);
+
+         // Configurar el encabezado para incluir el token CSRF
          xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').content);
+
+         // Enviar la solicitud DELETE al servidor
          xhr.send();
      }
 
+     // Crea un elemento de mensaje y le aplica estilos según el tipo de mensaje.
      function mostrarMensaje(mensaje, tipoMensaje) {
+         // Crear un nuevo elemento div para el mensaje
          var mensajeElement = document.createElement('div');
+         // Asignar el texto del mensaje al elemento
          mensajeElement.innerText = mensaje;
 
          // Definir clases base comunes para todos los tipos de mensaje
@@ -379,26 +400,27 @@
                      'text-red-500', 'bg-red-200', 'border-red-500', 'my-4'
                  );
                  break;
-                 // Puedes agregar más casos según tus necesidades
          }
 
+         // Configurar estilos adicionales
          mensajeElement.style.width = '70%';
-         mensajeElement.style.top = '0'; // Ajusta este valor según tus necesidades
+         mensajeElement.style.top = '0';
 
+         // Agregar el elemento al cuerpo del documento HTML
          document.body.appendChild(mensajeElement);
 
-         // Forzar un reflow antes de cambiar las propiedades para activar la transición
+         // Transición de opacidad, se apliquen de manera suave y visible en el navegador.
          void mensajeElement.offsetHeight;
 
          // Mostrar el mensaje
          mensajeElement.style.opacity = '1';
 
-         // Ocultar el mensaje después de unos segundos (opcional)
+         // Ocultar el mensaje después de unos segundos
          setTimeout(function() {
              mensajeElement.style.opacity = '0';
              setTimeout(function() {
                  mensajeElement.remove();
-             }, 500); // El mensaje se eliminará después de 0.5 segundos de desaparecer
-         }, 3000); // El mensaje se ocultará después de 3 segundos, ajusta según tus necesidades
+             }, 500);
+         }, 3000);
      }
  </script>
