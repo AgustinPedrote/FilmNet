@@ -16,7 +16,7 @@ use App\Models\Persona;
 
 class AudiovisualController extends Controller
 {
-    // Mostrar la página principal con la lista de audiovisuales
+    // Mostrar la página principal con la lista de audiovisuales (HOME)
     public function index()
     {
         $audiovisuales = Audiovisual::orderBy('titulo')->get();
@@ -32,7 +32,7 @@ class AudiovisualController extends Controller
         ]);
     }
 
-    // Realizar la búsqueda de audiovisuales con filtros
+    // Realizar la búsqueda de audiovisuales con filtros (HOME)
     public function buscarAudiovisual(Request $request)
     {
         // Obtener los parámetros de búsqueda desde la solicitud
@@ -73,9 +73,10 @@ class AudiovisualController extends Controller
         // Ejecutar la consulta y obtener los resultados
         $resultados = $query->orderBy('titulo')->get();
 
-        // Cargar la vista parcial '_busqueda' con los resultados y renderizarla
+        // Cargar la vista parcial '_busqueda' con los resultados
         $view = view('audiovisuales._busqueda', ['items' => $resultados]);
 
+        // Devolver el HTML generado por la vista para ser utilizado en la respuesta y renderizado en el home
         return $view->render();
     }
 
@@ -197,7 +198,7 @@ class AudiovisualController extends Controller
     }
 
 
-    // Mostrar la ficha técnica de un audiovisual
+    // Mostrar la ficha técnica de un audiovisual (SHOW)
     public function show(Audiovisual $audiovisual)
     {
         // Verifica si el usuario está autenticado

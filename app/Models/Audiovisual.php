@@ -121,7 +121,7 @@ class Audiovisual extends Model
         return $this->votaciones->count();
     }
 
-    // Obtiene el tipo de audiovisual.
+    // Obtiene el tipo de audiovisual y se muestra cuando no estas logueado
     public function obtenerTipo()
     {
         if ($this->tipo->nombre == 'Película' || $this->tipo->nombre == 'Serie') {

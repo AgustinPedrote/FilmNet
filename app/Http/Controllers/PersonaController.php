@@ -38,6 +38,7 @@ class PersonaController extends Controller
     {
         $persona = $audiovisual;
 
+        // Crear una colección vacía
         $filmografia = collect();
 
         // Obtener la filmografía combinada de todos los roles

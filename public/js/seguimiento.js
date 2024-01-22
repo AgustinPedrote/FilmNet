@@ -1,9 +1,10 @@
 // Manejar el evento de clic de seguimiento
-
 function toggleSeguimiento() {
+    // Obtener referencia al formulario y al icono de estrella en el DOM
     var form = document.getElementById("toggleSeguimientoForm");
     var starIcon = document.getElementById("starIcon");
 
+    // Enviar una solicitud fetch al servidor para manejar el seguimiento
     fetch(form.action, {
         method: form.method,
         headers: {
@@ -15,7 +16,10 @@ function toggleSeguimiento() {
             audiovisual_id: form.querySelector('[name="audiovisual_id"]').value,
         }),
     })
+        // Primera respuesta del servidor a formato JSON.
         .then((response) => response.json())
+
+        // La segunda actualiza el color de relleno del icono de estrella
         .then((data) => {
             console.log(data);
 

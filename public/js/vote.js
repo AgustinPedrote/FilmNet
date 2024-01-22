@@ -14,7 +14,7 @@ async function saveVote(event, audiovisual) {
 
     console.log("Voto seleccionado:", voto);
 
-    // Enviar votaciones
+    // Primero solicitud: Enviar votaciones
     const result = await fetch("http://127.0.0.1:8000/votaciones/create", {
         method: "POST",
         body: JSON.stringify(audiovisual),
@@ -25,7 +25,7 @@ async function saveVote(event, audiovisual) {
         },
     });
 
-    // Refrescar votaciones
+    // Segunda solicitud: Refrescar votaciones
     const refresh = await fetch("http://127.0.0.1:8000/votaciones/show", {
         method: "POST",
         body: JSON.stringify(audiovisual),
@@ -35,6 +35,8 @@ async function saveVote(event, audiovisual) {
             "X-CSRF-Token": csrfToken,
         },
     });
+
+    // Actualización de la Interfaz:
 
     // Convertir en formato JSON
     const data = await refresh.json();
@@ -53,10 +55,14 @@ async function saveVote(event, audiovisual) {
     if (data.length !== 0) {
         var totalVotos = 0;
 
+        // Iterar sobre los datos recibidos
         for (var i = 0; i < data.length; i++) {
+            // Obtener el voto como un entero
             const voto = parseInt(data[i]["voto"], 10);
 
+            // Verificar si el voto es un número válido
             if (!isNaN(voto)) {
+                // Sumar el voto al total y contar los votos válidos
                 sum += voto;
                 totalVotos++;
             }
@@ -67,8 +73,6 @@ async function saveVote(event, audiovisual) {
             avg = sum / totalVotos;
         }
     }
-
-    console.log("Comparación:", voto.trim().toLowerCase() === "no vista");
 
     if (voto.trim().toLowerCase() === "no vista") {
         avg = "No vista";

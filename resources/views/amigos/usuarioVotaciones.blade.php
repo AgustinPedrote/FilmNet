@@ -21,7 +21,7 @@
                                 <div class="flex items-center justify-center">
                                     <span class="mr-2">Votos</span>
                                     <span class="bg-blue-500 text-white px-2 py-1 rounded-full">
-                                        {{ auth()->user()->votaciones->count() }}
+                                        {{ $votaciones->count() }}
                                     </span>
                                 </div>
                             </th>

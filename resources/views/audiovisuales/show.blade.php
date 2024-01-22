@@ -31,15 +31,15 @@
 
             <!-- Detalles adicionales con mayor margen -->
             <div class="text-lg text-gray-500 space-y-2 mb-4">
-                <div class="mb-2"><strong>Título Original:</strong> {{ $audiovisual->titulo_original }}</div>
-                <div class="mb-2"><strong>Año:</strong> {{ $audiovisual->year }}</div>
-                <div class="mb-2"><strong>Duración:</strong> {{ $audiovisual->duracion }} minutos</div>
-                <div class="mb-2"><strong>País:</strong> {{ $audiovisual->pais }}</div>
+                <div class="mb-3"><strong>Título Original:</strong> {{ $audiovisual->titulo_original }}</div>
+                <div class="mb-3"><strong>Año:</strong> {{ $audiovisual->year }}</div>
+                <div class="mb-3"><strong>Duración:</strong> {{ $audiovisual->duracion }} minutos</div>
+                <div class="mb-3"><strong>País:</strong> {{ $audiovisual->pais }}</div>
 
                 <!-- Mostrar información de las personas relacionadas -->
 
                 <!-- Directores -->
-                <div class="mb-2">
+                <div class="mb-3">
                     <strong>Director:</strong>
                     @foreach ($audiovisual->directores as $director)
                         <a href="{{ route('personas.show', $director) }}" class="text-blue-500 hover:underline">
@@ -52,7 +52,7 @@
                 </div>
 
                 <!-- Compositores -->
-                <div class="mb-2">
+                <div class="mb-3">
                     <strong>Compositor:</strong>
                     @foreach ($audiovisual->compositores as $compositor)
                         <a href="{{ route('personas.show', $compositor) }}" class="text-blue-500 hover:underline">
@@ -65,7 +65,7 @@
                 </div>
 
                 <!-- Directores de fotografía -->
-                <div class="mb-2">
+                <div class="mb-3">
                     <strong>Fotografía:</strong>
                     @foreach ($audiovisual->fotografias as $fotografia)
                         <a href="{{ route('personas.show', $fotografia) }}" class="text-blue-500 hover:underline">
@@ -78,7 +78,7 @@
                 </div>
 
                 <!-- Guionistas -->
-                <div class="mb-2">
+                <div class="mb-3">
                     <strong>Guionista:</strong>
                     @foreach ($audiovisual->guionistas as $guionista)
                         <a href="{{ route('personas.show', $guionista) }}" class="text-blue-500 hover:underline">
@@ -91,7 +91,7 @@
                 </div>
 
                 <!-- Reparto -->
-                <div class="mb-2">
+                <div class="mb-3">
                     <strong>Reparto:</strong>
                     @foreach ($audiovisual->repartos as $reparto)
                         <a href="{{ route('personas.show', $reparto) }}" class="text-blue-500 hover:underline">
@@ -104,7 +104,7 @@
                 </div>
 
                 <!-- Géneros -->
-                <div class="mb-2"><strong>Géneros:</strong>
+                <div class="mb-3"><strong>Géneros:</strong>
                     @foreach ($audiovisual->generos as $genero)
                         {{ $genero->nombre }}@if (!$loop->last)
                             ,
@@ -114,7 +114,7 @@
 
                 <!-- Premios -->
                 @if ($audiovisual->premios->count() > 0)
-                    <div class="mb-2"><strong>Premios:</strong>
+                    <div class="mb-3"><strong>Premios:</strong>
                         @foreach ($audiovisual->premios as $premio)
                             {{ $premio->nombre }} ({{ $premio->year }})@if (!$loop->last)
                                 ,
@@ -124,12 +124,12 @@
                 @endif
 
                 <!-- Recomendación de edad -->
-                <div class="mb-2">
+                <div class="mb-3">
                     @include('partials.recommendation')
                 </div>
 
                 <!-- Sinopsis -->
-                <div class="mb-2"><strong>Sinopsis:</strong> {{ $audiovisual->sinopsis }}</div>
+                <div class="mb-3"><strong>Sinopsis:</strong> {{ $audiovisual->sinopsis }}</div>
             </div>
 
             <!-- Formulario de Críticas -->
@@ -144,40 +144,87 @@
             <img src="{{ asset($audiovisual->img) }}" alt="{{ $audiovisual->titulo }}"
                 class="w-full h-auto object-cover md:w-48 mx-auto mb-6 rounded-lg shadow-md">
 
-            <div class="mb-6 text-center w-full md:w-48 bg-gray-100 rounded-md p-10 border-gray-300">
+            <div class="mb-6 text-center w-full md:w-48 bg-gray-100 rounded-md p-8 border border-gray-300">
 
                 <!-- Mostrar las estrellas (1 al 10) -->
                 <div id="stars-container" class="flex items-center justify-center mb-2">
                     @for ($i = 1; $i <= 10; $i++)
                         @if ($notaMedia !== null && $i <= $notaMedia)
-                            <span class="text-yellow-300 text-lg">&#9733;</span>
+                            <span class="text-yellow-300 text-xl">&#9733;</span>
                         @else
-                            <span class="text-gray-400 text-lg">&#9733;</span>
+                            <span class="text-gray-400 text-xl">&#9733;</span>
                         @endif
                     @endfor
                 </div>
 
                 <!-- Nota media de las votaciones -->
                 <div class="space-y-4">
-                    <p class="font-bold text-lg bg-white text-blue-500 bg-white-500 border border-gray-300 rounded-md p-3.5 mb-4"
+                    <p class="font-bold text-lg bg-white text-blue-500 border border-gray-300 rounded-md p-3.5 mb-4"
                         id="nota">
                         {{ $notaMedia ? number_format($notaMedia, 1) : 'No vista' }}
                     </p>
                 </div>
 
-                <div class="space-y-4">
-                    <!-- Number of votes -->
+                <div class="space-y-4 mb-4">
+                    <!-- Número de votos -->
                     <div class="bg-white rounded-md p-4 border border-gray-300">
-                        <p class="text-blue-500 font-bold" id="votos">
-                            {{ $notaMedia ? $numeroVotos . ' Votos' : '0 Votos' }}</p>
-                    </div>
-
-                    <!-- Link audiovisual críticas -->
-                    <div class="bg-white rounded-md p-4 border border-gray-300">
+                        <!-- Link audiovisual críticas -->
                         <a href="{{ route('ver.criticas', $audiovisual) }}"
                             class="text-blue-500 hover:underline font-bold">
                             {{ $audiovisual->criticas->count() }} Críticas
                         </a>
+
+                        <p class="text-blue-500 font-bold" id="votos">
+                            {{ $notaMedia ? $numeroVotos . ' Votos' : '0 Votos' }}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Barras de votación -->
+                <div class="flex flex-col items-center bg-white border border-gray-300 rounded-md p-1 space-y-0">
+
+                    <!-- Espacio en blanco para numeración vertical -->
+                    <div class="w-3 mb-1 text-xs text-gray-600">
+
+                    </div>
+                    <!-- Contenedor para barras de votación -->
+                    <div class="flex-grow w-full space-y-0">
+                        @for ($i = 10; $i >= 1; $i--)
+                            <div class="flex items-center mb-0">
+                                <!-- Número y barra de votación -->
+                                <div class="w-3 text-right text-xs text-gray-600 mr-1">{{ $i }}</div>
+                                <div class="flex-grow">
+                                     <!-- Barra de votación -->
+                                    <div class="h-2 bg-gray-200 w-full rounded overflow-hidden">
+                                        @php
+                                            $votosParaNota = $audiovisual->votaciones->where('voto', $i)->count();
+                                            $totalVotos = $audiovisual->obtenerNumeroVotos();
+                                            $porcentaje = $totalVotos > 0 ? ($votosParaNota / $totalVotos) * 100 : 0;
+                                            $colorClass = 'bg-blue-500';
+                                            // Asignar colores específicos según el valor de $i
+                                            if ($i === 10) {
+                                                $colorClass = 'bg-green-500';
+                                            } elseif ($i >= 8) {
+                                                $colorClass = 'bg-green-400';
+                                            } elseif ($i >= 6) {
+                                                $colorClass = 'bg-yellow-300';
+                                            } elseif ($i === 5) {
+                                                $colorClass = 'bg-orange-300';
+                                            } elseif ($i >= 3) {
+                                                $colorClass = 'bg-red-400';
+                                            } elseif ($i >= 1) {
+                                                $colorClass = 'bg-red-500';
+                                            }
+                                        @endphp
+
+                                        <!-- Barra de progreso -->
+                                        <div class="h-full {{ $colorClass }} rounded"
+                                            style="width: {{ $porcentaje }}%">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endfor
                     </div>
                 </div>
             </div>

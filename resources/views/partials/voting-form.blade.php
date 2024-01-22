@@ -1,11 +1,15 @@
 @auth
     <!-- Formulario de Votación -->
-    <form class="mb-6 text-center w-full md:w-48 bg-gray-100 rounded-md p-2 border-gray-300">
+    <form class="mb-6 text-center w-full md:w-48 bg-gray-100 rounded-md p-2 border border-gray-300">
         @csrf
 
         <!-- Desplegable para Votación -->
         <div class="mb-4">
-            <label for="voto" class="block text-lg font-bold text-gray-800">Tu voto</label>
+            <label for="voto" class="block text-lg font-bold text-gray-800">
+                Tu voto
+            </label>
+
+            <!-- Activación script 'saveVote' -->
             <select name="voto" id="voto"
                 class="form-select mt-2 block w-full focus:outline-none focus:shadow-outline-blue border border-gray-300 rounded-md px-4 py-2"
                 onchange="saveVote(event, {{ $audiovisual }})">

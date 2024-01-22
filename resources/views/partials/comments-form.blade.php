@@ -3,7 +3,7 @@
     @csrf
 
     <!-- Contenedor principal -->
-    <div class="mb-4 flex items-start">
+    <div class="mb-3 flex items-start">
         <label for="critica" class="block text-lg font-bold text-gray-500">Tu Crítica:</label>
 
         <!-- Mensaje de error -->
@@ -13,9 +13,9 @@
     </div>
 
     <!-- Área de Texto para la Crítica -->
-    <div class="mb-4">
+    <div class="mb-3">
         <textarea name="critica" id="critica" rows="4"
-            class="form-input mt-1 block w-full focus:outline-none focus:shadow-outline-blue border border-gray-300 rounded-md px-4 py-2 resize-none"
+            class="form-input mt-1 block w-full focus:outline-none focus:shadow-outline-blue border border-gray-300 rounded-md px-4 py-2 resize-none h-44 text-lg"
             placeholder="Escribe tu opinión para que el resto de los usuarios la pueda leer."></textarea>
     </div>
 
@@ -40,14 +40,14 @@
         var critica = document.getElementById('critica').value.toLowerCase();
 
         // Lista de palabras malsonantes
-        var palabrasMalsonantes = ['horrible', 'basura', 'asquerosa']; // Agrega las palabras que deseas controlar
+        var palabrasMalsonantes = ['horrible', 'basura', 'asquerosa'];
 
         // Verificar si la crítica contiene palabras malsonantes
         var contenidoMalsonante = palabrasMalsonantes.some(function(palabra) {
             return critica.includes(palabra);
         });
 
-        // Mostrar mensaje de error
+        // Mostrar mensaje de error  si contenidoMalsonante es true (tiene palabras malsonantes)
         if (contenidoMalsonante) {
             // Mensaje de error por contenido malsonante
             document.getElementById('error').innerText =
