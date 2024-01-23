@@ -23,19 +23,26 @@
             </h1>
 
             <div class="flex justify-center">
+                <!-- Tabla de Usuarios -->
                 <table class="text-sm text-left text-gray-500 rounded-lg overflow-hidden w-full">
+                    <!-- Encabezados de la tabla -->
                     <thead class="text-xs text-white bg-gray-700 dark:bg-gray-800">
                         <tr>
                             <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/6">Nombre</th>
-                            <th scope="colgroup" class="py-3 px-6 text-center font-semibold text-lg w-2/6">Datos Personales</th>
+                            <th scope="colgroup" class="py-3 px-6 text-center font-semibold text-lg w-2/6">Datos
+                                Personales</th>
                             <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/6">Rol</th>
                             <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-2/6">Acciones</th>
                         </tr>
                     </thead>
+
+                    <!-- Mostrar usuarios en la tabla -->
                     <tbody>
                         @foreach ($users as $user)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <!-- Nombre -->
                                 <td class="py-4 px-6 text-center text-base">{{ $user->name }}</td>
+                                <!-- Datos Personales -->
                                 <td class="py-4 px-6 text-base">
                                     <ul class="list-none p-0 m-0">
                                         <li><strong>Año de Nacimiento:</strong> {{ $user->nacimiento }}</li>
@@ -45,7 +52,7 @@
                                         <li><strong>Email:</strong> {{ $user->email }}</li>
                                     </ul>
                                 </td>
-
+                                <!-- Rol -->
                                 <td class="py-4 px-6 text-center text-base">
                                     <form id="updateRoleForm" action="{{ route('admin.users.update', $user->id) }}"
                                         method="post">
@@ -64,6 +71,7 @@
                                         </select>
                                     </form>
 
+                                    <!-- Script para enviar el formulario al cambiar la selección -->
                                     <script>
                                         function submitForm(select) {
                                             select.form.submit();
@@ -71,16 +79,19 @@
                                     </script>
                                 </td>
 
+                                <!-- Acciones -->
                                 <td class="px-6 text-center space-x-2">
                                     <div class="flex justify-center space-x-2">
-                                        <!-- Botón de validar e invalidar usuario -->
+                                        <!-- Formulario para validar e invalidar al usuario -->
                                         <form action="{{ route('admin.users.validar', $user->id) }}" method="POST"
                                             class="flex items-center">
                                             @csrf
                                             @method('PUT')
 
+                                            <!-- Input oculto con el ID del usuario -->
                                             <input type="hidden" name="id" value="{{ $user->id }}">
 
+                                            <!-- Botón para validar o invalidar -->
                                             @if ($user->validado)
                                                 <button type="submit"
                                                     class="w-20 h-10 bg-orange-500 border border-orange-600 text-white rounded-md hover:bg-orange-600 focus:outline-none focus:shadow-outline-orange active:bg-orange-600 font-semibold text-base">
@@ -94,7 +105,7 @@
                                             @endif
                                         </form>
 
-                                        <!-- Botón para ver críticas del usuario -->
+                                        <!-- Enlace para ver críticas del usuario -->
                                         <a href="{{ route('admin.verCriticas', $user) }}" class="inline-block">
                                             <button
                                                 class="px-4 py-2 bg-blue-500 border border-blue-600 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-red active:bg-blue-600 mx-auto font-semibold text-base">
@@ -113,16 +124,18 @@
                                 </td>
                             </tr>
 
-                            <!-- Ventana modal para borrar una premio -->
+                            <!-- Ventana modal para borrar un usuario -->
                             @include('admin.users.delete')
                         @endforeach
                     </tbody>
                 </table>
             </div>
 
+            <!-- Paginación de usuarios -->
             <div class="mt-4">
                 {{ $users->links() }}
             </div>
         </div>
     </div>
+
 </x-admin>

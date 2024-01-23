@@ -98,7 +98,7 @@ function updateStars(avg) {
     for (let i = 1; i <= 10; i++) {
         const star = document.createElement("span");
         star.className =
-            i <= avg ? "text-yellow-300 text-lg" : "text-gray-400 text-lg";
+            i <= avg ? "text-yellow-300 text-xl" : "text-gray-400 text-xl";
         star.innerHTML = "&#9733;";
         starsContainer.appendChild(star);
     }

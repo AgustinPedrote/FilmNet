@@ -29,7 +29,7 @@
             <div class="bg-white p-6 max-w-4xl rounded-md shadow-lg w-full">
 
                 <!-- Primera fila (fila de arriba) -->
-                <div class="flex items-center justify-between mb-4 bg-gray-100 p-4 rounded-md">
+                <div class="flex items-center justify-between mb-4 bg-gray-100 border border-gray-300 p-4 rounded-md">
                     <!-- Columna 1: Imagen -->
                     <div class="relative w-1/5 h-auto overflow-hidden rounded-md shadow-md">
                         <a href="{{ route('audiovisual.show', ['audiovisual' => $critica->audiovisual]) }}">
@@ -82,7 +82,7 @@
                 <hr class="my-4 bg-blue-500">
 
                 <!-- Segunda fila (fila de abajo) -->
-                <div class="bg-gray-100 p-4 rounded-md">
+                <div class="bg-gray-100 border border-gray-300 p-4 rounded-md">
                     <!-- Contenido de la segunda fila -->
                     <div class="text-lg font-bold mb-2">Crítica:</div>
                     <p class="text-lg" style="min-height: 6rem;">{{ $critica->critica }}</p>

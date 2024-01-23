@@ -4,7 +4,7 @@ function buscarFotografia(audiovisualId) {
         .getElementById("search_fotografia" + audiovisualId)
         .value.trim();
 
-    // Obtener elementos del DOM
+    // Obtener elementos del DOM relacionados con la búsqueda
     var fotografiaResults = document.getElementById(
         "fotografiaResults" + audiovisualId
     );
@@ -36,6 +36,7 @@ function buscarFotografia(audiovisualId) {
             var fotografias = response.data.fotografias;
 
             if (Array.isArray(fotografias) && fotografias.length > 0) {
+                // Agregar estilos a la lista de resultados
                 fotografiaResults.classList.add(
                     "border",
                     "border-gray-500",
@@ -43,7 +44,7 @@ function buscarFotografia(audiovisualId) {
                     "p-2"
                 );
 
-                // Mostrar los resultados y agregar estilos
+                // Mostrar los resultados y agregar estilos a cada elemento de la lista
                 fotografias.forEach(function (resultado) {
                     var li = document.createElement("li");
                     li.classList.add(
@@ -54,11 +55,12 @@ function buscarFotografia(audiovisualId) {
                     );
                     li.textContent = resultado.nombre;
 
-                    // Dentro de la función de clic del elemento LI
+                    // Manejar el clic en el elemento de la lista
                     li.addEventListener("click", function () {
+                        // Asignar el valor de la fotografía seleccionada al campo de entrada
                         fotografiaInput.value = resultado.nombre;
 
-                        // Aquí cambia la línea para obtener el campo de entrada oculto correctamente
+                        // Obtener el campo de entrada oculto y asignar el ID de la fotografía
                         var fotografiaHiddenInput = document.getElementById(
                             "fotografia" + audiovisualId
                         );
@@ -72,6 +74,7 @@ function buscarFotografia(audiovisualId) {
                         );
                     });
 
+                    // Agregar el elemento de la lista al contenedor de resultados
                     fotografiaResults.appendChild(li);
                 });
             } else {

@@ -159,7 +159,7 @@
 
                 <!-- Nota media de las votaciones -->
                 <div class="space-y-4">
-                    <p class="font-bold text-lg bg-white text-blue-500 border border-gray-300 rounded-md p-3.5 mb-4"
+                    <p class="font-bold text-2xl bg-white text-blue-500 border border-gray-300 rounded-md p-3.5 mb-4"
                         id="nota">
                         {{ $notaMedia ? number_format($notaMedia, 1) : 'No vista' }}
                     </p>
@@ -200,7 +200,8 @@
                                             $votosParaNota = $audiovisual->votaciones->where('voto', $i)->count();
                                             $totalVotos = $audiovisual->obtenerNumeroVotos();
                                             $porcentaje = $totalVotos > 0 ? ($votosParaNota / $totalVotos) * 100 : 0;
-                                            $colorClass = 'bg-blue-500';
+                                            $colorClass = '';
+
                                             // Asignar colores específicos según el valor de $i
                                             if ($i === 10) {
                                                 $colorClass = 'bg-green-500';
@@ -217,7 +218,7 @@
                                             }
                                         @endphp
 
-                                        <!-- Barra de progreso -->
+                                        <!-- Barra de progreso con su color correspondiente-->
                                         <div class="h-full {{ $colorClass }} rounded"
                                             style="width: {{ $porcentaje }}%">
                                         </div>

@@ -80,7 +80,7 @@
                     <div class="bg-white p-6 max-w-4xl rounded-md shadow-lg w-full">
 
                         <!-- Primera fila (fila de arriba) -->
-                        <div class="flex items-center justify-between mb-4 bg-gray-100 p-4 rounded-md">
+                        <div class="flex items-center justify-between mb-4 bg-gray-100 border border-gray-300 p-4 rounded-md">
                             <!-- Columna 1: Detalles del usuario y fecha -->
                             <div class="w-2/3 flex flex-col ml-4">
                                 <div class="flex flex-col">
@@ -176,7 +176,7 @@
                         <hr class="my-4 mx-2">
 
                         <!-- Segunda fila: Crítica -->
-                        <div class="bg-gray-100 p-4 rounded-md m-2">
+                        <div class="bg-gray-100 border border-gray-300 p-4 rounded-md m-2">
                             <div class="text-lg font-bold mb-2">Crítica:</div>
                             <p class="text-lg" style="min-height: 6rem;">{{ $critica->critica }}</p>
                         </div>

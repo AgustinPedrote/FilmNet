@@ -4,7 +4,7 @@ function buscarCompositor(audiovisualId) {
         .getElementById("search_compositor" + audiovisualId)
         .value.trim();
 
-    // Obtener elementos del DOM
+    // Obtener elementos del DOM relacionados con la búsqueda
     var compositorResults = document.getElementById(
         "compositorResults" + audiovisualId
     );
@@ -36,6 +36,7 @@ function buscarCompositor(audiovisualId) {
             var compositores = response.data.compositores;
 
             if (Array.isArray(compositores) && compositores.length > 0) {
+                // Agregar estilos a la lista de resultados
                 compositorResults.classList.add(
                     "border",
                     "border-gray-500",
@@ -43,7 +44,7 @@ function buscarCompositor(audiovisualId) {
                     "p-2"
                 );
 
-                // Mostrar los resultados y agregar estilos
+                // Mostrar los resultados y agregar estilos a cada elemento de la lista
                 compositores.forEach(function (resultado) {
                     var li = document.createElement("li");
                     li.classList.add(
@@ -54,14 +55,17 @@ function buscarCompositor(audiovisualId) {
                     );
                     li.textContent = resultado.nombre;
 
-                    // Dentro de la función de clic del elemento LI
+                    // Manejar el clic en el elemento de la lista
                     li.addEventListener("click", function () {
+                        // Asignar el valor del compositor seleccionado al campo de entrada
                         compositorInput.value = resultado.nombre;
 
                         // Aquí cambia la línea para obtener el campo de entrada oculto correctamente
                         var compositorHiddenInput = document.getElementById(
                             "compositor" + audiovisualId
                         );
+
+                        // Obtener el campo de entrada oculto y asignar el ID del compositor
                         compositorHiddenInput.value = resultado.id;
 
                         // Cerrar la lista de resultados y quitar algunos estilos
@@ -72,6 +76,7 @@ function buscarCompositor(audiovisualId) {
                         );
                     });
 
+                    // Agregar el elemento de la lista al contenedor de resultados
                     compositorResults.appendChild(li);
                 });
             } else {

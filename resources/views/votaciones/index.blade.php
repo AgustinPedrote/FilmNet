@@ -9,7 +9,7 @@
         @else
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6 min-h-screen">
                 <table class="min-w-full divide-y divide-gray-100 text-left">
-                    <thead class="bg-gray-100">
+                    <thead class="bg-gray-100 border border-gray-300">
                         <tr>
                             <th class="px-6 py-3 text-xl font-semibold text-gray-900">
                                 Audiovisuales

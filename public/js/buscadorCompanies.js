@@ -8,12 +8,15 @@ function buscarCompany(audiovisualId) {
     var companyResults = document.getElementById(
         "companyResults" + audiovisualId
     );
-    var companyInput = document.getElementById("search_company" + audiovisualId);
+    var companyInput = document.getElementById(
+        "search_company" + audiovisualId
+    );
 
     // Verificar si la búsqueda está en blanco
     if (searchQuery === "") {
         // Limpiar la lista de resultados si la búsqueda está vacía
-        document.getElementById("companyResults" + audiovisualId).innerHTML = "";
+        document.getElementById("companyResults" + audiovisualId).innerHTML =
+            "";
         companyResults.classList.remove("border", "border-gray-300");
         return;
     }
@@ -33,6 +36,7 @@ function buscarCompany(audiovisualId) {
             var companies = response.data.companies;
 
             if (Array.isArray(companies) && companies.length > 0) {
+                // Agregar estilos a la lista de resultados
                 companyResults.classList.add(
                     "border",
                     "border-gray-500",
@@ -40,7 +44,7 @@ function buscarCompany(audiovisualId) {
                     "p-2"
                 );
 
-                // Mostrar los resultados y agregar estilos
+                // Mostrar los resultados y agregar estilos a cada elemento de la lista
                 companies.forEach(function (resultado) {
                     var li = document.createElement("li");
                     li.classList.add(
@@ -51,11 +55,12 @@ function buscarCompany(audiovisualId) {
                     );
                     li.textContent = resultado.nombre;
 
-                    // Dentro de la función de clic del elemento LI
+                    // Manejar el clic en el elemento de la lista
                     li.addEventListener("click", function () {
+                        // Asignar el valor de la compañía seleccionada al campo de entrada
                         companyInput.value = resultado.nombre;
 
-                        // Aquí cambia la línea para obtener el campo de entrada oculto correctamente
+                        // Obtener el campo de entrada oculto y asignar el ID de la compañía
                         var companyHiddenInput = document.getElementById(
                             "company" + audiovisualId
                         );
@@ -69,6 +74,7 @@ function buscarCompany(audiovisualId) {
                         );
                     });
 
+                    // Agregar el elemento de la lista al contenedor de resultados
                     companyResults.appendChild(li);
                 });
             } else {

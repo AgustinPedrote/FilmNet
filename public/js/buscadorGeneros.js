@@ -33,6 +33,7 @@ function buscarGenero(audiovisualId) {
             var generos = response.data.generos;
 
             if (Array.isArray(generos) && generos.length > 0) {
+                // Agregar estilos a la lista de resultados
                 generoResults.classList.add(
                     "border",
                     "border-gray-500",
@@ -40,7 +41,7 @@ function buscarGenero(audiovisualId) {
                     "p-2"
                 );
 
-                // Mostrar los resultados y agregar estilos
+                // Mostrar los resultados y agregar estilos a cada elemento de la lista
                 generos.forEach(function (resultado) {
                     var li = document.createElement("li");
                     li.classList.add(
@@ -51,11 +52,12 @@ function buscarGenero(audiovisualId) {
                     );
                     li.textContent = resultado.nombre;
 
-                    // Dentro de la función de clic del elemento LI
+                    // Manejar el clic en el elemento de la lista
                     li.addEventListener("click", function () {
+                        // Asignar el valor del género seleccionado al campo de entrada
                         generoInput.value = resultado.nombre;
 
-                        // Aquí cambia la línea para obtener el campo de entrada oculto correctamente
+                        // Obtener el campo de entrada oculto y asignar el ID del género
                         var generoHiddenInput = document.getElementById(
                             "genero" + audiovisualId
                         );
@@ -69,6 +71,7 @@ function buscarGenero(audiovisualId) {
                         );
                     });
 
+                    // Agregar el elemento de la lista al contenedor de resultados
                     generoResults.appendChild(li);
                 });
             } else {

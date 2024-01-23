@@ -36,6 +36,7 @@ function buscarDirector(audiovisualId) {
             var directores = response.data.directores;
 
             if (Array.isArray(directores) && directores.length > 0) {
+                // Agregar estilos a la lista de resultados
                 directorResults.classList.add(
                     "border",
                     "border-gray-500",
@@ -43,7 +44,7 @@ function buscarDirector(audiovisualId) {
                     "p-2"
                 );
 
-                // Mostrar los resultados y agregar estilos
+                // Mostrar los resultados y agregar estilos a cada elemento de la lista
                 directores.forEach(function (resultado) {
                     var li = document.createElement("li");
                     li.classList.add(
@@ -54,11 +55,12 @@ function buscarDirector(audiovisualId) {
                     );
                     li.textContent = resultado.nombre;
 
-                    // Dentro de la función de clic del elemento LI
+                    // Manejar el clic en el elemento de la lista
                     li.addEventListener("click", function () {
+                        // Asignar el valor del director seleccionado al campo de entrada
                         directorInput.value = resultado.nombre;
 
-                        // Aquí cambia la línea para obtener el campo de entrada oculto correctamente
+                        // Obtener el campo de entrada oculto y asignar el ID del director
                         var directorHiddenInput = document.getElementById(
                             "director" + audiovisualId
                         );
@@ -72,6 +74,7 @@ function buscarDirector(audiovisualId) {
                         );
                     });
 
+                    // Agregar el elemento de la lista al contenedor de resultados
                     directorResults.appendChild(li);
                 });
             } else {

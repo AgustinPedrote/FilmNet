@@ -131,7 +131,6 @@ Route::middleware(['auth', 'userEsAdmin'])->group(function () {
     // Eliminar TODO el Elenco y Equipo
     Route::delete('/audiovisuales/{audiovisualId}/eliminar-todo-elenco', [AudiovisualController::class, 'eliminarTodoElenco'])->name('audiovisuales.eliminarTodoElenco');
 
-
     // Users:
     Route::resource('users', UserController::class);
     // Index administración de usuarios

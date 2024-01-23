@@ -29,21 +29,21 @@
         @if ($puedeVerTrailer)
             <div class="mt-6">
                 @if ($audiovisual->trailer)
-                    <div class="bg-gray-900 rounded-md p-1 border-gray-300">
-                        <iframe class="w-full" height="500" src="{{ $audiovisual->trailer }}" title="YouTube video player"
+                    <div class="relative overflow-hidden rounded-md shadow-md">
+                        <iframe class="w-full h-72 md:h-96" src="{{ $audiovisual->trailer }}" title="YouTube video player"
                             frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             allowfullscreen>
                         </iframe>
                     </div>
                 @else
-                    <p class="text-lg text-red-500 space-y-1 font-bold">
+                    <p class="text-lg text-red-500 space-y-1 font-bold text-center">
                         No hay trailer disponible para este audiovisual.
                     </p>
                 @endif
             </div>
         @else
-            <p class="text-lg text-red-500 space-y-1 font-bold">
+            <p class="text-lg text-red-500 space-y-1 font-bold text-center mt-6">
                 No tienes la edad permitida para ver este trailer.
             </p>
         @endif
