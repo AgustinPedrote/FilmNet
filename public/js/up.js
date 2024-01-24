@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var scrollToTopButton = document.getElementById("scroll-to-top");
 
     window.addEventListener("scroll", function () {
-        // Muestra la flecha cuando el scroll está más abajo de 200 píxeles
-        if (window.scrollY > 200) {
+        // Muestra la flecha cuando el scroll está más abajo de 180 píxeles
+        if (window.scrollY > 180) {
             scrollToTopButton.classList.remove("hidden");
         } else {
             scrollToTopButton.classList.add("hidden");

@@ -1,4 +1,4 @@
-// Función asíncrona
+// Función asíncrona de votación
 async function saveVote(event, audiovisual) {
     // Evitar recarga de la página
     event.preventDefault();

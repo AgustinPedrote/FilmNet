@@ -49,12 +49,14 @@ class AudiovisualController extends Controller
             $query->where('titulo', 'ilike', '%' . $titulo . '%');
         }
 
+        // Agregar condición para género
         if (!empty($genero)) {
             $query->whereHas('generos', function ($q) use ($genero) {
                 $q->where('genero_id', $genero);
             });
         }
 
+        // Agregar condición para tipo de audiovisual
         if (!empty($tipo)) {
             $query->where('tipo_id', $tipo);
         }

@@ -7,6 +7,7 @@
 
              <!-- Modal header -->
              <div class="flex items-start justify-between p-1 border-b rounded-t dark:border-gray-600 bg-gray-700">
+                 <!-- Botón para cerrar el modal -->
                  <button type="button"
                      class="text-white bg-transparent  hover:text-gray-100 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:text-white"
                      data-modal-hide="ElencoEliminar{{ $audiovisualId }}">
@@ -15,7 +16,6 @@
                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                      </svg>
-                     <!-- Botón para cerrar el modal -->
                      <span class="sr-only">Close modal</span>
                  </button>
              </div>
@@ -23,8 +23,9 @@
              <!-- Modal Content -->
              <div class="p-8 space-y-5">
                  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                     <!-- Columna 1 -->
+                     <!-- COLUMNA 1 -->
                      <div>
+
                          <!-- Titulo del audiovisual -->
                          <div class="mb-5 p-2">
                              <div>
@@ -37,6 +38,7 @@
                                      <span>
                                          Tipo: {{ $audiovisual->tipo->nombre }}
                                      </span>
+
                                      <!-- Enlace para eliminar todo el elenco y equipo -->
                                      <a href="#" onclick="confirmarEliminarTodo('{{ $audiovisualId }}')"
                                          class="text-red-600 hover:text-red-700 font-semibold focus:outline-none active:text-red-700">
@@ -55,11 +57,13 @@
                                  <ul class="flex flex-wrap">
                                      @foreach ($audiovisual->directores as $director)
                                          <li class="mr-2 mb-2">
-                                             <!-- El formulario no se enviará a una URL convencional, sino que se manejará mediante JavaScript -->
+                                             <!-- Formulario para eliminar director -->
                                              <form action="javascript:void(0)"
                                                  onsubmit="eliminarRelacion('{{ $audiovisual->id }}', 'directores', '{{ $director->id }}', this.parentElement); return false;">
                                                  @csrf
                                                  @method('DELETE')
+
+                                                 <!-- Botón de eliminar con nombre del director y ícono -->
                                                  <button type="submit"
                                                      class="text-red-500 hover:text-red-600 focus:outline-none flex items-center bg-red-100 dark:bg-red-800 rounded p-1">
                                                      <span class="mr-2">{{ $director->nombre }}</span>
@@ -87,10 +91,13 @@
                                  <ul class="flex flex-wrap">
                                      @foreach ($audiovisual->compositores as $compositor)
                                          <li class="mr-2 mb-2">
+                                             <!-- Formulario para eliminar compositores -->
                                              <form action="javascript:void(0)"
                                                  onsubmit="eliminarRelacion('{{ $audiovisual->id }}', 'compositores', '{{ $compositor->id }}', this.parentElement); return false;">
                                                  @csrf
                                                  @method('DELETE')
+
+                                                 <!-- Botón de eliminar con nombre del compositor y ícono -->
                                                  <button type="submit"
                                                      class="text-red-500 hover:text-red-600 focus:outline-none flex items-center bg-red-100 dark:bg-red-800 rounded p-1">
                                                      <span class="mr-2">{{ $compositor->nombre }}</span>
@@ -118,10 +125,13 @@
                                  <ul class="flex flex-wrap">
                                      @foreach ($audiovisual->fotografias as $fotografia)
                                          <li class="mr-2 mb-2">
+                                             <!-- Formulario para eliminar directores de fotografía -->
                                              <form action="javascript:void(0)"
                                                  onsubmit="eliminarRelacion('{{ $audiovisual->id }}', 'fotografias', '{{ $fotografia->id }}', this.parentElement); return false;">
                                                  @csrf
                                                  @method('DELETE')
+
+                                                 <!-- Botón de eliminar con nombre del director de fotografía y ícono -->
                                                  <button type="submit"
                                                      class="text-red-500 hover:text-red-600 focus:outline-none flex items-center bg-red-100 dark:bg-red-800 rounded p-1">
                                                      <span class="mr-2">{{ $fotografia->nombre }}</span>
@@ -139,10 +149,12 @@
                                  <p class="text-gray-600 mt-3 mb-3">Ningún director de fotografía asignado</p>
                              @endif
                          </div>
+
                      </div>
 
-                     <!-- Columna 2 -->
+                     <!-- COLUMNA 2 -->
                      <div>
+
                          <!-- Botón para eliminar guionistas -->
                          <div class="mb-4 p-2 border border-gray-300 rounded shadow-md" style="min-height: 100px;">
                              <x-input-label for="search_guionista" :value="__('Eliminar Guionista:')"
@@ -152,10 +164,13 @@
                                  <ul class="flex flex-wrap">
                                      @foreach ($audiovisual->guionistas as $guionista)
                                          <li class="mr-2 mb-2">
+                                             <!-- Formulario para eliminar guionistas -->
                                              <form action="javascript:void(0)"
                                                  onsubmit="eliminarRelacion('{{ $audiovisual->id }}', 'guionistas', '{{ $guionista->id }}', this.parentElement); return false;">
                                                  @csrf
                                                  @method('DELETE')
+
+                                                 <!-- Botón de eliminar con nombre del guionista y ícono -->
                                                  <button type="submit"
                                                      class="text-red-500 hover:text-red-600 focus:outline-none flex items-center bg-red-100 dark:bg-red-800 rounded p-1">
                                                      <span class="mr-2">{{ $guionista->nombre }}</span>
@@ -174,7 +189,7 @@
                              @endif
                          </div>
 
-                         <!-- Botón para eliminar actores y actrices -->
+                         <!-- Botón para eliminar reparto -->
                          <div class="mb-4 p-2 border border-gray-300 rounded shadow-md" style="min-height: 100px;">
                              <x-input-label for="search_reparto" :value="__('Eliminar Reparto:')"
                                  class="block text-xl font-bold text-gray-900 dark:text-white mt-2 mb-2" />
@@ -183,10 +198,13 @@
                                  <ul class="flex flex-wrap">
                                      @foreach ($audiovisual->repartos as $reparto)
                                          <li class="mr-2 mb-2">
+                                             <!-- Formulario para eliminar reparto -->
                                              <form action="javascript:void(0)"
                                                  onsubmit="eliminarRelacion('{{ $audiovisual->id }}', 'repartos', '{{ $reparto->id }}', this.parentElement); return false;">
                                                  @csrf
                                                  @method('DELETE')
+
+                                                 <!-- Botón de eliminar con nombre del reparto y ícono -->
                                                  <button type="submit"
                                                      class="text-red-500 hover:text-red-600 focus:outline-none flex items-center bg-red-100 dark:bg-red-800 rounded p-1">
                                                      <span class="mr-2">{{ $reparto->nombre }}</span>
@@ -214,10 +232,13 @@
                                  <ul class="flex flex-wrap">
                                      @foreach ($audiovisual->companies as $company)
                                          <li class="mr-2 mb-2">
+                                             <!-- Formulario para eliminar compañías -->
                                              <form action="javascript:void(0)"
                                                  onsubmit="eliminarRelacion('{{ $audiovisual->id }}', 'companies', '{{ $company->id }}', this.parentElement); return false;">
                                                  @csrf
                                                  @method('DELETE')
+
+                                                 <!-- Botón de eliminar con nombre de la compañía y ícono -->
                                                  <button type="submit"
                                                      class="text-red-500 hover:text-red-600 focus:outline-none flex items-center bg-red-100 dark:bg-red-800 rounded p-1">
                                                      <span class="mr-2">{{ $company->nombre }}</span>
@@ -245,10 +266,13 @@
                                  <ul class="flex flex-wrap">
                                      @foreach ($audiovisual->generos as $genero)
                                          <li class="mr-2 mb-2">
+                                             <!-- Formulario para eliminar géneros -->
                                              <form action="javascript:void(0)"
                                                  onsubmit="eliminarRelacion('{{ $audiovisual->id }}', 'generos', '{{ $genero->id }}', this.parentElement); return false;">
                                                  @csrf
                                                  @method('DELETE')
+
+                                                 <!-- Botón de eliminar con nombre del género y ícono -->
                                                  <button type="submit"
                                                      class="text-red-500 hover:text-red-600 focus:outline-none flex items-center bg-red-100 dark:bg-red-800 rounded p-1">
                                                      <span class="mr-2">{{ $genero->nombre }}</span>
@@ -266,6 +290,7 @@
                                  <p class="text-gray-600 mt-3 mb-3">Ningún género asignado</p>
                              @endif
                          </div>
+
                      </div>
                  </div>
              </div>
@@ -288,139 +313,10 @@
                      class="cursor-pointer bg-red-500 border border-red-600 hover:bg-red-600 text-white rounded-md px-4 py-2 font-semibold focus:outline-none focus:shadow-outline-red active:bg-red-600">
                      Cancelar
                  </button>
-
              </div>
          </div>
      </div>
  </div>
 
- <script>
-     function aceptarEliminarTodoElenco(audiovisualId) {
-         // Recargar la página después de aceptar
-         location.reload();
-         document.querySelector(`[data-modal-hide="ElencoEliminar${audiovisualId}"]`).click();
-     }
-
-     // Función confirm para mostrar una ventana emergente de confirmación
-     function confirmarEliminarTodo(audiovisualId) {
-         if (confirm('¿Estás seguro de que deseas eliminar todo el elenco y equipo?')) {
-             eliminarTodoElenco(audiovisualId);
-         }
-     }
-
-     // Función para eliminar todo el elenco de un audiovisual
-     function eliminarTodoElenco(audiovisualId) {
-         var xhr = new XMLHttpRequest();
-
-         // La función se llamará cada vez que cambie el estado de la solicitud
-         xhr.onreadystatechange = function() {
-             if (xhr.readyState === XMLHttpRequest.DONE) {
-                 // Verificar si la respuesta del servidor es exitosa (código 200)
-                 if (xhr.status === 200) {
-                     var response = JSON.parse(xhr.responseText);
-                     if (response.success) {
-                         document.querySelector(`[data-modal-hide="ElencoEliminar${audiovisualId}"]`).click();
-                         location.reload();
-                     } else {
-                         mostrarMensaje(response.message, 'alert');
-                     }
-                 } else {
-                     mostrarMensaje('Error al comunicarse con el servidor.', 'alert');
-                 }
-             }
-         };
-
-         // Configurar la solicitud DELETE a la URL  específica para eliminar elenco
-         xhr.open('DELETE', `/audiovisuales/${audiovisualId}/eliminar-todo-elenco`, true);
-
-         // Configurar el encabezado para incluir el token CSRF
-         xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').content);
-
-         // Enviar la solicitud DELETE al servidor
-         xhr.send();
-     }
-
-     // Envía una solicitud DELETE al servidor para eliminar una relación y maneja la respuesta.
-     function eliminarRelacion(audiovisualId, tipoRelacion, relacionId, listItemElement) {
-         // Crear una nueva instancia de XMLHttpRequest
-         var xhr = new XMLHttpRequest();
-
-         // La función se ejecutará cada vez que cambie el estado de la solicitud
-         xhr.onreadystatechange = function() {
-             if (xhr.readyState === XMLHttpRequest.DONE) {
-                 if (xhr.status === 200) {
-                     // Analizar la respuesta JSON del servidor
-                     var response = JSON.parse(xhr.responseText);
-                     if (response.success) {
-                         // Eliminar el elemento de la lista en el modal
-                         listItemElement.remove();
-                         mostrarMensaje(response.message, 'success');
-                     } else {
-                         mostrarMensaje(response.message, 'alert');
-                     }
-                 } else {
-                     mostrarMensaje('Error al comunicarse con el servidor.', 'alert');
-                 }
-             }
-         };
-
-         // Configurar la solicitud DELETE a la URL específica para eliminar la relación
-         xhr.open('DELETE', `/audiovisuales/${audiovisualId}/eliminar-relacion/${tipoRelacion}/${relacionId}`, true);
-
-         // Configurar el encabezado para incluir el token CSRF
-         xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').content);
-
-         // Enviar la solicitud DELETE al servidor
-         xhr.send();
-     }
-
-     // Crea un elemento de mensaje y le aplica estilos según el tipo de mensaje.
-     function mostrarMensaje(mensaje, tipoMensaje) {
-         // Crear un nuevo elemento div para el mensaje
-         var mensajeElement = document.createElement('div');
-         // Asignar el texto del mensaje al elemento
-         mensajeElement.innerText = mensaje;
-
-         // Definir clases base comunes para todos los tipos de mensaje
-         mensajeElement.classList.add(
-             'fixed', 'top-0', 'left-1/2', 'transform', '-translate-x-1/2',
-             'p-2', 'font-medium', 'rounded-lg', 'shadow', 'text-center', 'z-50',
-             'transition-all', 'duration-500', 'ease-in-out', 'text-lg'
-         );
-
-         // Configurar estilos y clases específicas según el tipo de mensaje
-         switch (tipoMensaje) {
-             case 'success':
-                 mensajeElement.classList.add(
-                     'text-green-500', 'bg-green-200', 'border-green-500', 'my-4'
-                 );
-                 break;
-             case 'alert':
-                 mensajeElement.classList.add(
-                     'text-red-500', 'bg-red-200', 'border-red-500', 'my-4'
-                 );
-                 break;
-         }
-
-         // Configurar estilos adicionales
-         mensajeElement.style.width = '70%';
-         mensajeElement.style.top = '0';
-
-         // Agregar el elemento al cuerpo del documento HTML
-         document.body.appendChild(mensajeElement);
-
-         // Transición de opacidad, se apliquen de manera suave y visible en el navegador.
-         void mensajeElement.offsetHeight;
-
-         // Mostrar el mensaje
-         mensajeElement.style.opacity = '1';
-
-         // Ocultar el mensaje después de unos segundos
-         setTimeout(function() {
-             mensajeElement.style.opacity = '0';
-             setTimeout(function() {
-                 mensajeElement.remove();
-             }, 500);
-         }, 3000);
-     }
- </script>
+ <!-- Script para eliminar elenco -->
+ <script src="{{ asset('js/elencoEliminar.js') }}"></script>
