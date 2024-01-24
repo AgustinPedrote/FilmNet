@@ -23,7 +23,6 @@ class userAdmin
             $rol = Auth::user()->rol;
 
             // Verificar si el usuario pertenece al rol de dirección
-
                 if ($rol['id'] == 2) {
                     return $next($request);
                 }

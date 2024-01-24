@@ -36,6 +36,7 @@ function buscarGuionista(audiovisualId) {
             var guionistas = response.data.guionistas;
 
             if (Array.isArray(guionistas) && guionistas.length > 0) {
+                // Agregar estilos a la lista de resultados
                 guionistaResults.classList.add(
                     "border",
                     "border-gray-500",
@@ -43,7 +44,7 @@ function buscarGuionista(audiovisualId) {
                     "p-2"
                 );
 
-                // Mostrar los resultados y agregar estilos
+                // Mostrar los resultados y agregar estilos a cada elemento de la lista
                 guionistas.forEach(function (resultado) {
                     var li = document.createElement("li");
                     li.classList.add(
@@ -54,11 +55,12 @@ function buscarGuionista(audiovisualId) {
                     );
                     li.textContent = resultado.nombre;
 
-                    // Dentro de la función de clic del elemento LI
+                    // Manejar el clic en el elemento de la lista
                     li.addEventListener("click", function () {
+                        // Asignar el valor del guionista seleccionado al campo de entrada
                         guionistaInput.value = resultado.nombre;
 
-                        // Aquí cambia la línea para obtener el campo de entrada oculto correctamente
+                        // Obtener el campo de entrada oculto y asignar el ID del guionista
                         var guionistaHiddenInput = document.getElementById(
                             "guionista" + audiovisualId
                         );
@@ -72,6 +74,7 @@ function buscarGuionista(audiovisualId) {
                         );
                     });
 
+                    // Agregar el elemento de la lista al contenedor de resultados
                     guionistaResults.appendChild(li);
                 });
             } else {

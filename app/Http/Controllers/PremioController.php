@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePremioRequest;
 use App\Http\Requests\UpdatePremioRequest;
+use Illuminate\Http\Request;
 use App\Models\Premio;
 use App\Models\Audiovisual;
-use Illuminate\Http\Request;
 
 class PremioController extends Controller
 {
+    // Mostrar la lista paginada de premios
     public function index()
     {
         $premios = Premio::orderBy('nombre')->paginate(10);
@@ -24,21 +25,7 @@ class PremioController extends Controller
         //
     }
 
-    /* public function store(StorePremioRequest $request)
-    {
-        $nombre = $request->nombre;
-        $year = $request->year;
-        $audiovisual_id = $request->audiovisual_;
-
-        Premio::create([
-            'nombre' => $nombre,
-            'year' => $year,
-            'audiovisual_id' => $audiovisual_id
-        ]);
-
-        return redirect()->route('admin.premios.index')->with('success', 'El premio ha sido creado con éxito');
-    } */
-
+    // Almacenar un nuevo premio en la base de datos
     public function store(StorePremioRequest $request)
     {
         // Validar si la búsqueda está vacía o no coincide con un audiovisual
@@ -75,6 +62,7 @@ class PremioController extends Controller
         //
     }
 
+    // Actualizar la información de un premio en la base de datos
     public function update(UpdatePremioRequest $request, Premio $premio)
     {
         if ($request->audiovisual_ != null) {
@@ -91,9 +79,9 @@ class PremioController extends Controller
         return redirect()->route('admin.premios.index')->with('success', 'El premio ha sido modificado con éxito');
     }
 
+    // Eliminar un premio de la base de datos
     public function destroy(Premio $premio)
     {
-
         $premio->delete();
 
         return redirect()->route('admin.premios.index')->with('success', 'El premio ha sido eliminado con éxito.');

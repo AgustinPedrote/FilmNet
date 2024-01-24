@@ -36,6 +36,7 @@ function buscarReparto(audiovisualId) {
             var repartos = response.data.repartos;
 
             if (Array.isArray(repartos) && repartos.length > 0) {
+                // Agregar estilos a la lista de resultados
                 repartoResults.classList.add(
                     "border",
                     "border-gray-500",
@@ -43,7 +44,7 @@ function buscarReparto(audiovisualId) {
                     "p-2"
                 );
 
-                // Mostrar los resultados y agregar estilos
+                // Mostrar los resultados y agregar estilos a cada elemento de la lista
                 repartos.forEach(function (resultado) {
                     var li = document.createElement("li");
                     li.classList.add(
@@ -54,11 +55,12 @@ function buscarReparto(audiovisualId) {
                     );
                     li.textContent = resultado.nombre;
 
-                    // Dentro de la función de clic del elemento LI
+                    // Manejar el clic en el elemento de la lista
                     li.addEventListener("click", function () {
+                        // Asignar el valor del reparto seleccionado al campo de entrada
                         repartoInput.value = resultado.nombre;
 
-                        // Aquí cambia la línea para obtener el campo de entrada oculto correctamente
+                        // Obtener el campo de entrada oculto y asignar el ID del reparto
                         var repartoHiddenInput = document.getElementById(
                             "reparto" + audiovisualId
                         );
@@ -72,6 +74,7 @@ function buscarReparto(audiovisualId) {
                         );
                     });
 
+                    // Agregar el elemento de la lista al contenedor de resultados
                     repartoResults.appendChild(li);
                 });
             } else {

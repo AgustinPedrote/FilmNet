@@ -11,7 +11,7 @@
                 <path d="M0 0h24v24H0z" fill="none" />
                 <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2L12 15.6 4 21.2l2.4-7.2-6-4.8h7.6z" />
             </svg>
-            <span id="followText">Seguimiento</span>
+            <span>Quiero ver</span>
         </button>
     </form>
 @else
@@ -24,7 +24,7 @@
                 <path d="M0 0h24v24H0z" fill="none" />
                 <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2L12 15.6 4 21.2l2.4-7.2-6-4.8h7.6z" />
             </svg>
-            <span>Seguimiento</span>
+            <span>Quiero ver</span>
         </a>
     </div>
 @endauth

@@ -8,9 +8,7 @@ use App\Models\Company;
 
 class CompanyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Mostrar una lista paginada de compañías
     public function index()
     {
         $companies = Company::orderBy('nombre')->paginate(10);
@@ -18,17 +16,13 @@ class CompanyController extends Controller
         return view('admin.companies.index', ['companies' => $companies]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Almacenar una nueva compañía recién creada en la base de datos
     public function store(StoreCompanyRequest $request)
     {
         $nombre = $request->nombre;
@@ -39,25 +33,19 @@ class CompanyController extends Controller
         return redirect()->route('admin.companies.index')->with('success', 'La compañía ha sido creada con éxito.');
     }
 
-    /**
-     * Display the specified resource.
-     */
+
     public function show(Company $company)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit(Company $company)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // Actualizar la compañía especificada en la base de datos
     public function update(UpdateCompanyRequest $request, Company $company)
     {
         $company->update($request->all());
@@ -65,12 +53,10 @@ class CompanyController extends Controller
         return redirect()->route('admin.companies.index')->with('success', 'La compañía ha sido modificada con éxito.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Eliminar la compañía especificada
     public function destroy(Company $company)
     {
-        // Verificar si la compan$company tiene roles relacionados
+        // Verificar si la compañía tiene roles relacionados
         if ($company->audiovisuales->isEmpty()) {
 
             $company->delete();

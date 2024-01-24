@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return false;
         }
 
-        // Verifica la presencia de al menos una letra mayúscula.
+        // Verifica la presencia de al menos una letra.
         if (!/[a-zA-Z]/.test(password)) {
             displayErrorMessage(
                 field,

@@ -5,7 +5,7 @@
         <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
             <!-- Modal header -->
-            <div class="flex items-start justify-between p-1 border-b rounded-t dark:border-gray-600 bg-blue-500">
+            <div class="flex items-start justify-between p-1 border-b rounded-t dark:border-gray-600 bg-gray-700">
                 <button type="button"
                     class="text-white bg-transparent  hover:text-gray-100 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:text-white"
                     data-modal-hide="InsertarModal">
@@ -22,52 +22,44 @@
             <form action="{{ route('premios.store') }}" method="POST">
                 @csrf
                 <div class="p-6 space-y-6">
-                    <div class="mb-6">
-                        <!-- Nombre del premio -->
+                    <!-- Nombre del premio -->
+                    <div class="mb-4 p-2 border border-gray-300 rounded shadow-md">
                         <x-input-label for="nombre" :value="__('Nombre')"
                             class="block mb-2 text-xl font-bold text-gray-900 dark:text-white" />
                         <x-text-input id="nombre" class="block mt-1 w-full text-md" type="text" name="nombre"
                             required autofocus autocomplete="nombre" />
                         <x-input-error :messages="$errors->get('premio')" class="mt-2" />
+                    </div>
 
-                        <!-- Año del premio -->
+                    <!-- Año del premio -->
+                    <div class="mb-4 p-2 border border-gray-300 rounded shadow-md">
                         <x-input-label for="year" :value="__('Año')"
                             class="block mb-2 text-xl font-bold text-gray-900 dark:text-white mt-2" />
                         <x-text-input id="year" class="block mt-1 w-full text-md" type="text" name="year"
                             required autofocus autocomplete="year" />
                         <x-input-error :messages="$errors->get('premio')" class="mt-2" />
-
-                        <!-- Nuevo campo de búsqueda para Audiovisual al que pertenece el premio -->
-                        <div class="mb-6">
-
-                            <x-input-label for="search_audiovisual" :value="__('Audiovisual')"
-                                class="block mb-2 text-xl font-bold text-gray-900 dark:text-white mt-2" />
-                            <div class="flex items-center">
-                                <input id="search_audiovisual"
-                                    class="block w-full border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm"
-                                    type="text" name="search_audiovisual" placeholder="Buscar audiovisual..." />
-                                <button type="button" onclick="buscarAudiovisual()"
-                                    class="px-4 py-2 ml-4 cursor-pointer bg-green-500 border border-green-600 hover:bg-green-600 text-white rounded-md font-semibold focus:outline-none focus:shadow-outline-green active:bg-green-600">
-                                    Buscar
-                                </button>
-                            </div>
-
-                            <!-- Lista de resultados de la búsqueda -->
-                            <ul id="audiovisualResults"
-                                class="mt-2 space-y-2 cursor-pointer divide-y divide-gray-300 overflow-y-auto max-h-52">
-                            </ul>
-                        </div>
-                        @error('nombre')
-                            <br>
-                            <small>*{{ $message }}</small>
-                            <br>
-                        @enderror
                     </div>
-                    @error('nombre')
-                        <br>
-                        <small>*{{ $message }}</small>
-                        <br>
-                    @enderror
+
+                    <!-- Nuevo campo de búsqueda para Audiovisual al que pertenece el premio -->
+                    <div class="mb-4 p-2 border border-gray-300 rounded shadow-md">
+
+                        <x-input-label for="search_audiovisual" :value="__('Audiovisual')"
+                            class="block mb-2 text-xl font-bold text-gray-900 dark:text-white mt-2" />
+                        <div class="flex items-center">
+                            <input id="search_audiovisual"
+                                class="block w-full border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm"
+                                type="text" name="search_audiovisual" placeholder="Buscar audiovisual..." />
+                            <button type="button" onclick="buscarAudiovisual()"
+                                class="px-4 py-2 ml-4 cursor-pointer bg-green-500 border border-green-600 hover:bg-green-600 text-white rounded-md font-semibold focus:outline-none focus:shadow-outline-green active:bg-green-600">
+                                Buscar
+                            </button>
+                        </div>
+
+                        <!-- Lista de resultados de la búsqueda -->
+                        <ul id="audiovisualResults"
+                            class="mt-2 space-y-2 cursor-pointer divide-y divide-gray-300 overflow-y-auto max-h-52">
+                        </ul>
+                    </div>
                 </div>
 
                 <!-- Modal footer -->

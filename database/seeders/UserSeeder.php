@@ -46,7 +46,7 @@ class UserSeeder extends Seeder
             "name" => "María",
             "email" => "maria@maria.com",
             "password" => bcrypt('1234567a'),
-            "rol_id" => 2,
+            "rol_id" => 1,
             "nacimiento" => 2009,
             "ciudad" => "Barcelona",
             "pais" => "España",
@@ -58,7 +58,7 @@ class UserSeeder extends Seeder
             "email" => "admin@admin.com",
             "password" => bcrypt('1234567a'),
             "rol_id" => 2,
-            "nacimiento" => 2009,
+            "nacimiento" => 2000,
             "ciudad" => "Madrid",
             "pais" => "España",
             "sexo" => "hombre"

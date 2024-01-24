@@ -1,11 +1,11 @@
 <x-app-layout>
     <h1 class="text-2xl font-bold mb-6 mt-20 ml-10 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
-        Mis votaciones
+        Votaciones de {{ $usuario->name }}
     </h1>
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         @if ($votaciones->isEmpty())
-            <p class="text-gray-500 text-lg text-center mt-8 min-h-screen">No has realizado votaciones.</p>
+            <p class="text-gray-500 text-lg text-center mt-8 min-h-screen">No hay votaciones disponibles.</p>
         @else
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6 min-h-screen">
                 <table class="min-w-full divide-y divide-gray-100 text-left">
@@ -21,7 +21,7 @@
                                 <div class="flex items-center justify-center">
                                     <span class="mr-2">Votos</span>
                                     <span class="bg-blue-500 text-white px-2 py-1 rounded-full">
-                                        {{ auth()->user()->votaciones->count() }}
+                                        {{ $votaciones->count() }}
                                     </span>
                                 </div>
                             </th>
@@ -36,7 +36,7 @@
                                             <a
                                                 href="{{ route('audiovisual.show', ['audiovisual' => $votacion->audiovisual]) }}">
                                                 <img class="h-20 w-20 rounded-full object-cover border-2 border-gray-300 hover:border-blue-500 transition duration-300"
-                                                    src="{{ $votacion->audiovisual->img }}"
+                                                    src="{{ asset($votacion->audiovisual->img) }}"
                                                     alt="{{ $votacion->audiovisual->titulo }}">
                                             </a>
                                         </div>
@@ -70,7 +70,7 @@
                                         </div>
                                         <!-- Mostrar el nombre correspondiente a la puntuación -->
                                         <div class="text-lg text-gray-500 mt-2">
-                                            {{ $puntuacionesNombres[$votacion->voto] }}
+                                            {{ isset($puntuacionesNombres[$votacion->voto]) ? $puntuacionesNombres[$votacion->voto] : 'No definida' }}
                                         </div>
                                     </div>
                                 </td>
@@ -101,8 +101,4 @@
             window.history.back();
         }
     </script>
-
-    <div class="mx-6 mt-6 mb-10">
-        {{ $votaciones->links() }}
-    </div>
 </x-app-layout>

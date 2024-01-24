@@ -24,17 +24,22 @@
 
             <div class="flex justify-center">
                 <table class="text-sm text-left text-gray-500 rounded-lg overflow-hidden w-full">
+                    <!-- Encabezados de la tabla -->
                     <thead class="text-xs text-white bg-gray-700 dark:bg-gray-800">
                         <tr>
                             <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/5">Imagen</th>
                             <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/5">Titulo</th>
-                            <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/5">Elenco y Equipo</th>
+                            <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-1/5">Elenco y Equipo
+                            </th>
                             <th scope="col" class="py-3 px-6 text-center font-semibold text-lg w-2/5">Acciones</th>
                         </tr>
                     </thead>
+
+                    <!-- Filas de la tabla -->
                     <tbody>
                         @foreach ($audiovisuales as $audiovisual)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <!-- Imagen -->
                                 <td class="py-4 px-6 text-center">
                                     <div class="flex-shrink-0 h-16 w-16 mx-auto">
                                         <a href="{{ route('audiovisual.show', ['audiovisual' => $audiovisual]) }}">
@@ -43,9 +48,12 @@
                                         </a>
                                     </div>
                                 </td>
+                                <!-- Título -->
                                 <td class="py-4 px-6 text-center text-base">{{ $audiovisual->titulo }}</td>
+                                <!-- Acciones Elenco-->
                                 <td class="py-4 px-6 text-center text-base">
                                     <ul class="list-none p-0 m-0">
+                                        <!-- Enlace para añadir al elenco -->
                                         <li>
                                             <a href="#"
                                                 class="inline-block text-blue-500 hover:text-blue-600 focus:outline-none focus:shadow-outline-red active:text-blue-600 mx-auto font-semibold text-base"
@@ -54,6 +62,8 @@
                                                 Añadir
                                             </a>
                                         </li>
+
+                                        <!-- Enlace para eliminar del elenco -->
                                         <li>
                                             <a href="#"
                                                 class="inline-block text-red-500 hover:text-red-600 focus:outline-none focus:shadow-outline-red active:text-red-600 mx-auto font-semibold text-base"
@@ -64,7 +74,10 @@
                                         </li>
                                     </ul>
                                 </td>
+
+                                <!-- Acciones Audiovisual -->
                                 <td class="px-6 text-center space-x-2">
+                                    <!-- Botón para editar -->
                                     <a href="#" class="inline-block">
                                         <button
                                             class="px-4 py-2 bg-blue-500 border border-blue-600 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-red active:bg-blue-600 mx-auto font-semibold text-base"
@@ -74,6 +87,7 @@
                                         </button>
                                     </a>
 
+                                    <!-- Botón para borrar -->
                                     <button type="submit"
                                         class="px-4 py-2 bg-red-500 border border-red-600 text-white rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-red active:bg-red-600 mx-auto font-semibold text-base"
                                         data-modal-target="popup-modal{{ $audiovisual }}"
@@ -84,10 +98,10 @@
                                 </td>
                             </tr>
 
-                            <!-- Ventana modal para elenco de un audiovisual -->
+                            <!-- Ventana modal para añadir elenco de un audiovisual -->
                             @include('admin.audiovisuales.elenco')
 
-                            <!-- Ventana modal para elenco de un audiovisual -->
+                            <!-- Ventana modal para eliminar elenco de un audiovisual -->
                             @include('admin.audiovisuales.elencoEliminar', [
                                 'audiovisualId' => $audiovisual->id,
                             ])
@@ -102,6 +116,7 @@
                 </table>
             </div>
 
+            <!-- Botón para insertar nuevo audiovisual -->
             <div class="flex justify-center mt-4">
                 <a href="#" class="inline-block">
                     <button
@@ -112,6 +127,7 @@
                 </a>
             </div>
 
+            <!-- Paginación de la tabla de audiovisuales -->
             <div class="mt-4">
                 {{ $audiovisuales }}
             </div>
@@ -120,4 +136,5 @@
         <!-- Ventana modal para insertar una premio -->
         @include('admin.audiovisuales.create')
     </div>
+
 </x-admin>

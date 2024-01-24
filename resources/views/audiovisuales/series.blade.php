@@ -1,5 +1,13 @@
 <x-app-layout>
-    <h1 class="text-2xl font-bold mb-6 mt-20 ml-10 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
+    <!-- Título de Novedades -->
+    <h1 class="text-3xl font-extrabold text-center mt-4">
+        <span class="relative inline-block rounded-lg overflow-hidden">
+            <span class="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-500 border border-blue-600"></span>
+            <span class="relative text-white z-10 p-4">Novedades</span>
+        </span>
+    </h1>
+
+    <h1 class="text-2xl font-bold mb-6 mt-12 ml-10 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
         Series
     </h1>
 
