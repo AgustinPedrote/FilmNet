@@ -30,7 +30,7 @@
             <p class="text-gray-600">{{ $audiovisual->descripcion }}</p>
 
             <!-- Detalles adicionales con mayor margen -->
-            <div class="text-lg text-gray-500 space-y-2 mb-4">
+            <div class="text-md sm:text-lg text-gray-500 space-y-2 mb-4">
                 <div class="mb-3"><strong>Título Original:</strong> {{ $audiovisual->titulo_original }}</div>
                 <div class="mb-3"><strong>Año:</strong> {{ $audiovisual->year }}</div>
                 <div class="mb-3"><strong>Duración:</strong> {{ $audiovisual->duracion }} minutos</div>

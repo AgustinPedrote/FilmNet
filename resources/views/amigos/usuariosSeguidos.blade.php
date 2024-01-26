@@ -14,11 +14,12 @@
         @endif
     </div>
 
-    <h1 class="text-2xl font-bold mb-6 mt-20 ml-10 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
+    <h1 class="text-2xl font-bold mb-6 mt-20 ml-10 mx-4 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800"">
         Usuarios seguidos ({{ $amigos->count() }})
     </h1>
 
-    <div class="md:w-1/3 mx-auto mt-2 mb-6">
+    <!-- Buscador de usuarios para seguir -->
+    <div class="w-11/12 sm:w-1/2 mx-auto mt-2 mb-6">
         <form action="{{ route('seguir.amigo') }}" method="POST">
             @csrf
 
@@ -60,30 +61,42 @@
             <table class="min-w-full mt-10 table-auto border border-gray-300 divide-y divide-gray-300">
                 <thead>
                     <tr>
-                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">Nombre</th>
-                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">País</th>
-                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">Ciudad</th>
-                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">Votaciones</th>
-                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">Críticas</th>
-                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">Acciones</th>
+                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">
+                            Nombre
+                        </th>
+                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase hidden md:table-cell">
+                            País
+                        </th>
+                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase hidden md:table-cell">
+                            Ciudad
+                        </th>
+                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase hidden md:table-cell">
+                            Votaciones
+                        </th>
+                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase hidden md:table-cell">
+                            Críticas
+                        </th>
+                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">
+                            Acciones
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($amigos as $amigo)
                         <tr>
                             <td class="py-2 px-4 border text-center">{{ $amigo->name }}</td>
-                            <td class="py-2 px-4 border text-center">{{ $amigo->pais }}</td>
-                            <td class="py-2 px-4 border text-center">{{ $amigo->ciudad }}</td>
-                            <td class="py-2 px-4 border text-center">
+                            <td class="py-2 px-4 border text-center hidden md:table-cell">{{ $amigo->pais }}</td>
+                            <td class="py-2 px-4 border text-center hidden md:table-cell">{{ $amigo->ciudad }}</td>
+                            <td class="py-2 px-4 border text-center hidden md:table-cell">
                                 <a href="{{ route('usuario.votaciones', ['usuario' => $amigo]) }}"
                                     class="text-blue-500 hover:underline">
-                                    {{$amigo->votaciones->count()}}
+                                    {{ $amigo->votaciones->count() }}
                                 </a>
                             </td>
-                            <td class="py-2 px-4 border text-center">
+                            <td class="py-2 px-4 border text-center hidden md:table-cell">
                                 <a href="{{ route('usuario.criticas', ['usuario' => $amigo]) }}"
                                     class="text-blue-500 hover:underline">
-                                    {{$amigo->criticas->count()}}
+                                    {{ $amigo->criticas->count() }}
                                 </a>
                             </td>
                             <td class="py-2 px-4 border text-center">

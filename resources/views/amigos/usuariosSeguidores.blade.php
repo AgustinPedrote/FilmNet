@@ -12,26 +12,36 @@
             <table class="min-w-full mt-10 table-auto border border-gray-300 divide-y divide-gray-300">
                 <thead>
                     <tr>
-                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">Nombre</th>
-                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">País</th>
-                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">Ciudad</th>
-                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">Votaciones</th>
-                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">Críticas</th>
+                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">
+                            Nombre
+                        </th>
+                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase hidden md:table-cell">
+                            País
+                        </th>
+                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase hidden md:table-cell">
+                            Ciudad
+                        </th>
+                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase hidden md:table-cell">
+                            Votaciones
+                        </th>
+                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase hidden md:table-cell">
+                            Críticas
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($seguidores as $seguido)
                         <tr>
                             <td class="py-2 px-4 border text-center">{{ $seguido->name }}</td>
-                            <td class="py-2 px-4 border text-center">{{ $seguido->pais }}</td>
-                            <td class="py-2 px-4 border text-center">{{ $seguido->ciudad }}</td>
-                            <td class="py-2 px-4 border text-center">
+                            <td class="py-2 px-4 border text-center hidden md:table-cell">{{ $seguido->pais }}</td>
+                            <td class="py-2 px-4 border text-center hidden md:table-cell">{{ $seguido->ciudad }}</td>
+                            <td class="py-2 px-4 border text-center hidden md:table-cell">
                                 <a href="{{ route('usuario.votaciones', ['usuario' => $seguido]) }}"
                                     class="text-blue-500 hover:underline">
                                     {{ $seguido->votaciones->count() }}
                                 </a>
                             </td>
-                            <td class="py-2 px-4 border text-center">
+                            <td class="py-2 px-4 border text-center hidden md:table-cell">
                                 <a href="{{ route('usuario.criticas', ['usuario' => $seguido]) }}"
                                     class="text-blue-500 hover:underline">
                                     {{ $seguido->criticas->count() }}

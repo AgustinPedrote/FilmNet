@@ -1,5 +1,5 @@
 <x-app-layout>
-    <h1 class="text-2xl font-bold mb-6 mt-10 sm:mt-20 mx-4 border-b-2 border-blue-500 pb-2 text-gray-800 text-center">
+    <h1 class="text-2xl font-bold mb-6 mt-20 ml-10 mx-4 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
         Mis votaciones
     </h1>
 
@@ -14,7 +14,7 @@
                             <th class="px-4 py-3 sm:py-4 text-lg sm:text-xl font-semibold text-gray-900">
                                 Audiovisuales
                             </th>
-                            <!-- Utilizamos clases de ocultamiento responsivo para esconder las características en pantallas pequeñas -->
+                            <!-- Clases de ocultamiento responsivo para esconder las características en pantallas pequeñas -->
                             <th
                                 class="hidden sm:table-cell px-4 py-3 sm:py-4 text-lg sm:text-xl font-semibold text-gray-900">
                                 Características
@@ -52,7 +52,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <!-- Utilizamos clases de ocultamiento responsivo para esconder las características en pantallas pequeñas -->
+                                <!-- Clases de ocultamiento responsivo para esconder las características en pantallas pequeñas -->
                                 <td class="hidden sm:table-cell px-4 py-4 sm:py-6 text-base sm:text-lg">
                                     Año: {{ $votacion->audiovisual->year }}<br>
                                     Duración: {{ $votacion->audiovisual->duracion }} minutos<br>
@@ -98,6 +98,7 @@
         </a>
     </div>
 
+    <!-- Paginación -->
     <div class="mx-4 mt-6 mb-10">
         {{ $votaciones->links() }}
     </div>

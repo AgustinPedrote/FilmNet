@@ -4,7 +4,9 @@
 
     <!-- Contenedor principal -->
     <div class="mb-3 flex items-start">
-        <label for="critica" class="block text-lg font-bold text-gray-500">Tu Crítica:</label>
+        <label for="critica" class="block text-md sm:text-lg font-bold text-gray-500">
+            Tu Crítica:
+        </label>
 
         <!-- Mensaje de error -->
         <div id="error" class="text-red-500 ml-3 font-semibold text-lg">
@@ -15,7 +17,7 @@
     <!-- Área de Texto para la Crítica -->
     <div class="mb-3">
         <textarea name="critica" id="critica" rows="4"
-            class="form-input mt-1 block w-full focus:outline-none focus:shadow-outline-blue border border-gray-300 rounded-md px-4 py-2 resize-none h-44 text-lg"
+            class="form-input mt-1 block w-full focus:outline-none focus:shadow-outline-blue border border-gray-300 rounded-md px-4 py-2 resize-none h-44 text-md sm:text-lg"
             placeholder="Escribe tu opinión para que el resto de los usuarios la pueda leer."></textarea>
     </div>
 
