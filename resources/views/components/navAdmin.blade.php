@@ -1,6 +1,6 @@
 <!-- Menú lateral -->
 <aside class="bg-gray-800 text-white w-64 p-4">
-    <h1 class="text-2xl font-semibold mb-4">Panel de Administración</h1>
+    <h1 class="text-2xl font-semibold mb-4 text-yellow-400">Panel de Administración</h1>
 
     <ul>
         <li class="mb-2">

@@ -8,12 +8,11 @@
             <div class="flex h-14">
                 <!-- Logo con espacio a la derecha -->
                 <div class="shrink-0 flex items-center mb-10 mr-8">
-                    <a href="{{ route('home.index') }}">
-                        <x-application-logo class="block fill-current text-gray-800" />
-                    </a>
+                    <x-application-logo class="block fill-current text-gray-800" />
                 </div>
+
                 <!-- Enlaces de navegación -->
-                <div class="flex space-x-4 sm:space-x-6 relative z-20">
+                <div class="hidden lg:flex space-x-4 sm:space-x-6 relative z-20">
                     <x-nav-link :href="route('home.index')" :active="request()->routeIs('home.index')" class="text-xl">
                         {{ __('Inicio') }}
                     </x-nav-link>
@@ -30,10 +29,11 @@
                         {{ __('Documentales') }}
                     </x-nav-link>
                 </div>
+
             </div>
 
             <!-- Menú desplegable de configuración de usuario -->
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
+            <div class="hidden lg:flex lg:items-center lg:ml-6">
                 @if (Route::has('login'))
                     @auth
                         <!-- Dropdown para el usuario autenticado -->
@@ -114,9 +114,9 @@
             </div>
 
             <!-- Hamburger -->
-            <div class="-mr-2 flex items-center sm:hidden">
+            <div class="-mr-2 flex items-center lg:hidden">
                 <button @click="open = ! open"
-                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+                    class="inline-flex items-center justify-center p-2 rounded-md text-yellow-300 hover:text-yellow-300 hover:bg-blue-600 focus:outline-none focus:bg-blue-600 focus:text-yellow-300 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"
                             stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -130,51 +130,109 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
-        {{-- <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-        </div> --}}
-
+    <div :class="{ 'block': open, 'hidden': !open }" class="hidden lg:hidden">
         <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
-            @if (Route::has('login'))
-                @auth
-                    <div class="px-4">
-                        <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                        <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+        <div class="bg-gray-500 rounded-lg shadow-lg p-6">
+            @auth
+                <!-- Mostrar información del usuario autenticado y opción de cerrar sesión -->
+                <div class="flex items-center justify-between mb-4">
+                    <div class="text-lg font-semibold text-yellow-300 hover:text-yellow-400">
+                        {{ Auth::user()->name }}
                     </div>
 
-                    <div class="mt-3 space-y-1">
-                        <x-responsive-nav-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-responsive-nav-link>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="text-white hover:text-yellow-400 focus:outline-none">
+                            Cerrar sesión
+                        </button>
+                    </form>
+                </div>
 
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
+                <!-- Enlaces de navegación -->
+                <div class="flex items-center mb-2">
+                    <x-responsive-nav-link :href="route('home.index')" class="mr-2">
+                        Inicio
+                    </x-responsive-nav-link>
 
-                            <x-responsive-nav-link :href="route('logout')"
-                                onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-responsive-nav-link>
-                        </form>
+                    <x-responsive-nav-link :href="route('peliculas.index')" class="mr-2">
+                        Peliculas
+                    </x-responsive-nav-link>
+
+                    <x-responsive-nav-link :href="route('series.index')" class="mr-2">
+                        Series
+                    </x-responsive-nav-link>
+
+                    <x-responsive-nav-link :href="route('documentales.index')">
+                        Documentales
+                    </x-responsive-nav-link>
+                </div>
+
+                <!-- Enlace al perfil del usuario autenticado -->
+                <x-responsive-nav-link :href="route('admin.index')">
+                    Panel de administración
+                </x-responsive-nav-link>
+                <!-- Enlace al perfil del usuario autenticado -->
+                <x-responsive-nav-link :href="route('votaciones.index')">
+                    Mis votaciones
+                </x-responsive-nav-link>
+                <!-- Enlace al perfil del usuario autenticado -->
+                <x-responsive-nav-link :href="route('users.criticas')">
+                    Mis críticas
+                </x-responsive-nav-link>
+                <!-- Enlace al perfil del usuario autenticado -->
+                <x-responsive-nav-link :href="route('seguimientos.index')">
+                    Quiero ver
+                </x-responsive-nav-link>
+                <!-- Enlace al perfil del usuario autenticado -->
+                <x-responsive-nav-link :href="route('amigos.usuariosSeguidos')">
+                    Seguidos
+                </x-responsive-nav-link>
+                <!-- Enlace al perfil del usuario autenticado -->
+                <x-responsive-nav-link :href="route('amigos.usuariosSeguidores')">
+                    seguidores
+                </x-responsive-nav-link>
+                <!-- Enlace al perfil del usuario autenticado -->
+                <x-responsive-nav-link :href="route('profile.edit')">
+                    Perfil
+                </x-responsive-nav-link>
+            @else
+                <!-- Mostrar enlaces de inicio de sesión y registro si el usuario no está autenticado -->
+                <div class="flex items-center justify-between mb-4">
+                    <div class="text-base text-gray-200 hover:text-yellow-400">
+                        <a href="login">
+                            Iniciar sesión
+                        </a>
                     </div>
-                @else
-                    <a href="{{ route('login') }}"
-                        class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log
-                        in</a>
 
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}"
-                            class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
+                        <div class="text-base text-gray-200 hover:text-yellow-400">
+                            <a href="register">
+                                Registrarse
+                            </a>
+                        </div>
                     @endif
+                </div>
 
-                @endauth
+                <!-- Enlaces de navegación -->
+                <div class="flex items-center mb-2">
+                    <x-responsive-nav-link :href="route('home.index')" class="mr-2">
+                        Inicio
+                    </x-responsive-nav-link>
 
-            @endif
+                    <x-responsive-nav-link :href="route('peliculas.index')" class="mr-2">
+                        Peliculas
+                    </x-responsive-nav-link>
+
+                    <x-responsive-nav-link :href="route('series.index')" class="mr-2">
+                        Series
+                    </x-responsive-nav-link>
+
+                    <x-responsive-nav-link :href="route('documentales.index')">
+                        Documentales
+                    </x-responsive-nav-link>
+                </div>
+            @endauth
         </div>
+
     </div>
 </nav>
