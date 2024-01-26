@@ -1,9 +1,8 @@
-<!-- component -->
 <footer class="bg-blue-100 font-sans dark:bg-gray-900">
-    <div class="container px-6 mx-auto flex items-center justify-between">
+    <div class="container px-6 mx-auto flex flex-col md:flex-row items-center justify-between">
 
         <!-- Logo y nombre del sitio -->
-        <div>
+        <div class="mb-4 md:mb-0">
             <a href="{{ route('home.index') }}" class="flex items-center">
                 <!-- Logo del sitio -->
                 <img src="{{ asset('logos/logo.png') }}" alt="logo" class="w-16 h-auto mr-2">
@@ -14,7 +13,8 @@
 
         <ul class="flex flex-wrap items-center mb-6 text-base text-gray-900 sm:mb-0">
             <li>
-                <a href="{{ route('politica-de-privacidad') }}" class="mr-4 hover:underline md:mr-6">Política de privacidad</a>
+                <a href="{{ route('politica-de-privacidad') }}" class="mr-4 hover:underline md:mr-6">Política de
+                    privacidad</a>
             </li>
             <li>
                 <a href="{{ route('sobre-nosotros') }}" class="mr-4 hover:underline md:mr-6">Sobre Nosotros</a>
