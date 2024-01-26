@@ -9,7 +9,7 @@
         </div>
 
         {{-- Fila inferior con desplegables --}}
-        <div class="flex flex-wrap items-center justify-center space-x-4 mb-4">
+        <div class="flex flex-wrap items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
 
             {{-- Desplegable de géneros --}}
             <div class="w-full md:w-1/4 mb-4 md:mb-0">
@@ -34,7 +34,7 @@
             </div>
 
             {{-- Desplegable de recomendaciones de edad --}}
-            <div class="w-full md:w-1/4">
+            <div class="w-full md:w-1/4 md:mb-0">
                 <select x-model="selectedRecommendation" x-on:change="buscarAudiovisual2"
                     class="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 transition duration-300 ease-in-out">
                     <option value="">Recomendación</option>

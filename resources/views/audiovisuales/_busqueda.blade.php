@@ -1,4 +1,3 @@
-<!-- Vista parcial que se renderiza en el home -->
 @foreach ($items as $item)
     <!-- Enlace a la página de detalles del audiovisual -->
     <a href="{{ route('audiovisual.show', $item) }}"
