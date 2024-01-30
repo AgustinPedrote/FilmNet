@@ -144,7 +144,7 @@
                                  <x-input-label for="sinopsis" :value="__('Sinopsis')"
                                      class="block text-base font-bold text-gray-900 dark:text-white mb-2 mt-2" />
                                  <textarea id="sinopsis"
-                                     class="block w-full h-64 border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm"
+                                     class="block w-full h-32 sm:h-64 border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm"
                                      name="sinopsis" required autofocus autocomplete="sinopsis">{{ old('sinopsis', $audiovisual->sinopsis) }}</textarea>
                                  <x-input-error :messages="$errors->get('sinopsis')" class="mt-2" />
                              </div>

@@ -51,6 +51,7 @@ class AudiovisualController extends Controller
 
         // Agregar condición para género
         if (!empty($genero)) {
+            // Filtrar resultados
             $query->whereHas('generos', function ($q) use ($genero) {
                 $q->where('genero_id', $genero);
             });

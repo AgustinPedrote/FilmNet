@@ -19,7 +19,6 @@
     </h1>
 
     @forelse ($criticas->sortByDesc('created_at') as $critica)
-
         <!-- Votación del usuario al audiovisual -->
         @php
             $votacion = $critica->audiovisual->obtenerVotacion($critica->user_id, $critica->audiovisual_id);
@@ -41,10 +40,10 @@
                     <!-- Columna 2: Detalles del usuario y fecha -->
                     <div class="w-full flex flex-col ml-4">
                         <!-- Título en la parte superior -->
-                        <div class="text-2xl font-bold mb-2">{{ $critica->audiovisual->titulo }}</div>
+                        <div class="text-lg sm:text-2xl font-bold mb-2">{{ $critica->audiovisual->titulo }}</div>
 
                         <!-- Fecha de la crítica -->
-                        <div class="font-medium mb-2 text-lg flex items-center">
+                        <div class="font-medium mb-2 text-sm sm:text-lg flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"
                                 class="mr-2">
                                 <path
@@ -84,8 +83,8 @@
                 <!-- Segunda fila (fila de abajo) -->
                 <div class="bg-gray-100 border border-gray-300 p-4 rounded-md">
                     <!-- Contenido de la segunda fila -->
-                    <div class="text-lg font-bold mb-2">Crítica:</div>
-                    <p class="text-lg" style="min-height: 6rem;">{{ $critica->critica }}</p>
+                    <div class="text-md sm:text-lg font-bold mb-2">Crítica:</div>
+                    <p class="text-md sm:text-lg" style="min-height: 6rem;">{{ $critica->critica }}</p>
                 </div>
 
             </div>

@@ -1,4 +1,4 @@
-<!-- Ventana modal para editar un premio -->
+<!-- Ventana modal para crear un audiovisual -->
 <div id="InsertarModal" tabindex="-1" aria-hidden="true"
     class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative w-full max-w-7xl mx-auto">
@@ -135,7 +135,7 @@
                                 <x-input-label for="sinopsis" :value="__('Sinopsis')"
                                     class="block text-base font-bold text-gray-900 dark:text-white mb-2 mt-2" />
                                 <textarea id="sinopsis"
-                                    class="block w-full h-64 border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm"
+                                    class="block w-full h-32 sm:h-64 border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm"
                                     name="sinopsis" required autofocus autocomplete="sinopsis"></textarea>
                                 <x-input-error :messages="$errors->get('sinopsis')" class="mt-2" />
                             </div>
