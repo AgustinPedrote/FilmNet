@@ -82,7 +82,6 @@ async function eliminarRelacion(
     } catch (error) {
         // Manejar errores de la solicitud
         if (error.response) {
-            // La solicitud fue realizada, pero el servidor respondió con un código de estado que no está en el rango 2xx
             mostrarMensaje(
                 error.response.data.message ||
                     "Error al comunicarse con el servidor.",

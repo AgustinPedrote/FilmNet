@@ -38,7 +38,7 @@
                     Buscar
                 </button>
 
-                <!-- Botón "Crear" -->
+                <!-- Botón "Seguir" -->
                 <button type="submit"
                     class="ml-2 cursor-pointer bg-blue-500 border border-blue-600 hover:bg-blue-600 text-white rounded-md px-4 py-2 font-semibold focus:outline-none focus:shadow-outline-blue active:bg-blue-600">
                     Seguir
@@ -47,8 +47,9 @@
 
             <!-- Lista de resultados de la búsqueda -->
             <ul id="amigoResults"
-                class="absolute bg-white borde divide-y divide-gray-300 overflow-y-auto max-h-52 w-52 mt-1 z-10">
+                class="absolute bg-white border border-gray-300 divide-y divide-gray-300 overflow-y-auto max-h-52 w-52 sm:w-64 mt-1 z-10 hidden">
             </ul>
+
         </form>
     </div>
 
@@ -129,6 +130,12 @@
             </span>
         </a>
     </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 
     <!-- Script para buscador de usuarios -->
     <script src="{{ asset('js/buscadorUsuarios.js') }}"></script>

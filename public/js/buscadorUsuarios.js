@@ -1,59 +1,85 @@
-function goBack() {
-    window.history.back();
-}
+// Temporizador de búsqueda
+var searchTimeout;
 
 function buscarAmigo() {
+    // Obtener el valor de búsqueda del campo de entrada
     var searchQuery = document.getElementById("search_amigo").value.trim();
+    // Obtener el elemento de resultados
     var amigoResults = document.getElementById("amigoResults");
 
-    if (searchQuery === "") {
-        amigoResults.innerHTML = "";
-        return;
-    }
+    // Cancelar búsqueda anterior si existe
+    clearTimeout(searchTimeout);
 
-    axios.get("/busqueda/amigo", {
-            params: {
-                query: searchQuery,
-            },
-        })
-        .then(function(response) {
+    // Establecer un temporizador antes de realizar la búsqueda para evitar solicitudes excesivas
+    searchTimeout = setTimeout(function () {
+        // Si la consulta de búsqueda está vacía, limpiar los resultados y ocultar la lista
+        if (searchQuery === "") {
+            amigoResults.style.display = "none";
             amigoResults.innerHTML = "";
-            var amigos = response.data.amigos;
+            return;
+        }
 
-            if (Array.isArray(amigos) && amigos.length > 0) {
-                amigoResults.classList.add("border", "border-gray-500", "rounded-lg", "p-2");
+        // Realizar una solicitud GET al servidor para obtener los amigos que coincidan con la consulta
+        axios
+            .get("/busqueda/amigo", {
+                params: { query: searchQuery },
+            })
+            .then(function (response) {
+                // Limpiar los resultados anteriores
+                amigoResults.innerHTML = "";
+                // Obtener la lista de amigos del objeto de respuesta
+                var amigos = response.data.amigos;
 
-                amigos.forEach(function(resultado) {
-                    var li = document.createElement("li");
-                    li.classList.add(
-                        "hover:bg-blue-200",
-                        "transition",
-                        "duration-300",
-                        "ease-in-out"
-                    );
-                    li.textContent = resultado.name;
+                // Si se encontraron amigos, mostrarlos en la lista de resultados
+                if (Array.isArray(amigos) && amigos.length > 0) {
+                    amigos.forEach(function (resultado) {
+                        var li = document.createElement("li");
+                        // Agregar clases de estilo al elemento de lista
+                        li.classList.add(
+                            "px-4",
+                            "py-2",
+                            "cursor-pointer",
+                            "hover:bg-blue-200",
+                            "transition",
+                            "duration-300",
+                            "ease-in-out"
+                        );
+                        // Establecer el texto del elemento de lista como el nombre del amigo
+                        li.textContent = resultado.name;
 
-                    li.addEventListener("click", function() {
-                        document.getElementById("search_amigo").value = resultado.name;
+                        // Agregar un evento de clic para manejar la selección de amigo
+                        li.addEventListener("click", function () {
+                            document.getElementById("search_amigo").value =
+                                resultado.name;
 
-                        // Cambia la línea para obtener el campo de entrada oculto correctamente
-                        var amigoHiddenInput = document.getElementById("amigoId");
-                        amigoHiddenInput.value = resultado.id;
+                            var amigoHiddenInput =
+                                document.getElementById("amigoId");
+                            amigoHiddenInput.value = resultado.id;
 
-                        // Cerrar la lista de resultados y quitar algunos estilos
-                        amigoResults.innerHTML = "";
-                        amigoResults.classList.remove("border", "border-gray-300");
+                            // Ocultar la lista de resultados después de seleccionar un amigo
+                            amigoResults.style.display = "none";
+                        });
+
+                        // Agregar el elemento de lista a la lista de resultados
+                        amigoResults.appendChild(li);
                     });
 
-                    amigoResults.appendChild(li);
-                });
-            } else {
-                console.error("No se encontraron amigos.");
-                amigoResults.innerHTML = "<li>No se encontraron amigos.</li>";
-            }
-        })
-        .catch(function(error) {
-            console.error("Error al realizar la búsqueda:", error);
-            amigoResults.innerHTML = "<li>Error en la búsqueda.</li>";
-        });
+                    // Mostrar la lista de resultados
+                    amigoResults.style.display = "block";
+                } else {
+                    // Si no se encontraron amigos, mostrar un mensaje de error en la lista de resultados
+                    console.error("No se encontraron amigos.");
+                    amigoResults.innerHTML =
+                        "<li class='px-4 py-2'>No se encontraron amigos.</li>";
+                    amigoResults.style.display = "block";
+                }
+            })
+            .catch(function (error) {
+                // Manejar errores de solicitud mostrando un mensaje de error en la lista de resultados
+                console.error("Error al realizar la búsqueda:", error);
+                amigoResults.innerHTML =
+                    "<li class='px-4 py-2'>Error en la búsqueda.</li>";
+                amigoResults.style.display = "block";
+            });
+    }, 300); // Establecer un retraso antes de iniciar la búsqueda
 }

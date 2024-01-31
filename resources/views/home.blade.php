@@ -1,6 +1,21 @@
 <x-app-layout>
+    <!-- Mensajes de éxito y error -->
+    <div class="relative z-10">
+        @if (session('success'))
+            <div class="absolute top-[-10px] left-0 w-full mr-10 z-50">
+                <x-success :status="session('success')" />
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="absolute top-[-10px] left-0 w-full mr-10 z-50">
+                <x-error :status="session('error')" />
+            </div>
+        @endif
+    </div>
+
     {{-- Campo de búsqueda con Alpine.js --}}
-    <div x-data="buscarAudiovisual" x-init="buscarAudiovisual2" class="container mx-auto py-8">
+    <div x-data="buscarAudiovisual" x-init="buscarAudiovisual2" class="container mx-auto py-8 mt-6">
 
         {{-- Fila superior con campo de búsqueda --}}
         <div class="mb-4 text-center">
@@ -54,7 +69,7 @@
         {{-- Contenedor principal para los elementos de la categoría --}}
         <div x-html="resultados"
             class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 justify-center mx-auto w-full">
-            {{-- Se itera sobre los audiovisuales en audiovisuales._busqueda.blade.php y se renderiza--}}
+            {{-- Se itera sobre los audiovisuales en audiovisuales._busqueda.blade.php y se renderiza --}}
         </div>
 
         {{-- Mensaje cuando no hay resultados con Alpine.js --}}

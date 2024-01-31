@@ -28,25 +28,29 @@ class PremioController extends Controller
     // Almacenar un nuevo premio en la base de datos
     public function store(StorePremioRequest $request)
     {
-        // Validar si la búsqueda está vacía o no coincide con un audiovisual
-        if (empty($request->audiovisual_)) {
-            return redirect()->route('admin.premios.index')->with('error', 'El premio no ha sido creado con éxito');
-        }
+        // Validar los campos del formulario
+        $request->validate([
+            'nombre' => ['required', 'string', 'max:100'],
+            'year' => ['required', 'integer'],
+        ], [
+            'nombre.required' => 'El nombre es obligatorio.',
+            'nombre.string' => 'El nombre debe ser una cadena de caracteres.',
+            'nombre.max' => 'El nombre no puede tener más de 100 caracteres.',
+            'year.required' => 'El año es obligatorio.',
+            'year.integer' => 'El año debe ser un número entero.',
+        ]);
 
-        // Validar que el año sea un número
-        if (!is_numeric($request->year)) {
-            return redirect()->route('admin.premios.index')->with('error', 'El año debe ser un número');
+        // Validar que el audiovisual exista en la base de datos
+        $audiovisual = Audiovisual::find($request->audiovisual_);
+        if (!$audiovisual) {
+            return redirect()->route('admin.premios.index')->with('error', 'El audiovisual seleccionado no existe');
         }
 
         // Crear el premio
-        $nombre = $request->nombre;
-        $year = $request->year;
-        $audiovisual_id = $request->audiovisual_;
-
         Premio::create([
-            'nombre' => $nombre,
-            'year' => $year,
-            'audiovisual_id' => $audiovisual_id
+            'nombre' => $request->nombre,
+            'year' => $request->year,
+            'audiovisual_id' => $request->audiovisual_
         ]);
 
         return redirect()->route('admin.premios.index')->with('success', 'El premio ha sido creado con éxito');
@@ -65,17 +69,27 @@ class PremioController extends Controller
     // Actualizar la información de un premio en la base de datos
     public function update(UpdatePremioRequest $request, Premio $premio)
     {
-        if ($request->audiovisual_ != null) {
+        // Validar los campos del formulario
+        $request->validate([
+            'nombre' => ['required', 'string', 'max:100'],
+            'year' => ['required', 'integer'],
+        ], [
+            'nombre.required' => 'El nombre es obligatorio.',
+            'nombre.string' => 'El nombre debe ser una cadena de caracteres.',
+            'nombre.max' => 'El nombre no puede tener más de 100 caracteres.',
+            'year.required' => 'El año es obligatorio.',
+            'year.integer' => 'El año debe ser un número entero.',
+        ]);
+
+        // Verificar si el campo audiovisual_ está presente y no está vacío en la solicitud
+        if ($request->filled('audiovisual_')) {
             $premio->audiovisual_id = $request->audiovisual_;
         }
 
-        // Validar que el año sea un número
-        if (!is_numeric($request->year)) {
-            return redirect()->route('admin.premios.index')->with('error', 'El año debe ser un número');
-        }
-
+        // Actualizar los datos del premio con los datos validados
         $premio->update($request->all());
 
+        // Redireccionar de nuevo a la página de índice de premios con un mensaje de éxito
         return redirect()->route('admin.premios.index')->with('success', 'El premio ha sido modificado con éxito');
     }
 

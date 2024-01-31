@@ -152,53 +152,78 @@ class AudiovisualController extends Controller
     // Almacenar un nuevo audiovisual en la base de datos (Admin)
     public function store(StoreAudiovisualRequest $request)
     {
-        // Validar que se haya seleccionado un tipo de audiovisual
-        if (!$request->has('tipo_id') || $request->tipo_id == 0) {
-            return redirect()->route('admin.audiovisuales.index')->with('error', 'Debes seleccionar un tipo de audiovisual.');
-        }
+        // Validar las reglas de validación
+        $validatedData = $request->validate([
+            'titulo' => ['required', 'string', 'max:100'],
+            'titulo_original' => ['nullable', 'string', 'max:100'],
+            'year' => ['required', 'integer', 'between:1900,' . date('Y')],
+            'duracion' => ['required', 'numeric', 'min:1'],
+            'pais' => ['required', 'string', 'max:255', 'regex:/^[^\d]+$/'],
+            'trailer' => ['nullable', 'url'],
+            'tipo_id' => ['required', 'integer', 'exists:tipos,id'],
+            'recomendacion_id' => ['required', 'integer', 'exists:recomendaciones,id'],
+            'sinopsis' => ['required', 'string', 'max:500'],
+            'imagen' => ['required', 'image', 'max:2048'], // Asegurar que la imagen sea un archivo de imagen válido y no exceda 2MB
+        ], [
+            'titulo.required' => 'El título es obligatorio.',
+            'titulo.string' => 'El título debe ser una cadena de caracteres.',
+            'titulo.max' => 'El título no puede tener más de :max caracteres.',
+            'titulo_original.string' => 'El título original debe ser una cadena de caracteres.',
+            'titulo_original.max' => 'El título original no puede tener más de :max caracteres.',
+            'year.required' => 'El año es obligatorio.',
+            'year.integer' => 'El año debe ser un número entero.',
+            'year.between' => 'El año debe estar entre 1900 y el año actual.',
+            'duracion.required' => 'La duración es obligatoria.',
+            'duracion.numeric' => 'La duración debe ser un número.',
+            'duracion.min' => 'La duración debe ser al menos :min.',
+            'pais.required' => 'El país es obligatorio.',
+            'pais.string' => 'El país debe ser una cadena de caracteres.',
+            'pais.regex' => 'El país no puede contener números.',
+            'pais.max' => 'El país no puede tener más de :max caracteres.',
+            'trailer.url' => 'El formato del trailer no es válido.',
+            'tipo_id.required' => 'El tipo es obligatorio.',
+            'tipo_id.integer' => 'El tipo debe ser un número entero.',
+            'tipo_id.exists' => 'El tipo seleccionado no existe.',
+            'recomendacion_id.required' => 'La recomendación de edad es obligatoria.',
+            'recomendacion_id.integer' => 'La recomendación de edad debe ser un número entero.',
+            'recomendacion_id.exists' => 'La recomendación de edad seleccionada no existe.',
+            'sinopsis.required' => 'La sinopsis es obligatoria.',
+            'sinopsis.string' => 'La sinopsis debe ser una cadena de caracteres.',
+            'sinopsis.max' => 'La sinopsis no puede tener más de :max caracteres.',
+            'imagen.required' => 'La imagen es obligatoria.',
+            'imagen.image' => 'El archivo debe ser una imagen.',
+            'imagen.max' => 'La imagen no puede exceder :max kilobytes.',
+        ]);
 
-        // Validar que se haya seleccionado una recomendación de edad
-        if (!$request->has('recomendacion_id') || $request->recomendacion_id == 0) {
-            return redirect()->route('admin.audiovisuales.index')->with('error', 'Debes seleccionar una recomendación de edad.');
-        }
+        // Reemplazar los espacios en blanco con guiones bajos en el título
+        $titulo = str_replace(' ', '_', $validatedData['titulo']);
 
-        // Validar que se haya subido un archivo de imagen
-        if (!$request->hasFile('imagen')) {
-            return redirect()->route('admin.audiovisuales.index')->with('error', 'Debes seleccionar una imagen.');
-        }
-
-        // Reemplaza los espacios en blanco con guiones bajos en el título
-        $titulo = str_replace(' ', '_', $request->titulo);
-
-        // Obtén la extensión del archivo original
+        // Obtener la extensión del archivo original
         $extension = $request->file('imagen')->getClientOriginalExtension();
 
-        // Construye el nombre de la imagen con el título modificado y la extensión
+        // Construir el nombre de la imagen con el título modificado y la extensión
         $img = $titulo . '.' . $extension;
 
-        // Mueve el archivo a la ubicación deseada
+        // Mover el archivo a la ubicación deseada
         $request->file('imagen')->move(public_path('img'), $img);
 
-        // Validar que el año o la duración sea un número
-        if (!is_numeric($request->year) || !is_numeric($request->duracion)) {
-            return redirect()->route('admin.audiovisuales.index')->with('error', 'Los campos año y duración son numéricos');
-        }
-
+        // Crear un nuevo registro de audiovisual en la base de datos
         Audiovisual::create([
-            'titulo' => $request->titulo,
-            'titulo_original' => $request->titulo_original,
-            'year' => $request->year,
-            'duracion' => $request->duracion,
-            'pais' => $request->pais,
-            'trailer' => $request->trailer,
-            'tipo_id' => $request->tipo_id,
-            'recomendacion_id' => $request->recomendacion_id,
-            'sinopsis' => $request->sinopsis,
+            'titulo' => $validatedData['titulo'],
+            'titulo_original' => $validatedData['titulo_original'],
+            'year' => $validatedData['year'],
+            'duracion' => $validatedData['duracion'],
+            'pais' => $validatedData['pais'],
+            'trailer' => $validatedData['trailer'],
+            'tipo_id' => $validatedData['tipo_id'],
+            'recomendacion_id' => $validatedData['recomendacion_id'],
+            'sinopsis' => $validatedData['sinopsis'],
             'img' => 'img/' . $img
         ]);
 
         return redirect()->route('admin.audiovisuales.index')->with('success', 'El audiovisual ha sido creado con éxito');
     }
+
 
 
     // Mostrar la ficha técnica de un audiovisual (SHOW)
@@ -231,38 +256,74 @@ class AudiovisualController extends Controller
         //
     }
 
-    // actualizar la información de un audiovisual (Admin)
+    // Actualizar la información de un audiovisual (Admin)
     public function update(UpdateAudiovisualRequest $request, Audiovisual $audiovisual)
     {
-        // Verifica si se proporcionó una nueva imagen en la solicitud
+        // Verificar si se proporcionó una nueva imagen en la solicitud
         if ($request->hasFile('imagen')) {
 
-            // Reemplaza los espacios en blanco con guiones bajos en el título
+            // Reemplazar los espacios en blanco con guiones bajos en el título
             $titulo = str_replace(' ', '_', $request->titulo);
 
-            // Obtén la extensión del archivo original
+            // Obtener la extensión del archivo original
             $extension = $request->file('imagen')->getClientOriginalExtension();
 
-            // Construye el nombre de la imagen con el título modificado y la extensión
+            // Construir el nombre de la imagen con el título modificado y la extensión
             $img = $titulo . '.' . $extension;
 
-            // Mueve el archivo a la ubicación deseada
+            // Mover el archivo a la ubicación deseada
             $request->file('imagen')->move(public_path('img'), $img);
 
-            // Guarda la nueva imagen
+            // Guardar la nueva imagen
             $audiovisual->img = 'img/' . $img;
             $audiovisual->save();
         }
 
-        // Validar que el año o la duración sea un número
-        if (!is_numeric($request->year) || !is_numeric($request->duracion)) {
-            return redirect()->route('admin.audiovisuales.index')->with('error', 'Los campos año y duración son numéricos');
-        }
+        // Validar las reglas de validación
+        $validatedData = $request->validate([
+            'titulo' => ['required', 'string', 'max:100'],
+            'titulo_original' => ['nullable', 'string', 'max:100'],
+            'year' => ['required', 'integer', 'between:1900,' . date('Y')],
+            'duracion' => ['required', 'numeric', 'min:1'],
+            'pais' => ['required', 'string', 'max:255', 'regex:/^[^\d]+$/'],
+            'trailer' => ['nullable', 'url'],
+            'tipo_id' => ['required', 'integer', 'exists:tipos,id'],
+            'recomendacion_id' => ['required', 'integer', 'exists:recomendaciones,id'],
+            'sinopsis' => ['required', 'string', 'max:500'],
+        ], [
+            'titulo.required' => 'El título es obligatorio.',
+            'titulo.string' => 'El título debe ser una cadena de caracteres.',
+            'titulo.max' => 'El título no puede tener más de :max caracteres.',
+            'titulo_original.string' => 'El título original debe ser una cadena de caracteres.',
+            'titulo_original.max' => 'El título original no puede tener más de :max caracteres.',
+            'year.required' => 'El año es obligatorio.',
+            'year.integer' => 'El año debe ser un número entero.',
+            'year.between' => 'El año debe estar entre 1900 y el año actual.',
+            'duracion.required' => 'La duración es obligatoria.',
+            'duracion.numeric' => 'La duración debe ser un número.',
+            'duracion.min' => 'La duración debe ser al menos :min.',
+            'pais.required' => 'El país es obligatorio.',
+            'pais.string' => 'El país debe ser una cadena de caracteres.',
+            'pais.regex' => 'El país no puede contener números.',
+            'pais.max' => 'El país no puede tener más de :max caracteres.',
+            'trailer.url' => 'El formato del trailer no es válido.',
+            'tipo_id.required' => 'El tipo es obligatorio.',
+            'tipo_id.integer' => 'El tipo debe ser un número entero.',
+            'tipo_id.exists' => 'El tipo seleccionado no existe.',
+            'recomendacion_id.required' => 'La recomendación de edad es obligatoria.',
+            'recomendacion_id.integer' => 'La recomendación de edad debe ser un número entero.',
+            'recomendacion_id.exists' => 'La recomendación de edad seleccionada no existe.',
+            'sinopsis.required' => 'La sinopsis es obligatoria.',
+            'sinopsis.string' => 'La sinopsis debe ser una cadena de caracteres.',
+            'sinopsis.max' => 'La sinopsis no puede tener más de :max caracteres.',
+        ]);
 
-        $audiovisual->update($request->all());
+        // Actualizar el audiovisual con los datos validados
+        $audiovisual->update($validatedData);
 
         return redirect()->route('admin.audiovisuales.index')->with('success', 'El audiovisual ha sido modificado con éxito');
     }
+
 
     // Eliminar un audiovisual de la base de datos (Admin)
     public function destroy(Audiovisual $audiovisual)
