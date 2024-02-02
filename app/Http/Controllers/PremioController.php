@@ -31,13 +31,14 @@ class PremioController extends Controller
         // Validar los campos del formulario
         $request->validate([
             'nombre' => ['required', 'string', 'max:100'],
-            'year' => ['required', 'integer'],
+            'year' => ['required', 'integer', 'between:1900,' . date('Y')],
         ], [
             'nombre.required' => 'El nombre es obligatorio.',
             'nombre.string' => 'El nombre debe ser una cadena de caracteres.',
             'nombre.max' => 'El nombre no puede tener más de 100 caracteres.',
             'year.required' => 'El año es obligatorio.',
             'year.integer' => 'El año debe ser un número entero.',
+            'year.between' => 'El año debe estar entre 1900 y el año actual.',
         ]);
 
         // Validar que el audiovisual exista en la base de datos
@@ -72,13 +73,14 @@ class PremioController extends Controller
         // Validar los campos del formulario
         $request->validate([
             'nombre' => ['required', 'string', 'max:100'],
-            'year' => ['required', 'integer'],
+            'year' => ['required', 'integer', 'between:1900,' . date('Y')],
         ], [
             'nombre.required' => 'El nombre es obligatorio.',
             'nombre.string' => 'El nombre debe ser una cadena de caracteres.',
             'nombre.max' => 'El nombre no puede tener más de 100 caracteres.',
             'year.required' => 'El año es obligatorio.',
             'year.integer' => 'El año debe ser un número entero.',
+            'year.between' => 'El año debe estar entre 1900 y el año actual.',
         ]);
 
         // Verificar si el campo audiovisual_ está presente y no está vacío en la solicitud

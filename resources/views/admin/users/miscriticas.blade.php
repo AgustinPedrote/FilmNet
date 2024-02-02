@@ -55,7 +55,7 @@
                         <!-- Nota del usuario al audiovisual -->
                         <div class="mt-2 flex space-x-4">
                             <p
-                                class="font-bold {{ $votacion && $votacion->voto ? 'font-bold text-2xl bg-white text-blue-500 bg-white-500 border border-gray-300 rounded-md p-3.5 mb-4' : 'text-lg text-gray-500' }}">
+                                class="font-bold {{ $votacion && $votacion->voto ? 'font-bold text-2xl bg-white text-blue-500 bg-white-500 border border-gray-300 rounded-md p-3.5 mb-4' : 'text-base sm:text-lg text-gray-500' }}">
                                 @if ($votacion && $votacion->voto)
                                     {{ number_format($votacion->voto, 1) }}
                                 @else

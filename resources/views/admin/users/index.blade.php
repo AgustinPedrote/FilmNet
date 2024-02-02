@@ -29,7 +29,8 @@
                     <!-- Encabezados de la tabla -->
                     <thead class="text-xs text-white bg-gray-700 dark:bg-gray-800">
                         <tr>
-                            <th scope="col" class="py-2 lg:py-3 px-4 lg:px-6 text-center font-semibold text-base sm:text-lg w-1/6">
+                            <th scope="col"
+                                class="py-2 lg:py-3 px-4 lg:px-6 text-center font-semibold text-base sm:text-lg w-1/6">
                                 Nombre
                             </th>
                             <th scope="colgroup"
@@ -75,7 +76,8 @@
                                         @method('put')
 
                                         <select name="rol_id"
-                                            class="w-full border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm">
+                                            class="w-full border-blue-500 focus:border-blue-600 focus:ring-blue-500 rounded-md shadow-sm"
+                                            onchange="submitForm(this)">
                                             @foreach ($roles as $rol)
                                                 <option value="{{ $rol->id }}"
                                                     {{ $rol->id == $user->rol->id ? 'selected' : '' }}>
@@ -84,6 +86,13 @@
                                             @endforeach
                                         </select>
                                     </form>
+
+                                    <!-- Script para enviar el formulario al cambiar la selección -->
+                                    <script>
+                                        function submitForm(select) {
+                                            select.form.submit();
+                                        }
+                                    </script>
                                 </td>
 
                                 <!-- Acciones -->

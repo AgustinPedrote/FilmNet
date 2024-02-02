@@ -336,14 +336,15 @@ class AudiovisualController extends Controller
     // Críticas del audiovisual (paginados)
     public function criticas($audiovisual)
     {
+        // Busca el audiovisual y obtiene todas las críticas
         $audiovisual = Audiovisual::find($audiovisual);
         $criticas = $audiovisual->criticas;
 
-        // Si el usuario está logueado, mover su crítica al principio de la lista
+        // Si el usuario está logueado busca su crítica.
         if (auth()->check()) {
             $userCritica = $criticas->where('user_id', auth()->id())->first();
 
-            // Verificar si se encontró una crítica del usuario
+            // Excluye la crítica del usuario logueado y la añade al principio de la colección
             if ($userCritica) {
                 $criticas = $criticas->reject(function ($critica) {
                     return $critica->user_id == auth()->id();
@@ -351,13 +352,16 @@ class AudiovisualController extends Controller
             }
         }
 
-        // Calcula la nota media
+        // Calcula la nota media del audiovisual
         $notaMedia = $audiovisual->obtenerNotaMedia();
 
-        // Pagina las críticas con 4 elementos por página
+        // Paginar las críticas con 4 elementos por página
         $perPage = 4;
+        // Obtener el número de página actual
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $currentItems = $criticas->slice(($currentPage - 1) * $perPage, $perPage)->all();
+        // Seleccionar los elementos que se mostrarán en la página actual
+        $currentItems = $criticas->slice(($currentPage - 1) * $perPage, $perPage)->all(); // Los convierte en un array
+        // Crea un nuevo objeto y añade: lista de elementos a mostrar, nº total de elmentos y nº de elementos por página
         $criticasPaginadas = new LengthAwarePaginator($currentItems, $criticas->count(), $perPage);
 
         // Establece la ruta correcta para los enlaces de paginación
@@ -365,7 +369,7 @@ class AudiovisualController extends Controller
 
         return view('audiovisuales.criticas', [
             'audiovisual' => $audiovisual,
-            'criticas' => $criticasPaginadas,
+            'criticas' => $criticasPaginadas, // críticas paginadas y la información de paginación
             'notaMedia' => $notaMedia
         ]);
     }
@@ -457,7 +461,7 @@ class AudiovisualController extends Controller
     // Actualizar la información del elenco del audiovisual (Admin)
     public function updateBusqueda(Request $request, Audiovisual $audiovisual)
     {
-        // Obtén el nombre del género y la compañía desde la solicitud
+        // Obtener los resultados de búsqueda desde la solicitud
         $nombreGenero = $request->input('search_genero');
         $nombreCompany = $request->input('search_company');
         $nombreReparto = $request->input('search_reparto');
@@ -466,47 +470,87 @@ class AudiovisualController extends Controller
         $nombreCompositor = $request->input('search_compositor');
         $nombreDirector = $request->input('search_director');
 
-        // Verificar si se proporcionó información para el género y la compañía
-        if ($nombreGenero) {
-            // Busca en la base de datos o crea uno nuevo si no existe
-            $genero = Genero::firstOrCreate(['nombre' => $nombreGenero]);
+        // Verificar si se proporcionó al menos un término de búsqueda
+        if (!$nombreGenero && !$nombreCompany && !$nombreReparto && !$nombreGuionista && !$nombreFotografia && !$nombreCompositor && !$nombreDirector) {
+            return redirect()->route('admin.audiovisuales.index')->with('error', 'No se ha realizado ninguna modificación.');
+        }
 
-            // Asociar al audiovisual sin eliminar los existentes
+        /* // Verificar si se proporcionó información, buscar en la base de datos o crear una nueva instancia sin guardarla automáticamente.
+              Si no estaba en la base de datos, redirecciona con mensaje de error y si estaba en la base de datos asociar al audiovisual sin elminar los existentes */
+
+        // Genero
+        if ($nombreGenero) {
+            $genero = Genero::firstOrNew(['nombre' => $nombreGenero]);
+
+            if (!$genero->exists) {
+                return redirect()->route('admin.audiovisuales.index')->with('error', 'El género no existe en la base de datos.');
+            }
+
             $audiovisual->generos()->syncWithoutDetaching([$genero->id]);
         }
 
+        // Compañía
         if ($nombreCompany) {
-            $company = Company::firstOrCreate(['nombre' => $nombreCompany]);
+            $company = Company::firstOrNew(['nombre' => $nombreCompany]);
+
+            if (!$company->exists) {
+                return redirect()->route('admin.audiovisuales.index')->with('error', 'La compañía no existe en la base de datos.');
+            }
 
             $audiovisual->companies()->syncWithoutDetaching([$company->id]);
         }
 
+        // Reparto
         if ($nombreReparto) {
-            $reparto = Persona::firstOrCreate(['nombre' => $nombreReparto]);
+            $reparto = Persona::firstOrNew(['nombre' => $nombreReparto]);
+
+            if (!$reparto->exists) {
+                return redirect()->route('admin.audiovisuales.index')->with('error', 'El reparto no existe en la base de datos.');
+            }
 
             $audiovisual->repartos()->syncWithoutDetaching([$reparto->id]);
         }
 
+        // Guionista
         if ($nombreGuionista) {
-            $guionista = Persona::firstOrCreate(['nombre' => $nombreGuionista]);
+            $guionista = Persona::firstOrNew(['nombre' => $nombreGuionista]);
+
+            if (!$guionista->exists) {
+                return redirect()->route('admin.audiovisuales.index')->with('error', 'El guionista no existe en la base de datos.');
+            }
 
             $audiovisual->guionistas()->syncWithoutDetaching([$guionista->id]);
         }
 
+        // Fotografía
         if ($nombreFotografia) {
-            $fotografia = Persona::firstOrCreate(['nombre' => $nombreFotografia]);
+            $fotografia = Persona::firstOrNew(['nombre' => $nombreFotografia]);
+
+            if (!$fotografia->exists) {
+                return redirect()->route('admin.audiovisuales.index')->with('error', 'El fotógrafo no existe en la base de datos.');
+            }
 
             $audiovisual->fotografias()->syncWithoutDetaching([$fotografia->id]);
         }
 
+        // Compositor
         if ($nombreCompositor) {
-            $compositor = Persona::firstOrCreate(['nombre' => $nombreCompositor]);
+            $compositor = Persona::firstOrNew(['nombre' => $nombreCompositor]);
+
+            if (!$compositor->exists) {
+                return redirect()->route('admin.audiovisuales.index')->with('error', 'El compositor no existe en la base de datos.');
+            }
 
             $audiovisual->compositores()->syncWithoutDetaching([$compositor->id]);
         }
 
+        // Director
         if ($nombreDirector) {
-            $director = Persona::firstOrCreate(['nombre' => $nombreDirector]);
+            $director = Persona::firstOrNew(['nombre' => $nombreDirector]);
+
+            if (!$director->exists) {
+                return redirect()->route('admin.audiovisuales.index')->with('error', 'El director no existe en la base de datos.');
+            }
 
             $audiovisual->directores()->syncWithoutDetaching([$director->id]);
         }

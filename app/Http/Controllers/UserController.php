@@ -173,13 +173,16 @@ class UserController extends Controller
     // Mostrar la lista de audiovisuales en seguimiento del usuario logueado (paginados)
     public function seguimientos()
     {
-        // Audiovisuales en seguimiento sin paginar
-        $seguimientos = auth()->user()->usuariosSeguimientos;
+        // Audiovisuales en seguimiento sin paginar y con el orden inverso
+        $seguimientos = auth()->user()->usuariosSeguimientos->reverse();
 
         // Configura la paginación
         $perPage = 10;
+        // Obtener el número de página actual
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $currentItems = $seguimientos->slice(($currentPage - 1) * $perPage, $perPage)->all();
+        // Seleccionar los elementos que se mostrarán en la página actual
+        $currentItems = $seguimientos->slice(($currentPage - 1) * $perPage, $perPage)->all(); // Los convierte en un array
+        // Crea un nuevo objeto y añade: lista de elementos a mostrar, nº total de elmentos y nº de elementos por página
         $seguimientosPaginados = new LengthAwarePaginator($currentItems, $seguimientos->count(), $perPage);
 
         // Establece la ruta correcta para los enlaces de paginación

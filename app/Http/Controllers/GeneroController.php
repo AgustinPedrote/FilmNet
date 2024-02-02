@@ -26,11 +26,12 @@ class GeneroController extends Controller
     {
         // Validar las reglas de validación
         $request->validate([
-            'nombre' => ['required', 'string', 'max:100'],
+            'nombre' => ['required', 'string', 'max:100', 'regex:/^[^0-9]+$/'],
         ], [
             'nombre.required' => 'El nombre es obligatorio.',
             'nombre.string' => 'El nombre debe ser una cadena de caracteres.',
             'nombre.max' => 'El nombre no puede tener más de :max caracteres.',
+            'nombre.regex' => 'El nombre no puede contener números.',
         ]);
 
         // Crear un nuevo género en la base de datos con los datos validados
@@ -58,11 +59,12 @@ class GeneroController extends Controller
     {
         // Validar las reglas de validación
         $request->validate([
-            'nombre' => ['required', 'string', 'max:100'],
+            'nombre' => ['required', 'string', 'max:100', 'regex:/^[^0-9]+$/'],
         ], [
             'nombre.required' => 'El nombre es obligatorio.',
             'nombre.string' => 'El nombre debe ser una cadena de caracteres.',
             'nombre.max' => 'El nombre no puede tener más de :max caracteres.',
+            'nombre.regex' => 'El nombre no puede contener números.',
         ]);
 
         // Actualizar la información del género con los datos validados

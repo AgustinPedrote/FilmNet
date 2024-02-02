@@ -59,7 +59,11 @@
                                 </td>
 
                                 <!-- Título -->
-                                <td class="py-4 px-6 text-center text-base">{{ $audiovisual->titulo }}</td>
+                                <td class="py-4 px-6 text-center text-base">
+                                    <a href="{{ route('audiovisual.show', ['audiovisual' => $audiovisual]) }}" class="hover:text-gray-800">
+                                        {{ $audiovisual->titulo }}
+                                    </a>
+                                </td>
 
                                 <!-- Acciones Elenco-->
                                 <td class="py-4 px-6 text-center text-base">
@@ -131,7 +135,7 @@
             <div class="flex justify-center mt-4">
                 <a href="#" class="inline-block">
                     <button
-                    class="px-4 py-2 bg-green-500 border border-green-600 text-white rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-red active:bg-green-600 mx-auto text-xs sm:text-base font-semibold"
+                        class="px-4 py-2 bg-green-500 border border-green-600 text-white rounded-md hover:bg-green-600 focus:outline-none focus:shadow-outline-red active:bg-green-600 mx-auto text-xs sm:text-base font-semibold"
                         data-modal-target="InsertarModal" data-modal-toggle="InsertarModal">
                         Insertar
                     </button>

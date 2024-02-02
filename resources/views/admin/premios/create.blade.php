@@ -29,13 +29,6 @@
                         <x-text-input id="nombre" class="block mt-1 w-full text-md" type="text" name="nombre"
                             required autofocus autocomplete="nombre" />
                         <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
-
-                        <!-- Mostrar errores -->
-                        @error('nombre')
-                            <div class="font-medium text-base text-red-500 bg-red-200 border-red-500 rounded p-1 my-2">
-                                {{ $message }}
-                            </div>
-                        @enderror
                     </div>
 
                     <!-- Año del premio -->
