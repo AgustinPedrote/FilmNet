@@ -4,7 +4,7 @@
     </h1>
 
     @if ($seguimientosPaginados->isEmpty())
-        <div class="text-gray-500 text-lg text-center mt-8 min-h-screen">
+        <div class="text-gray-500 text-lg text-center mt-8 mb-72">
             <p>No hay audiovisuales.</p>
         </div>
     @else

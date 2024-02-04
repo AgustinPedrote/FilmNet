@@ -56,7 +56,7 @@
                         <!-- Nota del usuario al audiovisual -->
                         <div class="mt-2 flex space-x-4">
                             <p
-                                class="font-bold {{ $votacion && $votacion->voto ? 'font-bold text-2xl bg-white text-blue-500 bg-white-500 border border-gray-300 rounded-md p-3.5 mb-4' : 'text-lg text-gray-500' }}">
+                                class="font-bold {{ $votacion && $votacion->voto ? 'font-bold text-xl sm:text-2xl bg-white text-blue-500 bg-white-500 border border-gray-300 rounded-md p-3.5 mb-4' : 'text-base sm:text-lg text-gray-500' }}">
                                 @if ($votacion && $votacion->voto)
                                     {{ number_format($votacion->voto, 1) }}
                                 @else
@@ -70,14 +70,14 @@
                     <div class="w-1/4 flex justify-end items-center">
                         <div class="mt-2 flex space-x-4">
                             <button type="button"
-                                class="px-4 py-2 bg-blue-500 border border-blue-600 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-red active:bg-blue-600 mx-auto font-semibold"
+                                class="px-4 py-2 bg-blue-500 border border-blue-600 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-red active:bg-blue-600 mx-auto font-semibold text-sm md:text-base"
                                 data-modal-target="EditarModal{{ $critica }}"
                                 data-modal-toggle="EditarModal{{ $critica }}">
                                 Editar
                             </button>
 
                             <button type="submit"
-                                class="px-4 py-2 bg-red-500 border border-red-600 text-white rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-red active:bg-red-600 mx-auto font-semibold"
+                                class="px-4 py-2 bg-red-500 border border-red-600 text-white rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-red active:bg-red-600 mx-auto font-semibold text-sm md:text-base"
                                 data-modal-target="popup-modal{{ $critica }}"
                                 data-modal-toggle="popup-modal{{ $critica }}">
                                 Borrar
@@ -106,7 +106,7 @@
         @include('criticas.delete')
 
     @empty
-        <p class="text-gray-500 text-lg text-center mt-8 min-h-screen">
+        <p class="text-gray-500 text-lg text-center mt-8 mb-72">
             No has realizado críticas.
         </p>
     @endforelse

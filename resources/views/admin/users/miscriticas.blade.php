@@ -55,7 +55,7 @@
                         <!-- Nota del usuario al audiovisual -->
                         <div class="mt-2 flex space-x-4">
                             <p
-                                class="font-bold {{ $votacion && $votacion->voto ? 'font-bold text-2xl bg-white text-blue-500 bg-white-500 border border-gray-300 rounded-md p-3.5 mb-4' : 'text-base sm:text-lg text-gray-500' }}">
+                                class="font-bold {{ $votacion && $votacion->voto ? 'font-bold text-xl sm:text-2xl bg-white text-blue-500 bg-white-500 border border-gray-300 rounded-md p-3.5 mb-4' : 'text-base sm:text-lg text-gray-500' }}">
                                 @if ($votacion && $votacion->voto)
                                     {{ number_format($votacion->voto, 1) }}
                                 @else
@@ -69,7 +69,7 @@
                     <div class="w-1/4 flex justify-end items-center">
                         <div class="mt-2 flex space-x-4">
                             <button type="submit"
-                                class="px-4 py-2 bg-red-500 border border-red-600 text-white rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-red active:bg-red-600 mx-auto font-semibold"
+                                class="px-4 py-2 bg-red-500 border border-red-600 text-white rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-red active:bg-red-600 mx-auto font-semibold text-xs sm:text-base"
                                 data-modal-target="popup-modal{{ $critica }}"
                                 data-modal-toggle="popup-modal{{ $critica }}">
                                 Borrar
@@ -95,7 +95,7 @@
         @include('admin.users.deleteCriticas')
 
     @empty
-        <p class="text-lg text-center font-semibold">No hay críticas disponibles.</p>
+        <p class="text-lg text-center font-semibold mb-72">No hay críticas disponibles.</p>
     @endforelse
 
     <div class="mx-6 mt-4 mb-10">

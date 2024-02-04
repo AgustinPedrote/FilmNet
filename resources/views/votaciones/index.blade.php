@@ -5,7 +5,7 @@
 
     <div class="max-w-7xl mx-auto sm:px-2 md:px-6 lg:px-8">
         @if ($votaciones->isEmpty())
-            <p class="text-gray-500 text-lg text-center mt-8 min-h-screen">No has realizado votaciones.</p>
+            <p class="text-gray-500 text-lg text-center mt-8 mb-72">No has realizado votaciones.</p>
         @else
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-4 md:p-6">
                 <table class="min-w-full divide-y divide-gray-100 text-left">
@@ -14,7 +14,6 @@
                             <th class="px-4 py-3 sm:py-4 text-lg sm:text-xl font-semibold text-gray-900">
                                 Audiovisuales
                             </th>
-                            <!-- Clases de ocultamiento responsivo para esconder las características en pantallas pequeñas -->
                             <th
                                 class="hidden sm:table-cell px-4 py-3 sm:py-4 text-lg sm:text-xl font-semibold text-gray-900">
                                 Características
@@ -52,7 +51,6 @@
                                         </div>
                                     </div>
                                 </td>
-                                <!-- Clases de ocultamiento responsivo para esconder las características en pantallas pequeñas -->
                                 <td class="hidden sm:table-cell px-4 py-4 sm:py-6 text-base sm:text-lg">
                                     Año: {{ $votacion->audiovisual->year }}<br>
                                     Duración: {{ $votacion->audiovisual->duracion }} minutos<br>

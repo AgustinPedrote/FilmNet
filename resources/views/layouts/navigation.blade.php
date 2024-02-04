@@ -199,14 +199,14 @@
                 <!-- Mostrar enlaces de inicio de sesión y registro si el usuario no está autenticado -->
                 <div class="flex items-center justify-between mb-4">
                     <div class="text-base text-gray-200 hover:text-yellow-400">
-                        <a href="login">
+                        <a href="{{ route('login') }}">
                             Iniciar sesión
                         </a>
                     </div>
 
                     @if (Route::has('register'))
                         <div class="text-base text-gray-200 hover:text-yellow-400">
-                            <a href="register">
+                            <a href="{{ route('register') }}">
                                 Registrarse
                             </a>
                         </div>

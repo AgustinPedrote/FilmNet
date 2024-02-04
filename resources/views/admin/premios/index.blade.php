@@ -57,7 +57,10 @@
                                     {{ $premio->year }}
                                 </td>
                                 <td class="py-4 px-6 text-center text-base w-1/4">
-                                    {{ $premio->audiovisual->titulo }}
+                                    <a href="{{ route('audiovisual.show', ['audiovisual' => $premio->audiovisual]) }}"
+                                        class="hover:text-gray-800">
+                                        {{ $premio->audiovisual->titulo }}
+                                    </a>
                                 </td>
                                 <!-- Acciones Premios -->
                                 <td class="px-6 text-center w-1/4">

@@ -23,7 +23,7 @@
 
     <div class="flex justify-center">
         <button type="submit" id="botoncritica"
-            class="px-4 py-2 bg-blue-500 border border-blue-600 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 mx-auto font-semibold">
+            class="px-4 py-2 bg-blue-500 border border-blue-600 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 mx-auto font-semibold text-sm md:text-base">
             Enviar
         </button>
     </div>

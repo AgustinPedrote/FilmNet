@@ -39,10 +39,10 @@
                     <!-- Columna 2: Detalles del usuario y fecha -->
                     <div class="w-full flex flex-col ml-4">
                         <!-- Título en la parte superior -->
-                        <div class="text-2xl font-bold mb-2">{{ $critica->audiovisual->titulo }}</div>
+                        <div class="text-lg sm:text-2xl font-bold mb-2">{{ $critica->audiovisual->titulo }}</div>
 
                         <!-- Fecha de la crítica -->
-                        <div class="font-medium mb-2 text-lg flex items-center">
+                        <div class="font-medium mb-2 text-sm sm:text-lg flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"
                                 class="mr-2">
                                 <path
@@ -54,7 +54,7 @@
                         <!-- Nota del usuario al audiovisual -->
                         <div class="mt-2 flex space-x-4">
                             <p
-                                class="font-bold {{ $votacion && $votacion->voto ? 'font-bold text-2xl bg-white text-blue-500 bg-white-500 border border-gray-300 rounded-md p-3.5 mb-4' : 'text-lg text-gray-500' }}">
+                                class="font-bold {{ $votacion && $votacion->voto ? 'font-bold text-xl sm:text-2xl bg-white text-blue-500 bg-white-500 border border-gray-300 rounded-md p-3.5 mb-4' : 'text-base sm:text-lg text-gray-500' }}">
                                 @if ($votacion && $votacion->voto)
                                     {{ number_format($votacion->voto, 1) }}
                                 @else
@@ -70,8 +70,8 @@
                 <!-- Segunda fila (fila de abajo) -->
                 <div class="bg-gray-100 border border-gray-300 p-4 rounded-md">
                     <!-- Contenido de la segunda fila -->
-                    <div class="text-lg font-bold mb-2">Crítica:</div>
-                    <p class="text-lg" style="min-height: 6rem;">{{ $critica->critica }}</p>
+                    <div class="text-md sm:text-lg font-bold mb-2">Crítica:</div>
+                    <p class="text-md sm:text-lg" style="min-height: 6rem;">{{ $critica->critica }}</p>
                 </div>
 
             </div>
@@ -82,7 +82,7 @@
         @include('admin.users.deleteCriticas')
 
     @empty
-        <div class="text-gray-500 text-lg text-center mt-8 min-h-screen">
+        <div class="text-gray-500 text-lg text-center mt-8 mb-72">
             <p>No hay críticas disponibles.</p>
         </div>
     @endforelse

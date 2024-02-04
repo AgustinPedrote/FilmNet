@@ -20,7 +20,7 @@
     </h1>
 
     <!-- Sección de información del audiovisual -->
-    <div class="mt-10 mb-10 mx-4 relative min-h-screen">
+    <div class="mt-10 mb-10 mx-4 relative">
         <a href="{{ route('audiovisual.show', ['audiovisual' => $audiovisual->id]) }}">
             <div class="max-w-5xl mx-auto relative">
                 <!-- Imagen panorámica -->
@@ -179,7 +179,7 @@
 
                                     <!-- Nota del usuario al audiovisual -->
                                     <p
-                                        class="font-bold {{ $votacion && $votacion->voto ? 'font-bold text-2xl bg-white text-blue-500 bg-white-500 border border-gray-300 rounded-md p-3.5 mb-4' : 'text-lg text-gray-500' }}">
+                                        class="font-bold {{ $votacion && $votacion->voto ? 'font-bold text-2xl bg-white text-blue-500 bg-white-500 border border-gray-300 rounded-md p-3.5 mb-4' : 'text-base sm:text-lg text-gray-500' }}">
                                         @if ($votacion && $votacion->voto)
                                             {{ number_format($votacion->voto, 1) }}
                                         @else
@@ -205,7 +205,7 @@
             @endforeach
         @else
             <!-- Mensaje si no hay críticas -->
-            <p class="text-gray-500 text-lg text-center mt-8 h-screen">No hay críticas disponibles.</p>
+            <p class="text-gray-500 text-lg text-center mt-8 mb-72">No hay críticas disponibles.</p>
         @endif
 
         <!-- paginación -->

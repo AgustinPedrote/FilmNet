@@ -20,6 +20,12 @@
         @endforeach
     </div>
 
+    @if ($filmografia->isEmpty())
+        <p class="text-gray-500 text-lg text-center mt-8 mb-72">
+            No hay audiovisuales en la filmografía.
+        </p>
+    @endif
+
     <!-- Botón para volver a la página anterior -->
     <div class="mt-6">
         <a href="#" onclick="goBack()" class="flex items-center ml-6">

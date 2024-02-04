@@ -42,7 +42,12 @@
                         @foreach ($personas as $persona)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <!-- Nombre Personas -->
-                                <td class="py-4 px-6 text-center text-base">{{ $persona->nombre }}</td>
+                                <td class="py-4 px-6 text-center text-base">
+                                    <a href="{{ route('personas.show', $persona) }}" class="hover:text-gray-800">
+                                        {{ $persona->nombre }}
+                                    </a>
+                                </td>
+
                                 <!-- Acciones Personas -->
                                 <td class="px-6 text-center">
                                     <div class="flex justify-center lg:justify-start space-x-2">

@@ -4,11 +4,11 @@
     </h1>
 
     @if ($seguidores->isEmpty())
-        <div class="text-gray-500 text-lg text-center mt-10 min-h-screen">
+        <div class="text-gray-500 text-lg text-center mt-10 mb-48">
             <p>No te sigue ningún usuario.</p>
         </div>
     @else
-        <div class="mx-auto w-11/12 min-h-screen">
+        <div class="mx-auto w-11/12">
             <table class="min-w-full mt-10 table-auto border border-gray-300 divide-y divide-gray-300">
                 <thead>
                     <tr>

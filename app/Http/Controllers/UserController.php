@@ -138,6 +138,11 @@ class UserController extends Controller
         $usuario = User::find(auth()->user()->id);
         $amigoId = $request->amigo;
 
+        // Verificar si el usuario intenta seguirse a sí mismo
+        if ($amigoId == $usuario->id) {
+            return redirect()->back()->with('error', 'No puedes seguirte a ti mismo.');
+        }
+
         // Verificar si el usuario ya sigue al amigo
         if ($usuario->users()->where('id', $amigoId)->exists()) {
             return redirect()->back()->with('error', 'Ya sigues a este amigo.');

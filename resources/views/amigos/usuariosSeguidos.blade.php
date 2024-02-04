@@ -34,13 +34,13 @@
                 <input type="hidden" name="amigo" id="amigoId" class="amigo">
 
                 <button type="button" onclick="buscarAmigo()"
-                    class="px-4 py-2 ml-4 cursor-pointer bg-green-500 border border-green-600 hover:bg-green-600 text-white rounded-md font-semibold focus:outline-none focus:shadow-outline-green active:bg-green-600">
+                    class="px-4 py-2 ml-4 cursor-pointer bg-green-500 border border-green-600 hover:bg-green-600 text-white rounded-md font-semibold focus:outline-none focus:shadow-outline-green active:bg-green-600 text-sm md:text-base">
                     Buscar
                 </button>
 
                 <!-- Botón "Seguir" -->
                 <button type="submit"
-                    class="ml-2 cursor-pointer bg-blue-500 border border-blue-600 hover:bg-blue-600 text-white rounded-md px-4 py-2 font-semibold focus:outline-none focus:shadow-outline-blue active:bg-blue-600">
+                    class="ml-2 cursor-pointer bg-blue-500 border border-blue-600 hover:bg-blue-600 text-white rounded-md px-4 py-2 font-semibold focus:outline-none focus:shadow-outline-blue active:bg-blue-600 text-sm md:text-base">
                     Seguir
                 </button>
             </div>
@@ -54,11 +54,11 @@
     </div>
 
     @if ($amigos->isEmpty())
-        <div class="text-gray-500 text-lg text-center mt-10 min-h-screen">
+        <div class="text-gray-500 text-lg text-center mt-10 mb-72">
             <p>No sigues a ningún usuario.</p>
         </div>
     @else
-        <div class="mx-auto w-11/12 min-h-screen">
+        <div class="mx-auto w-11/12">
             <table class="min-w-full mt-10 table-auto border border-gray-300 divide-y divide-gray-300">
                 <thead>
                     <tr>
@@ -106,7 +106,7 @@
                                     @method('DELETE')
 
                                     <button type="submit"
-                                        class="cursor-pointer bg-red-500 border border-red-600 hover:bg-red-600 text-white rounded-md px-4 py-2 font-semibold focus:outline-none focus:shadow-outline-red active:bg-red-600">
+                                        class="cursor-pointer bg-red-500 border border-red-600 hover:bg-red-600 text-white rounded-md px-4 py-2 font-semibold focus:outline-none focus:shadow-outline-red active:bg-red-600 text-sm md:text-base">
                                         Dejar de seguir
                                     </button>
                                 </form>
