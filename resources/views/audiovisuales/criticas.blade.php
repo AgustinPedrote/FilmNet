@@ -208,10 +208,6 @@
             <p class="text-gray-500 text-lg text-center mt-8 mb-72">No hay críticas disponibles.</p>
         @endif
 
-        <!-- paginación -->
-        <div class="mx-6 mt-4 mb-10">
-            {{ $criticas->appends(request()->query())->links() }}
-        </div>
     </div>
 
     <!-- Botón para volver a la página anterior -->

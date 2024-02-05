@@ -144,6 +144,7 @@
             <img src="{{ asset($audiovisual->img) }}" alt="{{ $audiovisual->titulo }}"
                 class="w-full h-auto object-cover md:w-48 mx-auto mb-6 rounded-lg shadow-md">
 
+
             <div class="mb-6 text-center w-full md:w-48 bg-gray-100 rounded-md p-8 border border-gray-300">
 
                 <!-- Mostrar las estrellas (1 al 10) -->
@@ -251,11 +252,8 @@
         </a>
     </div>
 
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
+    <!-- Script para funciones -->
+    <script src="{{ asset('js/funciones.js') }}"></script>
 
     <!-- Script para votación del audiovisual de forma asíncrona -->
     <script src="{{ asset('js/vote.js') }}"></script>

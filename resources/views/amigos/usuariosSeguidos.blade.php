@@ -131,11 +131,8 @@
         </a>
     </div>
 
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
+    <!-- Script para funciones -->
+    <script src="{{ asset('js/funciones.js') }}"></script>
 
     <!-- Script para buscador de usuarios -->
     <script src="{{ asset('js/buscadorUsuarios.js') }}"></script>

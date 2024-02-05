@@ -333,7 +333,7 @@ class AudiovisualController extends Controller
         return redirect()->route('admin.audiovisuales.index')->with('success', 'El audiovisual ha sido eliminado con éxito.');
     }
 
-    // Críticas del audiovisual (paginados)
+    // Críticas del audiovisual
     public function criticas($audiovisual)
     {
         // Busca el audiovisual y obtiene todas las críticas
@@ -355,24 +355,13 @@ class AudiovisualController extends Controller
         // Calcula la nota media del audiovisual
         $notaMedia = $audiovisual->obtenerNotaMedia();
 
-        // Paginar las críticas con 4 elementos por página
-        $perPage = 4;
-        // Obtener el número de página actual
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        // Seleccionar los elementos que se mostrarán en la página actual
-        $currentItems = $criticas->slice(($currentPage - 1) * $perPage, $perPage)->all(); // Los convierte en un array
-        // Crea un nuevo objeto y añade: lista de elementos a mostrar, nº total de elmentos y nº de elementos por página
-        $criticasPaginadas = new LengthAwarePaginator($currentItems, $criticas->count(), $perPage);
-
-        // Establece la ruta correcta para los enlaces de paginación
-        $criticasPaginadas->withPath(route('ver.criticas', ['audiovisual' => $audiovisual->id]));
-
         return view('audiovisuales.criticas', [
             'audiovisual' => $audiovisual,
-            'criticas' => $criticasPaginadas, // críticas paginadas y la información de paginación
+            'criticas' => $criticas,
             'notaMedia' => $notaMedia
         ]);
     }
+
 
     // Buscar géneros en la base de datos y devolver los resultados (Admin)
     public function buscarGenero(Request $request)

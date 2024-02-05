@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return false;
         }
 
-        // Comprueba un mínimo y un máximo de caracteres alfabéticos
+        // Comprueba un mínimo y un máximo de caracteres alfabéticos y espacios en blanco
         if (value.length < 3 || value.length > 25) {
             displayErrorMessage(
                 field,
@@ -77,11 +77,11 @@ document.addEventListener("DOMContentLoaded", function () {
             return false;
         }
 
-        // Comprueba un mínimo y un máximo de caracteres alfanuméricos, incluyendo caracteres especiales
-        if (!/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+$/.test(value)) {
+        // Comprueba un mínimo y un máximo de caracteres alfanuméricos, incluyendo caracteres especiales y espacios en blanco
+        if (!/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/.test(value)) {
             displayErrorMessage(
                 field,
-                "Debe contener solo caracteres alfabéticos."
+                "Debe contener solo caracteres alfabéticos y espacios en blanco."
             );
             return false;
         }

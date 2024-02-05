@@ -27,14 +27,14 @@ class ProfileController extends Controller
 
         // Validar los datos del formulario del perfil de usuario
         $request->validate([
-            'name' => ['required', 'string', 'min:3', 'max:25', 'regex:/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+$/'],
+            'name' => ['required', 'string', 'min:3', 'max:25', 'regex:/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/'],
             'email' => ['required', 'string', 'email', 'max:100', Rule::unique('users')->ignore($user->id)], // Verificar si el valor del campo es único en la tabla de la base de datos
             'password' => ['nullable', 'string', 'min:8', 'regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/'],
             'password_confirmation' => ['nullable', 'same:password'],
             'nacimiento' => ['required', 'integer', 'min:1900', 'max:' . date('Y')],
             'sexo' => ['required', 'string'],
             'pais' => ['required', 'string'],
-            'ciudad' => ['required', 'string', 'min:3', 'max:25', 'regex:/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ]+$/'],
+            'ciudad' => ['required', 'string', 'min:3', 'max:25', 'regex:/^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\s]+$/'],
         ]);
 
         // Actualizar los datos del usuario

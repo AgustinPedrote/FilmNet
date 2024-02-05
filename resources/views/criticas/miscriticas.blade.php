@@ -124,13 +124,10 @@
         </a>
     </div>
 
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
-
     <div class="mx-6 mt-4 mb-10">
         {{ $criticas->links() }}
     </div>
+
+    <!-- Script para funciones -->
+    <script src="{{ asset('js/funciones.js') }}"></script>
 </x-app-layout>

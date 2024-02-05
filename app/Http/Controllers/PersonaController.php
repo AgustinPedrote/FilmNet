@@ -77,6 +77,9 @@ class PersonaController extends Controller
         // Eliminar duplicados de la colección combinada
         $filmografia = $filmografia->unique('id');
 
+        // Ordenar la filmografía por año de mayor a menor
+        $filmografia = $filmografia->sortByDesc('year');
+
         return view('personas.show', compact('persona', 'filmografia'));
     }
 

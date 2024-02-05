@@ -54,8 +54,9 @@
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <!-- Nombre -->
                                 <td class="py-2 lg:py-4 px-4 lg:px-6 text-center text-base">
-                                    <a href="{{ route('usuario.votaciones', ['usuario' => $user]) }}" class="hover:text-gray-800">
-                                    {{ $user->name }}
+                                    <a href="{{ route('usuario.votaciones', ['usuario' => $user]) }}"
+                                        class="hover:text-gray-800">
+                                        {{ $user->name }}
                                     </a>
                                 </td>
 
@@ -88,13 +89,6 @@
                                             @endforeach
                                         </select>
                                     </form>
-
-                                    <!-- Script para enviar el formulario al cambiar la selección -->
-                                    <script>
-                                        function submitForm(select) {
-                                            select.form.submit();
-                                        }
-                                    </script>
                                 </td>
 
                                 <!-- Acciones -->
@@ -155,5 +149,8 @@
             </div>
         </div>
     </div>
+
+    <!-- Script para funciones -->
+    <script src="{{ asset('js/funciones.js') }}"></script>
 
 </x-admin>

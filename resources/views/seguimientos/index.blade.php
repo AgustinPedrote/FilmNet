@@ -3,14 +3,14 @@
         Quiero ver
     </h1>
 
-    @if ($seguimientosPaginados->isEmpty())
+    @if ($seguimientos->isEmpty())
         <div class="text-gray-500 text-lg text-center mt-8 mb-72">
             <p>No hay audiovisuales.</p>
         </div>
     @else
         <div
             class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 justify-center mx-auto">
-            @foreach ($seguimientosPaginados as $seguimiento)
+            @foreach ($seguimientos as $seguimiento)
                 <a href="{{ route('audiovisual.show', $seguimiento) }}"
                     class="group p-4 transition duration-300 ease-in-out transform hover:scale-105">
                     <div class="relative w-full h-64 overflow-hidden rounded-md shadow-md">
@@ -25,10 +25,6 @@
             @endforeach
         </div>
 
-        <!-- paginación -->
-        <div class="mx-6 mt-4 mb-10">
-            {{ $seguimientosPaginados->appends(request()->query())->links() }}
-        </div>
     @endif
 
     <!-- Botón para volver a la página anterior -->
@@ -44,9 +40,6 @@
         </a>
     </div>
 
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
+    <!-- Script para funciones -->
+    <script src="{{ asset('js/funciones.js') }}"></script>
 </x-app-layout>

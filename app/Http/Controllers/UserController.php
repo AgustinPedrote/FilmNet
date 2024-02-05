@@ -175,25 +175,12 @@ class UserController extends Controller
         return redirect()->back()->with('error', 'No estás siguiendo a ' . $amigo->name);
     }
 
-    // Mostrar la lista de audiovisuales en seguimiento del usuario logueado (paginados)
+    // Mostrar la lista de audiovisuales en seguimiento del usuario logueado
     public function seguimientos()
     {
-        // Audiovisuales en seguimiento sin paginar y con el orden inverso
         $seguimientos = auth()->user()->usuariosSeguimientos->reverse();
 
-        // Configura la paginación
-        $perPage = 10;
-        // Obtener el número de página actual
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        // Seleccionar los elementos que se mostrarán en la página actual
-        $currentItems = $seguimientos->slice(($currentPage - 1) * $perPage, $perPage)->all(); // Los convierte en un array
-        // Crea un nuevo objeto y añade: lista de elementos a mostrar, nº total de elmentos y nº de elementos por página
-        $seguimientosPaginados = new LengthAwarePaginator($currentItems, $seguimientos->count(), $perPage);
-
-        // Establece la ruta correcta para los enlaces de paginación
-        $seguimientosPaginados->withPath(route('seguimientos.index'));
-
-        return view('seguimientos.index', compact('seguimientosPaginados'));
+        return view('seguimientos.index', compact('seguimientos'));
     }
 
     // Alternar el seguimiento de un audiovisual por el usuario logueado de forma asíncrona

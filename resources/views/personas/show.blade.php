@@ -14,7 +14,14 @@
                 </div>
 
                 <div class="mt-3 text-center">
-                    <div class="text-lg font-semibold text-gray-800">{{ $audiovisual->titulo }}</div>
+                    <div>
+                        <p class="text-lg font-semibold text-gray-800">
+                            {{ $audiovisual->titulo }}
+                        </p>
+                        <p class="text-lg text-gray-800">
+                            ({{ $audiovisual->year }})
+                        </p>
+                    </div>
                 </div>
             </a>
         @endforeach
@@ -39,9 +46,6 @@
         </a>
     </div>
 
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
+    <!-- Script para funciones -->
+    <script src="{{ asset('js/funciones.js') }}"></script>
 </x-app-layout>
