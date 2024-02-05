@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Critica;
+use App\Models\Votacion;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,5 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AudiovisualSeeder::class);
         $this->call(PremioSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(VotacionSeeder::class);
+        $this->call(CriticaSeeder::class);
     }
 }

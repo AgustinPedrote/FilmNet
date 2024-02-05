@@ -96,11 +96,6 @@
         </a>
     </div>
 
-    <!-- Paginación -->
-    <div class="mx-4 mt-6 mb-10">
-        {{ $votaciones->links() }}
-    </div>
-
     <!-- Script para funciones -->
     <script src="{{ asset('js/funciones.js') }}"></script>
 </x-app-layout>

@@ -203,5 +203,13 @@ class PersonaSeeder extends Seeder
         Persona::create([
             "nombre" => "Pelé",
         ]);
+
+        Persona::create([
+            "nombre" => "Jason Momoa",
+        ]);
+
+        Persona::create([
+            "nombre" => "Arnold Schwarzenegger",
+        ]);
     }
 }

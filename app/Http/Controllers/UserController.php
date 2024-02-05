@@ -68,8 +68,10 @@ class UserController extends Controller
     // Mostrar las votaciones del usuario logueado
     public function misVotaciones()
     {
-        // Votaciones del usuario logado y paginado
-        $votaciones = Votacion::where('user_id', auth()->user()->id)->paginate(10);
+        // Votaciones del usuario logado, ordenadas por created_at en orden ascendente
+        $votaciones = Votacion::where('user_id', auth()->user()->id)
+            ->orderBy('created_at', 'asc')
+            ->get();
 
         // Array asociativo de nombres de puntuaciones
         $puntuacionesNombres = [
@@ -178,10 +180,11 @@ class UserController extends Controller
     // Mostrar la lista de audiovisuales en seguimiento del usuario logueado
     public function seguimientos()
     {
-        $seguimientos = auth()->user()->usuariosSeguimientos->reverse();
+        $seguimientos = auth()->user()->usuariosSeguimientos->sortBy('titulo');
 
         return view('seguimientos.index', compact('seguimientos'));
     }
+
 
     // Alternar el seguimiento de un audiovisual por el usuario logueado de forma asíncrona
     public function toggleSeguimiento(Request $request)
@@ -232,8 +235,10 @@ class UserController extends Controller
     // Ver votaciones de un usuario específico
     public function usuarioVotaciones(User $usuario)
     {
-        // Votaciones del usuario y paginado
-        $votaciones = Votacion::where('user_id', $usuario->id)->paginate(10);
+        // Votaciones del usuario, ordenadas por created_at en orden ascendente
+        $votaciones = Votacion::where('user_id', $usuario->id)
+            ->orderBy('created_at', 'asc')
+            ->get();
 
         // Array asociativo de nombres de puntuaciones
         $puntuacionesNombres = [

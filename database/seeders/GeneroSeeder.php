@@ -70,5 +70,9 @@ class GeneroSeeder extends Seeder
         Genero::create([
             "nombre" => "Western",
         ]);
+
+        Genero::create([
+            "nombre" => "Superhéroes",
+        ]);
     }
 }
