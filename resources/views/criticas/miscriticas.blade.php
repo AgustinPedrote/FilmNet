@@ -111,10 +111,6 @@
         </p>
     @endforelse
 
-    <div class="mx-6 mt-4 mb-10">
-        {{ $criticas->links() }}
-    </div>
-
     <!-- Botón para volver a la página anterior -->
     <div class="mt-6 mx-4">
         <a href="#" onclick="goBack()" class="flex items-center ml-6">

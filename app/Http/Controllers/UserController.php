@@ -102,7 +102,7 @@ class UserController extends Controller
     // Mostrar las críticas del usuario logueado
     public function misCriticas()
     {
-        $criticas = Critica::where('user_id', auth()->user()->id)->paginate(4);
+        $criticas = Critica::where('user_id', auth()->user()->id)->get();
 
         return view('criticas.miscriticas', compact(
             'criticas'
@@ -222,7 +222,7 @@ class UserController extends Controller
     public function verCriticas(User $user)
     {
         // Críticas del usuario logado paginadas
-        $criticas = Critica::where('user_id', $user->id)->paginate(4);
+        $criticas = Critica::where('user_id', $user->id)->get();
 
         return view('admin.users.miscriticas', compact(
             'criticas',
