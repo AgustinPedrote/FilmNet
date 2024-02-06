@@ -82,7 +82,7 @@ class VotacionSeeder extends Seeder
             "audiovisual_id" => 10
         ]);
         Votacion::create([
-            "voto" => 7,
+            "voto" => 4,
             "user_id" => 2,
             "audiovisual_id" => 13
         ]);
@@ -92,7 +92,7 @@ class VotacionSeeder extends Seeder
             "audiovisual_id" => 16
         ]);
         Votacion::create([
-            "voto" => 7,
+            "voto" => 4,
             "user_id" => 2,
             "audiovisual_id" => 33
         ]);
@@ -102,7 +102,7 @@ class VotacionSeeder extends Seeder
             "audiovisual_id" => 30
         ]);
         Votacion::create([
-            "voto" => 6,
+            "voto" => 4,
             "user_id" => 2,
             "audiovisual_id" => 23
         ]);
@@ -112,7 +112,7 @@ class VotacionSeeder extends Seeder
             "audiovisual_id" => 19
         ]);
         Votacion::create([
-            "voto" => 8,
+            "voto" => 2,
             "user_id" => 2,
             "audiovisual_id" => 34
         ]);
@@ -164,12 +164,12 @@ class VotacionSeeder extends Seeder
             "audiovisual_id" => 30
         ]);
         Votacion::create([
-            "voto" => 8,
+            "voto" => 4,
             "user_id" => 3,
             "audiovisual_id" => 23
         ]);
         Votacion::create([
-            "voto" => 8,
+            "voto" => 6,
             "user_id" => 3,
             "audiovisual_id" => 19
         ]);

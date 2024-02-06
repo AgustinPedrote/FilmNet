@@ -73,6 +73,11 @@ class UserController extends Controller
             ->orderBy('created_at', 'asc')
             ->get();
 
+        // Calcula la media de las votaciones
+        $totalVotos = $votaciones->count();
+        $sumaVotos = $votaciones->sum('voto');
+        $mediaVotos = $totalVotos > 0 ? $sumaVotos / $totalVotos : 0;
+
         // Array asociativo de nombres de puntuaciones
         $puntuacionesNombres = [
             1 => 'Muy mala',
@@ -89,7 +94,8 @@ class UserController extends Controller
 
         return view('votaciones.index', compact(
             'votaciones',
-            'puntuacionesNombres'
+            'puntuacionesNombres',
+            'mediaVotos'
         ));
     }
 
@@ -240,6 +246,11 @@ class UserController extends Controller
             ->orderBy('created_at', 'asc')
             ->get();
 
+        // Calcula la media de las votaciones
+        $totalVotos = $votaciones->count();
+        $sumaVotos = $votaciones->sum('voto');
+        $mediaVotos = $totalVotos > 0 ? $sumaVotos / $totalVotos : 0;
+
         // Array asociativo de nombres de puntuaciones
         $puntuacionesNombres = [
             1 => 'Muy mala',
@@ -254,7 +265,7 @@ class UserController extends Controller
             10 => 'Excelente',
         ];
 
-        return view('amigos.usuarioVotaciones', compact('votaciones', 'puntuacionesNombres', 'usuario'));
+        return view('amigos.usuarioVotaciones', compact('votaciones', 'puntuacionesNombres', 'usuario', 'mediaVotos'));
     }
 
     // Eliminar una crítica de un usuario específico como administrador (Admin)

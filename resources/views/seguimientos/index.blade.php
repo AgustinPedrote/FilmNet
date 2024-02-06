@@ -1,6 +1,6 @@
 <x-app-layout>
     <h1 class="text-2xl font-bold mb-6 mt-20 ml-10 mx-4 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
-        Quiero ver
+        Quiero ver <span class="text-blue-500">({{ $seguimientos->count() }})</span>
     </h1>
 
     @if ($seguimientos->isEmpty())
@@ -28,7 +28,7 @@
     @endif
 
     <!-- Botón para volver a la página anterior -->
-    <div class="mt-6">
+    <div class="mt-6 mx-4">
         <a href="#" onclick="goBack()" class="flex items-center ml-6">
             <span class="bottom-4 right-4 p-2 bg-blue-500 text-white rounded-full cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"

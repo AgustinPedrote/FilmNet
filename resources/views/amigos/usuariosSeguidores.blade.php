@@ -1,15 +1,15 @@
 <x-app-layout>
     <h1 class="text-2xl font-bold mb-6 mt-20 ml-10 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
-        Usuarios seguidores ({{ $seguidores->count() }})
+        Usuarios seguidores <span class="text-blue-500">({{ $seguidores->count() }})</span>
     </h1>
 
     @if ($seguidores->isEmpty())
-        <div class="text-gray-500 text-lg text-center mt-10 mb-48">
+        <div class="text-gray-500 text-lg text-center mt-8 mb-72">
             <p>No te sigue ningún usuario.</p>
         </div>
     @else
         <div class="mx-auto w-11/12">
-            <table class="min-w-full mt-10 table-auto border border-gray-300 divide-y divide-gray-300">
+            <table class="min-w-full mt-10 mb-16 table-auto border border-gray-300 divide-y divide-gray-300">
                 <thead>
                     <tr>
                         <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">
@@ -55,7 +55,7 @@
     @endif
 
     <!-- Botón para volver a la página anterior -->
-    <div class="mt-6">
+    <div class="mt-6 mx-4">
         <a href="#" onclick="goBack()" class="flex items-center ml-6">
             <span class="bottom-4 right-4 p-2 bg-blue-500 text-white rounded-full cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"

@@ -167,31 +167,33 @@
                     </x-responsive-nav-link>
                 </div>
 
-                <!-- Enlace al perfil del usuario autenticado -->
-                <x-responsive-nav-link :href="route('admin.index')">
-                    Panel de administración
+                <!-- Menú desplegable del usuario logueado -->
+                @if (Auth::user()->rol_id == 2)
+                    <x-responsive-nav-link :href="route('admin.index')">
+                        Panel de administración
+                @endif
                 </x-responsive-nav-link>
-                <!-- Enlace al perfil del usuario autenticado -->
+
                 <x-responsive-nav-link :href="route('votaciones.index')">
                     Mis votaciones
                 </x-responsive-nav-link>
-                <!-- Enlace al perfil del usuario autenticado -->
+
                 <x-responsive-nav-link :href="route('users.criticas')">
                     Mis críticas
                 </x-responsive-nav-link>
-                <!-- Enlace al perfil del usuario autenticado -->
+
                 <x-responsive-nav-link :href="route('seguimientos.index')">
                     Quiero ver
                 </x-responsive-nav-link>
-                <!-- Enlace al perfil del usuario autenticado -->
+
                 <x-responsive-nav-link :href="route('amigos.usuariosSeguidos')">
                     Seguidos
                 </x-responsive-nav-link>
-                <!-- Enlace al perfil del usuario autenticado -->
+
                 <x-responsive-nav-link :href="route('amigos.usuariosSeguidores')">
                     seguidores
                 </x-responsive-nav-link>
-                <!-- Enlace al perfil del usuario autenticado -->
+
                 <x-responsive-nav-link :href="route('profile.edit')">
                     Perfil
                 </x-responsive-nav-link>
