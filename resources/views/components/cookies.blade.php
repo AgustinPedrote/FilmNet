@@ -16,9 +16,9 @@
     </div>
 
     <!-- Párrafo explicativo sobre privacidad y cookies -->
-    <h1 class="text-xl font-semibold mb-2 text-center">Su privacidad es importante para nosotros</h1>
+    <h1 class="text-lg md:text-xl font-semibold mb-2 text-center">Su privacidad es importante para nosotros</h1>
 
-    <p class="mb-4 text-base leading-relaxed">
+    <p class="mb-4 text-sm md:text-base leading-relaxed">
         Nosotros y nuestros socios almacenamos o accedemos a información
         en un dispositivo, tales como cookies, y procesamos datos personales, tales como identificadores únicos e
         información estándar enviada por un dispositivo, para anuncios y contenido personalizados, medición de

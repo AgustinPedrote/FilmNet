@@ -44,7 +44,7 @@
         </div>
     </form>
 @else
-    <div class="mb-4 text-center w-full md:w-48 bg-gray-100 rounded-md p-10 border-gray-300">
+    <div class="mb-6 text-center w-full md:w-48 bg-gray-100 rounded-md p-2 border border-gray-300">
         <label for="voto" class="block text-lg font-bold text-gray-800">
             Tu voto
         </label>

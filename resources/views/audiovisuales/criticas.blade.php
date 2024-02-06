@@ -15,12 +15,12 @@
     </div>
 
     <!-- Encabezado de la página -->
-    <h1 class="text-2xl font-bold mb-8 mt-16 ml-10 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
-        Críticas
+    <h1 class="text-2xl font-bold mb-6 mt-20 ml-10 mx-4 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
+        Críticas <span class="text-blue-500">({{ $criticas->count() }})</span>
     </h1>
 
     <!-- Sección de información del audiovisual -->
-    <div class="mt-10 mb-10 mx-4 relative min-h-screen">
+    <div class="mt-10 mb-10 mx-4 relative">
         <a href="{{ route('audiovisual.show', ['audiovisual' => $audiovisual->id]) }}">
             <div class="max-w-5xl mx-auto relative">
                 <!-- Imagen panorámica -->
@@ -80,25 +80,35 @@
                     <div class="bg-white p-6 max-w-4xl rounded-md shadow-lg w-full">
 
                         <!-- Primera fila (fila de arriba) -->
-                        <div class="flex items-center justify-between mb-4 bg-gray-100 border border-gray-300 p-4 rounded-md">
+                        <div
+                            class="flex items-center justify-between mb-4 bg-gray-100 border border-gray-300 p-4 rounded-md">
+
                             <!-- Columna 1: Detalles del usuario y fecha -->
                             <div class="w-2/3 flex flex-col ml-4">
                                 <div class="flex flex-col">
+
                                     <!-- Autor de la crítica -->
-                                    <div class="font-medium mb-2 text-2xl flex items-center">
+                                    <div class="font-medium mb-2 text-lg sm:text-2xl flex items-center">
+
                                         <!-- Icono de usuario -->
                                         <svg xmlns="http://www.w3.org/2000/svg" height="26" width="26"
                                             viewBox="0 0 512 512" class="mr-2">
                                             <path
                                                 d="M256 288A144 144 0 1 0 256 0a144 144 0 1 0 0 288zm-94.7 32C72.2 320 0 392.2 0 481.3c0 17 13.8 30.7 30.7 30.7H481.3c17 0 30.7-13.8 30.7-30.7C512 392.2 439.8 320 350.7 320H161.3z" />
                                         </svg>
+
+                                        <!-- Nombre del usuario -->
                                         {{ $critica->user->name }}
-                                        <span class="ml-2 text-base italic text-gray-900">
+
+                                        <!-- Ciudad del usuario -->
+                                        <span class="ml-2 text-base italic text-gray-900 hidden sm:inline">
                                             {{ $critica->user->ciudad }} ({{ $critica->user->pais }})
                                         </span>
+
                                         <!-- Editar y eliminar crítica solo para el usuario logueado -->
                                         @if ($critica->user_id == auth()->id())
                                             <div class="flex justify-end items-center mt-2">
+
                                                 <!-- Editar crítica de usuario logueado -->
                                                 <span class="ml-6 cursor-pointer hover:scale-110">
                                                     <svg xmlns="http://www.w3.org/2000/svg" height="20"
@@ -109,6 +119,7 @@
                                                             d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z" />
                                                     </svg>
                                                 </span>
+
                                                 <!-- Eliminar crítica de usuario logueado -->
                                                 <span class="ml-4 cursor-pointer hover:scale-110">
                                                     <svg xmlns="http://www.w3.org/2000/svg" height="20"
@@ -120,15 +131,18 @@
                                                     </svg>
                                                 </span>
                                             </div>
+
                                             <!-- Ventana modal para editar una crítica -->
                                             @include('criticas.edit')
+
                                             <!-- Ventana modal para borrar una crítica -->
                                             @include('criticas.delete')
                                         @endif
                                     </div>
 
                                     <!-- Número de críticas y votaciones realizadas por el usuario -->
-                                    <div class="font-medium mb-2 text-lg flex items-center">
+                                    <div class="font-medium mb-2 text-base sm:text-lg flex items-center">
+                                        <!-- Críticas -->
                                         <span class="mr-2">
                                             <a href="{{ route('usuario.criticas', ['usuario' => $critica->user]) }}"
                                                 class="text-blue-500 hover:underline">
@@ -138,6 +152,7 @@
 
                                         <span class="text-gray-500">|</span>
 
+                                        <!-- Votaciones -->
                                         <span class="ml-2">
                                             <a href="{{ route('usuario.votaciones', ['usuario' => $critica->user]) }}"
                                                 class="text-blue-500 hover:underline">
@@ -147,7 +162,7 @@
                                     </div>
 
                                     <!-- Fecha de la crítica -->
-                                    <div class="font-medium mb-2 text-lg flex items-center">
+                                    <div class="font-medium mb-2 text-base sm:text-lg flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14"
                                             viewBox="0 0 448 512" class="mr-2">
                                             <path
@@ -157,12 +172,14 @@
                                     </div>
                                 </div>
                             </div>
+
                             <!-- Columna 2: Nota Usuario -->
                             <div class="w-1/3 flex justify-end items-center">
                                 <div class="mt-2 flex space-x-4">
+
                                     <!-- Nota del usuario al audiovisual -->
                                     <p
-                                        class="font-bold {{ $votacion && $votacion->voto ? 'font-bold text-2xl bg-white text-blue-500 bg-white-500 border border-gray-300 rounded-md p-3.5 mb-4' : 'text-lg text-gray-500' }}">
+                                        class="font-bold {{ $votacion && $votacion->voto ? 'font-bold text-2xl bg-white text-blue-500 bg-white-500 border border-gray-300 rounded-md p-3.5 mb-4' : 'text-base sm:text-lg text-gray-500' }}">
                                         @if ($votacion && $votacion->voto)
                                             {{ number_format($votacion->voto, 1) }}
                                         @else
@@ -177,28 +194,25 @@
 
                         <!-- Segunda fila: Crítica -->
                         <div class="bg-gray-100 border border-gray-300 p-4 rounded-md m-2">
-                            <div class="text-lg font-bold mb-2">Crítica:</div>
-                            <p class="text-lg" style="min-height: 6rem;">{{ $critica->critica }}</p>
+                            <div class="text-base sm:text-lg font-bold mb-2">Crítica:</div>
+                            <p class="text-base sm:text-lg" style="min-height: 6rem;">{{ $critica->critica }}</p>
                         </div>
                     </div>
+
                     <!-- Línea divisoria entre críticas -->
                     <hr class="my-4">
                 </div>
             @endforeach
         @else
             <!-- Mensaje si no hay críticas -->
-            <p class="text-gray-500 text-lg text-center mt-8 h-screen">No hay críticas disponibles.</p>
+            <p class="text-gray-500 text-lg text-center mt-8 mb-72">No hay críticas disponibles.</p>
         @endif
 
-        <!-- paginación -->
-        <div class="mx-6 mt-4 mb-10">
-            {{ $criticas->appends(request()->query())->links() }}
-        </div>
     </div>
 
     <!-- Botón para volver a la página anterior -->
-    <div class="mt-6">
-        <a href="{{ route('audiovisual.show', $audiovisual) }}" onclick="goBack()" class="flex items-center ml-6">
+    <div class="mt-6 mx-4">
+        <a href="#" onclick="goBack()" class="flex items-center ml-6">
             <span class="bottom-4 right-4 p-2 bg-blue-500 text-white rounded-full cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                     class="h-6 w-6">

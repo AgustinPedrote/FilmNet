@@ -28,7 +28,7 @@
                             class="block mb-2 text-xl font-bold text-gray-900 dark:text-white" />
                         <x-text-input id="nombre" class="block mt-1 w-full text-md" type="text" name="nombre"
                             required autofocus autocomplete="nombre" />
-                        <x-input-error :messages="$errors->get('premio')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('nombre')" class="mt-2" />
                     </div>
 
                     <!-- Año del premio -->
@@ -37,7 +37,7 @@
                             class="block mb-2 text-xl font-bold text-gray-900 dark:text-white mt-2" />
                         <x-text-input id="year" class="block mt-1 w-full text-md" type="text" name="year"
                             required autofocus autocomplete="year" />
-                        <x-input-error :messages="$errors->get('premio')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('year')" class="mt-2" />
                     </div>
 
                     <!-- Nuevo campo de búsqueda para Audiovisual al que pertenece el premio -->

@@ -36,11 +36,10 @@
                          <x-input-error :messages="$errors->get('critica')" class="mt-2" />
                      </div>
 
-                     @error('nombre')
-                         <br>
-                         <small>*{{ $message }}</small>
-                         <br>
-                     @enderror
+                     <!-- Mensaje de error -->
+                     <div id="error" class="error text-red-500 ml-3 font-semibold text-lg text-center">
+                         <!-- Contenido del mensaje de error -->
+                     </div>
                  </div>
 
                  <!-- Modal footer -->
@@ -65,3 +64,6 @@
          </div>
      </div>
  </div>
+
+  <!-- Script para funciones -->
+  <script src="{{ asset('js/funciones.js') }}"></script>

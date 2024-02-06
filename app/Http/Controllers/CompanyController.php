@@ -25,13 +25,24 @@ class CompanyController extends Controller
     // Almacenar una nueva compañía recién creada en la base de datos
     public function store(StoreCompanyRequest $request)
     {
-        $nombre = $request->nombre;
-        Company::create([
-            'nombre' => $nombre,
+        // Validar las reglas de validación
+        $request->validate([
+            'nombre' => ['required', 'string', 'max:100'],
+        ], [
+            'nombre.required' => 'El nombre es obligatorio.',
+            'nombre.string' => 'El nombre debe ser una cadena de caracteres.',
+            'nombre.max' => 'El nombre no puede tener más de :max caracteres.',
         ]);
 
+        // Crear una nueva compañía en la base de datos con los datos validados
+        Company::create([
+            'nombre' => $request->nombre,
+        ]);
+
+        // Redireccionar de nuevo a la página de índice de compañías con un mensaje de éxito
         return redirect()->route('admin.companies.index')->with('success', 'La compañía ha sido creada con éxito.');
     }
+
 
 
     public function show(Company $company)
@@ -48,8 +59,19 @@ class CompanyController extends Controller
     // Actualizar la compañía especificada en la base de datos
     public function update(UpdateCompanyRequest $request, Company $company)
     {
+        // Validar las reglas de validación
+        $request->validate([
+            'nombre' => ['required', 'string', 'max:100'],
+        ], [
+            'nombre.required' => 'El nombre es obligatorio.',
+            'nombre.string' => 'El nombre debe ser una cadena de caracteres.',
+            'nombre.max' => 'El nombre no puede tener más de :max caracteres.',
+        ]);
+
+        // Actualizar la información de la compañía con los datos validados
         $company->update($request->all());
 
+        // Redireccionar de nuevo a la página de índice de compañías con un mensaje de éxito
         return redirect()->route('admin.companies.index')->with('success', 'La compañía ha sido modificada con éxito.');
     }
 

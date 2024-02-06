@@ -51,6 +51,7 @@ class AudiovisualController extends Controller
 
         // Agregar condición para género
         if (!empty($genero)) {
+            // Filtrar resultados
             $query->whereHas('generos', function ($q) use ($genero) {
                 $q->where('genero_id', $genero);
             });
@@ -151,53 +152,78 @@ class AudiovisualController extends Controller
     // Almacenar un nuevo audiovisual en la base de datos (Admin)
     public function store(StoreAudiovisualRequest $request)
     {
-        // Validar que se haya seleccionado un tipo de audiovisual
-        if (!$request->has('tipo_id') || $request->tipo_id == 0) {
-            return redirect()->route('admin.audiovisuales.index')->with('error', 'Debes seleccionar un tipo de audiovisual.');
-        }
+        // Validar las reglas de validación
+        $validatedData = $request->validate([
+            'titulo' => ['required', 'string', 'max:100'],
+            'titulo_original' => ['nullable', 'string', 'max:100'],
+            'year' => ['required', 'integer', 'between:1900,' . date('Y')],
+            'duracion' => ['required', 'numeric', 'min:1'],
+            'pais' => ['required', 'string', 'max:255', 'regex:/^[^\d]+$/'],
+            'trailer' => ['nullable', 'url'],
+            'tipo_id' => ['required', 'integer', 'exists:tipos,id'],
+            'recomendacion_id' => ['required', 'integer', 'exists:recomendaciones,id'],
+            'sinopsis' => ['required', 'string', 'max:500'],
+            'imagen' => ['required', 'image', 'max:2048'], // Asegurar que la imagen sea un archivo de imagen válido y no exceda 2MB
+        ], [
+            'titulo.required' => 'El título es obligatorio.',
+            'titulo.string' => 'El título debe ser una cadena de caracteres.',
+            'titulo.max' => 'El título no puede tener más de :max caracteres.',
+            'titulo_original.string' => 'El título original debe ser una cadena de caracteres.',
+            'titulo_original.max' => 'El título original no puede tener más de :max caracteres.',
+            'year.required' => 'El año es obligatorio.',
+            'year.integer' => 'El año debe ser un número entero.',
+            'year.between' => 'El año debe estar entre 1900 y el año actual.',
+            'duracion.required' => 'La duración es obligatoria.',
+            'duracion.numeric' => 'La duración debe ser un número.',
+            'duracion.min' => 'La duración debe ser al menos :min.',
+            'pais.required' => 'El país es obligatorio.',
+            'pais.string' => 'El país debe ser una cadena de caracteres.',
+            'pais.regex' => 'El país no puede contener números.',
+            'pais.max' => 'El país no puede tener más de :max caracteres.',
+            'trailer.url' => 'El formato del trailer no es válido.',
+            'tipo_id.required' => 'El tipo es obligatorio.',
+            'tipo_id.integer' => 'El tipo debe ser un número entero.',
+            'tipo_id.exists' => 'El tipo seleccionado no existe.',
+            'recomendacion_id.required' => 'La recomendación de edad es obligatoria.',
+            'recomendacion_id.integer' => 'La recomendación de edad debe ser un número entero.',
+            'recomendacion_id.exists' => 'La recomendación de edad seleccionada no existe.',
+            'sinopsis.required' => 'La sinopsis es obligatoria.',
+            'sinopsis.string' => 'La sinopsis debe ser una cadena de caracteres.',
+            'sinopsis.max' => 'La sinopsis no puede tener más de :max caracteres.',
+            'imagen.required' => 'La imagen es obligatoria.',
+            'imagen.image' => 'El archivo debe ser una imagen.',
+            'imagen.max' => 'La imagen no puede exceder :max kilobytes.',
+        ]);
 
-        // Validar que se haya seleccionado una recomendación de edad
-        if (!$request->has('recomendacion_id') || $request->recomendacion_id == 0) {
-            return redirect()->route('admin.audiovisuales.index')->with('error', 'Debes seleccionar una recomendación de edad.');
-        }
+        // Reemplazar los espacios en blanco con guiones bajos en el título
+        $titulo = str_replace(' ', '_', $validatedData['titulo']);
 
-        // Validar que se haya subido un archivo de imagen
-        if (!$request->hasFile('imagen')) {
-            return redirect()->route('admin.audiovisuales.index')->with('error', 'Debes seleccionar una imagen.');
-        }
-
-        // Reemplaza los espacios en blanco con guiones bajos en el título
-        $titulo = str_replace(' ', '_', $request->titulo);
-
-        // Obtén la extensión del archivo original
+        // Obtener la extensión del archivo original
         $extension = $request->file('imagen')->getClientOriginalExtension();
 
-        // Construye el nombre de la imagen con el título modificado y la extensión
+        // Construir el nombre de la imagen con el título modificado y la extensión
         $img = $titulo . '.' . $extension;
 
-        // Mueve el archivo a la ubicación deseada
+        // Mover el archivo a la ubicación deseada
         $request->file('imagen')->move(public_path('img'), $img);
 
-        // Validar que el año o la duración sea un número
-        if (!is_numeric($request->year) || !is_numeric($request->duracion)) {
-            return redirect()->route('admin.audiovisuales.index')->with('error', 'Los campos año y duración son numéricos');
-        }
-
+        // Crear un nuevo registro de audiovisual en la base de datos
         Audiovisual::create([
-            'titulo' => $request->titulo,
-            'titulo_original' => $request->titulo_original,
-            'year' => $request->year,
-            'duracion' => $request->duracion,
-            'pais' => $request->pais,
-            'trailer' => $request->trailer,
-            'tipo_id' => $request->tipo_id,
-            'recomendacion_id' => $request->recomendacion_id,
-            'sinopsis' => $request->sinopsis,
+            'titulo' => $validatedData['titulo'],
+            'titulo_original' => $validatedData['titulo_original'],
+            'year' => $validatedData['year'],
+            'duracion' => $validatedData['duracion'],
+            'pais' => $validatedData['pais'],
+            'trailer' => $validatedData['trailer'],
+            'tipo_id' => $validatedData['tipo_id'],
+            'recomendacion_id' => $validatedData['recomendacion_id'],
+            'sinopsis' => $validatedData['sinopsis'],
             'img' => 'img/' . $img
         ]);
 
         return redirect()->route('admin.audiovisuales.index')->with('success', 'El audiovisual ha sido creado con éxito');
     }
+
 
 
     // Mostrar la ficha técnica de un audiovisual (SHOW)
@@ -230,38 +256,74 @@ class AudiovisualController extends Controller
         //
     }
 
-    // actualizar la información de un audiovisual (Admin)
+    // Actualizar la información de un audiovisual (Admin)
     public function update(UpdateAudiovisualRequest $request, Audiovisual $audiovisual)
     {
-        // Verifica si se proporcionó una nueva imagen en la solicitud
+        // Verificar si se proporcionó una nueva imagen en la solicitud
         if ($request->hasFile('imagen')) {
 
-            // Reemplaza los espacios en blanco con guiones bajos en el título
+            // Reemplazar los espacios en blanco con guiones bajos en el título
             $titulo = str_replace(' ', '_', $request->titulo);
 
-            // Obtén la extensión del archivo original
+            // Obtener la extensión del archivo original
             $extension = $request->file('imagen')->getClientOriginalExtension();
 
-            // Construye el nombre de la imagen con el título modificado y la extensión
+            // Construir el nombre de la imagen con el título modificado y la extensión
             $img = $titulo . '.' . $extension;
 
-            // Mueve el archivo a la ubicación deseada
+            // Mover el archivo a la ubicación deseada
             $request->file('imagen')->move(public_path('img'), $img);
 
-            // Guarda la nueva imagen
+            // Guardar la nueva imagen
             $audiovisual->img = 'img/' . $img;
             $audiovisual->save();
         }
 
-        // Validar que el año o la duración sea un número
-        if (!is_numeric($request->year) || !is_numeric($request->duracion)) {
-            return redirect()->route('admin.audiovisuales.index')->with('error', 'Los campos año y duración son numéricos');
-        }
+        // Validar las reglas de validación
+        $validatedData = $request->validate([
+            'titulo' => ['required', 'string', 'max:100'],
+            'titulo_original' => ['nullable', 'string', 'max:100'],
+            'year' => ['required', 'integer', 'between:1900,' . date('Y')],
+            'duracion' => ['required', 'numeric', 'min:1'],
+            'pais' => ['required', 'string', 'max:255', 'regex:/^[^\d]+$/'],
+            'trailer' => ['nullable', 'url'],
+            'tipo_id' => ['required', 'integer', 'exists:tipos,id'],
+            'recomendacion_id' => ['required', 'integer', 'exists:recomendaciones,id'],
+            'sinopsis' => ['required', 'string', 'max:500'],
+        ], [
+            'titulo.required' => 'El título es obligatorio.',
+            'titulo.string' => 'El título debe ser una cadena de caracteres.',
+            'titulo.max' => 'El título no puede tener más de :max caracteres.',
+            'titulo_original.string' => 'El título original debe ser una cadena de caracteres.',
+            'titulo_original.max' => 'El título original no puede tener más de :max caracteres.',
+            'year.required' => 'El año es obligatorio.',
+            'year.integer' => 'El año debe ser un número entero.',
+            'year.between' => 'El año debe estar entre 1900 y el año actual.',
+            'duracion.required' => 'La duración es obligatoria.',
+            'duracion.numeric' => 'La duración debe ser un número.',
+            'duracion.min' => 'La duración debe ser al menos :min.',
+            'pais.required' => 'El país es obligatorio.',
+            'pais.string' => 'El país debe ser una cadena de caracteres.',
+            'pais.regex' => 'El país no puede contener números.',
+            'pais.max' => 'El país no puede tener más de :max caracteres.',
+            'trailer.url' => 'El formato del trailer no es válido.',
+            'tipo_id.required' => 'El tipo es obligatorio.',
+            'tipo_id.integer' => 'El tipo debe ser un número entero.',
+            'tipo_id.exists' => 'El tipo seleccionado no existe.',
+            'recomendacion_id.required' => 'La recomendación de edad es obligatoria.',
+            'recomendacion_id.integer' => 'La recomendación de edad debe ser un número entero.',
+            'recomendacion_id.exists' => 'La recomendación de edad seleccionada no existe.',
+            'sinopsis.required' => 'La sinopsis es obligatoria.',
+            'sinopsis.string' => 'La sinopsis debe ser una cadena de caracteres.',
+            'sinopsis.max' => 'La sinopsis no puede tener más de :max caracteres.',
+        ]);
 
-        $audiovisual->update($request->all());
+        // Actualizar el audiovisual con los datos validados
+        $audiovisual->update($validatedData);
 
         return redirect()->route('admin.audiovisuales.index')->with('success', 'El audiovisual ha sido modificado con éxito');
     }
+
 
     // Eliminar un audiovisual de la base de datos (Admin)
     public function destroy(Audiovisual $audiovisual)
@@ -271,17 +333,18 @@ class AudiovisualController extends Controller
         return redirect()->route('admin.audiovisuales.index')->with('success', 'El audiovisual ha sido eliminado con éxito.');
     }
 
-    // Críticas del audiovisual (paginados)
+    // Críticas del audiovisual
     public function criticas($audiovisual)
     {
+        // Busca el audiovisual y obtiene todas las críticas
         $audiovisual = Audiovisual::find($audiovisual);
         $criticas = $audiovisual->criticas;
 
-        // Si el usuario está logueado, mover su crítica al principio de la lista
+        // Si el usuario está logueado busca su crítica.
         if (auth()->check()) {
             $userCritica = $criticas->where('user_id', auth()->id())->first();
 
-            // Verificar si se encontró una crítica del usuario
+            // Excluye la crítica del usuario logueado y la añade al principio de la colección
             if ($userCritica) {
                 $criticas = $criticas->reject(function ($critica) {
                     return $critica->user_id == auth()->id();
@@ -289,24 +352,16 @@ class AudiovisualController extends Controller
             }
         }
 
-        // Calcula la nota media
+        // Calcula la nota media del audiovisual
         $notaMedia = $audiovisual->obtenerNotaMedia();
-
-        // Pagina las críticas con 4 elementos por página
-        $perPage = 4;
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $currentItems = $criticas->slice(($currentPage - 1) * $perPage, $perPage)->all();
-        $criticasPaginadas = new LengthAwarePaginator($currentItems, $criticas->count(), $perPage);
-
-        // Establece la ruta correcta para los enlaces de paginación
-        $criticasPaginadas->withPath(route('ver.criticas', ['audiovisual' => $audiovisual->id]));
 
         return view('audiovisuales.criticas', [
             'audiovisual' => $audiovisual,
-            'criticas' => $criticasPaginadas,
+            'criticas' => $criticas,
             'notaMedia' => $notaMedia
         ]);
     }
+
 
     // Buscar géneros en la base de datos y devolver los resultados (Admin)
     public function buscarGenero(Request $request)
@@ -395,7 +450,7 @@ class AudiovisualController extends Controller
     // Actualizar la información del elenco del audiovisual (Admin)
     public function updateBusqueda(Request $request, Audiovisual $audiovisual)
     {
-        // Obtén el nombre del género y la compañía desde la solicitud
+        // Obtener los resultados de búsqueda desde la solicitud
         $nombreGenero = $request->input('search_genero');
         $nombreCompany = $request->input('search_company');
         $nombreReparto = $request->input('search_reparto');
@@ -404,47 +459,87 @@ class AudiovisualController extends Controller
         $nombreCompositor = $request->input('search_compositor');
         $nombreDirector = $request->input('search_director');
 
-        // Verificar si se proporcionó información para el género y la compañía
-        if ($nombreGenero) {
-            // Busca en la base de datos o crea uno nuevo si no existe
-            $genero = Genero::firstOrCreate(['nombre' => $nombreGenero]);
+        // Verificar si se proporcionó al menos un término de búsqueda
+        if (!$nombreGenero && !$nombreCompany && !$nombreReparto && !$nombreGuionista && !$nombreFotografia && !$nombreCompositor && !$nombreDirector) {
+            return redirect()->route('admin.audiovisuales.index')->with('error', 'No se ha realizado ninguna modificación.');
+        }
 
-            // Asociar al audiovisual sin eliminar los existentes
+        /* // Verificar si se proporcionó información, buscar en la base de datos o crear una nueva instancia sin guardarla automáticamente.
+              Si no estaba en la base de datos, redirecciona con mensaje de error y si estaba en la base de datos asociar al audiovisual sin elminar los existentes */
+
+        // Genero
+        if ($nombreGenero) {
+            $genero = Genero::firstOrNew(['nombre' => $nombreGenero]);
+
+            if (!$genero->exists) {
+                return redirect()->route('admin.audiovisuales.index')->with('error', 'El género no existe en la base de datos.');
+            }
+
             $audiovisual->generos()->syncWithoutDetaching([$genero->id]);
         }
 
+        // Compañía
         if ($nombreCompany) {
-            $company = Company::firstOrCreate(['nombre' => $nombreCompany]);
+            $company = Company::firstOrNew(['nombre' => $nombreCompany]);
+
+            if (!$company->exists) {
+                return redirect()->route('admin.audiovisuales.index')->with('error', 'La compañía no existe en la base de datos.');
+            }
 
             $audiovisual->companies()->syncWithoutDetaching([$company->id]);
         }
 
+        // Reparto
         if ($nombreReparto) {
-            $reparto = Persona::firstOrCreate(['nombre' => $nombreReparto]);
+            $reparto = Persona::firstOrNew(['nombre' => $nombreReparto]);
+
+            if (!$reparto->exists) {
+                return redirect()->route('admin.audiovisuales.index')->with('error', 'El reparto no existe en la base de datos.');
+            }
 
             $audiovisual->repartos()->syncWithoutDetaching([$reparto->id]);
         }
 
+        // Guionista
         if ($nombreGuionista) {
-            $guionista = Persona::firstOrCreate(['nombre' => $nombreGuionista]);
+            $guionista = Persona::firstOrNew(['nombre' => $nombreGuionista]);
+
+            if (!$guionista->exists) {
+                return redirect()->route('admin.audiovisuales.index')->with('error', 'El guionista no existe en la base de datos.');
+            }
 
             $audiovisual->guionistas()->syncWithoutDetaching([$guionista->id]);
         }
 
+        // Fotografía
         if ($nombreFotografia) {
-            $fotografia = Persona::firstOrCreate(['nombre' => $nombreFotografia]);
+            $fotografia = Persona::firstOrNew(['nombre' => $nombreFotografia]);
+
+            if (!$fotografia->exists) {
+                return redirect()->route('admin.audiovisuales.index')->with('error', 'El fotógrafo no existe en la base de datos.');
+            }
 
             $audiovisual->fotografias()->syncWithoutDetaching([$fotografia->id]);
         }
 
+        // Compositor
         if ($nombreCompositor) {
-            $compositor = Persona::firstOrCreate(['nombre' => $nombreCompositor]);
+            $compositor = Persona::firstOrNew(['nombre' => $nombreCompositor]);
+
+            if (!$compositor->exists) {
+                return redirect()->route('admin.audiovisuales.index')->with('error', 'El compositor no existe en la base de datos.');
+            }
 
             $audiovisual->compositores()->syncWithoutDetaching([$compositor->id]);
         }
 
+        // Director
         if ($nombreDirector) {
-            $director = Persona::firstOrCreate(['nombre' => $nombreDirector]);
+            $director = Persona::firstOrNew(['nombre' => $nombreDirector]);
+
+            if (!$director->exists) {
+                return redirect()->route('admin.audiovisuales.index')->with('error', 'El director no existe en la base de datos.');
+            }
 
             $audiovisual->directores()->syncWithoutDetaching([$director->id]);
         }

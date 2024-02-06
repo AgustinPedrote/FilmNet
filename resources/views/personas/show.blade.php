@@ -14,11 +14,24 @@
                 </div>
 
                 <div class="mt-3 text-center">
-                    <div class="text-lg font-semibold text-gray-800">{{ $audiovisual->titulo }}</div>
+                    <div>
+                        <p class="text-lg font-semibold text-gray-800">
+                            {{ $audiovisual->titulo }}
+                        </p>
+                        <p class="text-lg text-gray-800">
+                            ({{ $audiovisual->year }})
+                        </p>
+                    </div>
                 </div>
             </a>
         @endforeach
     </div>
+
+    @if ($filmografia->isEmpty())
+        <p class="text-gray-500 text-lg text-center mt-8 mb-72">
+            No hay audiovisuales en la filmografía.
+        </p>
+    @endif
 
     <!-- Botón para volver a la página anterior -->
     <div class="mt-6">
@@ -33,9 +46,6 @@
         </a>
     </div>
 
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
+    <!-- Script para funciones -->
+    <script src="{{ asset('js/funciones.js') }}"></script>
 </x-app-layout>

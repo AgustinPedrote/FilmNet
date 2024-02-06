@@ -14,11 +14,12 @@
         @endif
     </div>
 
-    <h1 class="text-2xl font-bold mb-6 mt-20 ml-10 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
-        Usuarios seguidos ({{ $amigos->count() }})
+    <h1 class="text-2xl font-bold mb-6 mt-20 ml-10 mx-4 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
+        Usuarios seguidos <span class="text-blue-500">({{ $amigos->count() }})</span>
     </h1>
 
-    <div class="md:w-1/3 mx-auto mt-2 mb-6">
+    <!-- Buscador de usuarios para seguir -->
+    <div class="w-11/12 sm:w-1/2 mx-auto mt-2 mb-6">
         <form action="{{ route('seguir.amigo') }}" method="POST">
             @csrf
 
@@ -33,57 +34,70 @@
                 <input type="hidden" name="amigo" id="amigoId" class="amigo">
 
                 <button type="button" onclick="buscarAmigo()"
-                    class="px-4 py-2 ml-4 cursor-pointer bg-green-500 border border-green-600 hover:bg-green-600 text-white rounded-md font-semibold focus:outline-none focus:shadow-outline-green active:bg-green-600">
+                    class="px-4 py-2 ml-4 cursor-pointer bg-green-500 border border-green-600 hover:bg-green-600 text-white rounded-md font-semibold focus:outline-none focus:shadow-outline-green active:bg-green-600 text-sm md:text-base">
                     Buscar
                 </button>
 
-                <!-- Botón "Crear" -->
+                <!-- Botón "Seguir" -->
                 <button type="submit"
-                    class="ml-2 cursor-pointer bg-blue-500 border border-blue-600 hover:bg-blue-600 text-white rounded-md px-4 py-2 font-semibold focus:outline-none focus:shadow-outline-blue active:bg-blue-600">
+                    class="ml-2 cursor-pointer bg-blue-500 border border-blue-600 hover:bg-blue-600 text-white rounded-md px-4 py-2 font-semibold focus:outline-none focus:shadow-outline-blue active:bg-blue-600 text-sm md:text-base">
                     Seguir
                 </button>
             </div>
 
             <!-- Lista de resultados de la búsqueda -->
             <ul id="amigoResults"
-                class="absolute bg-white borde divide-y divide-gray-300 overflow-y-auto max-h-52 w-52 mt-1 z-10">
+                class="absolute bg-white border border-gray-300 divide-y divide-gray-300 overflow-y-auto max-h-52 w-52 sm:w-64 mt-1 z-10 hidden">
             </ul>
+
         </form>
     </div>
 
     @if ($amigos->isEmpty())
-        <div class="text-gray-500 text-lg text-center mt-10 min-h-screen">
+        <div class="text-gray-500 text-lg text-center mt-8 mb-56">
             <p>No sigues a ningún usuario.</p>
         </div>
     @else
-        <div class="mx-auto w-11/12 min-h-screen">
-            <table class="min-w-full mt-10 table-auto border border-gray-300 divide-y divide-gray-300">
+        <div class="mx-auto w-11/12">
+            <table class="min-w-full mt-10 mb-16 table-auto border border-gray-300 divide-y divide-gray-300">
                 <thead>
                     <tr>
-                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">Nombre</th>
-                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">País</th>
-                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">Ciudad</th>
-                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">Votaciones</th>
-                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">Críticas</th>
-                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">Acciones</th>
+                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">
+                            Nombre
+                        </th>
+                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase hidden md:table-cell">
+                            País
+                        </th>
+                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase hidden md:table-cell">
+                            Ciudad
+                        </th>
+                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase hidden md:table-cell">
+                            Votaciones
+                        </th>
+                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase hidden md:table-cell">
+                            Críticas
+                        </th>
+                        <th class="py-2 px-4 border bg-gray-200 text-gray-700 font-bold uppercase">
+                            Acciones
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($amigos as $amigo)
                         <tr>
                             <td class="py-2 px-4 border text-center">{{ $amigo->name }}</td>
-                            <td class="py-2 px-4 border text-center">{{ $amigo->pais }}</td>
-                            <td class="py-2 px-4 border text-center">{{ $amigo->ciudad }}</td>
-                            <td class="py-2 px-4 border text-center">
+                            <td class="py-2 px-4 border text-center hidden md:table-cell">{{ $amigo->pais }}</td>
+                            <td class="py-2 px-4 border text-center hidden md:table-cell">{{ $amigo->ciudad }}</td>
+                            <td class="py-2 px-4 border text-center hidden md:table-cell">
                                 <a href="{{ route('usuario.votaciones', ['usuario' => $amigo]) }}"
                                     class="text-blue-500 hover:underline">
-                                    {{$amigo->votaciones->count()}}
+                                    {{ $amigo->votaciones->count() }}
                                 </a>
                             </td>
-                            <td class="py-2 px-4 border text-center">
+                            <td class="py-2 px-4 border text-center hidden md:table-cell">
                                 <a href="{{ route('usuario.criticas', ['usuario' => $amigo]) }}"
                                     class="text-blue-500 hover:underline">
-                                    {{$amigo->criticas->count()}}
+                                    {{ $amigo->criticas->count() }}
                                 </a>
                             </td>
                             <td class="py-2 px-4 border text-center">
@@ -92,7 +106,7 @@
                                     @method('DELETE')
 
                                     <button type="submit"
-                                        class="cursor-pointer bg-red-500 border border-red-600 hover:bg-red-600 text-white rounded-md px-4 py-2 font-semibold focus:outline-none focus:shadow-outline-red active:bg-red-600">
+                                        class="cursor-pointer bg-red-500 border border-red-600 hover:bg-red-600 text-white rounded-md px-4 py-2 font-semibold focus:outline-none focus:shadow-outline-red active:bg-red-600 text-sm md:text-base">
                                         Dejar de seguir
                                     </button>
                                 </form>
@@ -105,7 +119,7 @@
     @endif
 
     <!-- Botón para volver a la página anterior -->
-    <div class="mt-6">
+    <div class="mt-6 mx-4">
         <a href="#" onclick="goBack()" class="flex items-center ml-6">
             <span class="bottom-4 right-4 p-2 bg-blue-500 text-white rounded-full cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -116,6 +130,9 @@
             </span>
         </a>
     </div>
+
+    <!-- Script para funciones -->
+    <script src="{{ asset('js/funciones.js') }}"></script>
 
     <!-- Script para buscador de usuarios -->
     <script src="{{ asset('js/buscadorUsuarios.js') }}"></script>

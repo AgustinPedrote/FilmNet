@@ -30,8 +30,9 @@
             <p class="text-gray-600">{{ $audiovisual->descripcion }}</p>
 
             <!-- Detalles adicionales con mayor margen -->
-            <div class="text-lg text-gray-500 space-y-2 mb-4">
+            <div class="text-md sm:text-lg text-gray-500 space-y-2 mb-4">
                 <div class="mb-3"><strong>Título Original:</strong> {{ $audiovisual->titulo_original }}</div>
+                <div class="mb-3"><strong>Tipo:</strong> {{ $audiovisual->tipo->nombre }}</div>
                 <div class="mb-3"><strong>Año:</strong> {{ $audiovisual->year }}</div>
                 <div class="mb-3"><strong>Duración:</strong> {{ $audiovisual->duracion }} minutos</div>
                 <div class="mb-3"><strong>País:</strong> {{ $audiovisual->pais }}</div>
@@ -144,6 +145,7 @@
             <img src="{{ asset($audiovisual->img) }}" alt="{{ $audiovisual->titulo }}"
                 class="w-full h-auto object-cover md:w-48 mx-auto mb-6 rounded-lg shadow-md">
 
+
             <div class="mb-6 text-center w-full md:w-48 bg-gray-100 rounded-md p-8 border border-gray-300">
 
                 <!-- Mostrar las estrellas (1 al 10) -->
@@ -194,7 +196,7 @@
                                 <!-- Número y barra de votación -->
                                 <div class="w-3 text-right text-xs text-gray-600 mr-1">{{ $i }}</div>
                                 <div class="flex-grow">
-                                     <!-- Barra de votación -->
+                                    <!-- Barra de votación -->
                                     <div class="h-2 bg-gray-200 w-full rounded overflow-hidden">
                                         @php
                                             $votosParaNota = $audiovisual->votaciones->where('voto', $i)->count();
@@ -239,7 +241,7 @@
     </div>
 
     <!-- Botón para volver a la página anterior -->
-    <div class="mt-6">
+    <div class="mt-6 mx-4">
         <a href="#" onclick="goBack()" class="flex items-center ml-6">
             <span class="bottom-4 right-4 p-2 bg-blue-500 text-white rounded-full cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -251,11 +253,8 @@
         </a>
     </div>
 
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
+    <!-- Script para funciones -->
+    <script src="{{ asset('js/funciones.js') }}"></script>
 
     <!-- Script para votación del audiovisual de forma asíncrona -->
     <script src="{{ asset('js/vote.js') }}"></script>

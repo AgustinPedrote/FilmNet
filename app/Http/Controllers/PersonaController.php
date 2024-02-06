@@ -24,6 +24,17 @@ class PersonaController extends Controller
     // Almacenar una nueva persona en la base de datos
     public function store(StorePersonaRequest $request)
     {
+        // Validar las reglas de validación
+        $request->validate([
+            'nombre' => ['required', 'string', 'max:100', 'regex:/^[^\d]+$/'],
+        ], [
+            'nombre.required' => 'El nombre es obligatorio.',
+            'nombre.string' => 'El nombre debe ser una cadena de caracteres.',
+            'nombre.max' => 'El nombre no puede tener más de :max caracteres.',
+            'nombre.regex' => 'El nombre no puede contener números.',
+        ]);
+
+        // Creando un nuevo registro en la tabla 'personas'
         $nombre = $request->nombre;
         Persona::create([
             'nombre' => $nombre,
@@ -32,6 +43,7 @@ class PersonaController extends Controller
         // Redireccionar de nuevo a la ficha técnica del audiovisual
         return redirect()->route('admin.personas.index')->with('success', 'La persona ha sido creada con éxito.');
     }
+
 
     // Mostrar detalles de una persona y su filmografía
     public function show(Persona $audiovisual)
@@ -65,6 +77,9 @@ class PersonaController extends Controller
         // Eliminar duplicados de la colección combinada
         $filmografia = $filmografia->unique('id');
 
+        // Ordenar la filmografía por año de mayor a menor
+        $filmografia = $filmografia->sortByDesc('year');
+
         return view('personas.show', compact('persona', 'filmografia'));
     }
 
@@ -76,12 +91,23 @@ class PersonaController extends Controller
     // Actualizar la información de una persona en la base de datos
     public function update(UpdatePersonaRequest $request, Persona $persona)
     {
+        // Validar las reglas de validación
+        $request->validate([
+            'nombre' => ['required', 'string', 'max:100', 'regex:/^[^\d]+$/'],
+        ], [
+            'nombre.required' => 'El nombre es obligatorio.',
+            'nombre.string' => 'El nombre debe ser una cadena de caracteres.',
+            'nombre.max' => 'El nombre no puede tener más de :max caracteres.',
+            'nombre.regex' => 'El nombre no puede contener números.',
+        ]);
 
+        // Actualizar la información de la persona con los datos validados
         $persona->update($request->all());
 
         // Redireccionar de nuevo a la ficha técnica del audiovisual
         return redirect()->route('admin.personas.index')->with('success', 'La persona ha sido modificada con éxito.');
     }
+
 
     // Eliminar una persona, verificando roles relacionados antes de la eliminación
     public function destroy(Persona $persona)

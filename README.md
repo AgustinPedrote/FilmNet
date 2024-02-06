@@ -34,3 +34,44 @@ Adicionalmente, los usuarios disponen de un conjunto de herramientas para gestio
 
 -   Implementación del framework web Laravel 10.
 -   Integración opcional para la visualización de cines cercanos en un mapa.
+
+# Instrucciones de instalación
+
+-   Requisitos:
+
+    - PHP 8.2.7
+
+    - Composer version 2.5.1
+
+    - Node v18.19.0
+
+    - npm 9.2.0
+
+    - psql (PostgreSQL) 15.5
+
+-   Instalación:
+
+    - Clonamos el repositorio de GitHub.
+
+    - Creamos la base de datos para el proyecto.
+
+    - Copiamos el contenido del archivo .env.example en otro archivo llamado .env y cambiamos las variables.
+      
+    - Abrimos un terminal en el directorio del proyecto e introducimos los siguientes comandos:
+
+       * composer install
+
+       * npm install
+
+       * php artisan key:generate
+
+       * php artisan migrate
+
+       * php artisan db:seed
+
+       * npm run dev
+
+       * php artisan serve
+
+    - Acceder a la ruta http://localhost:8000/
+

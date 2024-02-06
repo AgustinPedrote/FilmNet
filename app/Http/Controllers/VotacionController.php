@@ -40,10 +40,13 @@ class VotacionController extends Controller
             return response()->json('Voto nulo');
         }
 
-        // Insertar o actualizar voto
+        // Obtener la fecha y hora actual
+        $now = now();
+
+        // Insertar o actualizar voto, incluyendo la fecha y hora actual
         Votacion::updateOrInsert(
             ['audiovisual_id' => $audiovisualId, 'user_id' => $user],
-            ['voto' => $voto]
+            ['voto' => $voto, 'created_at' => $now]
         );
 
         // Redireccionar de nuevo a la página anterior

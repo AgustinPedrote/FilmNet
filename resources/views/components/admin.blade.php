@@ -29,7 +29,7 @@
 
         @include('components.navAdmin')
 
-        <!-- Contenido principal -->
+        <!-- Contenido principal Admin -->
         <main class="w-full">
             {{ $slot }}
         </main>

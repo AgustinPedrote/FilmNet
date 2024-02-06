@@ -68,8 +68,15 @@ class UserController extends Controller
     // Mostrar las votaciones del usuario logueado
     public function misVotaciones()
     {
-        // Votaciones del usuario logado y paginado
-        $votaciones = Votacion::where('user_id', auth()->user()->id)->paginate(10);
+        // Votaciones del usuario logado, ordenadas por created_at en orden ascendente
+        $votaciones = Votacion::where('user_id', auth()->user()->id)
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        // Calcula la media de las votaciones
+        $totalVotos = $votaciones->count();
+        $sumaVotos = $votaciones->sum('voto');
+        $mediaVotos = $totalVotos > 0 ? $sumaVotos / $totalVotos : 0;
 
         // Array asociativo de nombres de puntuaciones
         $puntuacionesNombres = [
@@ -87,7 +94,8 @@ class UserController extends Controller
 
         return view('votaciones.index', compact(
             'votaciones',
-            'puntuacionesNombres'
+            'puntuacionesNombres',
+            'mediaVotos'
         ));
     }
 
@@ -138,6 +146,11 @@ class UserController extends Controller
         $usuario = User::find(auth()->user()->id);
         $amigoId = $request->amigo;
 
+        // Verificar si el usuario intenta seguirse a sí mismo
+        if ($amigoId == $usuario->id) {
+            return redirect()->back()->with('error', 'No puedes seguirte a ti mismo.');
+        }
+
         // Verificar si el usuario ya sigue al amigo
         if ($usuario->users()->where('id', $amigoId)->exists()) {
             return redirect()->back()->with('error', 'Ya sigues a este amigo.');
@@ -170,23 +183,14 @@ class UserController extends Controller
         return redirect()->back()->with('error', 'No estás siguiendo a ' . $amigo->name);
     }
 
-    // Mostrar la lista de audiovisuales en seguimiento del usuario logueado (paginados)
+    // Mostrar la lista de audiovisuales en seguimiento del usuario logueado
     public function seguimientos()
     {
-        // Audiovisuales en seguimiento sin paginar
-        $seguimientos = auth()->user()->usuariosSeguimientos;
+        $seguimientos = auth()->user()->usuariosSeguimientos->sortBy('titulo');
 
-        // Configura la paginación
-        $perPage = 10;
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $currentItems = $seguimientos->slice(($currentPage - 1) * $perPage, $perPage)->all();
-        $seguimientosPaginados = new LengthAwarePaginator($currentItems, $seguimientos->count(), $perPage);
-
-        // Establece la ruta correcta para los enlaces de paginación
-        $seguimientosPaginados->withPath(route('seguimientos.index'));
-
-        return view('seguimientos.index', compact('seguimientosPaginados'));
+        return view('seguimientos.index', compact('seguimientos'));
     }
+
 
     // Alternar el seguimiento de un audiovisual por el usuario logueado de forma asíncrona
     public function toggleSeguimiento(Request $request)
@@ -237,8 +241,15 @@ class UserController extends Controller
     // Ver votaciones de un usuario específico
     public function usuarioVotaciones(User $usuario)
     {
-        // Votaciones del usuario y paginado
-        $votaciones = Votacion::where('user_id', $usuario->id)->paginate(10);
+        // Votaciones del usuario, ordenadas por created_at en orden ascendente
+        $votaciones = Votacion::where('user_id', $usuario->id)
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        // Calcula la media de las votaciones
+        $totalVotos = $votaciones->count();
+        $sumaVotos = $votaciones->sum('voto');
+        $mediaVotos = $totalVotos > 0 ? $sumaVotos / $totalVotos : 0;
 
         // Array asociativo de nombres de puntuaciones
         $puntuacionesNombres = [
@@ -254,7 +265,7 @@ class UserController extends Controller
             10 => 'Excelente',
         ];
 
-        return view('amigos.usuarioVotaciones', compact('votaciones', 'puntuacionesNombres', 'usuario'));
+        return view('amigos.usuarioVotaciones', compact('votaciones', 'puntuacionesNombres', 'usuario', 'mediaVotos'));
     }
 
     // Eliminar una crítica de un usuario específico como administrador (Admin)

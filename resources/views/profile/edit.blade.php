@@ -36,7 +36,7 @@
     </div>
 
     <!-- Botón para volver a la página anterior -->
-    <div class="mt-6">
+    <div class="mt-6 mx-4">
         <a href="#" onclick="goBack()" class="flex items-center ml-6">
             <span class="bottom-4 right-4 p-2 bg-blue-500 text-white rounded-full cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
@@ -48,9 +48,6 @@
         </a>
     </div>
 
-    <script>
-        function goBack() {
-            window.history.back();
-        }
-    </script>
+    <!-- Script para funciones -->
+    <script src="{{ asset('js/funciones.js') }}"></script>
 </x-app-layout>

@@ -14,12 +14,11 @@
         @endif
     </div>
 
-    <h1 class="text-2xl font-bold mb-8 mt-24 ml-10 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
-        Críticas de {{ $user->name }}
+    <h1 class="text-2xl font-bold mb-6 mt-20 ml-10 mx-4 border-b-2 border-blue-500 w-11/12 pb-2 text-gray-800">
+        Críticas de {{ $user->name }} <span class="text-blue-500">({{ $criticas->count() }})</span>
     </h1>
 
     @forelse ($criticas->sortByDesc('created_at') as $critica)
-
         <!-- Votación del usuario al audiovisual -->
         @php
             $votacion = $critica->audiovisual->obtenerVotacion($critica->user_id, $critica->audiovisual_id);
@@ -41,10 +40,10 @@
                     <!-- Columna 2: Detalles del usuario y fecha -->
                     <div class="w-full flex flex-col ml-4">
                         <!-- Título en la parte superior -->
-                        <div class="text-2xl font-bold mb-2">{{ $critica->audiovisual->titulo }}</div>
+                        <div class="text-lg sm:text-2xl font-bold mb-2">{{ $critica->audiovisual->titulo }}</div>
 
                         <!-- Fecha de la crítica -->
-                        <div class="font-medium mb-2 text-lg flex items-center">
+                        <div class="font-medium mb-2 text-sm sm:text-lg flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"
                                 class="mr-2">
                                 <path
@@ -56,7 +55,7 @@
                         <!-- Nota del usuario al audiovisual -->
                         <div class="mt-2 flex space-x-4">
                             <p
-                                class="font-bold {{ $votacion && $votacion->voto ? 'font-bold text-2xl bg-white text-blue-500 bg-white-500 border border-gray-300 rounded-md p-3.5 mb-4' : 'text-lg text-gray-500' }}">
+                                class="font-bold {{ $votacion && $votacion->voto ? 'font-bold text-xl sm:text-2xl bg-white text-blue-500 bg-white-500 border border-gray-300 rounded-md p-3.5 mb-4' : 'text-base sm:text-lg text-gray-500' }}">
                                 @if ($votacion && $votacion->voto)
                                     {{ number_format($votacion->voto, 1) }}
                                 @else
@@ -70,7 +69,7 @@
                     <div class="w-1/4 flex justify-end items-center">
                         <div class="mt-2 flex space-x-4">
                             <button type="submit"
-                                class="px-4 py-2 bg-red-500 border border-red-600 text-white rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-red active:bg-red-600 mx-auto font-semibold"
+                                class="px-4 py-2 bg-red-500 border border-red-600 text-white rounded-md hover:bg-red-600 focus:outline-none focus:shadow-outline-red active:bg-red-600 mx-auto font-semibold text-xs sm:text-base"
                                 data-modal-target="popup-modal{{ $critica }}"
                                 data-modal-toggle="popup-modal{{ $critica }}">
                                 Borrar
@@ -84,8 +83,8 @@
                 <!-- Segunda fila (fila de abajo) -->
                 <div class="bg-gray-100 border border-gray-300 p-4 rounded-md">
                     <!-- Contenido de la segunda fila -->
-                    <div class="text-lg font-bold mb-2">Crítica:</div>
-                    <p class="text-lg" style="min-height: 6rem;">{{ $critica->critica }}</p>
+                    <div class="text-md sm:text-lg font-bold mb-2">Crítica:</div>
+                    <p class="text-md sm:text-lg" style="min-height: 6rem;">{{ $critica->critica }}</p>
                 </div>
 
             </div>
@@ -96,7 +95,9 @@
         @include('admin.users.deleteCriticas')
 
     @empty
-        <p class="text-lg text-center font-semibold">No hay críticas disponibles.</p>
+        <p class="text-gray-500 text-lg text-center mt-8 mb-72">
+            No hay críticas disponibles.
+        </p>
     @endforelse
 
     <div class="mx-6 mt-4 mb-10">
@@ -104,8 +105,8 @@
     </div>
 
     <!-- Botón para volver a la página anterior -->
-    <div class="mt-6">
-        <a href="{{ route('admin.users.index') }}" onclick="goBack()" class="flex items-center ml-6">
+    <div class="mt-6 mx-4">
+        <a href="#" onclick="goBack()" class="flex items-center ml-6">
             <span class="bottom-4 right-4 p-2 bg-blue-500 text-white rounded-full cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
                     class="h-6 w-6">
@@ -115,4 +116,7 @@
             </span>
         </a>
     </div>
+
+    <!-- Script para funciones -->
+    <script src="{{ asset('js/funciones.js') }}"></script>
 </x-app-layout>

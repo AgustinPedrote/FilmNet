@@ -37,20 +37,20 @@
                         </iframe>
                     </div>
                 @else
-                    <p class="text-lg text-red-500 space-y-1 font-bold text-center">
+                    <p class="text-base md:text-lg text-red-500 space-y-1 font-bold text-center">
                         No hay trailer disponible para este audiovisual.
                     </p>
                 @endif
             </div>
         @else
-            <p class="text-lg text-red-500 space-y-1 font-bold text-center mt-6">
+            <p class="text-base md:text-lg text-red-500 space-y-1 font-bold text-center mt-6">
                 No tienes la edad permitida para ver este trailer.
             </p>
         @endif
     </div>
 @else
     <div class="mt-6 p-6 flex items-center space-x-2">
-        <a href="{{ route('login') }}" class="text-blue-500 hover:underline font-bold text-lg flex items-center">
+        <a href="{{ route('login') }}" class="text-blue-500 hover:underline font-bold flex items-center text-base md:text-lg">
             <span>Ver trailer</span>
             <svg xmlns="http://www.w3.org/2000/svg" height="18" width="20" viewBox="0 0 576 512"
                 class="ml-2 text-blue-500 fill-current transform">

@@ -22,19 +22,19 @@
 
              <!-- Modal Content -->
              <div class="p-8 space-y-5">
-                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                 <div class="grid grid-cols-1 md:grid-cols-2 md:gap-8">
                      <!-- COLUMNA 1 -->
                      <div>
 
                          <!-- Titulo del audiovisual -->
-                         <div class="mb-5 p-2">
+                         <div class="mb-2 md:mb-5 p-2">
                              <div>
                                  <a href="{{ route('audiovisual.show', ['audiovisual' => $audiovisual]) }}"
-                                     class="text-gray-700 hover:text-gray-900 block text-2xl font-bold dark:text-white mt-3 mb-3 border-b-2 border-blue-500">
+                                     class="text-gray-700 hover:text-gray-900 block text-xl md:text-2xl font-bold dark:text-white mt-3 mb-3 border-b-2 border-blue-500">
                                      {{ $audiovisual->titulo }}
                                  </a>
 
-                                 <div class="flex items-center justify-between text-gray-600 dark:text-gray-400">
+                                 <div class="flex items-center justify-between text-gray-600 dark:text-gray-400 text-sm md:text-base"">
                                      <span>
                                          Tipo: {{ $audiovisual->tipo->nombre }}
                                      </span>
@@ -49,9 +49,9 @@
                          </div>
 
                          <!-- Botón para eliminar directores -->
-                         <div class="mb-4 p-2 border border-gray-300 rounded shadow-md" style="min-height: 100px;">
+                         <div class="mb-1 md:mb-4 p-1 md:p-2 border border-gray-300 rounded shadow-md" style="min-height: 100px;">
                              <x-input-label for="eliminar_director" :value="__('Eliminar Director:')"
-                                 class="block text-xl font-bold text-gray-900 dark:text-white mt-2 mb-2" />
+                                 class="block text-lg md:text-xl font-bold text-gray-900 dark:text-white mt-2 mb-2" />
 
                              @if ($audiovisual->directores->isNotEmpty())
                                  <ul class="flex flex-wrap">
@@ -66,7 +66,7 @@
                                                  <!-- Botón de eliminar con nombre del director y ícono -->
                                                  <button type="submit"
                                                      class="text-red-500 hover:text-red-600 focus:outline-none flex items-center bg-red-100 dark:bg-red-800 rounded p-1">
-                                                     <span class="mr-2">{{ $director->nombre }}</span>
+                                                     <span class="mr-2 text-sm md:text-base">{{ $director->nombre }}</span>
                                                      <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                                          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                          <path stroke-linecap="round" stroke-linejoin="round"
@@ -83,9 +83,9 @@
                          </div>
 
                          <!-- Botón para eliminar compositores -->
-                         <div class="mb-4 p-2 border border-gray-300 rounded shadow-md" style="min-height: 100px;">
+                         <div class="mb-1 md:mb-4 p-1 md:p-2 border border-gray-300 rounded shadow-md" style="min-height: 100px;">
                              <x-input-label for="search_compositor" :value="__('Eliminar Compositor:')"
-                                 class="block text-xl font-bold text-gray-900 dark:text-white mt-2 mb-2" />
+                                 class="block text-lg md:text-xl font-bold text-gray-900 dark:text-white mt-2 mb-2" />
 
                              @if ($audiovisual->compositores->isNotEmpty())
                                  <ul class="flex flex-wrap">
@@ -100,7 +100,7 @@
                                                  <!-- Botón de eliminar con nombre del compositor y ícono -->
                                                  <button type="submit"
                                                      class="text-red-500 hover:text-red-600 focus:outline-none flex items-center bg-red-100 dark:bg-red-800 rounded p-1">
-                                                     <span class="mr-2">{{ $compositor->nombre }}</span>
+                                                     <span class="mr-2 text-sm md:text-base">{{ $compositor->nombre }}</span>
                                                      <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                                          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                          <path stroke-linecap="round" stroke-linejoin="round"
@@ -117,9 +117,9 @@
                          </div>
 
                          <!-- Botón para eliminar directores de fotografía -->
-                         <div class="mb-4 p-2 border border-gray-300 rounded shadow-md" style="min-height: 100px;">
+                         <div class="mb-1 md:mb-4 p-1 md:p-2 border border-gray-300 rounded shadow-md" style="min-height: 100px;">
                              <x-input-label for="search_fotografia" :value="__('Eliminar Fotografía:')"
-                                 class="block text-xl font-bold text-gray-900 dark:text-white mt-2 mb-2" />
+                                 class="block text-lg md:text-xl font-bold text-gray-900 dark:text-white mt-2 mb-2" />
 
                              @if ($audiovisual->fotografias->isNotEmpty())
                                  <ul class="flex flex-wrap">
@@ -134,7 +134,7 @@
                                                  <!-- Botón de eliminar con nombre del director de fotografía y ícono -->
                                                  <button type="submit"
                                                      class="text-red-500 hover:text-red-600 focus:outline-none flex items-center bg-red-100 dark:bg-red-800 rounded p-1">
-                                                     <span class="mr-2">{{ $fotografia->nombre }}</span>
+                                                     <span class="mr-2 text-sm md:text-base">{{ $fotografia->nombre }}</span>
                                                      <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                                          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                          <path stroke-linecap="round" stroke-linejoin="round"
@@ -156,9 +156,9 @@
                      <div>
 
                          <!-- Botón para eliminar guionistas -->
-                         <div class="mb-4 p-2 border border-gray-300 rounded shadow-md" style="min-height: 100px;">
+                         <div class="mb-1 md:mb-4 p-1 md:p-2 border border-gray-300 rounded shadow-md" style="min-height: 100px;">
                              <x-input-label for="search_guionista" :value="__('Eliminar Guionista:')"
-                                 class="block text-xl font-bold text-gray-900 dark:text-white mt-2 mb-2" />
+                                 class="block text-lg md:text-xl font-bold text-gray-900 dark:text-white mt-2 mb-2" />
 
                              @if ($audiovisual->guionistas->isNotEmpty())
                                  <ul class="flex flex-wrap">
@@ -173,7 +173,7 @@
                                                  <!-- Botón de eliminar con nombre del guionista y ícono -->
                                                  <button type="submit"
                                                      class="text-red-500 hover:text-red-600 focus:outline-none flex items-center bg-red-100 dark:bg-red-800 rounded p-1">
-                                                     <span class="mr-2">{{ $guionista->nombre }}</span>
+                                                     <span class="mr-2 text-sm md:text-base">{{ $guionista->nombre }}</span>
                                                      <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                                          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                          <path stroke-linecap="round" stroke-linejoin="round"
@@ -190,9 +190,9 @@
                          </div>
 
                          <!-- Botón para eliminar reparto -->
-                         <div class="mb-4 p-2 border border-gray-300 rounded shadow-md" style="min-height: 100px;">
+                         <div class="mb-1 md:mb-4 p-1 md:p-2 border border-gray-300 rounded shadow-md" style="min-height: 100px;">
                              <x-input-label for="search_reparto" :value="__('Eliminar Reparto:')"
-                                 class="block text-xl font-bold text-gray-900 dark:text-white mt-2 mb-2" />
+                                 class="block text-lg md:text-xl font-bold text-gray-900 dark:text-white mt-2 mb-2" />
 
                              @if ($audiovisual->repartos->isNotEmpty())
                                  <ul class="flex flex-wrap">
@@ -207,7 +207,7 @@
                                                  <!-- Botón de eliminar con nombre del reparto y ícono -->
                                                  <button type="submit"
                                                      class="text-red-500 hover:text-red-600 focus:outline-none flex items-center bg-red-100 dark:bg-red-800 rounded p-1">
-                                                     <span class="mr-2">{{ $reparto->nombre }}</span>
+                                                     <span class="mr-2 text-sm md:text-base">{{ $reparto->nombre }}</span>
                                                      <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                                          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                          <path stroke-linecap="round" stroke-linejoin="round"
@@ -224,9 +224,9 @@
                          </div>
 
                          <!-- Botón para eliminar compañías -->
-                         <div class="mb-4 p-2 border border-gray-300 rounded shadow-md" style="min-height: 100px;">
+                         <div class="mb-1 md:mb-4 p-1 md:p-2 border border-gray-300 rounded shadow-md" style="min-height: 100px;">
                              <x-input-label for="eliminar_compania" :value="__('Eliminar Compañía:')"
-                                 class="block text-xl font-bold text-gray-900 dark:text-white mt-2 mb-2" />
+                                 class="block text-lg md:text-xl font-bold text-gray-900 dark:text-white mt-2 mb-2" />
 
                              @if ($audiovisual->companies->isNotEmpty())
                                  <ul class="flex flex-wrap">
@@ -241,7 +241,7 @@
                                                  <!-- Botón de eliminar con nombre de la compañía y ícono -->
                                                  <button type="submit"
                                                      class="text-red-500 hover:text-red-600 focus:outline-none flex items-center bg-red-100 dark:bg-red-800 rounded p-1">
-                                                     <span class="mr-2">{{ $company->nombre }}</span>
+                                                     <span class="mr-2 text-sm md:text-base">{{ $company->nombre }}</span>
                                                      <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                                          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                          <path stroke-linecap="round" stroke-linejoin="round"
@@ -258,9 +258,9 @@
                          </div>
 
                          <!-- Botón para eliminar géneros -->
-                         <div class="mb-4 p-2 border border-gray-300 rounded shadow-md" style="min-height: 100px;">
+                         <div class="md:mb-4 p-1 md:p-2 border border-gray-300 rounded shadow-md" style="min-height: 100px;">
                              <x-input-label for="eliminar_genero" :value="__('Eliminar Género:')"
-                                 class="block text-xl font-bold text-gray-900 dark:text-white mt-2 mb-2" />
+                                 class="block text-lg md:text-xl font-bold text-gray-900 dark:text-white mt-2 mb-2" />
 
                              @if ($audiovisual->generos->isNotEmpty())
                                  <ul class="flex flex-wrap">
@@ -275,7 +275,7 @@
                                                  <!-- Botón de eliminar con nombre del género y ícono -->
                                                  <button type="submit"
                                                      class="text-red-500 hover:text-red-600 focus:outline-none flex items-center bg-red-100 dark:bg-red-800 rounded p-1">
-                                                     <span class="mr-2">{{ $genero->nombre }}</span>
+                                                     <span class="mr-2 text-sm md:text-base">{{ $genero->nombre }}</span>
                                                      <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                                          viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                                          <path stroke-linecap="round" stroke-linejoin="round"
@@ -301,7 +301,7 @@
 
                  <!-- Botón "Aceptar" -->
                  <button onclick="aceptarEliminarTodoElenco('{{ $audiovisualId }}')"
-                     class="cursor-pointer bg-blue-500 border border-blue-600 hover:bg-blue-600 text-white rounded-md px-4 py-2 font-semibold focus:outline-none focus:shadow-outline-blue active:bg-blue-600">
+                     class="cursor-pointer bg-blue-500 border border-blue-600 hover:bg-blue-600 text-white rounded-md  px-4 py-2 font-semibold focus:outline-none focus:shadow-outline-blue active:bg-blue-600 text-xs md:text-base">
                      Aceptar
                  </button>
 
@@ -310,7 +310,7 @@
 
                  <!-- Botón "Cancelar" -->
                  <button data-modal-hide="ElencoEliminar{{ $audiovisualId }}" type="button"
-                     class="cursor-pointer bg-red-500 border border-red-600 hover:bg-red-600 text-white rounded-md px-4 py-2 font-semibold focus:outline-none focus:shadow-outline-red active:bg-red-600">
+                     class="cursor-pointer bg-red-500 border border-red-600 hover:bg-red-600 text-white rounded-md px-4 py-2 font-semibold focus:outline-none focus:shadow-outline-red active:bg-red-600 text-xs md:text-base">
                      Cancelar
                  </button>
              </div>

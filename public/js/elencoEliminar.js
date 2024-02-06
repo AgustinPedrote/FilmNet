@@ -17,101 +17,84 @@ function confirmarEliminarTodo(audiovisualId) {
     }
 }
 
-// Función para eliminar todo el elenco de un audiovisual
-function eliminarTodoElenco(audiovisualId) {
-    var xhr = new XMLHttpRequest();
-
-    // La función se llamará cada vez que cambie el estado de la solicitud
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            // Verificar si la respuesta del servidor es exitosa (código 200)
-            if (xhr.status === 200) {
-                var response = JSON.parse(xhr.responseText);
-                if (response.success) {
-                    // Cerrar el modal y recargar la página después de eliminar el elenco con éxito
-                    document
-                        .querySelector(
-                            `[data-modal-hide="ElencoEliminar${audiovisualId}"]`
-                        )
-                        .click();
-                    location.reload();
-                } else {
-                    // Mostrar mensaje de error en caso de problemas con la solicitud al servidor
-                    mostrarMensaje(response.message, "alert");
-                }
-            } else {
-                mostrarMensaje(
-                    "Error al comunicarse con el servidor.",
-                    "alert"
-                );
+// Función para eliminar todo el elenco de un audiovisual utilizando Axios
+async function eliminarTodoElenco(audiovisualId) {
+    try {
+        // Realizar la solicitud DELETE utilizando Axios
+        await axios.delete(
+            `/audiovisuales/${audiovisualId}/eliminar-todo-elenco`,
+            {
+                headers: {
+                    "X-CSRF-TOKEN": document.querySelector(
+                        'meta[name="csrf-token"]'
+                    ).content,
+                },
             }
+        );
+
+        // Cerrar el modal y recargar la página después de eliminar el elenco con éxito
+        document
+            .querySelector(`[data-modal-hide="ElencoEliminar${audiovisualId}"]`)
+            .click();
+        location.reload();
+    } catch (error) {
+        // Manejar errores de la solicitud
+        if (error.response) {
+            // La solicitud fue realizada, pero el servidor respondió con un código de estado que no está en el rango 2xx
+            mostrarMensaje(
+                error.response.data.message ||
+                    "Error al comunicarse con el servidor.",
+                "alert"
+            );
+        } else if (error.request) {
+            // La solicitud fue realizada pero no se recibió ninguna respuesta
+            mostrarMensaje("No se recibió respuesta del servidor.", "alert");
+        } else {
+            // Hubo un error al configurar la solicitud
+            mostrarMensaje("Error al comunicarse con el servidor.", "alert");
         }
-    };
-
-    // Configurar la solicitud DELETE a la URL específica para eliminar elenco
-    xhr.open(
-        "DELETE",
-        `/audiovisuales/${audiovisualId}/eliminar-todo-elenco`,
-        true
-    );
-
-    // Configurar el encabezado con el token CSRF
-    xhr.setRequestHeader(
-        "X-CSRF-TOKEN",
-        document.querySelector('meta[name="csrf-token"]').content
-    );
-
-    // Enviar la solicitud DELETE al servidor
-    xhr.send();
+    }
 }
 
-// Función para eliminar una relación específica y manejar la respuesta
-function eliminarRelacion(
+// Función para eliminar una relación específica y manejar la respuesta utilizando Axios
+async function eliminarRelacion(
     audiovisualId,
     tipoRelacion,
     relacionId,
     listItemElement
 ) {
-    // Crear una nueva instancia de XMLHttpRequest
-    var xhr = new XMLHttpRequest();
-
-    // La función se ejecutará cada vez que cambie el estado de la solicitud
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                // Analizar la respuesta JSON del servidor
-                var response = JSON.parse(xhr.responseText);
-                if (response.success) {
-                    // Eliminar el elemento de la lista en el modal
-                    listItemElement.remove();
-                    mostrarMensaje(response.message, "success");
-                } else {
-                    mostrarMensaje(response.message, "alert");
-                }
-            } else {
-                mostrarMensaje(
-                    "Error al comunicarse con el servidor.",
-                    "alert"
-                );
+    try {
+        // Realizar la solicitud DELETE utilizando Axios
+        await axios.delete(
+            `/audiovisuales/${audiovisualId}/eliminar-relacion/${tipoRelacion}/${relacionId}`,
+            {
+                headers: {
+                    "X-CSRF-TOKEN": document.querySelector(
+                        'meta[name="csrf-token"]'
+                    ).content,
+                },
             }
+        );
+
+        // Eliminar el elemento de la lista en el modal
+        listItemElement.remove();
+        mostrarMensaje("Relación eliminada exitosamente.", "success");
+    } catch (error) {
+        // Manejar errores de la solicitud
+        if (error.response) {
+            mostrarMensaje(
+                error.response.data.message ||
+                    "Error al comunicarse con el servidor.",
+                "alert"
+            );
+        } else if (error.request) {
+            // La solicitud fue realizada pero no se recibió ninguna respuesta
+            mostrarMensaje("No se recibió respuesta del servidor.", "alert");
+        } else {
+            // Hubo un error al configurar la solicitud
+            mostrarMensaje("Error al comunicarse con el servidor.", "alert");
         }
-    };
-
-    // Configurar la solicitud DELETE a la URL específica para eliminar la relación
-    xhr.open(
-        "DELETE",
-        `/audiovisuales/${audiovisualId}/eliminar-relacion/${tipoRelacion}/${relacionId}`,
-        true
-    );
-
-    // Configurar el encabezado con el token CSRF
-    xhr.setRequestHeader(
-        "X-CSRF-TOKEN",
-        document.querySelector('meta[name="csrf-token"]').content
-    );
-
-    // Enviar la solicitud DELETE al servidor
-    xhr.send();
+    }
 }
 
 // Función para mostrar mensajes al usuario

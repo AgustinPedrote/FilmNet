@@ -32,5 +32,24 @@ class PremioSeeder extends Seeder
             "year" => "2005",
             "audiovisual_id" => 7,
         ]);
+
+
+        Premio::create([
+            "nombre" => "Globos de Oro",
+            "year" => "2008",
+            "audiovisual_id" => 13,
+        ]);
+
+        Premio::create([
+            "nombre" => "BAFTA",
+            "year" => "2020",
+            "audiovisual_id" => 24,
+        ]);
+
+        Premio::create([
+            "nombre" => "Goya",
+            "year" => "2023",
+            "audiovisual_id" => 32,
+        ]);
     }
 }
