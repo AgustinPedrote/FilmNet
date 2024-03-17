@@ -6,6 +6,24 @@
   <b> Agustín Pedrote Bejarano | Curso 2023/24 </b>
 </p>
 
+# Capturas
+
+<p align="center">
+<img src="/public/logos/inicio.png">
+</p>
+
+<p align="center">
+<img src="/public/logos/show.png">
+</p>
+
+<p align="center">
+<img src="/public/logos/votaciones.png">
+</p>
+
+<p align="center">
+<img src="/public/logos/administracion.png">
+</p>
+
 # Descripción general del proyecto
 
 El proyecto en cuestión constituye un portal web especializado en el ámbito cinematográfico, diseñado para proporcionar a los usuarios un acceso eficiente a información detallada sobre diversas producciones audiovisuales. Además, facilita la posibilidad de que los usuarios registren y compartan sus valoraciones y críticas sobre dichas obras. Este entorno virtual ofrece una plataforma intuitiva y funcional, destinada a satisfacer las necesidades de una comunidad apasionada por el cine, alentando así la interacción y el intercambio de opiniones entre sus miembros.
